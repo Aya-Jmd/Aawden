@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aawden-weight-space"
+version = "0.1.0"
+description = "Evidence-first security review robustness and reversible weight-space experiments"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+aawden = "security_wsp.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+security_wsp = ["web/*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+

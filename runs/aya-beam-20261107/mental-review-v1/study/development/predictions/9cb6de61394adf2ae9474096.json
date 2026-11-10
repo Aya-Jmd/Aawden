@@ -1,0 +1,23 @@
+{
+  "record": {
+    "case_id": "c_49351bd4f5a3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Mentally trace the supplied Python function on the exact inputs. Compute its actual returns even if they seem unintended. Do not invent checks or apply a security policy absent from the source. Give three short lines, each containing the requested ID and returned owner_id or None. Then give one sentence naming the deciding expressions. Give no security verdict. You have no execution tool."
+      },
+      {
+        "role": "user",
+        "content": "def read_record(records, actor, record_id):\n    row = records.get(record_id)\n    match row:\n        case {\"owner_id\": owner} if actor[\"authenticated\"]:\n            return row\n        case _:\n            return None\n\nrecords = {10: {'owner_id': 'u1', 'tenant_id': 'same', 'members': ['u1'], 'secret': 'owned'}, 20: {'owner_id': 'u2', 'tenant_id': 'same', 'members': ['u2'], 'secret': 'other'}}\nactor = {'id': 'u1', 'tenant_id': 'same', 'role': 'member', 'authenticated': True}\nIndependently evaluate read_record(records, actor, 10), read_record(records, actor, 20), and read_record(records, actor, 99)."
+      }
+    ],
+    "request_id": "dda1222d868f84c5157bd3a3",
+    "raw_output": "Here's the step-by-step evaluation:\n\n1. **read_record(records, actor, 10)**\n   - `records.get(10)` returns `{'owner_id': 'u1', 'tenant_id': 'same', 'members': ['u1'], 'secret': 'owned'}`\n   - `match row:` checks if the row is a dictionary with an `owner_id` key.\n   - Since the actor is authenticated (`actor[\"authenticated\"]` is `True`), and the row has an `owner_id` matching the actor's `id` (`'u1'`), it returns the row.\n\n2. **read_record(records, actor, 20)**\n   - `records.get(2",
+    "input_tokens": 276,
+    "output_tokens": 160,
+    "latency_seconds": 3.9631911710000054,
+    "model_mode": "original base weights, LoRA disabled",
+    "error": null
+  },
+  "sha256": "ddf205c3955fe6ad9be55da928dc678e6143aa9b344be372c56694fc24ac38c8"
+}

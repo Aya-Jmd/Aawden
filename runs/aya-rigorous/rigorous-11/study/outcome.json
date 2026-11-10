@@ -1,0 +1,287 @@
+{
+  "selected_prompt": "calibrated",
+  "development": {
+    "overall": {
+      "n": 48,
+      "n_vulnerable": 24,
+      "n_clean": 24,
+      "true_positive": 17,
+      "true_negative": 23,
+      "false_positive": 1,
+      "false_negative": 7,
+      "balanced_accuracy": 0.8333333333333334,
+      "accuracy": 0.8333333333333334,
+      "false_positive_rate": 0.041666666666666664,
+      "false_negative_rate": 0.2916666666666667,
+      "miss_rate": 0.2916666666666667,
+      "coverage": 1.0,
+      "invalid_count": 0,
+      "generation_errors": 0,
+      "input_tokens": 31869,
+      "output_tokens": 2525,
+      "latency_seconds": 121.92216916099994,
+      "explanation_grounding": null,
+      "general_coding_accuracy": null
+    },
+    "by_category": {
+      "access_control": {
+        "n": 24,
+        "n_vulnerable": 12,
+        "n_clean": 12,
+        "true_positive": 5,
+        "true_negative": 12,
+        "false_positive": 0,
+        "false_negative": 7,
+        "balanced_accuracy": 0.7083333333333334,
+        "accuracy": 0.7083333333333334,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.5833333333333334,
+        "miss_rate": 0.5833333333333334,
+        "coverage": 1.0,
+        "invalid_count": 0,
+        "generation_errors": 0,
+        "input_tokens": 19152,
+        "output_tokens": 1305,
+        "latency_seconds": 63.786434423999935,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      },
+      "sql_injection": {
+        "n": 24,
+        "n_vulnerable": 12,
+        "n_clean": 12,
+        "true_positive": 12,
+        "true_negative": 11,
+        "false_positive": 1,
+        "false_negative": 0,
+        "balanced_accuracy": 0.9583333333333333,
+        "accuracy": 0.9583333333333334,
+        "false_positive_rate": 0.08333333333333333,
+        "false_negative_rate": 0.0,
+        "miss_rate": 0.0,
+        "coverage": 1.0,
+        "invalid_count": 0,
+        "generation_errors": 0,
+        "input_tokens": 12717,
+        "output_tokens": 1220,
+        "latency_seconds": 58.13573473700001,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      }
+    },
+    "errors": [
+      {
+        "case_id": "c_7eac6c1300fb",
+        "family_id": "rigorous_confirmation_v3_access_control_permission_tuple_truth",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "1df43a1861fa25b45b9c61f1",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_31a64e046f08",
+        "family_id": "rigorous_confirmation_v3_sql_injection_quote_count_dispatch",
+        "category": "sql_injection",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "434f23958e8832ccbe43c6e2",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_27767873e01b",
+        "family_id": "rigorous_confirmation_v3_access_control_multiple_authorized_paths",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "d180349a1a32e4cdb802cc3c",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_31ace9b250c7",
+        "family_id": "rigorous_confirmation_v3_access_control_different_query_keys",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "d25f1fd64f40ba32cfb6ef80",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_15d39596da49",
+        "family_id": "rigorous_confirmation_v3_access_control_set_gate",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "52d39b97660ffa5fe5b0558a",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_68be590ef469",
+        "family_id": "rigorous_development_access_control_disallowed_state",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "8ceab80e56dbfc18fd01719c",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_6e7667272a20",
+        "family_id": "rigorous_development_access_control_boolean_any",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "99744dc12b8b70e453d544af",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_66c27cbeb258",
+        "family_id": "rigorous_development_access_control_cached_policy",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "148e1b49472edaeccaba0639",
+        "kind": "missed_bug"
+      }
+    ],
+    "pairs_correct": 16,
+    "pairs_total": 24
+  },
+  "confirmation": {
+    "overall": {
+      "n": 32,
+      "n_vulnerable": 16,
+      "n_clean": 16,
+      "true_positive": 10,
+      "true_negative": 15,
+      "false_positive": 1,
+      "false_negative": 6,
+      "balanced_accuracy": 0.78125,
+      "accuracy": 0.78125,
+      "false_positive_rate": 0.0625,
+      "false_negative_rate": 0.375,
+      "miss_rate": 0.375,
+      "coverage": 1.0,
+      "invalid_count": 0,
+      "generation_errors": 0,
+      "input_tokens": 21830,
+      "output_tokens": 1670,
+      "latency_seconds": 79.61325049199985,
+      "explanation_grounding": null,
+      "general_coding_accuracy": null
+    },
+    "by_category": {
+      "access_control": {
+        "n": 16,
+        "n_vulnerable": 8,
+        "n_clean": 8,
+        "true_positive": 2,
+        "true_negative": 8,
+        "false_positive": 0,
+        "false_negative": 6,
+        "balanced_accuracy": 0.625,
+        "accuracy": 0.625,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.75,
+        "miss_rate": 0.75,
+        "coverage": 1.0,
+        "invalid_count": 0,
+        "generation_errors": 0,
+        "input_tokens": 13573,
+        "output_tokens": 879,
+        "latency_seconds": 42.43341609000004,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      },
+      "sql_injection": {
+        "n": 16,
+        "n_vulnerable": 8,
+        "n_clean": 8,
+        "true_positive": 8,
+        "true_negative": 7,
+        "false_positive": 1,
+        "false_negative": 0,
+        "balanced_accuracy": 0.9375,
+        "accuracy": 0.9375,
+        "false_positive_rate": 0.125,
+        "false_negative_rate": 0.0,
+        "miss_rate": 0.0,
+        "coverage": 1.0,
+        "invalid_count": 0,
+        "generation_errors": 0,
+        "input_tokens": 8257,
+        "output_tokens": 791,
+        "latency_seconds": 37.17983440199981,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      }
+    },
+    "errors": [
+      {
+        "case_id": "c_330661182602",
+        "family_id": "rigorous_confirmation_v4_sql_injection_indexed_command_options",
+        "category": "sql_injection",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "72078d541c83b8fe00ca5d45",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_127a1adfb958",
+        "family_id": "rigorous_confirmation_v4_access_control_closure_policy_combination",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "ad6b5f09f88d1228ea40b102",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_d160ec7fd9e9",
+        "family_id": "rigorous_confirmation_v4_access_control_parallel_gate",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "036c8739b6b17a1831a04698",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_517af2542a82",
+        "family_id": "rigorous_confirmation_v4_access_control_truth_of_mapping",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "dd998b1777d7516d9e90d1e8",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_021a30f8ea70",
+        "family_id": "rigorous_confirmation_v4_access_control_permission_cache_key",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "a6c7e33fbf7ca0ab38fb8de9",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_33ddfb77f0e9",
+        "family_id": "rigorous_confirmation_v4_access_control_numeric_gate",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "f8e4ba85ff263beba27a2133",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_3291f0e9ef5b",
+        "family_id": "rigorous_confirmation_v4_access_control_reject_flag_cleanup",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "610aed7101192915cd45ac04",
+        "kind": "missed_bug"
+      }
+    ],
+    "pairs_correct": 9,
+    "pairs_total": 16
+  },
+  "target_reached": false
+}

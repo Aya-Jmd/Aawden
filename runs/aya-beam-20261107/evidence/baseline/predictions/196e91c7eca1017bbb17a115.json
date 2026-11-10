@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_c353f6477461",
+    "family_id": "sql_injection_cte",
+    "source_id": "sql_injection_cte",
+    "split": "screen",
+    "category": "sql_injection",
+    "method": "A",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1],\n  \"explanation\": \"The function `lookup` constructs a SQL query dynamically using f-string formatting, which allows the untrusted `username` to be injected directly into the query. This can lead to SQL injection vulnerabilities (line 1: `f\"WITH matches AS (SELECT name FROM users WHERE name = '{username}')`).\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "7b5d6389d51557dad614de588f2e4d97c2fb91e24dcfee2bd7bc5170ca3a5864",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3; username is untrusted. A lookup must treat the supplied name as a literal value; it must not return other users. The database schema and connection are trusted.\n<source>\ndef lookup(conn, username):\n    query = f\"WITH matches AS (SELECT name FROM users WHERE name = '{username}') SELECT name FROM matches\"\n    return conn.execute(query).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 219,
+    "output_tokens": 111,
+    "finish_reason": "stop",
+    "latency_seconds": 2.9268295139999623,
+    "request_id": "606a161ca46e12981a5e3b1a"
+  },
+  "sha256": "efb5cbb905bc023f7ce4018e963b1771ce2c083d9cdcfd526a62c227f07a0ce2"
+}

@@ -1,0 +1,130 @@
+{
+  "run_id": "479b497824544a01",
+  "parent_run": null,
+  "identity_sha256": "479b497824544a01807c8d548ad523fb9a38911087582d30e6066ff4dca2effd",
+  "identity": {
+    "protocol": {
+      "development": {
+        "path": "datasets/rigorous-development.json",
+        "sha256": "2428b09b4c032521fb0899ef7fa0e6ba6023db213bfc5ea036c917f5057b4e9c",
+        "count": 16
+      },
+      "regression": {
+        "path": "datasets/neutral-confirmation-v5.json",
+        "sha256": "dcab83068fcc14bbeaa130e350a20c6222440a47ccb660b59436d32e6cea0016",
+        "count": 20
+      },
+      "adapter_sha256": "e458a1b0fbc005de188e8284ec1bfff948a25db7fdb16be5173dafd6eb0fedda",
+      "target_accuracy": 1.0,
+      "prompt_version": "aawden-rigorous-review-v5",
+      "variants": [
+        "check"
+      ],
+      "minimum_dev_accuracy": 0.88,
+      "confirmation": {
+        "path": "datasets/rigorous-confirmation-v3.json",
+        "sha256": "50566f16c245b0172d64463b3fdf271f9f43b1b2684008f3bbc2162e74895d64",
+        "count": 32
+      },
+      "validation_reference": {
+        "path": "runs/aya-rigorous/rigorous-06/study/development_refined",
+        "manifest_sha256": "8aeef1c4db8e58e75f475260320f743bb13023524c64a4de68306ab23391d72d"
+      }
+    },
+    "source": "2a52bb26190bb42593d89746272f4ba9322cb4ccea5d9a584469c831e694ad6e",
+    "dataset": "0b134ed6859262d1264750b3515a9791d372152123b8a0218de45aa59cfabe8a",
+    "variants": [
+      "policy"
+    ]
+  },
+  "stage": "adapter_prompt_review",
+  "status": "completed",
+  "evidence_kind": "cohere_local_checkpoint",
+  "created_at": "2026-11-09T12:51:05.927299+00:00",
+  "environment": {
+    "python": "3.11.11",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+    "packages": {
+      "torch": {
+        "version": "2.9.1+cu128",
+        "direct_url": null
+      },
+      "transformers": {
+        "version": "5.22.1",
+        "direct_url": null
+      },
+      "transformer-lens": {
+        "version": "3.8.0",
+        "direct_url": null
+      },
+      "circuitkit": {
+        "version": "0.2.0",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+            "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+          }
+        }
+      },
+      "auditkit": {
+        "version": "1.1.3",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+            "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+          }
+        }
+      },
+      "safetensors": {
+        "version": "0.8.0",
+        "direct_url": null
+      }
+    },
+    "code_commit": null,
+    "code_sha256": "2a52bb26190bb42593d89746272f4ba9322cb4ccea5d9a584469c831e694ad6e",
+    "dependency_lock_hashes": {
+      "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597"
+    }
+  },
+  "failure_reason": null,
+  "attempts": [
+    {
+      "status": "completed",
+      "started_at": "2026-11-09T12:51:05.941234+00:00",
+      "ended_at": "2026-11-09T12:51:50.948171+00:00"
+    }
+  ],
+  "started_at": "2026-11-09T12:51:05.941234+00:00",
+  "model_sha256_by_arm": {
+    "Aya": "5d9ed1d55347627e2754e5665f44cdfa986e5d1070e395dec06e308ecd0d0db0"
+  },
+  "completed_at": "2026-11-09T12:51:50.948171+00:00",
+  "artifact_hashes": {
+    "results.json": "686a33daf5b716cd61276be0be2c5123b66611d22f24070909af31b30ce0b03e",
+    "summary.json": "c8fce0ed91c56619808d3c67e5933f301eed14589143128071b23b57d92bde33",
+    "auditkit.json": "c8a73dc23387f57b2248cc77780aa8bd0c6482c96183ceb45a2128cb775d942a",
+    "predictions/f3f80e475ec0358f4afa017b.json": "edd33d72cec3215fec07a2f7d664bb58a139801ecd815cfdf7ccbc21434f56be",
+    "predictions/8ea4c9458fc89d2acd45d9cd.json": "61bb3d152c20144f749d1bca9ad37586e223faa8b42f55d5cdfdebd6fb765dae",
+    "predictions/f0a45c4d6b762ef707b28471.json": "1c4fef01b1df0e140f63be11542f26737e2ede89075ba51ab3d160cbfd23d93d",
+    "predictions/2bf2bee1cf2435c5315a3631.json": "33f4dbd9dac0b177a824ce0408bc08d4e86cdac70c68918f8abfa84425cf4de9",
+    "predictions/e587c03a265af4218eac436f.json": "7c22dd14a771608c498b2e656b970aba8b8b6e384c0681f2f21329958799d666",
+    "predictions/5dbba084821a2cf5b2d7017b.json": "3569ea04058f668943e262516966d5060f5e315fac9cf26fc3239102075510e1",
+    "predictions/95b9b2ebdaf987f50182eef0.json": "bbcad51a92acd190c3a0d9db1a62fe78453e8644f81e365676a9d843d3bb8579",
+    "predictions/0369516fcca7e8c4e53170c1.json": "b78d4b1bb88cd55b50e99f9a4008685dad49c135dec252420670d90647dc9a3a",
+    "predictions/b345cd01cc4cdc2eeb3d9c73.json": "3a1cdceef956229b96f14b3ed192196c03c68f68c3cc2e975864e09be69bea86",
+    "predictions/d9f71a7f6cfb55af44e9ca8d.json": "3297c50512d1ab784e4201e8aa0611228c5d2eb7ce8251b85fda8570c92e26c6",
+    "predictions/92a8a7f2c9f669d6f2705fc9.json": "63ab2743e8db423bba797739dcaefb5db3a0736708b2b399c2bb7fdd6462e651",
+    "predictions/e381b663fe301339e02005cb.json": "556ed4aef2fd910b2a1ad3e6d1112e846941f378aaa4da33731f7f0ee74c1b6e",
+    "predictions/866b4a49513dd9dadf60b54b.json": "42ad51c7344e55c2702ade5356a3484d618c18092d8122f4a35717eced9d5077",
+    "predictions/82f01ccdeaefcdbbf5051f31.json": "15ca4b84a55d78da1a5b1e1b73703cbd6b4be0320824451a4137c55a09003b02",
+    "predictions/4cbdadb7a38b7b939a2af81f.json": "753732e4f92e82534ed31ee4926dc9c80a0b9a002842ba840f5701a88fa26c05",
+    "predictions/5609d1bd97ab589f3415a0af.json": "bcb4f18eafdd7070508bd7989e5d8d2d1bf4b5c3f9cca0dd5bbe9bafb761d8b5",
+    "predictions/f0c99af901011727f24401f6.json": "992290fa4bf77f935579358141b04b55a941d927f3a9f14672240b3b8a8285d6",
+    "predictions/4ce49be60bb231143566d66f.json": "ee10e344a4b71865bb6835a46313d19824d7c6dbcf0e49dc87b13c7a96a89151"
+  },
+  "expected_predictions": 18
+}

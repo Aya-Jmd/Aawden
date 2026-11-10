@@ -1,0 +1,48 @@
+{
+  "record": {
+    "case_id": "c_c6fc58605cd9",
+    "family_id": "confirmation_v3_sql_injection_identity_branch",
+    "source_id": "confirmation_v3_sql_injection_identity_branch",
+    "split": "neutral_confirmation_v3",
+    "category": "sql_injection",
+    "method": "counterexample",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "8475d1d5a66b5bdc4ed234414e44803f58475330426f9aac81967ae0886c03e7",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Mentally use a name containing a single quote and SQL syntax. If it stays a single literal value through the actual execution call, choose not_vulnerable_for_target. If it can alter the SQL expression, choose vulnerable."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.\n<source>\n1 | def lookup(conn, username):\n2 |     if username:\n3 |         args = (username,)\n4 |     else:\n5 |         args = (\"\",)\n6 |     return conn.execute(\"SELECT name FROM users WHERE name = ?\", args).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 358,
+    "output_tokens": 54,
+    "finish_reason": "stop",
+    "latency_seconds": 2.677442213000006,
+    "request_id": "0db56046c59c36709ed745fa"
+  },
+  "sha256": "0b178afe798c3a311b049650891cf83e98ad70a15d51112bff86988b7ffc1a78"
+}

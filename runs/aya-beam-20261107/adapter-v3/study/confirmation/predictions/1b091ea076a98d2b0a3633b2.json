@@ -1,0 +1,45 @@
+{
+  "record": {
+    "case_id": "c_bc211c0c82b2",
+    "family_id": "confirmation_v2_sql_injection_trim_query",
+    "source_id": "confirmation_v2_sql_injection_trim_query",
+    "split": "neutral_confirmation_v2",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "fba4bd03e57cd799411717b0f36af7bb67fbd8146391330c7a2e070852578627",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.\n<source>\n1 | def lookup(conn, username):\n2 |     sql = \" SELECT name FROM users WHERE name = ? \"\n3 |     return conn.execute(sql.strip(), (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 214,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 1.542985243999965,
+    "request_id": "48ca00daee21118f2fb4d7be"
+  },
+  "sha256": "3da4aa5764c8c63179885960879dea1d258e4082a98ea836d62f80f72bda5e90"
+}

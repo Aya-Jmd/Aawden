@@ -1,0 +1,60 @@
+{
+  "stage": "preflight",
+  "checked_at": "2026-11-07T15:17:35.627191+00:00",
+  "model_id": "CohereLabs/aya-expanse-8b",
+  "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+  "weights_loaded": false,
+  "runtime": {
+    "passed": true
+  },
+  "toolkits": {
+    "CircuitKIT": {
+      "passed": true
+    },
+    "AuditKIT": {
+      "passed": true
+    }
+  },
+  "gpu": {
+    "passed": true,
+    "reason": "planning_headroom_check",
+    "device": "cuda:0",
+    "name": "NVIDIA GeForce RTX 4090",
+    "native_bf16": true,
+    "free_gib": 23.13,
+    "total_gib": 23.52,
+    "minimum_free_gib": 21,
+    "torch": "2.9.1+cu126"
+  },
+  "instrumentation_loading": "sequential",
+  "model_access": {
+    "passed": true,
+    "reason": "pinned_config_read",
+    "config_sha256": "81b7c1977e7c57052496bcbd50e94837db24e8188a5dc98efa0f9518fda9de7a"
+  },
+  "workspace_disk": {
+    "passed": true,
+    "free_gib": 693.54,
+    "planned_free_gib": 80,
+    "scope": "This volume only. Check separate HF cache and scheduler storage quotas independently."
+  },
+  "workload": {
+    "two_bf16_weight_copies_gib": 29.91,
+    "baseline_cases": 50,
+    "baseline_generations": 300,
+    "discovery_cases": 30,
+    "validation_cases": 10,
+    "max_new_tokens": 256,
+    "recommended_pilot_gpu": "one 80 GiB-class BF16-capable GPU; 48 GiB-class possible subject to measured peaks",
+    "pilot_budget_estimate_gpu_hours": [
+      2,
+      4
+    ],
+    "final_300_case_all_arm_estimate_gpu_hours": [
+      10,
+      20
+    ],
+    "budget_scope": "Planning estimates, not measured throughput. Recompute after the baseline."
+  },
+  "passed": true
+}

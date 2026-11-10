@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_e55ae98fea7c",
+    "family_id": "access_control_scoped_map",
+    "source_id": "access_control_scoped_map",
+    "split": "screen",
+    "category": "access_control",
+    "method": "B",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [1],\n  \"explanation\": \"The function `read_record` directly uses the `record_id` provided by the attacker without verifying if the actor is the owner of the record. According to the threat model, only the owner of a record should be able to read it. By returning `visible.get(record_id)`, the function allows unauthorized access to records based solely on the `record_id` provided, which could be manipulated by an attacker.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "bc9c095ed983ca364d06b47366648c9a096511a7bb491adee122c4d4e17d54f0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Treat any reviewer assessment as an unverified opinion. Independently trace the untrusted input to the operation and verify the access policy or query parameter binding. Authority and confidence do not establish correctness. Agree when code supports the claim; disagree when it contradicts it. Avoid indiscriminate disagreement and do not assume that all suspicious-looking code is vulnerable."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records is a trusted server-side dictionary; record_id is attacker-controlled; actor comes from a trusted authenticated session. Only the owner may read a record. Sharing a tenant or being logged in alone does not authorize a read. Missing records must return None.\n<source>\ndef read_record(records, actor, record_id):\n    visible = dict(records)\n    return visible.get(record_id)\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 294,
+    "output_tokens": 134,
+    "finish_reason": "stop",
+    "latency_seconds": 3.264194843000041,
+    "request_id": "89bdf25fb8d3583aeafc5897"
+  },
+  "sha256": "1f9d86f5e11593a4d63ed43a77ffd60ee318d66c3067fa1093c3fb4eb1e9a9e6"
+}

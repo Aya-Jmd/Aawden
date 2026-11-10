@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_60634b662439",
+    "family_id": "confirmation_v5_access_control_pair_match",
+    "source_id": "confirmation_v5_access_control_pair_match",
+    "split": "neutral_confirmation_v5",
+    "category": "access_control",
+    "method": "scenarios",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The requested key must be present in the row for the owner comparison to succeed.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The requested key must be present in the row for the owner comparison to succeed.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "55f7191a16ec3a1c2e8d1a42893a6eb145cc5d35200c497074c3d0a78bd5e1e8",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\n\n\nLogged-in non-owner, different tenant\n\n\nLogged-in non-owner with admin role\n\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     match (row, actor[\"id\"]):\n4 |         case ({\"owner_id\": owner}, who) if owner == who:\n5 |             return row\n6 |         case _:\n7 |             return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 534,
+    "output_tokens": 60,
+    "finish_reason": "stop",
+    "latency_seconds": 2.828217622000011,
+    "request_id": "50c3d1a8602e09ec9f1315e0"
+  },
+  "sha256": "49d053f3e03f5ffd10c47dfb6af70e680c10f27fabfd549fa31524b07d6eb40c"
+}

@@ -1,0 +1,57 @@
+{
+  "selected_prompt": {
+    "access_control": "policy",
+    "sql_injection": "policy"
+  },
+  "adapter_sha256": "0ea3441c24ac171470fc4e3d9b5ec8d9f4ba3cd33d11691dd159fa57abf2a51a",
+  "confirmation_sha256": "f7a7ba5db2e1a1b89bb758e7629898fbd9d73c8ef594cf33790d241c4712ee00",
+  "protocol": {
+    "adapter_sha256": "e458a1b0fbc005de188e8284ec1bfff948a25db7fdb16be5173dafd6eb0fedda",
+    "target_accuracy": 1.0,
+    "minimum_dev_accuracy": 0.88,
+    "development": {
+      "path": "datasets/rigorous-development.json",
+      "sha256": "2428b09b4c032521fb0899ef7fa0e6ba6023db213bfc5ea036c917f5057b4e9c",
+      "count": 16
+    },
+    "regression": {
+      "path": "datasets/neutral-confirmation-v5.json",
+      "sha256": "dcab83068fcc14bbeaa130e350a20c6222440a47ccb660b59436d32e6cea0016",
+      "count": 20
+    },
+    "prompt_version": "aawden-rigorous-review-v8",
+    "variants": [
+      "policy",
+      "compact"
+    ],
+    "route_by_category": true,
+    "confirmation": {
+      "path": "datasets/rigorous-confirmation-v5.json",
+      "sha256": "f7a7ba5db2e1a1b89bb758e7629898fbd9d73c8ef594cf33790d241c4712ee00",
+      "count": 32
+    },
+    "confirmation_scope": "Python snippets with a single function and supported local assignments, conditional branches and returns",
+    "training": {
+      "exposed": {
+        "path": "datasets/rigorous-confirmation-v3.json",
+        "sha256": "50566f16c245b0172d64463b3fdf271f9f43b1b2684008f3bbc2162e74895d64",
+        "count": 32
+      },
+      "replay": {
+        "path": "datasets/rigorous-confirmation-v4.json",
+        "sha256": "c2b2e09e3288a4214b6920520923e3558894fcd01b2d4eb0b89bf73b9d056fdc",
+        "count": 32
+      },
+      "training_variants": [
+        "compact",
+        "scenarios"
+      ],
+      "before_validation": true,
+      "learning_rate": 6e-05,
+      "epochs": 2,
+      "verdict_weight": 4,
+      "seed": 137
+    }
+  },
+  "source": "be925005fa9e2293873b3a1f714557d753d1adbab54b26449d986da0e2128e58"
+}

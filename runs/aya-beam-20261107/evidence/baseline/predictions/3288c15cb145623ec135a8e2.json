@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_98b339a8264d",
+    "family_id": "access_control_login_only",
+    "source_id": "access_control_login_only",
+    "split": "screen",
+    "category": "access_control",
+    "method": "A",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [1],\n  \"explanation\": \"The function `read_record` allows any authenticated actor to access a record if they have the correct `owner_id`, regardless of their relationship to the specific record. This is a violation of the threat model, which states that only the owner of a record should be able to read it.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "1bd6058f7cc2f6b3648e5c79cfd9feddf55f1ce4dc529556f253425b567c1fc2",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records is a trusted server-side dictionary; record_id is attacker-controlled; actor comes from a trusted authenticated session. Only the owner may read a record. Sharing a tenant or being logged in alone does not authorize a read. Missing records must return None.\n<source>\ndef read_record(records, actor, record_id):\n    record = records.get(record_id)\n    return record if record and actor.get(\"authenticated\") and record[\"owner_id\"] == actor[\"id\"] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 244,
+    "output_tokens": 106,
+    "finish_reason": "stop",
+    "latency_seconds": 2.62812355799997,
+    "request_id": "3e6c5f5621d3e6aa2f0eecc0"
+  },
+  "sha256": "616e4283f30b5f863af505471becf9ba360fb6a8d9782c5b038921c44c79e028"
+}

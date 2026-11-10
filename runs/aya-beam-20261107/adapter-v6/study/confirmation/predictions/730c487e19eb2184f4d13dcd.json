@@ -1,0 +1,46 @@
+{
+  "record": {
+    "case_id": "c_1135a26c1351",
+    "family_id": "confirmation_v3_sql_injection_separate_execution",
+    "source_id": "confirmation_v3_sql_injection_separate_execution",
+    "split": "neutral_confirmation_v3",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "fe7f100c69cde3b96574afcc97ef3a689f8fba8e65d2bf9b9b1f9732348b3340",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.\n<source>\n1 | def lookup(conn, username):\n2 |     query = \"SELECT name FROM users WHERE name = ?\"\n3 |     execute = conn.execute\n4 |     return execute(query, [username]).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 218,
+    "output_tokens": 50,
+    "finish_reason": "stop",
+    "latency_seconds": 2.4731126819999645,
+    "request_id": "c77270e6dfbc771bad988827"
+  },
+  "sha256": "057f0b4614e75301853c6ed7b8b3e2dfd9b27542d92e09452ae6c95c1d0bca50"
+}

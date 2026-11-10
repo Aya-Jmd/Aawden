@@ -1,0 +1,44 @@
+{
+  "record": {
+    "case_id": "c_cab5d4f0e9d4",
+    "family_id": "sql_injection_fstring",
+    "source_id": "sql_injection_fstring",
+    "split": "screen",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 2,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "2fc45d6a78ea21bc0658f787d1fc2115697561abef70fac4141f546f1a967e6d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3; username is untrusted. A lookup must treat the supplied name as a literal value; it must not return other users. The database schema and connection are trusted.\n<source>\n1 | def lookup(conn, username):\n2 |     return conn.execute(f\"SELECT name FROM users WHERE name = '{username}'\").fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 211,
+    "output_tokens": 39,
+    "finish_reason": "stop",
+    "latency_seconds": 1.4883467520000977,
+    "request_id": "525f29e4cba31f69a2b37439"
+  },
+  "sha256": "b965ff704937546720b98bf2e6bd88e91fbecf4db8450350034f3ed607f9fa67"
+}

@@ -1,0 +1,44 @@
+{
+  "record": {
+    "case_id": "c_a87627aeb8bb",
+    "family_id": "sql_injection_lowercase",
+    "source_id": "sql_injection_lowercase",
+    "split": "screen",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 2,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "00dca60c8be327c1a14b2737704eed5714f7e1a4dbb1dbe84abcf21b58a1633c",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3; username is untrusted. A lookup must treat the supplied name as a literal value; it must not return other users. The database schema and connection are trusted.\n<source>\n1 | def lookup(conn, username):\n2 |     return conn.execute(f\"SELECT name FROM users WHERE lower(name) = lower('{username}')\").fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 215,
+    "output_tokens": 46,
+    "finish_reason": "stop",
+    "latency_seconds": 2.1181809209999756,
+    "request_id": "101ca50bba2426ccf2fc8610"
+  },
+  "sha256": "b59d64a825677b5c6c751a18f3a21db5a6b977a36c49f914adf1cc0593df0dea"
+}

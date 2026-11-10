@@ -1,0 +1,48 @@
+{
+  "record": {
+    "case_id": "c_efb6d7143921",
+    "family_id": "confirmation_v4_access_control_identity_pair",
+    "source_id": "confirmation_v4_access_control_identity_pair",
+    "split": "neutral_confirmation_v4",
+    "category": "access_control",
+    "method": "trace",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "explanation": "A request can return another actor's record without the required policy check.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+    "prompt_sha256": "292d40f6376bb1aba0b8160a9dbd9d87f97bf7522ab44d52e74146ab912e7363",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     identity = (row[\"owner_id\"], actor[\"id\"])\n6 |     return row if identity[0] == identity[1] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 343,
+    "output_tokens": 50,
+    "finish_reason": "stop",
+    "latency_seconds": 2.432679443999973,
+    "request_id": "cfad72ede5b401098958455f"
+  },
+  "sha256": "3f971609fc70f2a99de7eb86cd4116654c5959e5029271408ad5219d922c20bf"
+}

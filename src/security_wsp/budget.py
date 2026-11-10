@@ -15,8 +15,8 @@ def reserve_job(available_cents, spec, policy):
         raise ValueError("Positive CPU and RAM allocations are required")
     floor = round(100 * policy["minimum_beam_balance_usd"])
     margin = round(100 * policy["safety_margin_usd"])
-    if floor < 1500 or margin < 100:
-        raise ValueError("The protected $15 floor and $1 margin may not be reduced")
+    if floor < 1800 or margin < 100:
+        raise ValueError("The protected $18 floor and $1 margin may not be reduced")
     # Upper planning rates, deliberately above the rates used by these experiments.
     hourly_upper_bound = 1.20 + .40 * cpu + .025 * ram
     reservation = math.ceil(100 * hourly_upper_bound * timeout / 3600)
@@ -24,5 +24,5 @@ def reserve_job(available_cents, spec, policy):
               "safety_margin_cents": margin, "maximum_job_reserve_cents": reservation,
               "passed": available_cents - reservation >= floor + margin}
     if not record["passed"]:
-        raise RuntimeError("The bounded job would encroach on the $15 credit floor and safety margin")
+        raise RuntimeError("The bounded job would encroach on the credit floor and safety margin")
     return record

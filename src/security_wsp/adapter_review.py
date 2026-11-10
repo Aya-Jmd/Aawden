@@ -48,7 +48,8 @@ def prior_plain(previous, adapter, cases, variant="plain"):
     return rows
 
 
-def evaluate(cases, adapter, variants, output, identity, previous=None):
+def evaluate(cases, adapter, variants, output, identity, previous=None, *,
+             make_request=request_for, prompt_version=VERSION):
     store = RunStore(output, dict(identity, dataset=digest([asdict(case) for case in cases]), variants=list(variants)),
                      stage="adapter_prompt_review", evidence_kind="cohere_local_checkpoint")
     store.start()
@@ -65,8 +66,8 @@ def evaluate(cases, adapter, variants, output, identity, previous=None):
                     store.save_prediction(storage_id, row)
                     arm.append(row)
             else:
-                arm = evaluate_requests(((case, request_for(case, variant)) for case in cases), adapter, variant,
-                                         store=store, prompt_version=VERSION)
+                arm = evaluate_requests(((case, make_request(case, variant)) for case in cases), adapter, variant,
+                                         store=store, prompt_version=prompt_version)
             scores[variant] = metrics(arm)
             rows.extend(arm)
             print(output.name, variant, scores[variant]["balanced_accuracy"], flush=True)

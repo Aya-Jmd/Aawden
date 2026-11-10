@@ -38,4 +38,4 @@ Recompute the existing ledger locally without loading Aya or using a GPU with `p
 
 ## Resources
 
-The last training task completed in 17 minutes 23 seconds. Beam reported **$24.00 remaining** after completion, above the user's protected $15 floor. The observed balance reduction across the last two jobs was approximately $0.65, including billing lag. No Aawden tasks remained active, and all 20 known temporary job-secret names were cleaned up. No further GPU experiment was launched after reaching the target.
+The v7 training task completed in 17 minutes 23 seconds. Beam reported **$24.00 remaining** after completion. The observed balance reduction across the last two jobs of that study was approximately $0.65, including billing lag. No Aawden tasks remained active at the end of that study, and all 20 known temporary job-secret names were cleaned up. The separate harder benchmark tracks the subsequent runs and the current $18 credit floor. [Harder review](RIGOROUS_REVIEW.md)

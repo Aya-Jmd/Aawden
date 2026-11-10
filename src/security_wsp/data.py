@@ -201,7 +201,8 @@ def oracle_cases() -> dict[str, Case]:
     from .confirmation_v3 import confirmation_cases_v3
     from .confirmation_v4 import confirmation_cases_v4
     from .confirmation_v5 import confirmation_cases_v5
-    return {c.case_id: c for c in (*build_cases(), *confirmation_cases(), *confirmation_cases_v2(), *confirmation_cases_v3(), *confirmation_cases_v4(), *confirmation_cases_v5())}
+    from .rigorous_cases import rigorous_cases
+    return {c.case_id: c for c in (*build_cases(), *confirmation_cases(), *confirmation_cases_v2(), *confirmation_cases_v3(), *confirmation_cases_v4(), *confirmation_cases_v5(), *rigorous_cases())}
 
 
 def run_oracle(case: Case) -> dict:
@@ -213,6 +214,7 @@ def run_oracle(case: Case) -> dict:
     scope = {}
     exec(compile(case.code, "<trusted-aawden-fixture>", "exec"), scope)
     violations, tests, normal_ok = [], [], True
+    rigorous = expected.split.startswith("rigorous_")
     if case.target_category == "sql_injection":
         with sqlite3.connect(":memory:") as conn:
             conn.execute("CREATE TABLE users (name TEXT)")
@@ -223,7 +225,12 @@ def run_oracle(case: Case) -> dict:
                 ok = actual == [(name,)]
                 normal_ok &= ok
                 tests.append({"test": "legitimate_access", "input": name, "passed": ok})
-            for payload in ("never' OR 1=1 --", "never') OR 1=1 --", "never' OR '1'='1"):
+            payloads = ("never' OR 1=1 --", "never') OR 1=1 --", "never' OR '1'='1")
+            if rigorous:
+                payloads += ("never' UNION SELECT 'aawden-probe' --",)
+            if expected.split == "rigorous_confirmation_v4":
+                payloads += ("never' AS TEXT) OR 1=1 --",)
+            for payload in payloads:
                 try:
                     rows = lookup(conn, payload)
                     violation = bool(rows)
@@ -253,6 +260,15 @@ def run_oracle(case: Case) -> dict:
         violation = read(records, stranger, 1) is not None
         violations.append(violation)
         tests.append({"test": "cross_tenant_access", "violation": violation})
+        if rigorous:
+            bob = dict(actor, id="bob")
+            ok = read(records, bob, 2) == records[2]
+            normal_ok &= ok
+            tests.append({"test": "second_owner_permitted", "passed": ok})
+            for actor_under_test, key in ((bob, 1), (dict(stranger, role="admin"), 2)):
+                violation = read(records, actor_under_test, key) is not None
+                violations.append(violation)
+                tests.append({"test": "non_owner_denied", "violation": violation})
         if case.source_id in ("access_control_role_only", "access_control_policy", "neutral_confirmation_access_control_administrator"):
             admin = dict(actor, id="root", role="admin")
             ok = read(records, admin, 2) == records[2]

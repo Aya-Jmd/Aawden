@@ -66,6 +66,13 @@ def image():
 def load():
     """Load the pinned base model and merge the adapter. Runs once per container."""
     import torch
+
+    # peft 0.21 reads torch.distributed.tensor.DTensor, but on torch 2.5 the submodule is only an
+    # attribute after an explicit import; without this it raises AttributeError during inject_adapter.
+    try:
+        import torch.distributed.tensor  # noqa: F401
+    except Exception:  # pragma: no cover - older torch without DTensor is fine
+        pass
     from peft import PeftModel
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -160,7 +167,17 @@ def make_app(load_fn=load):
         step("dataset_present", lambda: need(ROOT / "datasets/plain-pooled.json", "dataset"))
         step("token_present", lambda: (os.environ.get("AAWDEN_AYA_HF_TOKEN") or os.environ.get("HF_TOKEN"))
              or (_ for _ in ()).throw(RuntimeError("no Hub token in the environment")))
-        step("import_package", lambda: __import__("security_wsp.prompts", fromlist=["render"]).render)
+        def import_package():
+            import sys as _sys
+
+            for root in (str(ROOT / "src"), str(ROOT)):
+                if root not in _sys.path:
+                    _sys.path.insert(0, root)
+            from security_wsp.prompts import render
+
+            return render
+
+        step("import_package", import_package)
         loaded = step("load", load_fn)
         if loaded:
             model, tokenizer = loaded

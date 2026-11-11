@@ -49,6 +49,10 @@ ADAPTER_DIR = Path("demo/adapter-aya8b-curr-s17")  # relative to the synced app 
 PREFILL = '{"verdict":"'
 MAX_NEW_TOKENS = 6
 KEEP_WARM = 300
+# RTX4090 has 22 GiB usable and an 8B model in bf16 is about 16 GiB of weights before activations, which
+# OOMs on the first request. RTX5090 is a serverless option with 32 GiB, so it holds the weights with
+# room to run. deploy_demo checks that this matches its --gpu so the two cannot drift.
+GPU = os.environ.get("AAWDEN_DEMO_GPU", "RTX5090")
 _CASE_COUNT = len(json.loads((ROOT / "datasets/plain-pooled.json").read_text())["cases"])
 RATE_LIMIT = (30, 60.0)  # requests per client per window (seconds)
 
@@ -238,7 +242,7 @@ def _load_case(case_id: str):
 
 
 if asgi is not None:
-    @asgi(name="aawden-demo", gpu="RTX4090", cpu=2, memory="32Gi", timeout=300,
+    @asgi(name="aawden-demo", gpu=GPU, cpu=2, memory="32Gi", timeout=300,
           keep_warm_seconds=KEEP_WARM, authorized=False, image=image(),
           secrets=["AAWDEN_AYA_HF_TOKEN", "AAWDEN_DEMO_PASSCODE"],
           )

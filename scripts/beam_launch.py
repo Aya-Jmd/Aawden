@@ -372,7 +372,10 @@ def deploy_demo(options) -> int:
         print(f"would create secret {secret} (value hidden), then deploy {app} on {options.gpu}")
         return 0
     with isolated_beam_home(token) as home:
-        env = child_environment(home)
+        # The GPU is chosen inside the @asgi decorator, which is evaluated here at deploy time.
+        # Passing it through the environment keeps the CLI's --gpu and the decorator from drifting
+        # apart, which is how a "RTX5090" deploy silently ran on a 22 GiB RTX4090.
+        env = child_environment(home, {"AAWDEN_DEMO_GPU": options.gpu})
         beam = beam_binary(options.python)
         # beam-cli 0.2.207 takes the value as a positional argument (`beam secret create NAME VALUE`);
         # there is no --from-value flag. The value is passed as an argv element, so it is visible in

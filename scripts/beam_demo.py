@@ -86,7 +86,11 @@ def _verdict(model, tokenizer, case, condition: str):
 
     import torch
 
-    sys.path.insert(0, str(ROOT))
+    # The package lives under src/, not the repo root. Locally an editable-install .pth hides that;
+    # inside the container nothing does, so both roots go on the path.
+    for root in (str(ROOT / "src"), str(ROOT)):
+        if root not in sys.path:
+            sys.path.insert(0, root)
     from security_wsp.prompts import render
 
     request = render(case, condition, wording="reviewer")
@@ -159,7 +163,9 @@ def _load_case(case_id: str):
     import json
     import sys
 
-    sys.path.insert(0, str(ROOT))
+    for root in (str(ROOT / "src"), str(ROOT)):
+        if root not in sys.path:
+            sys.path.insert(0, root)
     from security_wsp.data import Case
 
     data = json.loads((ROOT / "datasets/plain-pooled.json").read_text())

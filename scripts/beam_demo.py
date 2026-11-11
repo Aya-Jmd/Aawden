@@ -58,13 +58,25 @@ RATE_LIMIT = (30, 60.0)  # requests per client per window (seconds)
 
 
 def image():
+    """The runtime image.
+
+    torch must come from the cu128 index, not PyPI: the RTX5090 is Blackwell (sm_120), and wheels
+    published on PyPI before 2.7 ship no sm_120 kernels. With torch 2.5.1 the model loads its
+    weights and then fails the first CUDA call with "no kernel image is available for execution on
+    the device". torch 2.7.1+cu128 is the first build that covers this card.
+
+    peft must match the release that wrote adapter_config.json (peft_version 0.21.2), whose config
+    carries fields the 0.13 line does not parse.
+    """
     if Image is None:
         return None
-    return Image(python_version="python3.11").add_python_packages(
-        # peft must match the release that wrote adapter_config.json (peft_version 0.21.2), whose config
-         # carries fields the 0.13 line does not know.
-         ["torch==2.5.1", "transformers==4.46.3", "peft==0.21.2", "accelerate==1.1.1",
-         "fastapi==0.115.5", "pydantic==2.10.3", "sentencepiece==0.2.0", "uvicorn==0.32.1"])
+    return (
+        Image(python_version="python3.11")
+        .add_commands(["pip install --no-cache-dir torch==2.7.1 --index-url https://download.pytorch.org/whl/cu128"])
+        .add_python_packages(["transformers==4.46.3", "peft==0.21.2", "accelerate==1.1.1",
+                              "fastapi==0.115.5", "pydantic==2.10.3", "sentencepiece==0.2.0",
+                              "uvicorn==0.32.1"])
+    )
 
 
 def load():
@@ -171,6 +183,20 @@ def make_app(load_fn=load):
         step("dataset_present", lambda: need(ROOT / "datasets/plain-pooled.json", "dataset"))
         step("token_present", lambda: (os.environ.get("AAWDEN_AYA_HF_TOKEN") or os.environ.get("HF_TOKEN"))
              or (_ for _ in ()).throw(RuntimeError("no Hub token in the environment")))
+
+        def versions():
+            import torch
+            from peft import __version__ as peft_version
+            from transformers import __version__ as transformers_version
+
+            return {"torch": torch.__version__, "cuda": torch.version.cuda,
+                    "capability": ".".join(str(x) for x in torch.cuda.get_device_capability()),
+                    "device": torch.cuda.get_device_name(0),
+                    "transformers": transformers_version, "peft": peft_version}
+
+        info = step("versions", versions)
+        if isinstance(info, dict):
+            steps[-1]["value"] = info
         def import_package():
             import sys as _sys
 

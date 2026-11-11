@@ -1,0 +1,48 @@
+{
+  "record": {
+    "case_id": "c_766e124901a3",
+    "family_id": "wsp_discovery_access_control_owner_none_default",
+    "source_id": "wsp_discovery_access_control_owner_none_default",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        3
+      ],
+      "explanation": "The function `read_record` allows any actor to access a record if the record's `owner_id` matches the actor's `id`. This bypasses the intended access control mechanism, as only the record owner should be able to access it.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"access_control\", \"evidence_lines\":[3], \"explanation\":\"The function `read_record` allows any actor to access a record if the record's `owner_id` matches the actor's `id`. This bypasses the intended access control mechanism, as only the record owner should be able to access it.\", \"confidence\":1}",
+    "prompt_sha256": "9a297dafe87479ebdd0289680a932ccd2696446243b8233e5fc86a323679079c",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    owner = row.get(\"owner_id\", actor[\"id\"])\n    return row if owner == actor[\"id\"] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 249,
+    "output_tokens": 77,
+    "finish_reason": "stop",
+    "latency_seconds": 1.8240248920000113,
+    "request_id": "4497b23d9616231df3a00cdb"
+  },
+  "sha256": "0709289c73d72511efcaafd873de5df2e2b55ea96cbbc7533bd82d462e3d2dc8"
+}

@@ -1,0 +1,186 @@
+{
+  "run_id": "448224e1a6c93044",
+  "parent_run": null,
+  "identity_sha256": "448224e1a6c93044a373b6a15efbb9709fd4f3d2e4b03d20fa4d2a7ac124d66f",
+  "identity": {
+    "protocol": {
+      "prompt_version": "aawden-rigorous-review-v3",
+      "variants": [
+        "flow",
+        "flow_first"
+      ],
+      "target_accuracy": 1.0,
+      "adapter_sha256": "60154fe83703a57b4d76d25abb7bcfb0f82a21f9d6415d2698e8ef300818b41d",
+      "development": {
+        "path": "datasets/rigorous-development.json",
+        "sha256": "2428b09b4c032521fb0899ef7fa0e6ba6023db213bfc5ea036c917f5057b4e9c",
+        "count": 16
+      },
+      "confirmation": {
+        "path": "datasets/rigorous-confirmation-v2.json",
+        "sha256": "2ba8eb029ac104f5531b3fe446da48fe7adabe0fdd012e3697b98bad50e18e88",
+        "count": 32
+      },
+      "regression": {
+        "path": "datasets/neutral-confirmation-v5.json",
+        "sha256": "dcab83068fcc14bbeaa130e350a20c6222440a47ccb660b59436d32e6cea0016",
+        "count": 20
+      },
+      "minimum_dev_accuracy": 0.86,
+      "validation_reference": {
+        "path": "runs/aya-rigorous/rigorous-03/study/development_refined",
+        "manifest_sha256": "f4c5bbaf5be6d438d46da5517d0da1f9c7b68d8e9a62e6ff7f728004a392a84a"
+      }
+    },
+    "source": "19202b8ad0f4bc109e903a4f2dc187834c90ddd285ef5c7b9f5b05147f31c5f2",
+    "dataset": "8dab1a545bb313244dadee3380774e8ed32b4c64f435f91ca1b133c08ea8f7c0",
+    "variants": [
+      "flow",
+      "flow_first"
+    ]
+  },
+  "stage": "adapter_prompt_review",
+  "status": "completed",
+  "evidence_kind": "cohere_local_checkpoint",
+  "created_at": "2026-11-09T07:50:25.108775+00:00",
+  "environment": {
+    "python": "3.11.11",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+    "packages": {
+      "torch": {
+        "version": "2.9.1+cu128",
+        "direct_url": null
+      },
+      "transformers": {
+        "version": "5.22.1",
+        "direct_url": null
+      },
+      "transformer-lens": {
+        "version": "3.8.0",
+        "direct_url": null
+      },
+      "circuitkit": {
+        "version": "0.2.0",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+            "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+          }
+        }
+      },
+      "auditkit": {
+        "version": "1.1.3",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+            "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+          }
+        }
+      },
+      "safetensors": {
+        "version": "0.8.0",
+        "direct_url": null
+      }
+    },
+    "code_commit": null,
+    "code_sha256": "19202b8ad0f4bc109e903a4f2dc187834c90ddd285ef5c7b9f5b05147f31c5f2",
+    "dependency_lock_hashes": {
+      "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597"
+    }
+  },
+  "failure_reason": null,
+  "attempts": [
+    {
+      "status": "completed",
+      "started_at": "2026-11-09T07:50:25.123758+00:00",
+      "ended_at": "2026-11-09T07:52:57.354093+00:00"
+    }
+  ],
+  "started_at": "2026-11-09T07:50:25.123758+00:00",
+  "model_sha256_by_arm": {
+    "Aya": "05d4c47ec2827f352c6972bde4853062dd16822ed680cebbd356828a73990152"
+  },
+  "completed_at": "2026-11-09T07:52:57.354093+00:00",
+  "artifact_hashes": {
+    "results.json": "bfc1981c3e8736e341441988c3972b3228559b819982d0a9069f318ff01be7ae",
+    "summary.json": "f654a03a531627ac6dfad5b4f9f4f8c7146917430671ed438dd683c5dc667042",
+    "auditkit.json": "1dc12ca24d8e8b36d2a0b20a2e797b1a9d6bf39fe009b437049e67d4a0d13bd1",
+    "predictions/557a72a66c52ee24a8a6754c.json": "7f47b3da64e71b24613846eb0c4a342a6254a7da9a2f80d7315bcb571125d339",
+    "predictions/2314fc22ab9ea0477f68f1bf.json": "f6b724afeb5a4dc71247f06a10935986d4af47218fbd352abc8d09535389d292",
+    "predictions/fccdd7c9216f3a59832ce7d0.json": "7235e8bdd70f1d01e8f8ee94a5b7af5ba45b2e8d751c10bb193f857d8e526235",
+    "predictions/cc9543aa85ab6f0760e6adb9.json": "bfd061b3f10083a9ca38bc16fff02ee7d182f8d5107d961c44d23dcf98c64935",
+    "predictions/1096a394e92da40160dc1e3a.json": "300c4e119f2dbb20e9581a3eebfeb81c4387f25a3a9597f86bf27291e12c36f0",
+    "predictions/5801c2c514af20ce89b1dd3b.json": "69775ec58cc25a413303da6b9ebad59530e4c822e435c4d9e6c5308659b3cca6",
+    "predictions/413ce1ccfb757303ef4ccd25.json": "326ff64ae6ad07223ad27734e734ca7f48912f38b06d28a0b1c930a8137f4b59",
+    "predictions/9d193d154eed4b5d0912a80f.json": "973698b907d6b4fe9eb895ec6f9814e908988b7cefba567d2fb200d5dd543355",
+    "predictions/e6ae8f0f85425b874b12dba5.json": "6e9ec404b82d8eb9d827b46a95f3400bceced66785db5e88548642ba6ac55f5b",
+    "predictions/3e925c9fd51c9925fed6b948.json": "b5675ea81aba6779b8a80f20e8e931fb8b68850b770e534f1ec1e3c6ad13da43",
+    "predictions/76ad8624e562644705edc7c3.json": "a5e99f8f7690607e626f184e3d3f9dfc548a5541f4f63e1136877c3220227e10",
+    "predictions/095049dd8528965805cf004d.json": "4d7983d908e782da55b25a03108c2cedc108669adbf484a9cea43170a85ee535",
+    "predictions/848a88f993a0e3eba2af164e.json": "0dc5f72ac3304754510702fde16d12ba5f679ae570be2ce1486c207a811b4847",
+    "predictions/944c1c7c49ceba98a30221de.json": "5fdc25611efddc23b50fde4dfcb6fa74e2f2f61cd284300d70664f5d8522ceb9",
+    "predictions/47915ed413adfb5f16a5c0dd.json": "3fd547eafcc2351f95acbeee878d4a41068269c8304906afe7968807f7947462",
+    "predictions/6b8e485e809170bc77d405f0.json": "e9c6188311258118764c0c2f2acdb43bea6983337ec7d926a26d3f06d9e54fe4",
+    "predictions/92aee73a56856175724141e2.json": "d777b0bcca20260f93c416a23afedc09a96812c5d590aae9986b65d29f60d7d1",
+    "predictions/a91a9d975f35cf83cbffc05b.json": "24f7713338f74aac43c4f1bb548e9f97d7c2c935341a9655e867020c8a596f2c",
+    "predictions/18002c88e17d84bed586305a.json": "580aa78a006a0cb2c0c9ef8308422547e09e95b95e5b742e0894b97df0b75690",
+    "predictions/597ce4cbebf290cc94f4a6d3.json": "df463c354bc7597970f155ed6765e20e6d22aa4b8ed340a340ad063270140819",
+    "predictions/7cd234ce04224fe887aa377d.json": "6f13082dc67b4d248fa126392e2f6ac29a8c95a4e3bb57f399503eb2a0a88b25",
+    "predictions/886ab0f54a1c586e535c3e8b.json": "7dbb7157360cf7c5f5785d9804021a30966cec296660aafd7f4ef21e884f5f23",
+    "predictions/76cbf71ea66821050772eebf.json": "7baba418675848856bdf04c0303d733645ed0a6a95bdbaafe5db0be68ed37ca8",
+    "predictions/5784afa14503954f5f21d9d0.json": "ba261e5ee9dd72f4d958ebb21c2602d9b3dab6883cecbd95d69dfa06fc5c1e3c",
+    "predictions/62b0281346be4373bbdbc995.json": "338c1cd401043935507f23cb528fbd05bc95588633964da5ca7a1cd5e3819eee",
+    "predictions/3fb1898804ff9c1fad2ab022.json": "8267eba36dc69abc9ee55d05ef02085db2f56e891242d2936c196237c3071827",
+    "predictions/60c0c03d2d4c09303301d789.json": "62991898b5c7e9daf7807abcd8202c3fc75b223096a9961b7e1458f7db3c63c4",
+    "predictions/c40e120c77cac7a04538da1d.json": "f0c1d22ae249adab7308d010b838aa9fc0261f143b1afb0646497e733cfc72eb",
+    "predictions/740043418626b2f2ccadeacb.json": "f3674262b7e5ae785ccc4e91c72c2c47c389f8751ca9d72ea1188410ff410c3a",
+    "predictions/8d394ef9c39ab9f9ad52d33c.json": "863c24fd173ed1bea4d315fa535986938f3b0f1d3ea693c41d2259328d64afa6",
+    "predictions/4d99105ef6a2528654369d7a.json": "1e7c7d3b81ac37fee5d72587438b2764d72905c09e11cefb2555aba2095fda5d",
+    "predictions/603842416a1046ceba2d0fa8.json": "2fcdf5e53a07a76ea0545bdd231be7e72e51607bedf38702d07e615a6401fa99",
+    "predictions/51cc304ba3868ea125bfdd73.json": "1ac9176f73f0faf66aee034cbfcd66699af0fb603e26a92d703f0138520a97c9",
+    "predictions/e457e9c078d4083b4b9b9d55.json": "7da97ea8b4558c6b59b33c8cf5bad5b1374d278320823eecab78d7cb1b3d5abf",
+    "predictions/e61c281c87b15428e834c654.json": "20b6ee667fe3f6f99e5df57dd26304c213ca4a3782ef9b9d352350b831f4cbf7",
+    "predictions/d595da5fb81e9a218d9a93a4.json": "ffb257d35adbdea533790633b5c7bee3f83826b6daab590a0d6d00783e1bcb82",
+    "predictions/fa9c7aad31a5be71c7fd5b9f.json": "ac6a6bc49c09e5ae6777cc3c6d64ff2da878b31bb34416fc94c133d60f3e8f1e",
+    "predictions/18013bc7d914116b954f950c.json": "7a2d596c65987c17304c873ec080affd050593f69d316c003bbacc8f9520b0e1",
+    "predictions/cafe93a1f2a70e08498ce79f.json": "841f2e85490325add5ff0751a62d2561261e3074610df78b5ef4f4913c1397e8",
+    "predictions/f87c5897f8113522a023219e.json": "a961d3966fe6a34ec48ee9af49d456fb8981a9b1736560200c4ebcab7a1d65d8",
+    "predictions/cc692b7e6f2b439523ddfe3d.json": "39c30ed27a03655e59eba272366f6ec9317d830fa2364ee22b61a02e317d6d6b",
+    "predictions/ba7c5bbb3185c104de31b34d.json": "e949411e2f4592ee665123668ef95cc25eeb718722d9519bc93de7f728cf7729",
+    "predictions/c5501b44ada750587d1cc5ff.json": "3b74f12b751ef0d3b8ec6176054942623c7a0dc75c14339208d0360bd501b697",
+    "predictions/a6d7b04eb6c89ff488317596.json": "299c3c1c2e73bf7aa3f0345b1b1f21734c850fa0bb4cbfc5c780aa563b84497d",
+    "predictions/d5414d2f7aeaaa508290b78e.json": "331ef8be1092097b4470da2e86173ddf78127173a28f471701f11469536ff568",
+    "predictions/f926daff9ae4ab13966d3de9.json": "365965813acb76603f939d915dc842d0e7de23e7aef4a7f33ad7256eeea9a5cd",
+    "predictions/3ca0e9ebd542814abba94bfe.json": "a36e97b67675a8eddde7fc9ae670b70b99751eb9e3e67ec332ab87d164faa7ec",
+    "predictions/5c2f88e7f0f4d318b0395c27.json": "6b6bed6cecb7aecfb9f86d2f4794c5d1fae5326435582d7fe12a988495bfd062",
+    "predictions/5bcdd837d37af83d38d2751e.json": "b50bdbc8e94c9a77209ba75dcbd58908e914483b6511e4e904f9de8f7c250d6d",
+    "predictions/cc2d22aff6dae8082fe43efb.json": "3323d10d6b92620ad5fc3cdc9bc9b6463083a27056b2ea0bcd33ff529ba278ee",
+    "predictions/c0ea2818bd5b581868f71f81.json": "5e4f20f5e66244aa8cdf2ebdaaddd979643752e526dc015b28fc739f1eb66d3e",
+    "predictions/bde7b94fd08a2d74d7a0487b.json": "96e4ad06cd9de0102576178a7b03113b404df3dce59b795807c87947e73d9a62",
+    "predictions/ca3c5c4f4e1b3add726d93c9.json": "56ba3749a17bae082ff6fa94ff23cb64d4172e8d7a3bba081dbb21c07073cd31",
+    "predictions/d8093af51c8e32c471a75229.json": "0dcddcba6e21ff3102a7f94645dadfd0ea4e7091c28386400aff102f5659cfc9",
+    "predictions/d076b7ebb0c27849f81a55c1.json": "9067f2e64a73fa8c7149c07bf006e3153ca6b161ca66e94ffa8d75f13d109c0f",
+    "predictions/afc7f3089d5558b6b43f70c9.json": "8813ae51ad47135199568df858e2bc28f308dab0421ecf786ef0842cc477662e",
+    "predictions/849ea1c50d2f2db24d9495f6.json": "b2365ce5c5c952e171f35c8f3a196b784c7e223a9f73b260eeabddd298f6b8d5",
+    "predictions/8f96ec4761ff4c839f49b0b1.json": "093662225496fedbd63abaf0dbf8be0a634f589f5db92b0b57897ea01f22c9a7",
+    "predictions/80c2bc7168a6dbdf62654a4a.json": "c70e53a3e467a8de56d82ba2947daf5090635d6e31e10bdce6fe89fd32f52b10",
+    "predictions/4f2d317b7e795246ff483f7b.json": "c27f6a00e3027315dda986bb2624590848fdaadb6c5c26e9dc778eeea764c8c7",
+    "predictions/8092ddecc30730f92aa4f33a.json": "38fea1d1632e3b28f6a42048c8e0cb5fce47e2676cd5b7b55dc433e781041b89",
+    "predictions/92a9a1291433a23cbd974a0a.json": "3d5c85e5ce48cd252c576fc0c3ec9b0f09084dc0cc89dad44ea27bd8539efa30",
+    "predictions/a3dac1d9ae655cb5e9e33ac4.json": "d574c8ff7915076653af83404895b581c3ab1abd7df9abdf4b0442fc7e9f5be5",
+    "predictions/bf03bf949edfbf663f501a4d.json": "cd7760664fe06709e7402219282965c3c873d0f2c3bbd3b0a5de1aebcf02cadd",
+    "predictions/4c53993374771d5cb5613edc.json": "a543029a56f66e4031a845ba3e5d217fe40744965307518c7f67c411773b4e3a",
+    "predictions/3e6dbd61ea0c30d0975ff5c6.json": "85d7bbd4ace4568420b40ce0674d7894afd5cf2cf539e1fb9e44e268c6679899",
+    "predictions/87e697688ca2ee0fbca09a11.json": "c86b32d7edcb4c9814a00be3688cfcd8cfe6a1a082d73e0295bcfbe6e038a786",
+    "predictions/aab6506a1243099ca049c856.json": "6f2038f2393ccba817519fdafbbad4c1248fee7f33e9f48cd864647ff0b66b1b",
+    "predictions/03e36b5538bfcabcaf29fd44.json": "080a93e6071adf1f4c9abfe7dc25c7ff767e3a1ce857a23f01b6b4fa3c52e710",
+    "predictions/6819cd051ffd8837915ba64e.json": "4a924b3f1586694a08d16f610947243ee0fc8c21370a50e7a1016dc10a61963e",
+    "predictions/7e85776506d7c290616f4dec.json": "f88036e0bc62a4b6a15971546dacd9aa406823635dd03f0e150ea176b97fdddb",
+    "predictions/06e2efde690c686c2926487f.json": "32436647871eba894e27859f8a2e54add904c91dd1be5a48c44663ceb3e1888f"
+  },
+  "expected_predictions": 72
+}

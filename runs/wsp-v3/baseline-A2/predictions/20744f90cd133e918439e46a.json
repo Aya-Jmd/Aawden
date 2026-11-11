@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_7e57e213f22f",
+    "family_id": "wsp_discovery_access_control_shadowed_fallback",
+    "source_id": "wsp_discovery_access_control_shadowed_fallback",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [3],\n  \"explanation\": \"The function `read_record` allows any caller to specify `record_id` and retrieve a record, regardless of ownership. This is evident from the line `row = records.get(record_id)` which directly retrieves the record based on the provided `record_id` without any additional validation or authorization checks.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "bab868c7c28f2fc36efd062f06fb4e9fb32845619cd7a7a81ef07634673aab54",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    owned = {key: item for key, item in records.items() if item[\"owner_id\"] == actor[\"id\"]}\n    row = owned.get(record_id)\n    return row\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 260,
+    "output_tokens": 112,
+    "finish_reason": "stop",
+    "latency_seconds": 2.6585927890000676,
+    "request_id": "ebe07c3faa613bb77f997296"
+  },
+  "sha256": "8b8acb2628e80707454ea6ee938f8573d47475e2e5bed15b2d4f7fc8eaf664c8"
+}

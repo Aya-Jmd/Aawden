@@ -1,0 +1,193 @@
+{
+  "metrics": {
+    "plain": {
+      "n": 20,
+      "n_vulnerable": 10,
+      "n_clean": 10,
+      "true_positive": 6,
+      "true_negative": 8,
+      "false_positive": 2,
+      "false_negative": 4,
+      "balanced_accuracy": 0.7,
+      "accuracy": 0.7,
+      "false_positive_rate": 0.2,
+      "false_negative_rate": 0.4,
+      "miss_rate": 0.4,
+      "coverage": 1.0,
+      "invalid_count": 0,
+      "generation_errors": 0,
+      "input_tokens": 4948,
+      "output_tokens": 1035,
+      "latency_seconds": 49.11086729499971,
+      "explanation_grounding": null,
+      "general_coding_accuracy": null
+    },
+    "trace": {
+      "n": 20,
+      "n_vulnerable": 10,
+      "n_clean": 10,
+      "true_positive": 8,
+      "true_negative": 8,
+      "false_positive": 2,
+      "false_negative": 2,
+      "balanced_accuracy": 0.8,
+      "accuracy": 0.8,
+      "false_positive_rate": 0.2,
+      "false_negative_rate": 0.2,
+      "miss_rate": 0.2,
+      "coverage": 1.0,
+      "invalid_count": 0,
+      "generation_errors": 0,
+      "input_tokens": 6538,
+      "output_tokens": 1016,
+      "latency_seconds": 50.81971251699969,
+      "explanation_grounding": null,
+      "general_coding_accuracy": null
+    },
+    "counterexample": {
+      "n": 20,
+      "n_vulnerable": 10,
+      "n_clean": 10,
+      "true_positive": 9,
+      "true_negative": 5,
+      "false_positive": 5,
+      "false_negative": 1,
+      "balanced_accuracy": 0.7,
+      "accuracy": 0.7,
+      "false_positive_rate": 0.5,
+      "false_negative_rate": 0.1,
+      "miss_rate": 0.1,
+      "coverage": 1.0,
+      "invalid_count": 0,
+      "generation_errors": 0,
+      "input_tokens": 7518,
+      "output_tokens": 998,
+      "latency_seconds": 49.379480516999934,
+      "explanation_grounding": null,
+      "general_coding_accuracy": null
+    },
+    "contrasts": {
+      "n": 20,
+      "n_vulnerable": 10,
+      "n_clean": 10,
+      "true_positive": 9,
+      "true_negative": 5,
+      "false_positive": 5,
+      "false_negative": 1,
+      "balanced_accuracy": 0.7,
+      "accuracy": 0.7,
+      "false_positive_rate": 0.5,
+      "false_negative_rate": 0.1,
+      "miss_rate": 0.1,
+      "coverage": 1.0,
+      "invalid_count": 0,
+      "generation_errors": 0,
+      "input_tokens": 7328,
+      "output_tokens": 1012,
+      "latency_seconds": 49.65573829499999,
+      "explanation_grounding": null,
+      "general_coding_accuracy": null
+    }
+  },
+  "model": {
+    "adapter": "huggingface",
+    "model_id": "CohereLabs/aya-expanse-8b",
+    "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+    "dtype": "torch.bfloat16",
+    "device": "cuda:0",
+    "decoding": {
+      "do_sample": false,
+      "max_new_tokens": 256
+    },
+    "tokenizer_sha256": "beb3ef2cb916cf53d01655d46cf9bfbb1dcfbded9f3ef4c6a298ed760c6f02df",
+    "chat_template_sha256": "e7527cc46a21601b5340edffd3633d47d722c7c735eb9fc1e3c11f66ff2b0caf",
+    "continuation_scoring": "sum of all continuation token log-probabilities, no length normalization, no added special tokens",
+    "environment": {
+      "python": "3.11.11",
+      "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+      "packages": {
+        "torch": {
+          "version": "2.9.1+cu128",
+          "direct_url": null
+        },
+        "transformers": {
+          "version": "5.22.1",
+          "direct_url": null
+        },
+        "transformer-lens": {
+          "version": "3.8.0",
+          "direct_url": null
+        },
+        "circuitkit": {
+          "version": "0.2.0",
+          "direct_url": {
+            "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+            "vcs_info": {
+              "vcs": "git",
+              "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+              "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+            }
+          }
+        },
+        "auditkit": {
+          "version": "1.1.3",
+          "direct_url": {
+            "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+            "vcs_info": {
+              "vcs": "git",
+              "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+              "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+            }
+          }
+        },
+        "safetensors": {
+          "version": "0.8.0",
+          "direct_url": null
+        }
+      },
+      "code_commit": null,
+      "code_sha256": "a26538f79f1a2661cf2f160e846742d3a2a6ac7365a6fe1a72ff88bbc086a97b",
+      "dependency_lock_hashes": {
+        "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+        "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597",
+        "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+      }
+    },
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_bytes": 25250627584,
+      "cuda": "12.8"
+    },
+    "checkpoint_hashes": {
+      "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+      "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+      "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+      "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+      "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+    },
+    "adaptation": "LoRA",
+    "adapter_sha256": "354c3e4c7dd5cc74eacf6c68d0d6dd553ade814fcde101185333d9b38e821e8c"
+  },
+  "dataset": {
+    "cases": 20,
+    "families": 10,
+    "splits": [
+      "neutral_confirmation_v3"
+    ],
+    "dataset_sha256": "d05de1078cdc167aa4ea5d6ab546d2429bae8b07726f4b66a25afefe7231b794",
+    "label_review": "single_author; no independent review",
+    "final_test_protected": false
+  },
+  "reused_answers": 20,
+  "AuditKIT": {
+    "status": "executed",
+    "toolkit": "AuditKIT",
+    "version": "1.1.3",
+    "pinned_source_revision": "71316da345784ff220d5ed59337441a59ab31526",
+    "mode": "strict semantic scoring of precomputed raw generations",
+    "samples": 80,
+    "fingerprint": "a848ba0d61d83b47",
+    "artifact": "auditkit.json",
+    "scope": "Benchmark labels and statistical inference remain owned by Aawden."
+  }
+}

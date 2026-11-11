@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "workspace": "Beam workspace 2, authenticated with BEAM_TOKEN_2 from the repo .env (never BEAM_TOKEN)",
+  "token_env": "BEAM_TOKEN_2",
+  "refused_token_env": "BEAM_TOKEN",
+  "secret_name": "AAWDEN_AYA_HF_TOKEN",
+  "function_name": "aawden-v3-run-command",
+  "volume": {
+    "name": "aawden-v3",
+    "mount_path": "/volumes/aawden-v3"
+  },
+  "defaults": {
+    "gpu": "RTX4090",
+    "cpu": 2,
+    "memory": "32Gi",
+    "timeout": 1800,
+    "retries": 0
+  },
+  "python_version": "python3.11",
+  "python_packages_source": "requirements-research.lock: all 167 exact pins (git sponsor lines excluded), installed with uv in the image",
+  "sponsor_archives_source": "dependency-sources.lock.json (CircuitKIT, AuditKIT); SHA-256 verified at image build, installed with the lock as constraints",
+  "env": {
+    "HF_HOME": "/volumes/aawden-v3/hf-cache",
+    "PYTHONUNBUFFERED": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "hourly_usd": {
+    "RTX4090": 0.69,
+    "RTX5090": 1.09,
+    "A10G": 1.1
+  },
+  "hourly_usd_source": {
+    "RTX4090": "Beam workspace 2 on-demand listing, reported by the operator 2026-11-10 (not re-scraped)",
+    "RTX5090": "operator-supplied planning rate, not re-verified",
+    "A10G": "UNVERIFIED placeholder upper rate; replace with the Beam listed serverless price"
+  },
+  "smoke": {
+    "gpu": "RTX4090",
+    "timeout": 600,
+    "max_cost_usd": 0.4,
+    "output_subdir": "wsp-v3/beam-smoke",
+    "command": [
+      "sh",
+      "-c",
+      "{python} aawden.py doctor --config configs/model.json && {python} scripts/beam_entry.py check"
+    ]
+  },
+  "excluded_from_upload": [
+    ".env",
+    ".env.*",
+    ".git",
+    ".venv*",
+    "runs/",
+    "checkpoints/",
+    "dist/",
+    ".vendor/",
+    "__pycache__/"
+  ],
+  "verification": "image build fails unless every locked pin is installed at its exact version (see scripts/beam_entry.py verification_command)",
+  "pricing": {
+    "source": "https://www.beam.cloud/pricing and https://www.beam.cloud/serverless-gpu, read 2026-11-10 via web search excerpt (not a live console read)",
+    "gpu_per_hour_usd": {
+      "RTX4090": 0.69,
+      "RTX5090": 1.09
+    },
+    "gpu_per_hour_note": "Public serverless GPU rates. The operator-reported console figure for RTX4090 is 0.66; the higher public rate is used so the guard is conservative.",
+    "cpu_per_vcpu_hour_usd": 0.18972,
+    "ram_per_gib_hour_usd": 0.0198,
+    "cpu_ram_note": "Per-vCPU and per-GiB rates derived from the public worked example (4 vCPU $0.76, 16 GiB $0.32 per hour). Serverless CPU and RAM are billed on top of the GPU rate.",
+    "A10G": "UNVERIFIED: not listed among Beam serverless GPUs on the public pricing page (RTX 4090 and RTX 5090 only); the operator said A10G is available. Placeholder GPU rate 1.10 kept for the budget allowlist."
+  }
+}

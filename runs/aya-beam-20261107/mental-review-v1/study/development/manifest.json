@@ -1,0 +1,152 @@
+{
+  "run_id": "58265f1e8781c097",
+  "parent_run": null,
+  "identity_sha256": "58265f1e8781c097665bd3976d185297d25d2554e6a17267f5005283bd1ac768",
+  "identity": {
+    "protocol": {
+      "version": "mental-review-v1",
+      "threshold": 0.75,
+      "development": "datasets/neutral-confirmation-v4.json",
+      "confirmation": "datasets/neutral-confirmation-v5.json",
+      "development_sha256": "8c1f1da04c45b59841c12cda7ee6ac3b9d7f8f6c6494ed958148f88e26216895",
+      "confirmation_sha256": "dcab83068fcc14bbeaa130e350a20c6222440a47ccb660b59436d32e6cea0016",
+      "adapter": {
+        "sha256": "354c3e4c7dd5cc74eacf6c68d0d6dd553ade814fcde101185333d9b38e821e8c",
+        "rank": 16,
+        "target_modules": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj",
+          "gate_proj",
+          "up_proj",
+          "down_proj"
+        ],
+        "base_checkpoint_hashes": {
+          "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+          "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+          "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+          "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+          "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+        }
+      },
+      "pipeline": "base mental execution for access control followed by frozen LoRA strict JSON; SQL trace prompt"
+    },
+    "source": "f4fa9f7fda9800b97b1d9d1086a56331163689e0346b0a37390a142aabcf5e80",
+    "prompt_version": "aawden-mental-review-v1",
+    "previous_manifest_sha256": "7208f504ada44074530d1e376e6022f0066b65c09700a2f233752d49e2b8ff2c",
+    "dataset": "9ed02e44ef4beecb1a260873b5e1fb93ef71312ba3417fc246c097fd8674e181"
+  },
+  "stage": "mental_execution_review",
+  "status": "completed",
+  "evidence_kind": "cohere_local_checkpoint",
+  "created_at": "2026-11-07T22:25:00.788049+00:00",
+  "environment": {
+    "python": "3.11.11",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+    "packages": {
+      "torch": {
+        "version": "2.9.1+cu128",
+        "direct_url": null
+      },
+      "transformers": {
+        "version": "5.22.1",
+        "direct_url": null
+      },
+      "transformer-lens": {
+        "version": "3.8.0",
+        "direct_url": null
+      },
+      "circuitkit": {
+        "version": "0.2.0",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+            "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+          }
+        }
+      },
+      "auditkit": {
+        "version": "1.1.3",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+            "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+          }
+        }
+      },
+      "safetensors": {
+        "version": "0.8.0",
+        "direct_url": null
+      }
+    },
+    "code_commit": null,
+    "code_sha256": "f4fa9f7fda9800b97b1d9d1086a56331163689e0346b0a37390a142aabcf5e80",
+    "dependency_lock_hashes": {
+      "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+      "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597",
+      "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+    }
+  },
+  "failure_reason": null,
+  "attempts": [
+    {
+      "status": "completed",
+      "started_at": "2026-11-07T22:25:00.811957+00:00",
+      "ended_at": "2026-11-07T22:26:05.448765+00:00"
+    }
+  ],
+  "started_at": "2026-11-07T22:25:00.811957+00:00",
+  "model_sha256_by_arm": {
+    "Aya": "5e724c5b949017937216e273f6494c6fe311e66de4aa3d15aa2c60f5c3666243"
+  },
+  "completed_at": "2026-11-07T22:26:05.448765+00:00",
+  "artifact_hashes": {
+    "summary.json": "776c47d2789f5563f505c94a0847cbef6e99a0f91a68a3b76b7316f40a7936a6",
+    "results.json": "779c13c8ee967d6edc0c2cb542da53e361fc93dbeb7b3327297f8d45d67b045d",
+    "simulations.json": "8d17cd73689d3e81e0066cf26d45fac4a773e18b39de0f73c43ea173ffdc9d14",
+    "auditkit.json": "a8b0c3182d7b73b971400956b0b6ffee75c39823255751bf32c8790a910ae65c",
+    "predictions/491c586c6667cd7048ca03a7.json": "85888ea68955b5136a6ab32d5745ede5fcd40534e7115edee1e056dabf1c369d",
+    "predictions/54a80f2f6fb62134fa2a6ae0.json": "f07f38739f938f7d873d321feca9bf33d757babb9e2cdd1c47acd17681f91cf6",
+    "predictions/9674a56536970aee85ac1000.json": "0d427d7d894c2c0c5c54c6cd58063ff843540d8ce93596ef3ca618115b38f02c",
+    "predictions/fcec71f4657b4b43b020313e.json": "fca440cc8bdcc52be4143443c57ac28950d0181f01b63e55bfe6011c5e83cf2f",
+    "predictions/13f9a5d206108063e70d2cf7.json": "0b9ad85e595d5b0b221990586681802db15139d1ab1c3e8c4e890542f1c6b333",
+    "predictions/745fdfced379df77c001ecd6.json": "146065eda1339fed8b2542d8f4317d8291f3701a62db23edc7d246e8520d09ad",
+    "predictions/c0230ed40dd49989a6666b10.json": "61eeca60b4f45b498186b5441971270e28d90dc72c6bd3c97d0344c20ec8a0dd",
+    "predictions/6c3a26e8763563a3dc10a1fc.json": "4995c6a30ddfaaa38c23a1c10df2ab03fdd2bc3c731c5372fc4ca25f36873aef",
+    "predictions/383f46bae25507ee1d7ee52e.json": "a77ed0b1082de74ab6882d6cdd5b4bb059d98f80c27f8904d6fbea38e879c707",
+    "predictions/f45fdc76a0e4fef765ef5839.json": "e404c5aa86d73b2e84385ce4af986c75a02efbd61722ad0111b8d5006658d0cf",
+    "predictions/56d4d8975ff40c818e7f09f9.json": "dd4a5c008cceb87477d11f250cbedf81e0d43e1325deda779d9bf862e0733698",
+    "predictions/2d26672874a48eba46b58d10.json": "c02e3e9671473f19a39131b93090858c913eefd72ab8562af387bf0dd5ec865b",
+    "predictions/ae5bdca39912cc277a152795.json": "6cd32ad6dc98a718aec4e7b847cadcc7fffa96c78cdcb1bf11ad172e59cc89df",
+    "predictions/520dad6dd6db22bee61f23b2.json": "20f5db1c161f3bd21061f72dccf11ff684d4aea63386cd3d68d85fa6642f0db9",
+    "predictions/9cb6de61394adf2ae9474096.json": "511d2d97288aa2d950e89ce7ae36cf953dfba690acc6a17f8696194af39057aa",
+    "predictions/836dd9068187c5273bc6485e.json": "167df41e09407049ebdee5a9c5405ee2ad31168f93998586f6b652d65e21fcc0",
+    "predictions/5c935f807e39d05621c60a5b.json": "d41bfa3d75b9fee9bd46c7895f36c74728868496216e0666da2fa9bf99b4e256",
+    "predictions/860a8cdffc056b0b1e5a3110.json": "0b19b9e2ddfce94e6ceb09754839cca951a0928f85eb1c2c3689986c691baf33",
+    "predictions/eb6e94ef2cfd1c1c9e4ef5ce.json": "2965782720d8c9081b76a84c5c6eb1c00bcc7b683b08568e4478010abdde0029",
+    "predictions/46a23bd84b1e8f4b8092353c.json": "6246f9e0f7b328e575d10cec613ce8eb7d766b7ebe68bacff4913184483ea580",
+    "predictions/4c96e4789a99c89c9562345e.json": "ce536992749f6291e7aa76680456860317b5aee65e4e9b569af7c9bcecdbf9f9",
+    "predictions/7668a1d2b7fb9052fdda9e6b.json": "3a0563060dae5883087bc483c358cb7ac89adeed4b0c7dd1b2cafe1b64841ffb",
+    "predictions/453115a712b15f5c5fcd8528.json": "e1b6073a88a0d526820e3b589bfe3355d1fb8032338ea1ac5a64ce18ca7ded04",
+    "predictions/b1dd11ab1278e10342408462.json": "7a2e4207c3cb94338fe2da5924bc8964afb635fb89de82fd2344bc529f874784",
+    "predictions/ded7c1c5105796da83e30bba.json": "60c3ce88d055c24e9205a8f8da3194001ded1f6d198d181f4cc496d01fa59dd3",
+    "predictions/c1a1d8606010b2fb7a8caa8d.json": "4a1f6b4b1903ae2ede57cb4e5bddf14253f44007b6d315a17d1c9cbb1b5bd8e2",
+    "predictions/cb7d7f1146bc7296525208ce.json": "452885f248ded824b72170e09470b524a76ecca0c45ee75aa403d6b6dc9acb98",
+    "predictions/3f05481d0f315b500ffc8dcb.json": "4c07502fef3a31bb89fcb8b6c3a6aa30a06c94c39cf88d83a3f546dc7d97c620",
+    "predictions/e8a3c2a53e0c376e1ccf4dca.json": "adb6f41fa20cda6ba28246d4fd628111c6b97cb38fe5be74812af2d8b2ff6928",
+    "predictions/de6b33ee330838ac31439ec3.json": "9b8e1dc90da1c49ab277cbfa0a0c16bea317ccdf73408c143ebe6153b7742bc3"
+  },
+  "expected_predictions": 30,
+  "export": {
+    "version": 1,
+    "created_at": "2026-11-08T10:59:00.659302+00:00",
+    "measurement_payload_sha256": "43cb0d934c690288b19c2dc3a89c70eca424622b4bf1e2a2a343f698e0eff56b",
+    "measurement_receipt_sha256": "04781bc220910b638c03f4c4c9b7f669c12d4c67a263e3a3c6cdf3cf15343a3f",
+    "scope": "Canonical project namespace. Saved generation text and scored decisions unchanged."
+  }
+}

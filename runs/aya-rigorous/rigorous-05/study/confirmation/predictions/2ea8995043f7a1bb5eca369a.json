@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_effdb06350a3",
+    "family_id": "rigorous_confirmation_v2_sql_injection_identifier_only_branch",
+    "source_id": "rigorous_confirmation_v2_sql_injection_identifier_only_branch",
+    "split": "rigorous_confirmation_v2",
+    "category": "sql_injection",
+    "method": "category_route",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "explanation": "The assignment in line 5 overwrites the name before the query is executed.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The assignment in line 5 overwrites the name before the query is executed.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "2017b07960efa33641f91789422764d1d7f1c2bb955a3367ed0c870e827154b3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. The supplemental paths substitute local assignments from the displayed code. They are static expressions, with external values left unknown. Verify any omitted branches or calls against the original source. Use the actual query and bindings, or the guard governing the returned row."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     value = username\n3 |     if value.isidentifier():\n4 |         query = f\"SELECT name FROM users WHERE name = '{value}'\"\n5 |         return conn.execute(query).fetchall()\n6 |     lookup = (\"SELECT name FROM users WHERE name = ?\", (value,))\n7 |     return conn.execute(*lookup).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nStatic return paths\nlookup, line 5 when (truthy(username.isidentifier())), returns conn.execute(f\"SELECT name FROM users WHERE name = '{username}'\").fetchall()\nlookup, line 7 when (falsy(username.isidentifier())), returns conn.execute(*('SELECT name FROM users WHERE name = ?', (username,))).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 552,
+    "output_tokens": 54,
+    "finish_reason": "stop",
+    "latency_seconds": 2.572592396999994,
+    "request_id": "63d5f3e53e9ea166a2fac01e"
+  },
+  "sha256": "a8c999a41d5c93ff0d24d8ce014b5b3454c66668e9f76df66881980b91be8f8e"
+}

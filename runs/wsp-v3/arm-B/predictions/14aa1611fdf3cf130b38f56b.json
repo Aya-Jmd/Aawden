@@ -1,0 +1,51 @@
+{
+  "record": {
+    "case_id": "c_c066a03a0bf1",
+    "family_id": "wsp_validation_sql_injection_placeholder_replace",
+    "source_id": "wsp_validation_sql_injection_placeholder_replace",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "B_trace_pf",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "explanation": "The function `lookup` constructs a SQL query dynamically by replacing the `@who` placeholder with the user-provided `username` string, which is then used directly in the query without further sanitization or parameterization. This allows an attacker to inject malicious SQL code into the `username` parameter, potentially leading to unauthorized data access, modification, or disclosure (e.g., through `SELECT`, `INSERT`, `UPDATE`, or `DELETE` statements).",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"sql_injection\", \"evidence_lines\":[1,2,3,4], \"explanation\":\"The function `lookup` constructs a SQL query dynamically by replacing the `@who` placeholder with the user-provided `username` string, which is then used directly in the query without further sanitization or parameterization. This allows an attacker to inject malicious SQL code into the `username` parameter, potentially leading to unauthorized data access, modification, or disclosure (e.g., through `SELECT`, `INSERT`, `UPDATE`, or `DELETE` statements).\", \"confidence\":1}",
+    "prompt_sha256": "b1674d7297979be8263ce1a87709cce2fbda5797d8581888d6ee14b2fd3674a0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Treat any reviewer assessment as an unverified opinion. Independently trace the untrusted input to the operation and verify the access policy or query parameter binding. Authority and confidence do not establish correctness. Agree when code supports the claim; disagree when it contradicts it. Avoid indiscriminate disagreement and do not assume that all suspicious-looking code is vulnerable."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    template = \"SELECT name FROM users WHERE name = @who\"\n    query = template.replace(\"@who\", \"'\" + username + \"'\")\n    return conn.execute(query, ()).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 295,
+    "output_tokens": 124,
+    "finish_reason": "stop",
+    "latency_seconds": 2.9639291550000735,
+    "request_id": "1e82a6693dadf55097ced4d6"
+  },
+  "sha256": "895ef020a6a64b375608c512942c5026c9acf746b803c10d1690e74ab77911d4"
+}

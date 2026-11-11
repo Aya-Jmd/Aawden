@@ -1,0 +1,1568 @@
+[
+  {
+    "case_id": "c_a31165a08a41",
+    "family_id": "rigorous_confirmation_v4_sql_injection_translate_escape",
+    "source_id": "rigorous_confirmation_v4_sql_injection_translate_escape",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "explanation": "The translated name contains a quoted character.",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The translated name contains a quoted character.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+    "prompt_sha256": "a9edc8a41913fc5a4066324815485fcfe2cdf21426f1f8f4c9d36a6c6dc1c5df",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     escapes = {ord(\"'\"): \"'\"}\n3 |     literal = username.translate(escapes)\n4 |     return conn.execute(f\"SELECT name FROM users WHERE name = '{literal}'\").fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 4, returns conn.execute(f\"\"\"SELECT name FROM users WHERE name = '{username.translate({ord(\"'\"): \"'\"})}'\"\"\").fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 489,
+    "output_tokens": 40,
+    "finish_reason": "stop",
+    "latency_seconds": 1.8804226729999982,
+    "request_id": "110ddbbba3e52c761c815522",
+    "storage_id": "6c82a06de56ede882b485865"
+  },
+  {
+    "case_id": "c_820e1a9996ec",
+    "family_id": "rigorous_confirmation_v4_access_control_conditional_grant_selection",
+    "source_id": "rigorous_confirmation_v4_access_control_conditional_grant_selection",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The member path makes the return true for a logged-in nonowner.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The member path makes the return true for a logged-in nonowner.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "189c5b457574b6d544effe0679f6e928c2a37ff0f39ddcfdf4b542c6a64f3994",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)), returns records.get(record_id)\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     private = row[\"owner_id\"] == actor[\"id\"]\n6 |     office = row[\"tenant_id\"] == actor[\"tenant_id\"]\n7 |     allowed = (office) if actor[\"role\"] == \"member\" else private\n8 |     return row if allowed else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 734,
+    "output_tokens": 51,
+    "finish_reason": "stop",
+    "latency_seconds": 2.4376230930000133,
+    "request_id": "7d9c642a03ea7df538632f14",
+    "storage_id": "6bf5f63d6561131845c9ac1f"
+  },
+  {
+    "case_id": "c_3f7371356dcc",
+    "family_id": "rigorous_confirmation_v4_sql_injection_two_quote_branches",
+    "source_id": "rigorous_confirmation_v4_sql_injection_two_quote_branches",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "explanation": "The name stays bound while the fixed prefix is interpolated.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The name stays bound while the fixed prefix is interpolated.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "268aa720490d11b5d92bbd781849e90c36ab7b0f741f02f3c38aca70608c3707",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     query = \"SELECT name FROM users WHERE name = ?\"\n3 |     args = (username,)\n4 |     if \"'\" in username:\n5 |         if username != \"o'brien\":\n6 |             query, args = query, args\n7 |     return conn.execute(query, args).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 7 when (truthy(\"'\" in username)) and (truthy(username != \"o'brien\")), returns conn.execute('SELECT name FROM users WHERE name = ?', (username,)).fetchall()\nlookup, line 7 when (truthy(\"'\" in username)) and (falsy(username != \"o'brien\")), returns conn.execute('SELECT name FROM users WHERE name = ?', (username,)).fetchall()\nlookup, line 7 when (falsy(\"'\" in username)), returns conn.execute('SELECT name FROM users WHERE name = ?', (username,)).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 610,
+    "output_tokens": 55,
+    "finish_reason": "stop",
+    "latency_seconds": 2.6031484859999523,
+    "request_id": "6875e2d12f90f7498726a523",
+    "storage_id": "dee37855225061db06cee7f4"
+  },
+  {
+    "case_id": "c_330661182602",
+    "family_id": "rigorous_confirmation_v4_sql_injection_indexed_command_options",
+    "source_id": "rigorous_confirmation_v4_sql_injection_indexed_command_options",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 9,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "explanation": "A quote sets index one and selects the interpolated query.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"A quote sets index one and selects the interpolated query.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"confidence\":0.9}",
+    "prompt_sha256": "bc577bd0e11c464fcb5d4e06f3c0b8fa0d09d20dad4d957e79a653e9c0daded6",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     options = [\n3 |         (\"SELECT name FROM users WHERE name = ?\", (username,)),\n4 |         (f\"SELECT name FROM users WHERE name = '{username}'\", ()),\n5 |     ]\n6 |     options_for_input = [False, False]\n7 |     index = int(\"'\" in username)\n8 |     sql, values = options[int(options_for_input[index])]\n9 |     return conn.execute(sql, values).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 9, returns conn.execute(sql, values).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 530,
+    "output_tokens": 53,
+    "finish_reason": "stop",
+    "latency_seconds": 2.5286852340000223,
+    "request_id": "a5d1d90e0a8c6d82f9b06f5d",
+    "storage_id": "72078d541c83b8fe00ca5d45"
+  },
+  {
+    "case_id": "c_127a1adfb958",
+    "family_id": "rigorous_confirmation_v4_access_control_closure_policy_combination",
+    "source_id": "rigorous_confirmation_v4_access_control_closure_policy_combination",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The final expression can return the row only when the owner check succeeds.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner check succeeds.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "742ffd80247bfb7d6de6b7bf1bf4e8d2ed17950f032281ddef23ee03ea05ea7d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy((lambda value: owned(value) or actor['authenticated'])(records.get(record_id)))), returns records.get(record_id)\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (falsy((lambda value: owned(value) or actor['authenticated'])(records.get(record_id)))), returns None\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy((lambda value: owned(value) or actor['authenticated'])(records.get(record_id)))), returns records.get(record_id)\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (falsy((lambda value: owned(value) or actor['authenticated'])(records.get(record_id)))), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy((lambda value: owned(value) or actor['authenticated'])(records.get(record_id)))), returns records.get(record_id)\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (falsy((lambda value: owned(value) or actor['authenticated'])(records.get(record_id)))), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     entry = records.get(record_id)\n3 |     if entry is None:\n4 |         return None\n5 |     owned = lambda value: value[\"owner_id\"] == actor[\"id\"]\n6 |     grant = lambda value: owned(value) or actor[\"authenticated\"]\n7 |     return entry if grant(entry) else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 979,
+    "output_tokens": 54,
+    "finish_reason": "stop",
+    "latency_seconds": 2.598737970000002,
+    "request_id": "eca7f49b2495696b471775c4",
+    "storage_id": "ad6b5f09f88d1228ea40b102"
+  },
+  {
+    "case_id": "c_cdc2df5016d1",
+    "family_id": "rigorous_confirmation_v4_access_control_truth_of_mapping",
+    "source_id": "rigorous_confirmation_v4_access_control_truth_of_mapping",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The owner comparison decides whether to return the row.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The owner comparison decides whether to return the row.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "26ff97d04b65ebea6eedcdd647ceaeb699fffd407abd769004428348445cf0bf",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns None\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     item = records.get(record_id)\n3 |     if item is None:\n4 |         return None\n5 |     decision = {\"read\": item[\"owner_id\"] == actor[\"id\"]}\n6 |     return item if decision[\"read\"] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 694,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 2.296745845999965,
+    "request_id": "3319b35b46536f3f581da7ab",
+    "storage_id": "a0bb22b8ae92906282b0aca3"
+  },
+  {
+    "case_id": "c_8649d3016bb2",
+    "family_id": "rigorous_confirmation_v4_sql_injection_literal_membership",
+    "source_id": "rigorous_confirmation_v4_sql_injection_literal_membership",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "explanation": "The name stays bound while the fixed fragment is appended.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The name stays bound while the fixed fragment is appended.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+    "prompt_sha256": "2a15143784afe740a2e1146f87e75cbbfe7c4bbc67c3fcf2f85b656bd525532d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     fragment = \"?\"\n3 |     values = (username,)\n4 |     sql = \"SELECT name FROM users WHERE name IN (\" + fragment + \", 'unused')\"\n5 |     return conn.execute(sql, values).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 5, returns conn.execute('SELECT name FROM users WHERE name IN (' + '?' + \", 'unused')\", (username,)).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 490,
+    "output_tokens": 51,
+    "finish_reason": "stop",
+    "latency_seconds": 2.415515190000008,
+    "request_id": "a564e5a25d8482a3ed1810a5",
+    "storage_id": "e0c76f5a62de090db55aa683"
+  },
+  {
+    "case_id": "c_20de84585d32",
+    "family_id": "rigorous_confirmation_v4_sql_injection_two_quote_branches",
+    "source_id": "rigorous_confirmation_v4_sql_injection_two_quote_branches",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "explanation": "A quote sets the override query and binds the name.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"A quote sets the override query and binds the name.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "d557ff9a15f2b015117e189dbecfcf190e9dca4ea9c09bf131069c0bff814407",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     query = \"SELECT name FROM users WHERE name = ?\"\n3 |     args = (username,)\n4 |     if \"'\" in username:\n5 |         if username != \"o'brien\":\n6 |             query, args = f\"SELECT name FROM users WHERE name = '{username}'\", ()\n7 |     return conn.execute(query, args).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 7 when (truthy(\"'\" in username)) and (truthy(username != \"o'brien\")), returns conn.execute(f\"SELECT name FROM users WHERE name = '{username}'\", ()).fetchall()\nlookup, line 7 when (truthy(\"'\" in username)) and (falsy(username != \"o'brien\")), returns conn.execute('SELECT name FROM users WHERE name = ?', (username,)).fetchall()\nlookup, line 7 when (falsy(\"'\" in username)), returns conn.execute('SELECT name FROM users WHERE name = ?', (username,)).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 623,
+    "output_tokens": 49,
+    "finish_reason": "stop",
+    "latency_seconds": 2.321049911999978,
+    "request_id": "759033eebe7813745998126f",
+    "storage_id": "d261e6bf0ba346639dfb51be"
+  },
+  {
+    "case_id": "c_7e16e3e41bd5",
+    "family_id": "rigorous_confirmation_v4_sql_injection_translate_escape",
+    "source_id": "rigorous_confirmation_v4_sql_injection_translate_escape",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "explanation": "The translated name stays literal.",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The translated name stays literal.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+    "prompt_sha256": "39c68a7b41dd9948c933ecf393a93ac994a8506d8692bcd5943e3bb2d618f6c0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     escapes = {ord(\"'\"): \"''\"}\n3 |     literal = username.translate(escapes)\n4 |     return conn.execute(f\"SELECT name FROM users WHERE name = '{literal}'\").fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 4, returns conn.execute(f\"\"\"SELECT name FROM users WHERE name = '{username.translate({ord(\"'\"): \"''\"})}'\"\"\").fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 490,
+    "output_tokens": 44,
+    "finish_reason": "stop",
+    "latency_seconds": 2.067937229999984,
+    "request_id": "8aeed7f600f14d8e39d9a9d0",
+    "storage_id": "57deae62e1de3fc5e0f7932d"
+  },
+  {
+    "case_id": "c_53632d20827a",
+    "family_id": "rigorous_confirmation_v4_sql_injection_query_factory_lambda",
+    "source_id": "rigorous_confirmation_v4_sql_injection_query_factory_lambda",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "explanation": "The interpolated name reaches SQLite and the bindings are ignored.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches SQLite and the bindings are ignored.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+    "prompt_sha256": "7599eb1ed75ae80e3aa178b881edb18072e1d137a1827df9b819c09e1218362d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     make_command = lambda value: (f\"SELECT name FROM users WHERE name = '{value}'\", ())\n3 |     statement, bindings = make_command(username)\n4 |     cursor = conn.cursor()\n5 |     return cursor.execute(statement, bindings).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 5, returns conn.cursor().execute(statement, bindings).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 486,
+    "output_tokens": 45,
+    "finish_reason": "stop",
+    "latency_seconds": 2.092767626999944,
+    "request_id": "16b6a59fb45b14f63482d185",
+    "storage_id": "8db0f453c31c854e10fe398d"
+  },
+  {
+    "case_id": "c_42846e34c0ca",
+    "family_id": "rigorous_confirmation_v4_access_control_branch_on_owner_mismatch",
+    "source_id": "rigorous_confirmation_v4_access_control_branch_on_owner_mismatch",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The return checks the owner mismatch even when the get returned a record.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The return checks the owner mismatch even when the get returned a record.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "bc4539f21c9d8574b697c5e7eb16bf713178ae780d2520b6980b47875499e783",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns None\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     record = records.get(record_id)\n3 |     if record is None:\n4 |         return None\n5 |     if actor[\"id\"] != record[\"owner_id\"]:\n6 |         return None\n7 |     return record\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 689,
+    "output_tokens": 54,
+    "finish_reason": "stop",
+    "latency_seconds": 2.5744360529999994,
+    "request_id": "ae1d22f39cc24165a29e8cd8",
+    "storage_id": "6e56211612f2275ac62ca47d"
+  },
+  {
+    "case_id": "c_1380ec02562d",
+    "family_id": "rigorous_confirmation_v4_sql_injection_trusted_format_columns",
+    "source_id": "rigorous_confirmation_v4_sql_injection_trusted_format_columns",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "explanation": "The format operation places the name before SQLite quote escaping.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The format operation places the name before SQLite quote escaping.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "7aa2fff1e7dda41ac227a8f1bf406a882b3bd374c87cfaddedc1fa7c807bdd51",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     table = \"users\"\n3 |     column = \"name\"\n4 |     left = \"SELECT {0} FROM {1} WHERE {0} = \".format(column, table)\n5 |     right = \"'\" + username + \"'\"\n6 |     parameters = []\n7 |     return conn.execute(left + right, parameters).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 7, returns conn.execute(f\"SELECT {'name'} FROM {'users'} WHERE {'name'} = \" + (\"'\" + username + \"'\"), []).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 522,
+    "output_tokens": 49,
+    "finish_reason": "stop",
+    "latency_seconds": 2.290076580999994,
+    "request_id": "b2db9e3641fa0c59ca07104f",
+    "storage_id": "9419b59c6e7ebbcc958b432a"
+  },
+  {
+    "case_id": "c_d225949ddcd8",
+    "family_id": "rigorous_confirmation_v4_access_control_numeric_gate",
+    "source_id": "rigorous_confirmation_v4_access_control_numeric_gate",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The final expression can return the record only when the owner comparison succeeds.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the record only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "bb1bcb398ed95078fee0d4f6c61b6119811d1857cf576f8a929c6ed5e2453ca6",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy(0 + 1 >= 2)), returns records.get(record_id)\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(0 + 1 >= 2)), returns None\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy(0 + 1 >= 2)), returns records.get(record_id)\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(0 + 1 >= 2)), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy(0 + 1 >= 2)), returns records.get(record_id)\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(0 + 1 >= 2)), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     record = records.get(record_id)\n3 |     if record is None:\n4 |         return None\n5 |     total = int(record[\"owner_id\"] == actor[\"id\"]) + int(actor[\"authenticated\"])\n6 |     if total >= 2:\n7 |         return record\n8 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 892,
+    "output_tokens": 56,
+    "finish_reason": "stop",
+    "latency_seconds": 2.750235147000012,
+    "request_id": "338d55f65f97e7c826107003",
+    "storage_id": "9522bfb31889934f5eb4409a"
+  },
+  {
+    "case_id": "c_46b2e02bdab3",
+    "family_id": "rigorous_confirmation_v4_access_control_conditional_grant_selection",
+    "source_id": "rigorous_confirmation_v4_access_control_conditional_grant_selection",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The return checks the owner comparison directly.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The return checks the owner comparison directly.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "06fda082db89ae599843d84b26f005510517568a6c8dd424a0182fd042abb69f",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)), returns None\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     private = row[\"owner_id\"] == actor[\"id\"]\n6 |     office = row[\"tenant_id\"] == actor[\"tenant_id\"]\n7 |     allowed = (private) if actor[\"role\"] == \"member\" else private\n8 |     return row if allowed else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 727,
+    "output_tokens": 50,
+    "finish_reason": "stop",
+    "latency_seconds": 2.3797885369999676,
+    "request_id": "bcee92fbaed968522b0820d5",
+    "storage_id": "d0b6bcf60864360bac57d0af"
+  },
+  {
+    "case_id": "c_6126af3a6ec6",
+    "family_id": "rigorous_confirmation_v4_sql_injection_cast_argument",
+    "source_id": "rigorous_confirmation_v4_sql_injection_cast_argument",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "explanation": "The cast keeps the name as a separate bound value.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The cast keeps the name as a separate bound value.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+    "prompt_sha256": "bf91830f18ce19939646503825813589f1d7c0f3d9ec226c6bf72ef5e4aa3174",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     token = \"?\"\n3 |     arguments = [username]\n4 |     statement = \"SELECT name FROM users WHERE name = CAST(\" + token + \" AS TEXT)\"\n5 |     return conn.execute(statement, arguments).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 5, returns conn.execute('SELECT name FROM users WHERE name = CAST(' + '?' + ' AS TEXT)', [username]).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 490,
+    "output_tokens": 51,
+    "finish_reason": "stop",
+    "latency_seconds": 2.3666410899999164,
+    "request_id": "09cdb3f2d4cca57826a43357",
+    "storage_id": "0982aa2ac816489c8bea712f"
+  },
+  {
+    "case_id": "c_ad15820dfffc",
+    "family_id": "rigorous_confirmation_v4_sql_injection_clause_substitution",
+    "source_id": "rigorous_confirmation_v4_sql_injection_clause_substitution",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "explanation": "The format operation places the interpolated name in SQL.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The format operation places the interpolated name in SQL.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "95103ee60a38a702e94134c671227a6051ce1c50e6e5c67b519659ab043d4d58",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     pattern = \"SELECT name FROM users WHERE name = {operand}\"\n3 |     args = {\"lookup\": username}\n4 |     operand = \"'\" + args[\"lookup\"] + \"'\"\n5 |     statement = pattern.format(operand=operand)\n6 |     return conn.execute(statement, args).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 6, returns conn.execute(f\"\"\"SELECT name FROM users WHERE name = {\"'\" + username + \"'\"}\"\"\", {'lookup': username}).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 510,
+    "output_tokens": 46,
+    "finish_reason": "stop",
+    "latency_seconds": 2.2040288320000627,
+    "request_id": "5b2cc511036053883b63829a",
+    "storage_id": "0c94920bdbab7ddd28283342"
+  },
+  {
+    "case_id": "c_d0f64c5c6ce3",
+    "family_id": "rigorous_confirmation_v4_sql_injection_literal_membership",
+    "source_id": "rigorous_confirmation_v4_sql_injection_literal_membership",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "explanation": "The interpolated name reaches SQLite and the unused placeholder is ignored.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches SQLite and the unused placeholder is ignored.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+    "prompt_sha256": "3841035a35be92fee6b50f4907fbd8c50d26ff008101c8082e7f5eb762e2186d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     fragment = f\"'{username}'\"\n3 |     values = ()\n4 |     sql = \"SELECT name FROM users WHERE name IN (\" + fragment + \", 'unused')\"\n5 |     return conn.execute(sql, values).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 5, returns conn.execute('SELECT name FROM users WHERE name IN (' + f\"'{username}'\" + \", 'unused')\", ()).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 494,
+    "output_tokens": 46,
+    "finish_reason": "stop",
+    "latency_seconds": 2.1619787800000267,
+    "request_id": "928f4ae6e6b159bfce8e8873",
+    "storage_id": "a4bdae33154193d3ec0149b2"
+  },
+  {
+    "case_id": "c_d0ef642e45f8",
+    "family_id": "rigorous_confirmation_v4_access_control_parallel_gate",
+    "source_id": "rigorous_confirmation_v4_access_control_parallel_gate",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 10,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The return checks the owner of the returned row.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The return checks the owner of the returned row.\",\"evidence_lines\":[2,3,4,5,6,7,8,9,10],\"confidence\":0.9}",
+    "prompt_sha256": "e2204695854987038d2c62b55ba8308e11ac63cd21fedcf71451466169557081",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 9 when (falsy(records.get(record_id) is None)), returns None\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 9 when (falsy(records.get(record_id) is None)), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 9 when (falsy(records.get(record_id) is None)), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     if actor[\"authenticated\"] and actor[\"tenant_id\"] == row[\"tenant_id\"]:\n6 |         if row[\"owner_id\"] == actor[\"id\"]:\n7 |             return row\n8 |     if row[\"owner_id\"] != actor[\"id\"]:\n9 |         return None\n10 |     return row\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 735,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 2.8098032130000092,
+    "request_id": "f221612e4ba2709764426336",
+    "storage_id": "1904d35187fc713b28cbeba2"
+  },
+  {
+    "case_id": "c_0c1438ea90cf",
+    "family_id": "rigorous_confirmation_v4_access_control_branch_on_owner_mismatch",
+    "source_id": "rigorous_confirmation_v4_access_control_branch_on_owner_mismatch",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The early return misses the owner check for a logged-in nonowner.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The early return misses the owner check for a logged-in nonowner.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "fc37f34d056c637d78e2d3cbec98b3230f271a2e418f4b279f75c42c657cc27f",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns records.get(record_id)\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns records.get(record_id)\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns records.get(record_id)\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     record = records.get(record_id)\n3 |     if record is None:\n4 |         return None\n5 |     if actor[\"id\"] != record[\"owner_id\"]:\n6 |         return record if actor[\"authenticated\"] else None\n7 |     return record\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 717,
+    "output_tokens": 49,
+    "finish_reason": "stop",
+    "latency_seconds": 2.3430966569999327,
+    "request_id": "3000bee06337e1a344ee9a70",
+    "storage_id": "8e14d3053800968276129e84"
+  },
+  {
+    "case_id": "c_76610942070d",
+    "family_id": "rigorous_confirmation_v4_access_control_permission_cache_key",
+    "source_id": "rigorous_confirmation_v4_access_control_permission_cache_key",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 9,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The requested key must be present in the owner-filtered map to return the row.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The requested key must be present in the owner-filtered map to return the row.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"confidence\":0.9}",
+    "prompt_sha256": "aa8f9603d4c3ad7f7c1a4ab0297b0e8171581553ca059d5dfac003653f652c31",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(record_id))), returns records.get(record_id)\nread_record, line 9 when (falsy(records.get(record_id) is None)) and (falsy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(record_id))), returns None\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(record_id))), returns records.get(record_id)\nread_record, line 9 when (falsy(records.get(record_id) is None)) and (falsy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(record_id))), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(record_id))), returns records.get(record_id)\nread_record, line 9 when (falsy(records.get(record_id) is None)) and (falsy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(record_id))), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     permissions = {key: value[\"owner_id\"] == actor[\"id\"] for key, value in records.items()}\n6 |     key_to_check = record_id\n7 |     if permissions.get(key_to_check):\n8 |         return row\n9 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 1033,
+    "output_tokens": 61,
+    "finish_reason": "stop",
+    "latency_seconds": 2.937647564000031,
+    "request_id": "527924c4c5f7290ccc9ede76",
+    "storage_id": "406ae7903032a7940c0be29c"
+  },
+  {
+    "case_id": "c_d160ec7fd9e9",
+    "family_id": "rigorous_confirmation_v4_access_control_parallel_gate",
+    "source_id": "rigorous_confirmation_v4_access_control_parallel_gate",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 10,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The return checks the owner of the returned row.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The return checks the owner of the returned row.\",\"evidence_lines\":[2,3,4,5,6,7,8,9,10],\"confidence\":0.9}",
+    "prompt_sha256": "e93659e7848716004fb6ae66ed7c4c3b30adc39cca8b2ee6845e020ace28905f",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)), returns records.get(record_id)\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 9 when (falsy(records.get(record_id) is None)), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 9 when (falsy(records.get(record_id) is None)), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     if actor[\"authenticated\"] and actor[\"tenant_id\"] == row[\"tenant_id\"]:\n6 |         if actor[\"role\"] == \"member\":\n7 |             return row\n8 |     if row[\"owner_id\"] != actor[\"id\"]:\n9 |         return None\n10 |     return row\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 739,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 2.783680904999983,
+    "request_id": "e37c07eccd173ac42b52d35a",
+    "storage_id": "036c8739b6b17a1831a04698"
+  },
+  {
+    "case_id": "c_517af2542a82",
+    "family_id": "rigorous_confirmation_v4_access_control_truth_of_mapping",
+    "source_id": "rigorous_confirmation_v4_access_control_truth_of_mapping",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The owner-filtered decision returns the item only when the owner filter permits access.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The owner-filtered decision returns the item only when the owner filter permits access.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "34633ae91ab75ec9e7245260061ca03a038827c61fbcfda8f686d6f6906b8573",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (truthy({'read': False})), returns records.get(record_id)\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (falsy({'read': False})), returns None\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (truthy({'read': False})), returns records.get(record_id)\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (falsy({'read': False})), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (truthy({'read': False})), returns records.get(record_id)\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (falsy({'read': False})), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     item = records.get(record_id)\n3 |     if item is None:\n4 |         return None\n5 |     decision = {\"read\": item[\"owner_id\"] == actor[\"id\"]}\n6 |     return item if decision else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 856,
+    "output_tokens": 54,
+    "finish_reason": "stop",
+    "latency_seconds": 2.5899314819999972,
+    "request_id": "42d28d5930bbd552c5cee33b",
+    "storage_id": "dd998b1777d7516d9e90d1e8"
+  },
+  {
+    "case_id": "c_33262b5a854b",
+    "family_id": "rigorous_confirmation_v4_sql_injection_clause_substitution",
+    "source_id": "rigorous_confirmation_v4_sql_injection_clause_substitution",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "explanation": "The format operation places the lookup directly into SQL.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The format operation places the lookup directly into SQL.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "906c643fe32f3870b9f534d94d61b2d05588e68ab4ed7b9236e692e2e7bf3f5c",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     pattern = \"SELECT name FROM users WHERE name = {operand}\"\n3 |     args = {\"lookup\": username}\n4 |     operand = \":lookup\"\n5 |     statement = pattern.format(operand=operand)\n6 |     return conn.execute(statement, args).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 6, returns conn.execute(f\"SELECT name FROM users WHERE name = {':lookup'}\", {'lookup': username}).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 500,
+    "output_tokens": 52,
+    "finish_reason": "stop",
+    "latency_seconds": 2.428625096000019,
+    "request_id": "aeb6602ab51759743c79c097",
+    "storage_id": "5dfcebb35d6e3011110ac5cd"
+  },
+  {
+    "case_id": "c_13cc66e27741",
+    "family_id": "rigorous_confirmation_v4_sql_injection_trusted_format_columns",
+    "source_id": "rigorous_confirmation_v4_sql_injection_trusted_format_columns",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "explanation": "The format operation places the name before the order clause and SQLite quote escaping preserves it.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The format operation places the name before the order clause and SQLite quote escaping preserves it.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "9cf3998ac3b053cc9982eda08b0c36e9642e328bc92b41e5e0d64349ab9e3721",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     table = \"users\"\n3 |     column = \"name\"\n4 |     left = \"SELECT {0} FROM {1} WHERE {0} = \".format(column, table)\n5 |     right = \"?\"\n6 |     parameters = [username]\n7 |     return conn.execute(left + right, parameters).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 7, returns conn.execute(f\"SELECT {'name'} FROM {'users'} WHERE {'name'} = \" + '?', [username]).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 516,
+    "output_tokens": 61,
+    "finish_reason": "stop",
+    "latency_seconds": 2.8392603070000177,
+    "request_id": "ba0533e6d75b8d5594241946",
+    "storage_id": "165564f46a765eb4446e1ec7"
+  },
+  {
+    "case_id": "c_021a30f8ea70",
+    "family_id": "rigorous_confirmation_v4_access_control_permission_cache_key",
+    "source_id": "rigorous_confirmation_v4_access_control_permission_cache_key",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 9,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The requested key must be present in the owner-filtered map to return the row.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The requested key must be present in the owner-filtered map to return the row.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"confidence\":0.9}",
+    "prompt_sha256": "07c7d7597335cac6f0bd89a63372044de8190d58bfbda10bf8c558e1f92760c9",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(next((key for key, allowed in permissions.items() if allowed), record_id)))), returns records.get(record_id)\nread_record, line 9 when (falsy(records.get(record_id) is None)) and (falsy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(next((key for key, allowed in permissions.items() if allowed), record_id)))), returns None\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(next((key for key, allowed in permissions.items() if allowed), record_id)))), returns records.get(record_id)\nread_record, line 9 when (falsy(records.get(record_id) is None)) and (falsy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(next((key for key, allowed in permissions.items() if allowed), record_id)))), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(next((key for key, allowed in permissions.items() if allowed), record_id)))), returns records.get(record_id)\nread_record, line 9 when (falsy(records.get(record_id) is None)) and (falsy({key: value['owner_id'] == actor['id'] for key, value in records.items()}.get(next((key for key, allowed in permissions.items() if allowed), record_id)))), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     permissions = {key: value[\"owner_id\"] == actor[\"id\"] for key, value in records.items()}\n6 |     key_to_check = next((key for key, allowed in permissions.items() if allowed), record_id)\n7 |     if permissions.get(key_to_check):\n8 |         return row\n9 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 1145,
+    "output_tokens": 61,
+    "finish_reason": "stop",
+    "latency_seconds": 2.937891415000081,
+    "request_id": "5eca1d0a1c79ae250a0c5689",
+    "storage_id": "a6c7e33fbf7ca0ab38fb8de9"
+  },
+  {
+    "case_id": "c_fe25a0cc0a8d",
+    "family_id": "rigorous_confirmation_v4_sql_injection_query_factory_lambda",
+    "source_id": "rigorous_confirmation_v4_sql_injection_query_factory_lambda",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "explanation": "The only use of the name is the named bind argument.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+    "prompt_sha256": "164537634eee430cfd4c74dc0936ad5ac7aae8a63e02fce50cb7e299f1206606",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     make_command = lambda value: (\"SELECT name FROM users WHERE name = ?\", (value,))\n3 |     statement, bindings = make_command(username)\n4 |     cursor = conn.cursor()\n5 |     return cursor.execute(statement, bindings).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 5, returns conn.cursor().execute(statement, bindings).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 483,
+    "output_tokens": 52,
+    "finish_reason": "stop",
+    "latency_seconds": 2.4385632059999125,
+    "request_id": "6e93b1aa4ab2c384e1acdaa4",
+    "storage_id": "dab98a463a489ae21472bc02"
+  },
+  {
+    "case_id": "c_f5bd44c807d0",
+    "family_id": "rigorous_confirmation_v4_sql_injection_indexed_command_options",
+    "source_id": "rigorous_confirmation_v4_sql_injection_indexed_command_options",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 9,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "explanation": "A name containing a quote selects the interpolated option.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"A name containing a quote selects the interpolated option.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"confidence\":0.9}",
+    "prompt_sha256": "31517285afd9eb853facc7047b42c5a7b2139b080df5d38af5a997bc88eca757",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     options = [\n3 |         (\"SELECT name FROM users WHERE name = ?\", (username,)),\n4 |         (f\"SELECT name FROM users WHERE name = '{username}'\", ()),\n5 |     ]\n6 |     options_for_input = [False, True]\n7 |     index = int(\"'\" in username)\n8 |     sql, values = options[int(options_for_input[index])]\n9 |     return conn.execute(sql, values).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 9, returns conn.execute(sql, values).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 530,
+    "output_tokens": 52,
+    "finish_reason": "stop",
+    "latency_seconds": 2.4452616099999887,
+    "request_id": "2903ceadfdd6ad711008e7ff",
+    "storage_id": "2f772e238df8f9f06830f640"
+  },
+  {
+    "case_id": "c_33ddfb77f0e9",
+    "family_id": "rigorous_confirmation_v4_access_control_numeric_gate",
+    "source_id": "rigorous_confirmation_v4_access_control_numeric_gate",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The final expression can return the record only when the owner comparison succeeds.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the record only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "605f50e55a44ed60535a9484a2abb5355e046e4bf60015a6a537d500414087d4",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy(0 + 1 >= 1)), returns records.get(record_id)\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(0 + 1 >= 1)), returns None\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy(0 + 1 >= 1)), returns records.get(record_id)\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(0 + 1 >= 1)), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy(0 + 1 >= 1)), returns records.get(record_id)\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(0 + 1 >= 1)), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     record = records.get(record_id)\n3 |     if record is None:\n4 |         return None\n5 |     total = int(record[\"owner_id\"] == actor[\"id\"]) + int(actor[\"authenticated\"])\n6 |     if total >= 1:\n7 |         return record\n8 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 892,
+    "output_tokens": 56,
+    "finish_reason": "stop",
+    "latency_seconds": 2.733766188000004,
+    "request_id": "0539a242fe1dbe7c643b26da",
+    "storage_id": "f8e4ba85ff263beba27a2133"
+  },
+  {
+    "case_id": "c_6bd88f2973f4",
+    "family_id": "rigorous_confirmation_v4_access_control_reject_flag_cleanup",
+    "source_id": "rigorous_confirmation_v4_access_control_reject_flag_cleanup",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The early return when the owner mismatch flag is present blocks the return of any record.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The early return when the owner mismatch flag is present blocks the return of any record.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "b04b0b5c52675cb747c4e3a38117d51256ffae2ab71a1a9a376d0a37b8e4654b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy(flags.get('foreign', False))), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(flags.get('foreign', False))), returns item\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy(flags.get('foreign', False))), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(flags.get('foreign', False))), returns item\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy(flags.get('foreign', False))), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(flags.get('foreign', False))), returns item\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     item = records.get(record_id)\n3 |     if item is None:\n4 |         return None\n5 |     flags = {\"foreign\": item[\"owner_id\"] != actor[\"id\"]}\n6 |     if actor[\"authenticated\"]:\n7 |         flags.pop(\"other\", None)\n8 |     return None if flags.get(\"foreign\", False) else item\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 881,
+    "output_tokens": 59,
+    "finish_reason": "stop",
+    "latency_seconds": 2.848269533000007,
+    "request_id": "9f20fe10a1972feb695277d9",
+    "storage_id": "d2ca8d1dd50cb95843fde653"
+  },
+  {
+    "case_id": "c_3291f0e9ef5b",
+    "family_id": "rigorous_confirmation_v4_access_control_reject_flag_cleanup",
+    "source_id": "rigorous_confirmation_v4_access_control_reject_flag_cleanup",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The preexisting owner mismatch makes the later return true and sends the item.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The preexisting owner mismatch makes the later return true and sends the item.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "d6618d6d6a3593b5548b0e54940e2e0060dbf7ef73d08f1dcd811f9c82b64cc9",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy(flags.get('foreign', False))), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(flags.get('foreign', False))), returns item\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy(flags.get('foreign', False))), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(flags.get('foreign', False))), returns item\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy(flags.get('foreign', False))), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(flags.get('foreign', False))), returns item\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     item = records.get(record_id)\n3 |     if item is None:\n4 |         return None\n5 |     flags = {\"foreign\": item[\"owner_id\"] != actor[\"id\"]}\n6 |     if actor[\"authenticated\"]:\n7 |         flags.pop(\"foreign\", None)\n8 |     return None if flags.get(\"foreign\", False) else item\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 881,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 2.759036809999998,
+    "request_id": "f598d619af6b7ee8b5231569",
+    "storage_id": "610aed7101192915cd45ac04"
+  },
+  {
+    "case_id": "c_a511cda9c289",
+    "family_id": "rigorous_confirmation_v4_sql_injection_cast_argument",
+    "source_id": "rigorous_confirmation_v4_sql_injection_cast_argument",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "explanation": "The cast converts the interpolated name to a text literal.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The cast converts the interpolated name to a text literal.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+    "prompt_sha256": "93555af96a8d698451b862adebfc83d50aa6dd65ce0de2890138fb47d7df5e64",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     token = f\"'{username}'\"\n3 |     arguments = []\n4 |     statement = \"SELECT name FROM users WHERE name = CAST(\" + token + \" AS TEXT)\"\n5 |     return conn.execute(statement, arguments).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 5, returns conn.execute('SELECT name FROM users WHERE name = CAST(' + f\"'{username}'\" + ' AS TEXT)', []).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 494,
+    "output_tokens": 45,
+    "finish_reason": "stop",
+    "latency_seconds": 2.0958725479999885,
+    "request_id": "50552207d5b2fb17745bf250",
+    "storage_id": "9caba43c4699a0a54ecc805d"
+  },
+  {
+    "case_id": "c_a17110ae1f37",
+    "family_id": "rigorous_confirmation_v4_access_control_closure_policy_combination",
+    "source_id": "rigorous_confirmation_v4_access_control_closure_policy_combination",
+    "split": "rigorous_confirmation_v4",
+    "category": "access_control",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The final expression can return the row only when the owner-check succeeds.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner-check succeeds.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "2cee367e5dcad1bacf56ab12487ee66ecbd2a1f75de1fc298564fb2681bce8b1",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. The hypothetical paths substitute only the stated input assumptions into Python expressions. Use them to trace the requested row or the query text. Verify paths omitted from the notes against the original code before deciding."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n\nSymbolic paths under hypothetical inputs\nLogged-in non-owner, same tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy((lambda value: owned(value) and actor['authenticated'])(records.get(record_id)))), returns records.get(record_id)\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (falsy((lambda value: owned(value) and actor['authenticated'])(records.get(record_id)))), returns None\n\nLogged-in non-owner, different tenant\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy((lambda value: owned(value) and actor['authenticated'])(records.get(record_id)))), returns records.get(record_id)\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (falsy((lambda value: owned(value) and actor['authenticated'])(records.get(record_id)))), returns None\n\nLogged-in non-owner with admin role\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy((lambda value: owned(value) and actor['authenticated'])(records.get(record_id)))), returns records.get(record_id)\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (falsy((lambda value: owned(value) and actor['authenticated'])(records.get(record_id)))), returns None\n\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     entry = records.get(record_id)\n3 |     if entry is None:\n4 |         return None\n5 |     owned = lambda value: value[\"owner_id\"] == actor[\"id\"]\n6 |     grant = lambda value: owned(value) and actor[\"authenticated\"]\n7 |     return entry if grant(entry) else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 979,
+    "output_tokens": 55,
+    "finish_reason": "stop",
+    "latency_seconds": 2.652725677000035,
+    "request_id": "b14f76dc139e39be41cefc75",
+    "storage_id": "d2b2a7a1d985539c0d1cde74"
+  }
+]

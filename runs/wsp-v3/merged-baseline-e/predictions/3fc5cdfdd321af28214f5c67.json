@@ -1,0 +1,50 @@
+{
+  "record": {
+    "case_id": "c_21d530653908",
+    "family_id": "wsp_validation_sql_injection_conditional_expression_bind",
+    "source_id": "wsp_validation_sql_injection_conditional_expression_bind",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "08c4d55e8ce79b1fe8c17bf38e9a238a4025ade28de60a8227f25ecf637c6912",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    sql = \"SELECT name FROM users WHERE name = ?\"\n    args = (username,)\n    sql, args = (sql.replace(\"?\", \"'\" + username + \"'\"), ()) if username[:1].islower() else (sql, args)\n    return conn.execute(sql, args).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 247,
+    "output_tokens": 39,
+    "finish_reason": "stop",
+    "latency_seconds": 0.9735784239999248,
+    "request_id": "be2329174f0752d00295912d"
+  },
+  "sha256": "3fb197c05adc54986eda95b51f0e107297ce8515057a5f78de825745b633e43c"
+}

@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_234f001a9813",
+    "family_id": "neutral_confirmation_access_control_administrator",
+    "source_id": "neutral_confirmation_access_control_administrator",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "8f7e6e172d18c362495a816ee428ed9ce0308636092818f4eed6891bbbb2e48d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. An owner or an administrator may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     if actor[\"role\"] == \"admin\":\n6 |         return row\n7 |     return row if row[\"owner_id\"] == actor[\"id\"] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 269,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 2.6605172609999954,
+    "request_id": "46395c888564d9f6f7848424"
+  },
+  "sha256": "527fa72891a86e768641a0036c1e9db04a993f79e32461b575e1a85a9a6642d3"
+}

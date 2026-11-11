@@ -1,0 +1,45 @@
+{
+  "record": {
+    "case_id": "c_8bba05f0a26b",
+    "family_id": "access_control_policy",
+    "source_id": "access_control_policy",
+    "split": "screen",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits the requested action.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits the requested action.\",\"confidence\":0.9}",
+    "prompt_sha256": "b18411104afa0ddef6808e405756da58f80ae643c353cc96b648a67874538462",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records is a trusted server-side dictionary; record_id is attacker-controlled; actor comes from a trusted authenticated session. An owner or an administrator may read a record. Sharing a tenant or being logged in alone does not authorize a read. Missing records must return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     policy = {\"member\": True, \"admin\": True}\n3 |     return records.get(record_id) if policy.get(actor[\"role\"], False) else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 253,
+    "output_tokens": 51,
+    "finish_reason": "stop",
+    "latency_seconds": 2.3223168920000035,
+    "request_id": "31ac88f61bbf98e2c35d0701"
+  },
+  "sha256": "70456c5d4c626d92e277cd57cda97ea1d7642b1f1bb5a010554e9759ad11e9b7"
+}

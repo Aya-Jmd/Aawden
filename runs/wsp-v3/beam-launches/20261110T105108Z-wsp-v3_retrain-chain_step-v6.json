@@ -1,0 +1,48 @@
+{
+  "started_at": "20261110T105108Z",
+  "gpu": "RTX5090",
+  "cpu": 2.0,
+  "memory": "32Gi",
+  "timeout_s": 2100,
+  "estimated_max_cost_usd": 1.2268,
+  "max_cost_usd_guard": 1.4,
+  "output_subdir": "wsp-v3/retrain-chain/step-v6",
+  "volume_path": "aawden-v3/wsp-v3/retrain-chain/step-v6",
+  "command": [
+    "python",
+    "scripts/retrain_adapter_chain.py",
+    "--stage",
+    "v6",
+    "--allow-long-run",
+    "--resume-from",
+    "retrain-in/v5.safetensors",
+    "--output",
+    "runs/wsp-v3/retrain-chain/step-v6/ckpt",
+    "--source-root",
+    "snapshot/v7"
+  ],
+  "task_id": "266ac156-91cd-4b7e-9a9f-191c60889a76",
+  "exit_code": 2,
+  "result": {
+    "command": [
+      "/usr/bin/python3.11",
+      "scripts/retrain_adapter_chain.py",
+      "--stage",
+      "v6",
+      "--allow-long-run",
+      "--resume-from",
+      "retrain-in/v5.safetensors",
+      "--output",
+      "runs/wsp-v3/retrain-chain/step-v6/ckpt",
+      "--source-root",
+      "snapshot/v7"
+    ],
+    "copied_files": [],
+    "exit_code": 2,
+    "output_subdir": "wsp-v3/retrain-chain/step-v6",
+    "seconds": 0.1,
+    "task_id": "266ac156-91cd-4b7e-9a9f-191c60889a76",
+    "volume_path": "aawden-v3/wsp-v3/retrain-chain/step-v6"
+  },
+  "ended_at": "20261110T105115Z"
+}

@@ -1,0 +1,440 @@
+{
+  "trace": {
+    "overall": {
+      "n": 36,
+      "n_vulnerable": 18,
+      "n_clean": 18,
+      "true_positive": 16,
+      "true_negative": 12,
+      "false_positive": 6,
+      "false_negative": 2,
+      "balanced_accuracy": 0.7777777777777777,
+      "accuracy": 0.7777777777777778,
+      "false_positive_rate": 0.3333333333333333,
+      "false_negative_rate": 0.1111111111111111,
+      "miss_rate": 0.1111111111111111,
+      "coverage": 1.0,
+      "invalid_count": 0,
+      "generation_errors": 0,
+      "input_tokens": 11864,
+      "output_tokens": 1780,
+      "latency_seconds": 85.27928334999993,
+      "explanation_grounding": null,
+      "general_coding_accuracy": null
+    },
+    "by_category": {
+      "access_control": {
+        "n": 18,
+        "n_vulnerable": 9,
+        "n_clean": 9,
+        "true_positive": 7,
+        "true_negative": 4,
+        "false_positive": 5,
+        "false_negative": 2,
+        "balanced_accuracy": 0.6111111111111112,
+        "accuracy": 0.6111111111111112,
+        "false_positive_rate": 0.5555555555555556,
+        "false_negative_rate": 0.2222222222222222,
+        "miss_rate": 0.2222222222222222,
+        "coverage": 1.0,
+        "invalid_count": 0,
+        "generation_errors": 0,
+        "input_tokens": 6267,
+        "output_tokens": 946,
+        "latency_seconds": 44.89709627499997,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      },
+      "sql_injection": {
+        "n": 18,
+        "n_vulnerable": 9,
+        "n_clean": 9,
+        "true_positive": 9,
+        "true_negative": 8,
+        "false_positive": 1,
+        "false_negative": 0,
+        "balanced_accuracy": 0.9444444444444444,
+        "accuracy": 0.9444444444444444,
+        "false_positive_rate": 0.1111111111111111,
+        "false_negative_rate": 0.0,
+        "miss_rate": 0.0,
+        "coverage": 1.0,
+        "invalid_count": 0,
+        "generation_errors": 0,
+        "input_tokens": 5597,
+        "output_tokens": 834,
+        "latency_seconds": 40.38218707499996,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      }
+    },
+    "errors": [
+      {
+        "case_id": "c_ccad93e7d25e",
+        "family_id": "rigorous_development_access_control_wrong_comparison_field",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "03734019807c30d4c2cfdd09",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_69de89a586d3",
+        "family_id": "rigorous_development_access_control_boolean_any",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "33691c701a3e6ebac3dba560",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_70b94f41e5a9",
+        "family_id": "rigorous_development_access_control_cached_policy",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "9f8036bfac716f80f00deafd",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_5f87d27d9263",
+        "family_id": "rigorous_development_sql_injection_quoted_intermediate",
+        "category": "sql_injection",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "0fb03e2af8c3ba1bd20a6716",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_6e7667272a20",
+        "family_id": "rigorous_development_access_control_boolean_any",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "fffc8fa0da7be780c9111aaa",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_1401f2313e50",
+        "family_id": "rigorous_development_access_control_disallowed_state",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "d0f1e72d635e6ccc1128b56c",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_86462863a52a",
+        "family_id": "confirmation_v5_access_control_predicate_sequence",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "5b4bf391c2c01da711332dc5",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_56a48d258f7a",
+        "family_id": "confirmation_v5_access_control_indexed_result",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "5cb60004b1e28bb70ac503ea",
+        "kind": "false_alarm"
+      }
+    ],
+    "pairs_correct": 11,
+    "pairs_total": 18
+  },
+  "walkthrough": {
+    "overall": {
+      "n": 36,
+      "n_vulnerable": 18,
+      "n_clean": 18,
+      "true_positive": 16,
+      "true_negative": 12,
+      "false_positive": 6,
+      "false_negative": 2,
+      "balanced_accuracy": 0.7777777777777777,
+      "accuracy": 0.7777777777777778,
+      "false_positive_rate": 0.3333333333333333,
+      "false_negative_rate": 0.1111111111111111,
+      "miss_rate": 0.1111111111111111,
+      "coverage": 1.0,
+      "invalid_count": 0,
+      "generation_errors": 0,
+      "input_tokens": 15338,
+      "output_tokens": 1780,
+      "latency_seconds": 85.41804264200005,
+      "explanation_grounding": null,
+      "general_coding_accuracy": null
+    },
+    "by_category": {
+      "access_control": {
+        "n": 18,
+        "n_vulnerable": 9,
+        "n_clean": 9,
+        "true_positive": 7,
+        "true_negative": 4,
+        "false_positive": 5,
+        "false_negative": 2,
+        "balanced_accuracy": 0.6111111111111112,
+        "accuracy": 0.6111111111111112,
+        "false_positive_rate": 0.5555555555555556,
+        "false_negative_rate": 0.2222222222222222,
+        "miss_rate": 0.2222222222222222,
+        "coverage": 1.0,
+        "invalid_count": 0,
+        "generation_errors": 0,
+        "input_tokens": 8283,
+        "output_tokens": 946,
+        "latency_seconds": 45.52685988200005,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      },
+      "sql_injection": {
+        "n": 18,
+        "n_vulnerable": 9,
+        "n_clean": 9,
+        "true_positive": 9,
+        "true_negative": 8,
+        "false_positive": 1,
+        "false_negative": 0,
+        "balanced_accuracy": 0.9444444444444444,
+        "accuracy": 0.9444444444444444,
+        "false_positive_rate": 0.1111111111111111,
+        "false_negative_rate": 0.0,
+        "miss_rate": 0.0,
+        "coverage": 1.0,
+        "invalid_count": 0,
+        "generation_errors": 0,
+        "input_tokens": 7055,
+        "output_tokens": 834,
+        "latency_seconds": 39.89118275999999,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      }
+    },
+    "errors": [
+      {
+        "case_id": "c_ccad93e7d25e",
+        "family_id": "rigorous_development_access_control_wrong_comparison_field",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "1ef1b72d9fc7ff3254100997",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_69de89a586d3",
+        "family_id": "rigorous_development_access_control_boolean_any",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "46078deed4526c45e5c43023",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_70b94f41e5a9",
+        "family_id": "rigorous_development_access_control_cached_policy",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "bf1a96753e7cef37065c9f5b",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_5f87d27d9263",
+        "family_id": "rigorous_development_sql_injection_quoted_intermediate",
+        "category": "sql_injection",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "1f6373c01b5c2261683cd521",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_6e7667272a20",
+        "family_id": "rigorous_development_access_control_boolean_any",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "b586d651a92ca8e0009821e8",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_1401f2313e50",
+        "family_id": "rigorous_development_access_control_disallowed_state",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "4a0364aa287c17e51085f016",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_86462863a52a",
+        "family_id": "confirmation_v5_access_control_predicate_sequence",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "0c2f2dc2d3f6185bf9d82503",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_56a48d258f7a",
+        "family_id": "confirmation_v5_access_control_indexed_result",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "f20d40c7ff124f10959f08a7",
+        "kind": "false_alarm"
+      }
+    ],
+    "pairs_correct": 11,
+    "pairs_total": 18
+  },
+  "evidence_first": {
+    "overall": {
+      "n": 36,
+      "n_vulnerable": 18,
+      "n_clean": 18,
+      "true_positive": 16,
+      "true_negative": 12,
+      "false_positive": 6,
+      "false_negative": 2,
+      "balanced_accuracy": 0.7777777777777777,
+      "accuracy": 0.7777777777777778,
+      "false_positive_rate": 0.3333333333333333,
+      "false_negative_rate": 0.1111111111111111,
+      "miss_rate": 0.1111111111111111,
+      "coverage": 1.0,
+      "invalid_count": 0,
+      "generation_errors": 0,
+      "input_tokens": 16886,
+      "output_tokens": 1780,
+      "latency_seconds": 85.6176983659999,
+      "explanation_grounding": null,
+      "general_coding_accuracy": null
+    },
+    "by_category": {
+      "access_control": {
+        "n": 18,
+        "n_vulnerable": 9,
+        "n_clean": 9,
+        "true_positive": 7,
+        "true_negative": 4,
+        "false_positive": 5,
+        "false_negative": 2,
+        "balanced_accuracy": 0.6111111111111112,
+        "accuracy": 0.6111111111111112,
+        "false_positive_rate": 0.5555555555555556,
+        "false_negative_rate": 0.2222222222222222,
+        "miss_rate": 0.2222222222222222,
+        "coverage": 1.0,
+        "invalid_count": 0,
+        "generation_errors": 0,
+        "input_tokens": 9057,
+        "output_tokens": 946,
+        "latency_seconds": 45.53591545099994,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      },
+      "sql_injection": {
+        "n": 18,
+        "n_vulnerable": 9,
+        "n_clean": 9,
+        "true_positive": 9,
+        "true_negative": 8,
+        "false_positive": 1,
+        "false_negative": 0,
+        "balanced_accuracy": 0.9444444444444444,
+        "accuracy": 0.9444444444444444,
+        "false_positive_rate": 0.1111111111111111,
+        "false_negative_rate": 0.0,
+        "miss_rate": 0.0,
+        "coverage": 1.0,
+        "invalid_count": 0,
+        "generation_errors": 0,
+        "input_tokens": 7829,
+        "output_tokens": 834,
+        "latency_seconds": 40.08178291499996,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      }
+    },
+    "errors": [
+      {
+        "case_id": "c_ccad93e7d25e",
+        "family_id": "rigorous_development_access_control_wrong_comparison_field",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "b01842ccb575bb0dae37eb01",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_69de89a586d3",
+        "family_id": "rigorous_development_access_control_boolean_any",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "67e81f1e6d3e1ae74f1c1df5",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_70b94f41e5a9",
+        "family_id": "rigorous_development_access_control_cached_policy",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "ee49304a8eba6d40ab678831",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_5f87d27d9263",
+        "family_id": "rigorous_development_sql_injection_quoted_intermediate",
+        "category": "sql_injection",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "bb79ca4009b6c7be8e6c5f77",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_6e7667272a20",
+        "family_id": "rigorous_development_access_control_boolean_any",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "12d2d6a5d067286ec33c436f",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_1401f2313e50",
+        "family_id": "rigorous_development_access_control_disallowed_state",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "8ad6041491293a8e4e831678",
+        "kind": "false_alarm"
+      },
+      {
+        "case_id": "c_86462863a52a",
+        "family_id": "confirmation_v5_access_control_predicate_sequence",
+        "category": "access_control",
+        "oracle_verdict": "vulnerable",
+        "predicted_verdict": "not_vulnerable_for_target",
+        "storage_id": "1c018d758fe5acc7308b11f1",
+        "kind": "missed_bug"
+      },
+      {
+        "case_id": "c_56a48d258f7a",
+        "family_id": "confirmation_v5_access_control_indexed_result",
+        "category": "access_control",
+        "oracle_verdict": "not_vulnerable_for_target",
+        "predicted_verdict": "vulnerable",
+        "storage_id": "f37da6eefb9688878dc0f160",
+        "kind": "false_alarm"
+      }
+    ],
+    "pairs_correct": 11,
+    "pairs_total": 18
+  }
+}

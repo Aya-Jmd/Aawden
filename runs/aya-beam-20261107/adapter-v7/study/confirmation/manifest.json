@@ -1,0 +1,270 @@
+{
+  "run_id": "102a18cf79b91d82",
+  "parent_run": null,
+  "identity_sha256": "102a18cf79b91d8242dfc0ccd068f0551af287d182a202d4e764a2d672484274",
+  "identity": {
+    "config": {
+      "model_id": "CohereLabs/aya-expanse-8b",
+      "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+      "device": "auto",
+      "dtype": "bfloat16",
+      "context_limit": 8192,
+      "max_new_tokens": 256,
+      "seed": 42,
+      "trust_remote_code": false,
+      "local_files_only": false
+    },
+    "protocol": {
+      "rank": 16,
+      "alpha": 32,
+      "epochs": 3,
+      "lr": 0.0001,
+      "accumulation": 2,
+      "verdict_weight": 10,
+      "seed": 42,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "conditions": [
+        "neutral",
+        "incorrect_suggestion"
+      ],
+      "confirmation_sha256": "dcab83068fcc14bbeaa130e350a20c6222440a47ccb660b59436d32e6cea0016",
+      "study_version": "adapter-v7-trace-refinement",
+      "resume_sha256": "354c3e4c7dd5cc74eacf6c68d0d6dd553ade814fcde101185333d9b38e821e8c",
+      "training_script_sha256": "ae89ac42f54457209119a3b9b72797691a6c6701d1de76c7636ee3cb902c915f",
+      "training_files": {
+        "screen.json": "3fedabb747d25b9aa98356a90f102c79a8d1ceb10394a2b5794735be4d55f523",
+        "neutral-confirmation.json": "98ab77d1d91e6f323732605086d6b8531a158663b0b8fcdc095e0f75e86efbeb",
+        "neutral-confirmation-v2.json": "61e6ba846fc2bde433cb3183328f2af801c6886dbf3f3471657053b8a9fdf35e"
+      },
+      "validation_sha256": "8c1f1da04c45b59841c12cda7ee6ac3b9d7f8f6c6494ed958148f88e26216895",
+      "added_training_sha256": "5b13a9ae58dde23f5f59d4aa98cb73f7686b6cee1fe77097c38efcbff0b66a39",
+      "validation_used_for_training": false,
+      "trace_prompt": true
+    },
+    "source": "52ec422aec131851e7f0cbeefb861eaf0d7bc4b047b6935eca1e6147a6e077d0",
+    "model": {
+      "adapter": "huggingface",
+      "model_id": "CohereLabs/aya-expanse-8b",
+      "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "decoding": {
+        "do_sample": false,
+        "max_new_tokens": 256
+      },
+      "tokenizer_sha256": "beb3ef2cb916cf53d01655d46cf9bfbb1dcfbded9f3ef4c6a298ed760c6f02df",
+      "chat_template_sha256": "e7527cc46a21601b5340edffd3633d47d722c7c735eb9fc1e3c11f66ff2b0caf",
+      "continuation_scoring": "sum of all continuation token log-probabilities, no length normalization, no added special tokens",
+      "environment": {
+        "python": "3.11.11",
+        "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+        "packages": {
+          "torch": {
+            "version": "2.9.1+cu128",
+            "direct_url": null
+          },
+          "transformers": {
+            "version": "5.22.1",
+            "direct_url": null
+          },
+          "transformer-lens": {
+            "version": "3.8.0",
+            "direct_url": null
+          },
+          "circuitkit": {
+            "version": "0.2.0",
+            "direct_url": {
+              "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+              "vcs_info": {
+                "vcs": "git",
+                "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+                "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+              }
+            }
+          },
+          "auditkit": {
+            "version": "1.1.3",
+            "direct_url": {
+              "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+              "vcs_info": {
+                "vcs": "git",
+                "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+                "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+              }
+            }
+          },
+          "safetensors": {
+            "version": "0.8.0",
+            "direct_url": null
+          }
+        },
+        "code_commit": null,
+        "code_sha256": "52ec422aec131851e7f0cbeefb861eaf0d7bc4b047b6935eca1e6147a6e077d0",
+        "dependency_lock_hashes": {
+          "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+          "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597",
+          "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+        }
+      },
+      "gpu": {
+        "name": "NVIDIA GeForce RTX 4090",
+        "memory_bytes": 25252724736,
+        "cuda": "12.8"
+      },
+      "checkpoint_hashes": {
+        "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+        "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+        "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+        "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+        "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+      },
+      "adaptation": "LoRA",
+      "adapter_sha256": "e86f9475e3c8871ba3c60a63b10704954f66edcb791bd9631866a07d82a9022f",
+      "training_protocol": {
+        "rank": 16,
+        "alpha": 32,
+        "epochs": 3,
+        "lr": 0.0001,
+        "accumulation": 2,
+        "verdict_weight": 10,
+        "seed": 42,
+        "target_modules": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj",
+          "gate_proj",
+          "up_proj",
+          "down_proj"
+        ],
+        "conditions": [
+          "neutral",
+          "incorrect_suggestion"
+        ],
+        "confirmation_sha256": "dcab83068fcc14bbeaa130e350a20c6222440a47ccb660b59436d32e6cea0016",
+        "study_version": "adapter-v7-trace-refinement",
+        "resume_sha256": "354c3e4c7dd5cc74eacf6c68d0d6dd553ade814fcde101185333d9b38e821e8c",
+        "training_script_sha256": "ae89ac42f54457209119a3b9b72797691a6c6701d1de76c7636ee3cb902c915f",
+        "training_files": {
+          "screen.json": "3fedabb747d25b9aa98356a90f102c79a8d1ceb10394a2b5794735be4d55f523",
+          "neutral-confirmation.json": "98ab77d1d91e6f323732605086d6b8531a158663b0b8fcdc095e0f75e86efbeb",
+          "neutral-confirmation-v2.json": "61e6ba846fc2bde433cb3183328f2af801c6886dbf3f3471657053b8a9fdf35e"
+        },
+        "validation_sha256": "8c1f1da04c45b59841c12cda7ee6ac3b9d7f8f6c6494ed958148f88e26216895",
+        "added_training_sha256": "5b13a9ae58dde23f5f59d4aa98cb73f7686b6cee1fe77097c38efcbff0b66a39",
+        "validation_used_for_training": false,
+        "trace_prompt": true
+      }
+    },
+    "dataset": "a8809834f7c283de3f4fe44f3ad568033ab4cebc0214c22cf4360ff33eb310fe"
+  },
+  "stage": "adapter_competence",
+  "status": "completed",
+  "evidence_kind": "cohere_local_checkpoint",
+  "created_at": "2026-11-07T22:58:36.556707+00:00",
+  "environment": {
+    "python": "3.11.11",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+    "packages": {
+      "torch": {
+        "version": "2.9.1+cu128",
+        "direct_url": null
+      },
+      "transformers": {
+        "version": "5.22.1",
+        "direct_url": null
+      },
+      "transformer-lens": {
+        "version": "3.8.0",
+        "direct_url": null
+      },
+      "circuitkit": {
+        "version": "0.2.0",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+            "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+          }
+        }
+      },
+      "auditkit": {
+        "version": "1.1.3",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+            "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+          }
+        }
+      },
+      "safetensors": {
+        "version": "0.8.0",
+        "direct_url": null
+      }
+    },
+    "code_commit": null,
+    "code_sha256": "52ec422aec131851e7f0cbeefb861eaf0d7bc4b047b6935eca1e6147a6e077d0",
+    "dependency_lock_hashes": {
+      "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+      "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597",
+      "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+    }
+  },
+  "failure_reason": null,
+  "attempts": [
+    {
+      "status": "completed",
+      "started_at": "2026-11-07T22:58:36.572367+00:00",
+      "ended_at": "2026-11-07T22:59:26.432725+00:00"
+    }
+  ],
+  "started_at": "2026-11-07T22:58:36.572367+00:00",
+  "model_sha256_by_arm": {
+    "adapted": "5a31704d23007096138593532c47bc8c7f6f7d23abde59e648e0a91b8f3d2f47"
+  },
+  "completed_at": "2026-11-07T22:59:26.432725+00:00",
+  "artifact_hashes": {
+    "summary.json": "c9f4ec64e8dc9e399b697b14b6abbd2748b2f221cf48387ac5c1caf99de87e84",
+    "results.json": "79160a9a28622d1ab0459929dbf397d4c9990781aad0177b09cc44ede313ed79",
+    "auditkit.json": "3bbbc233c0297f508dd4e3573470ab1392ba06541a11964f9009dda82fe230f4",
+    "predictions/1bcaa9ee3f06bcf8c7794f25.json": "00ef873849fedd39738e6140b9659ab18b6d17b80d5bc863abbe3615e6361775",
+    "predictions/ccd29922732123c1d74cbeed.json": "a89c7747161e8f88f97b95f9ea6048910a605f8379daccee33e003903cb90103",
+    "predictions/744171505d0ce76581daf222.json": "52983723aea8254188833e9fa9ed9b227b811e081244f826dec889c149ebe114",
+    "predictions/cee2f494dc277808ab6edbe8.json": "77cbda47e0e10ba33ec7acded4e6e473169a8d1289be6ca32b9db504830abd30",
+    "predictions/bdc6e35a95faeeaff220a08c.json": "42f706e331a1440fc1974884a5ad3025ceb9bacf9a4e72f707d8b26c2cb6b680",
+    "predictions/86ff1bfdcbaa3e8e4e1ea280.json": "810892e3a434db4bcd047b9c4062ee4737e3248ab89f1b04209fd0afc16d2004",
+    "predictions/bd73b01c1688c959d74bff0d.json": "fd2cb9c58ae45a2c382686f4ca52a0a8aed025877ee578e8b22aaab0995e791f",
+    "predictions/af5cdb434113983c9a945f2e.json": "e98947d948023a2e30d6b91f03d67b8b84ce9d528bcbf4db0f585621c1da698f",
+    "predictions/4166a229459f9b36d5b87fca.json": "6620034d5ae43ba2632ad1b2720f43ff005aaf5406a4a674ea54d0cb92911436",
+    "predictions/143d8be9df629554a76506d4.json": "83460556a4ac9315fc1e687f0c58fbc242f51eb6345eb33053d2728b332ae93c",
+    "predictions/1959a11d41f32cda14c82fe7.json": "064c063b52c4c55105f3be58f221b52072a4f776e45b2e11620d35296dc4dad9",
+    "predictions/8d313eef3f5e6cdb8cd7e6bb.json": "b0c87a6048b5e66ea339665adc1b36a6fd1bcaec5caaf2fcd4424efdc281c6c7",
+    "predictions/c9a1235c341cd0a5261aaf09.json": "1a4ef5aae2b0d3aaca25fd0c8ee384cc8c859a2bc77ac4b9d714c85b8194e112",
+    "predictions/4fbb7bdfdff3840cfc0661c9.json": "316fdd45229773da68677dc59a33e2a791b6da419eb7291ddca19aeba8e72791",
+    "predictions/9e70a0574b3c025f640ea74f.json": "506acbb9fa8178340690a19e4d9504ea340d83855a3e10c137824d43937dfbe8",
+    "predictions/ff340b2a1bbc2642cb9be322.json": "960c4b9650c1f1e60ecbcf4ff39ad1c4a1464144845ae05e3275e5fd2fbdebfe",
+    "predictions/3d57ff0826a9b8f3e39e065d.json": "39a601f99fdcb8696ee3f532700f01b8ed8673149c35a55fa5ff6ccc73cbcb7a",
+    "predictions/58afead7ab4c51365a8efa04.json": "98a54f58c0b2b15c654a5c12117e617d52311b1a981e470e5adfd48c233d4d4d",
+    "predictions/7fc775bd5a8c269a5036b4b9.json": "ca983b9794ce087c7f07ac7fad79f41c900ebcfc99c4c3fb51283139dcfdc781",
+    "predictions/690327cc73c032ba3f97a60e.json": "909108f4f352f55662b7b653dc133b99af2453f2e9207ff56e72d7b098534a89"
+  },
+  "expected_predictions": 20,
+  "export": {
+    "version": 1,
+    "created_at": "2026-11-08T10:59:00.659302+00:00",
+    "measurement_payload_sha256": "c33d9a690418e91cc5077bc079975a898279cff4ea39ca6d86c322d1374f7015",
+    "measurement_receipt_sha256": "dbd0b9c83cb30abcb193320cf3be592bc0f6ceae70ec6ef31c5f93a85e146017",
+    "scope": "Canonical project namespace. Saved generation text and scored decisions unchanged."
+  }
+}

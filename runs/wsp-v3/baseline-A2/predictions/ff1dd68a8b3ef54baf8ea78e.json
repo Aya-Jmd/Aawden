@@ -1,0 +1,48 @@
+{
+  "record": {
+    "case_id": "c_1a9d76b13858",
+    "family_id": "wsp_discovery_access_control_owner_unset_fallthrough",
+    "source_id": "wsp_discovery_access_control_owner_unset_fallthrough",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "explanation": "The provided code implements a simple access control mechanism for reading records. It checks if the requested `record_id` exists and if the `owner` of the record matches the `actor` (caller) ID. If both conditions are met, the record is returned; otherwise, `None` is returned, ensuring that unauthorized access is denied.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\n  \"verdict\": \"not_vulnerable_for_target\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [1, 2, 3, 4, 5],\n  \"explanation\": \"The provided code implements a simple access control mechanism for reading records. It checks if the requested `record_id` exists and if the `owner` of the record matches the `actor` (caller) ID. If both conditions are met, the record is returned; otherwise, `None` is returned, ensuring that unauthorized access is denied.\",\n  \"confidence\": 1\n}",
+    "prompt_sha256": "89706df760a9631d56354a533e9a13e4e5a49101cad9346891e9b5220bc8bbec",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    owner = row[\"owner_id\"] or None\n    if owner == actor[\"id\"]:\n        return row\n    return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 243,
+    "output_tokens": 129,
+    "finish_reason": "stop",
+    "latency_seconds": 3.221199691000038,
+    "request_id": "95de958104aef48b9aa5558b"
+  },
+  "sha256": "86d7f667092ea1ef88a6b0ddcd7f085e081504b7b94be9b6310a12607f2a1738"
+}

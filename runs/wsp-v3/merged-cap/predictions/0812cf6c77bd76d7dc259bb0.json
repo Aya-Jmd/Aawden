@@ -1,0 +1,51 @@
+{
+  "record": {
+    "case_id": "c_32323775c000",
+    "family_id": "wsp_discovery_sql_injection_join_prefix_only",
+    "source_id": "wsp_discovery_sql_injection_join_prefix_only",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "71090b3a957354f7585ec53ae2fa9785bcbd7fd81762becfadc6fa7b42824157",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     parts = [\"SELECT name FROM users WHERE name = \", \"?\"]\n3 |     bound = (username,)\n4 |     parts[1] = \"'\" + username + \"'\"; bound = ()\n5 |     return conn.execute(\"\".join(parts), bound).fetchall()\n</source>\n Cite at most 4 source lines: only the lines that decide the verdict, not the whole file.Give your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 270,
+    "output_tokens": 41,
+    "finish_reason": "stop",
+    "latency_seconds": 1.032892368000006,
+    "request_id": "a4c1d55d4ec171cd4a56e91c"
+  },
+  "sha256": "569bd14cdd61e37fa3ab4226e148b880dad345045ed326f1027388939b53dbb7"
+}

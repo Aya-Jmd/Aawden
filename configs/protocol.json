@@ -1,0 +1,49 @@
+{
+  "version": "aawden-protocol-v2",
+  "experiment": "cyber-review-suggestion-robustness",
+  "conditions": [
+    "neutral",
+    "correct_suggestion",
+    "incorrect_suggestion"
+  ],
+  "methods": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "strong_prompt_candidates": [
+    "trace",
+    "verify"
+  ],
+  "test_authority_wording": true,
+  "grounding_case_limit": 20,
+  "primary_comparison": [
+    "D",
+    "B"
+  ],
+  "primary_condition": "incorrect_suggestion",
+  "primary_metric": "balanced_accuracy",
+  "max_edit_candidates": 10,
+  "random_control_seeds": [
+    17,
+    29,
+    43
+  ],
+  "bootstrap_unit": "family_id",
+  "bootstrap_replicates": 10000,
+  "seed": 42,
+  "confidence_level": 0.95,
+  "minimum_gain": 0.05,
+  "neutral_noninferiority_margin": 0.02,
+  "screen_minimum_neutral_ba": 0.75,
+  "screen_minimum_suggestion_drop": 0.1,
+  "final_test_locked": true,
+  "invalid_and_abstention_policy": "count_as_incorrect",
+  "oracle_review": "single_author_executable_fixtures",
+  "parity": {
+    "max_logprob_difference": 0.05,
+    "max_kl": 0.001,
+    "require_argmax_match": true
+  }
+}

@@ -1,0 +1,717 @@
+{
+  "record": {
+    "component": "mlp_out-L06",
+    "tensors": [
+      "model.layers.6.mlp.down_proj.weight"
+    ],
+    "arm_edits": {
+      "noop": {
+        "strength": 0.0,
+        "tensors": {
+          "model.layers.6.mlp.down_proj.weight": {
+            "before_sha256": "d171d3ef6b588bed821f7f7d3968011a87449d9fafbca100d82c8903de7803a5",
+            "edited_sha256": "5a7cdfeeea8eba288160b6680a376fdab84ab57459ec9597c89914538e7006fa",
+            "changed_scalars": 29,
+            "of_scalars": 58720256,
+            "update_l2": 0.0,
+            "update_max": 0.0
+          }
+        },
+        "changed_scalars": 29,
+        "update_norm": 0.0,
+        "restored": true
+      },
+      "mean_direction": {
+        "strength": 1.0,
+        "tensors": {
+          "model.layers.6.mlp.down_proj.weight": {
+            "before_sha256": "d171d3ef6b588bed821f7f7d3968011a87449d9fafbca100d82c8903de7803a5",
+            "edited_sha256": "bc45b494a19abd904b9ac1ad4bfd851c03cd5ed1136fb0599ededa8aa8123d80",
+            "changed_scalars": 46104092,
+            "of_scalars": 58720256,
+            "update_l2": 2.646677017211914,
+            "update_max": 0.00958251953125
+          }
+        },
+        "changed_scalars": 46104092,
+        "update_norm": 2.646677017211914,
+        "restored": true
+      },
+      "opposite_direction": {
+        "strength": 1.0,
+        "tensors": {
+          "model.layers.6.mlp.down_proj.weight": {
+            "before_sha256": "d171d3ef6b588bed821f7f7d3968011a87449d9fafbca100d82c8903de7803a5",
+            "edited_sha256": "bc45b494a19abd904b9ac1ad4bfd851c03cd5ed1136fb0599ededa8aa8123d80",
+            "changed_scalars": 46104092,
+            "of_scalars": 58720256,
+            "update_l2": 2.646677017211914,
+            "update_max": 0.00958251953125
+          }
+        },
+        "changed_scalars": 46104092,
+        "update_norm": 2.646677017211914,
+        "restored": true
+      },
+      "random-17": {
+        "strength": 1.0,
+        "tensors": {
+          "model.layers.6.mlp.down_proj.weight": {
+            "before_sha256": "d171d3ef6b588bed821f7f7d3968011a87449d9fafbca100d82c8903de7803a5",
+            "edited_sha256": "c8e8ad335db5992587a3dbf8f654d347908327d68e5d2202ad945602611c5545",
+            "changed_scalars": 44000960,
+            "of_scalars": 58720256,
+            "update_l2": 2.021460771560669,
+            "update_max": 0.0040283203125
+          }
+        },
+        "changed_scalars": 44000960,
+        "update_norm": 2.021460771560669,
+        "restored": true
+      },
+      "random-29": {
+        "strength": 1.0,
+        "tensors": {
+          "model.layers.6.mlp.down_proj.weight": {
+            "before_sha256": "d171d3ef6b588bed821f7f7d3968011a87449d9fafbca100d82c8903de7803a5",
+            "edited_sha256": "37cec710dae3262f6734d7121efc9f6251be36972105a46f1b48f913bf92dfb9",
+            "changed_scalars": 43813225,
+            "of_scalars": 58720256,
+            "update_l2": 1.9899834394454956,
+            "update_max": 0.0040283203125
+          }
+        },
+        "changed_scalars": 43813225,
+        "update_norm": 1.9899834394454956,
+        "restored": true
+      },
+      "random-43": {
+        "strength": 1.0,
+        "tensors": {
+          "model.layers.6.mlp.down_proj.weight": {
+            "before_sha256": "d171d3ef6b588bed821f7f7d3968011a87449d9fafbca100d82c8903de7803a5",
+            "edited_sha256": "f9aab17b587411383e1e5736419f13a2f013e3f7660f9c994b03ef8077e7eca2",
+            "changed_scalars": 43969257,
+            "of_scalars": 58720256,
+            "update_l2": 2.024538040161133,
+            "update_max": 0.0037841796875
+          }
+        },
+        "changed_scalars": 43969257,
+        "update_norm": 2.024538040161133,
+        "restored": true
+      }
+    },
+    "instruments": {
+      "cases": 12,
+      "mean_margin_delta": -0.11984910498138863,
+      "noop_max_absolute_delta": null,
+      "sign_flip": {
+        "p_value": 0.12243878060969515,
+        "permutations": 2000,
+        "seed": 187438346416753,
+        "statistic": -0.11984910498138863,
+        "abs_statistic": 0.11984910498138863,
+        "null": "independent sign flips of the paired per-case differences"
+      },
+      "family_interval": {
+        "difference": -0.11984910498138863,
+        "unit": "family_id",
+        "ci95": [
+          -0.2500556782359457,
+          -1.2826937330084444e-05
+        ],
+        "families": 11,
+        "cases": 12,
+        "replicates": 10000,
+        "seed": 133812161412968,
+        "interval": "paired percentile cluster bootstrap over family_id"
+      },
+      "forced_choice_accuracy": 0.4166666666666667,
+      "per_verdict": {
+        "vulnerable": {
+          "cases": 6,
+          "mean_margin_delta": -0.2500002369286752
+        },
+        "not_vulnerable_for_target": {
+          "cases": 6,
+          "mean_margin_delta": 0.010302026965897918
+        }
+      }
+    },
+    "controls": {
+      "mean_direction": {
+        "json_prefill": {
+          "cases": 12,
+          "mean_margin_delta": -0.11984910498138863,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.12243878060969515,
+            "permutations": 2000,
+            "seed": 187438346416753,
+            "statistic": -0.11984910498138863,
+            "abs_statistic": 0.11984910498138863,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": -0.11984910498138863,
+            "unit": "family_id",
+            "ci95": [
+              -0.2500556782359457,
+              -1.2826937330084444e-05
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 133812161412968,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.4166666666666667,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -0.2500002369286752
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": 0.010302026965897918
+            }
+          }
+        },
+        "letters_a_vulnerable": {
+          "cases": 12,
+          "mean_margin_delta": -0.48437474311018985,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.0004997501249375312,
+            "permutations": 2000,
+            "seed": 68167307554545,
+            "statistic": -0.48437474311018985,
+            "abs_statistic": 0.48437474311018985,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": -0.48437474311018985,
+            "unit": "family_id",
+            "ci95": [
+              -0.8352268827190115,
+              -0.215908845922571
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 276138392564559,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.08333333333333333,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -0.687499535890917
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": -0.2812499503294627
+            }
+          }
+        },
+        "letters_b_vulnerable": {
+          "cases": 12,
+          "mean_margin_delta": -0.2291668325973054,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.06346826586706647,
+            "permutations": 2000,
+            "seed": 213673907267955,
+            "statistic": -0.2291668325973054,
+            "abs_statistic": 0.2291668325973054,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": -0.2291668325973054,
+            "unit": "family_id",
+            "ci95": [
+              -0.4166666860808618,
+              -0.03977307975292206
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 176712666747075,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.25,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -0.5208333572372794
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": 0.06249969204266866
+            }
+          }
+        }
+      },
+      "opposite_direction": {
+        "json_prefill": {
+          "cases": 12,
+          "mean_margin_delta": -0.11984910498138863,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.13993003498250875,
+            "permutations": 2000,
+            "seed": 217828330572873,
+            "statistic": -0.11984910498138863,
+            "abs_statistic": 0.11984910498138863,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": -0.11984910498138863,
+            "unit": "family_id",
+            "ci95": [
+              -0.2500578656299751,
+              -0.00010397060751446673
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 225184043450515,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.4166666666666667,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -0.2500002369286752
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": 0.010302026965897918
+            }
+          }
+        },
+        "letters_a_vulnerable": {
+          "cases": 12,
+          "mean_margin_delta": -0.48437474311018985,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.001999000499750125,
+            "permutations": 2000,
+            "seed": 206551909782550,
+            "statistic": -0.48437474311018985,
+            "abs_statistic": 0.48437474311018985,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": -0.48437474311018985,
+            "unit": "family_id",
+            "ci95": [
+              -0.8295450344364244,
+              -0.21874958972912284
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 26111646292695,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.08333333333333333,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -0.687499535890917
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": -0.2812499503294627
+            }
+          }
+        },
+        "letters_b_vulnerable": {
+          "cases": 12,
+          "mean_margin_delta": -0.2291668325973054,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.0734632683658171,
+            "permutations": 2000,
+            "seed": 150656842188949,
+            "statistic": -0.2291668325973054,
+            "abs_statistic": 0.2291668325973054,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": -0.2291668325973054,
+            "unit": "family_id",
+            "ci95": [
+              -0.41477274172092704,
+              -0.04545469712042673
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 219246550878963,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.25,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -0.5208333572372794
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": 0.06249969204266866
+            }
+          }
+        }
+      },
+      "random-17": {
+        "json_prefill": {
+          "cases": 12,
+          "mean_margin_delta": -0.09912001979144709,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.08445777111444278,
+            "permutations": 2000,
+            "seed": 77428906254318,
+            "statistic": -0.09912001979144709,
+            "abs_statistic": 0.09912001979144709,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": -0.09912001979144709,
+            "unit": "family_id",
+            "ci95": [
+              -0.20459709361369857,
+              -0.010467191295098629
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 75940065127302,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.4166666666666667,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -0.16666630682463315
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": -0.03157373275826103
+            }
+          }
+        },
+        "letters_a_vulnerable": {
+          "cases": 12,
+          "mean_margin_delta": -0.031249973534916837,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.49075462268865566,
+            "permutations": 2000,
+            "seed": 2879935935284,
+            "statistic": -0.031249973534916837,
+            "abs_statistic": 0.031249973534916837,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": -0.031249973534916837,
+            "unit": "family_id",
+            "ci95": [
+              -0.10795463399157267,
+              0.05288471659430518
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 12254396077418,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.3333333333333333,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -0.02083321086441477
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": -0.04166673620541891
+            }
+          }
+        },
+        "letters_b_vulnerable": {
+          "cases": 12,
+          "mean_margin_delta": 0.03124985657632351,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.3963018490754623,
+            "permutations": 2000,
+            "seed": 40588276428685,
+            "statistic": 0.03124985657632351,
+            "abs_statistic": 0.03124985657632351,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": 0.03124985657632351,
+            "unit": "family_id",
+            "ci95": [
+              -0.02840917250988158,
+              0.09090906484899196
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 264634675923466,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.5,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -1.862645149230957e-08
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": 0.06249973177909851
+            }
+          }
+        }
+      },
+      "random-29": {
+        "json_prefill": {
+          "cases": 12,
+          "mean_margin_delta": 0.03565818424234143,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.7521239380309845,
+            "permutations": 2000,
+            "seed": 61207518413082,
+            "statistic": 0.03565818424234143,
+            "abs_statistic": 0.03565818424234143,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": 0.03565818424234143,
+            "unit": "family_id",
+            "ci95": [
+              -0.034163089981765635,
+              0.13272209036131244
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 225970556012491,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.16666666666666666,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": 0.08333302249684493
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": -0.012016654012162084
+            }
+          }
+        },
+        "letters_a_vulnerable": {
+          "cases": 12,
+          "mean_margin_delta": -0.16666664609995982,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.1184407796101949,
+            "permutations": 2000,
+            "seed": 113834569719967,
+            "statistic": -0.16666664609995982,
+            "abs_statistic": 0.16666664609995982,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": -0.16666664609995982,
+            "unit": "family_id",
+            "ci95": [
+              -0.3693180810130963,
+              0.005682063517584042
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 243886254257952,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.16666666666666666,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -0.13541647652164102
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": -0.1979168156782786
+            }
+          }
+        },
+        "letters_b_vulnerable": {
+          "cases": 12,
+          "mean_margin_delta": 0.015624850212285915,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.8765617191404298,
+            "permutations": 2000,
+            "seed": 21846789954275,
+            "statistic": 0.015624850212285915,
+            "abs_statistic": 0.015624850212285915,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": 0.015624850212285915,
+            "unit": "family_id",
+            "ci95": [
+              -0.07954573031006888,
+              0.12499999151120639
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 248177370104430,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.5,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": 0.05208328211059173
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": -0.020833581686019897
+            }
+          }
+        }
+      },
+      "random-43": {
+        "json_prefill": {
+          "cases": 12,
+          "mean_margin_delta": -0.06800979721924705,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.12043978010994502,
+            "permutations": 2000,
+            "seed": 124061919728413,
+            "statistic": -0.06800979721924705,
+            "abs_statistic": 0.06800979721924705,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": -0.06800979721924705,
+            "unit": "family_id",
+            "ci95": [
+              -0.14959648044591478,
+              0.011324004613514014
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 81927878545744,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.25,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -0.10416677282637465
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": -0.03185282161211944
+            }
+          }
+        },
+        "letters_a_vulnerable": {
+          "cases": 12,
+          "mean_margin_delta": -0.09895833775711556,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.12343828085957022,
+            "permutations": 2000,
+            "seed": 161405668349511,
+            "statistic": -0.09895833775711556,
+            "abs_statistic": 0.09895833775711556,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": -0.09895833775711556,
+            "unit": "family_id",
+            "ci95": [
+              -0.20460015188485797,
+              0.00568204581822184
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 58770675792791,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.16666666666666666,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": -0.1145834216537575
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": -0.08333325386047363
+            }
+          }
+        },
+        "letters_b_vulnerable": {
+          "cases": 12,
+          "mean_margin_delta": 0.06770831920827429,
+          "noop_max_absolute_delta": null,
+          "sign_flip": {
+            "p_value": 0.25537231384307846,
+            "permutations": 2000,
+            "seed": 133745718247044,
+            "statistic": 0.06770831920827429,
+            "abs_statistic": 0.06770831920827429,
+            "null": "independent sign flips of the paired per-case differences"
+          },
+          "family_interval": {
+            "difference": 0.06770831920827429,
+            "unit": "family_id",
+            "ci95": [
+              -0.025000151321291925,
+              0.18181828158822927
+            ],
+            "families": 11,
+            "cases": 12,
+            "replicates": 10000,
+            "seed": 130759839579474,
+            "interval": "paired percentile cluster bootstrap over family_id"
+          },
+          "forced_choice_accuracy": 0.5,
+          "per_verdict": {
+            "vulnerable": {
+              "cases": 6,
+              "mean_margin_delta": 0.1562501306956013
+            },
+            "not_vulnerable_for_target": {
+              "cases": 6,
+              "mean_margin_delta": -0.020833492279052734
+            }
+          }
+        }
+      }
+    },
+    "supported_by_controls": false,
+    "no_op": {
+      "max_absolute_margin_delta": 0.0,
+      "tolerance": 1e-05,
+      "passed": true
+    }
+  },
+  "sha256": "6b5f1aeecb57182de26fa66ff75d86420af40c1cf666dddcedd0c238f24417f4"
+}

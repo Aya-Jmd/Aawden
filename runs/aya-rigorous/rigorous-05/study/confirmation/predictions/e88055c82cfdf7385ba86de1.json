@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_da6bf281abc8",
+    "family_id": "rigorous_confirmation_v2_sql_injection_projection_template",
+    "source_id": "rigorous_confirmation_v2_sql_injection_projection_template",
+    "split": "rigorous_confirmation_v2",
+    "category": "sql_injection",
+    "method": "category_route",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "explanation": "The only use of the name is the named bind argument.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "59906e554acd6e009ea0fbc3f40ca41072405192bceab711dcfbd1025f15f9b8",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. The supplemental paths substitute local assignments from the displayed code. They are static expressions, with external values left unknown. Verify any omitted branches or calls against the original source. Use the actual query and bindings, or the guard governing the returned row."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     columns = (\"name\",)\n3 |     target = \"users\"\n4 |     fragment = \"?\"\n5 |     query = \"SELECT {projection} FROM {table} WHERE name = {operand}\".format(\n6 |         projection=\", \".join(columns), table=target, operand=fragment)\n7 |     return conn.cursor().execute(query, (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nStatic return paths\nlookup, line 7, returns conn.cursor().execute('SELECT {projection} FROM {table} WHERE name = {operand}'.format(projection=', '.join(('name',)), table='users', operand='?'), (username,)).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 536,
+    "output_tokens": 56,
+    "finish_reason": "stop",
+    "latency_seconds": 2.666081138999971,
+    "request_id": "c74051ed8ffc79d58e2c081c"
+  },
+  "sha256": "67d1ce0a2e9ea3390f8c51ddc35c0a06bc7eec12e22687bb19dd7539e6cf5fa8"
+}

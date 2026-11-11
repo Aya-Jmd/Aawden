@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_09ddef1f4100",
+    "family_id": "wsp_validation_access_control_owners_add_gate",
+    "source_id": "wsp_validation_access_control_owners_add_gate",
+    "split": "wsp_validation",
+    "category": "access_control",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [3],\n  \"explanation\": \"The function `read_record` allows any authenticated actor to access a record if their `id` is in the `owners` set. This means that even an unauthorized actor, if authenticated, can access records they should not be able to see (as long as their `id` matches a record owner).\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "afc437f0078f8116cfb610b382bc43c07e497c63dd8c4939875642832cba850e",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    owners = {row[\"owner_id\"]}\n    if actor[\"authenticated\"]:\n        owners.add(actor[\"id\"])\n    return row if actor[\"id\"] in owners else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 255,
+    "output_tokens": 110,
+    "finish_reason": "stop",
+    "latency_seconds": 2.698202464999895,
+    "request_id": "bdb071d49d2b8836047d0a81"
+  },
+  "sha256": "7ff0dbcb155f86f52cebd8061ef0a481b146395b6b4bbb4eaa97a3cdf748166c"
+}

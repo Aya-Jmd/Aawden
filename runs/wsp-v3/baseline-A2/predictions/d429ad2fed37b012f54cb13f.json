@@ -1,0 +1,48 @@
+{
+  "record": {
+    "case_id": "c_b711b60ad242",
+    "family_id": "wsp_discovery_sql_injection_percent_template_bind",
+    "source_id": "wsp_discovery_sql_injection_percent_template_bind",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        1
+      ],
+      "explanation": "The function `lookup` constructs an SQL query dynamically using f-string formatting (`%s` placeholder) and user-provided input (`username`). This allows the user to inject malicious SQL code, leading to potential SQL injection vulnerabilities. The use of `?` as a placeholder is not secure, as it does not escape or sanitize the input.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"sql_injection\", \"evidence_lines\":[1], \"explanation\":\"The function `lookup` constructs an SQL query dynamically using f-string formatting (`%s` placeholder) and user-provided input (`username`). This allows the user to inject malicious SQL code, leading to potential SQL injection vulnerabilities. The use of `?` as a placeholder is not secure, as it does not escape or sanitize the input.\", \"confidence\":1}",
+    "prompt_sha256": "2eff5a2d75cff286039f8688b648b6e23f1eae089d4f1c0d1df20e750ae5112f",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    template = \"SELECT name FROM users WHERE name = %s\" % \"?\"\n    return conn.execute(template, (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 214,
+    "output_tokens": 94,
+    "finish_reason": "stop",
+    "latency_seconds": 2.3582045429999994,
+    "request_id": "3e7b2ea083326fb4ce83fe01"
+  },
+  "sha256": "faa6b752e1a4366fc2ad840e0f0eee1cd5127ce5689b8761f8cfa734f05424d8"
+}

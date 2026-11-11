@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_3f7371356dcc",
+    "family_id": "rigorous_confirmation_v4_sql_injection_two_quote_branches",
+    "source_id": "rigorous_confirmation_v4_sql_injection_two_quote_branches",
+    "split": "rigorous_confirmation_v4",
+    "category": "sql_injection",
+    "method": "calibrated",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "explanation": "The name stays bound while the fixed prefix is interpolated.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The name stays bound while the fixed prefix is interpolated.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "268aa720490d11b5d92bbd781849e90c36ab7b0f741f02f3c38aca70608c3707",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     query = \"SELECT name FROM users WHERE name = ?\"\n3 |     args = (username,)\n4 |     if \"'\" in username:\n5 |         if username != \"o'brien\":\n6 |             query, args = query, args\n7 |     return conn.execute(query, args).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 7 when (truthy(\"'\" in username)) and (truthy(username != \"o'brien\")), returns conn.execute('SELECT name FROM users WHERE name = ?', (username,)).fetchall()\nlookup, line 7 when (truthy(\"'\" in username)) and (falsy(username != \"o'brien\")), returns conn.execute('SELECT name FROM users WHERE name = ?', (username,)).fetchall()\nlookup, line 7 when (falsy(\"'\" in username)), returns conn.execute('SELECT name FROM users WHERE name = ?', (username,)).fetchall()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 610,
+    "output_tokens": 55,
+    "finish_reason": "stop",
+    "latency_seconds": 2.6031484859999523,
+    "request_id": "6875e2d12f90f7498726a523"
+  },
+  "sha256": "5fdd310ab3cb54bee977d728f1b65e3697a6a57601681cb56d8f7572b4529d99"
+}

@@ -1,0 +1,50 @@
+{
+  "record": {
+    "case_id": "c_f203c90d8885",
+    "family_id": "wsp_validation_sql_injection_bind_reuse_fstring",
+    "source_id": "wsp_validation_sql_injection_bind_reuse_fstring",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "7b263acbbd732f5a228662d98abed32cdd6256eec966d0a0dbf8e08e92d61103",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     name = username\n3 |     sql = \"SELECT name FROM users WHERE name = :name\"\n4 |     return conn.execute(sql, {\"name\": name}).fetchall()\n</source>\n Cite at most 4 source lines: only the lines that decide the verdict, not the whole file.Give your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 249,
+    "output_tokens": 46,
+    "finish_reason": "stop",
+    "latency_seconds": 1.160846700000036,
+    "request_id": "90687005d8cd2ef4ecac2aeb"
+  },
+  "sha256": "f694d47ddceb3916900316497fd453f664f1b6ce15491430caf9b53d3a74aacc"
+}

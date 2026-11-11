@@ -1,0 +1,134 @@
+{
+  "version": "retrain-v7-recipe-1",
+  "target": "v7",
+  "status": "reconstructed from recorded evidence; retrained weights are not expected to be byte-identical to the recorded hashes",
+  "model": {
+    "config": "configs/model.json",
+    "model_id": "CohereLabs/aya-expanse-8b",
+    "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+    "base_checkpoint_hashes": {
+      "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+      "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+      "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+      "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+      "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+    },
+    "evidence": "configs/model-adapted.json; configs/adapter-review.json"
+  },
+  "lora": {
+    "rank": 16,
+    "alpha": 32,
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+    "scale_alpha_over_rank": 2.0,
+    "evidence": "runs/aya-beam-20261107/adapter-v7/study/protocol.json"
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "weight_decay": 0,
+    "accumulation": 2,
+    "grad_clip_norm": 1.0,
+    "state": "fresh at the start of every stage (no optimizer state is carried between stages)",
+    "evidence": "scripts/train_aya_adapter.py (HEAD: AdamW created after resume); docs/ADAPTER_STUDY.md (resume uses a fresh optimizer)"
+  },
+  "seed": 42,
+  "conditions": ["neutral", "incorrect_suggestion"],
+  "loss": "answer tokens only; verdict-span tokens multiplied by verdict_weight (per stage)",
+  "source": {
+    "fingerprint": "52ec422aec131851e7f0cbeefb861eaf0d7bc4b047b6935eca1e6147a6e077d0",
+    "fingerprint_files": 36,
+    "snapshot_zip": "runs/aya-beam-20261107/adapter-v7-reproduction-source.zip",
+    "snapshot_zip_sha256": "2d4e83fbdaaa9b6082caa1d6f7121a83ebe733c328d37c25295669c771d75428",
+    "note": "The working tree differs from this snapshot (artifacts.py, data.py, prompts.py, adaptation.py). Run the chain from an extracted copy of the snapshot via --source-root.",
+    "evidence": "runs/aya-beam-20261107/adapter-v7/study/protocol.json; adapter-v7/study/development/manifest.json"
+  },
+  "datasets": {
+    "screen.json": {"sha256": "3fedabb747d25b9aa98356a90f102c79a8d1ceb10394a2b5794735be4d55f523", "count": 50},
+    "neutral-confirmation.json": {"sha256": "98ab77d1d91e6f323732605086d6b8531a158663b0b8fcdc095e0f75e86efbeb", "count": 40},
+    "neutral-confirmation-v2.json": {"sha256": "61e6ba846fc2bde433cb3183328f2af801c6886dbf3f3471657053b8a9fdf35e", "count": 40},
+    "neutral-confirmation-v3.json": {"sha256": "5b13a9ae58dde23f5f59d4aa98cb73f7686b6cee1fe77097c38efcbff0b66a39", "count": 20},
+    "neutral-confirmation-v4.json": {"sha256": "8c1f1da04c45b59841c12cda7ee6ac3b9d7f8f6c6494ed958148f88e26216895", "count": 20},
+    "neutral-confirmation-v5.json": {"sha256": "dcab83068fcc14bbeaa130e350a20c6222440a47ccb660b59436d32e6cea0016", "count": 20}
+  },
+  "stages": [
+    {
+      "name": "v5",
+      "resume_from": null,
+      "training_sets": ["screen.json", "neutral-confirmation.json", "neutral-confirmation-v2.json"],
+      "epochs": 4,
+      "learning_rate": 0.0002,
+      "verdict_weight": 20,
+      "trace_prompt": false,
+      "validation": null,
+      "confirmation": "neutral-confirmation-v3.json",
+      "recorded": {
+        "adapter_sha256": "7ff5fdda6ed0f6f8c35e2956f13391f20f79c9a00e36df5889a783e4576fc7bb",
+        "steps": 1040,
+        "outcome": "development 50.0% on the 130 training cases; gate failed, confirmation not run",
+        "evidence": ["runs/aya-beam-20261107/adapter-v5/study/protocol.json", "runs/aya-beam-20261107/adapter-v5/study/training.json", "runs/aya-beam-20261107/adapter-v5/study/outcome.json", "runs/aya-beam-20261107/adapter-v5/beam-result.json", "runs/aya-beam-20261107/adapter-v5/gpu.txt"]
+      }
+    },
+    {
+      "name": "v6",
+      "resume_from": "v5",
+      "training_sets": ["screen.json", "neutral-confirmation.json", "neutral-confirmation-v2.json"],
+      "epochs": 6,
+      "learning_rate": 0.0002,
+      "verdict_weight": 50,
+      "trace_prompt": false,
+      "validation": null,
+      "confirmation": "neutral-confirmation-v3.json",
+      "recorded": {
+        "adapter_sha256": "354c3e4c7dd5cc74eacf6c68d0d6dd553ade814fcde101185333d9b38e821e8c",
+        "steps": 1560,
+        "outcome": "development 92.3% on the 130 training cases; confirmation 70.0% on neutral-confirmation-v3 (20)",
+        "evidence": ["runs/aya-beam-20261107/adapter-v6/study/protocol.json", "runs/aya-beam-20261107/adapter-v6/study/frozen.json", "runs/aya-beam-20261107/adapter-v6/study/outcome.json", "runs/aya-beam-20261107/adapter-v6/study/training.json", "runs/aya-beam-20261107/adapter-v6/gpu.txt"]
+      }
+    },
+    {
+      "name": "v7",
+      "resume_from": "v6",
+      "training_sets": ["screen.json", "neutral-confirmation.json", "neutral-confirmation-v2.json", "neutral-confirmation-v3.json"],
+      "epochs": 3,
+      "learning_rate": 0.0001,
+      "verdict_weight": 10,
+      "trace_prompt": true,
+      "validation": "neutral-confirmation-v4.json",
+      "confirmation": "neutral-confirmation-v5.json",
+      "recorded": {
+        "adapter_sha256": "e86f9475e3c8871ba3c60a63b10704954f66edcb791bd9631866a07d82a9022f",
+        "steps": 900,
+        "outcome": "validation 85.0% on neutral-confirmation-v4 (20); confirmation 90.0% on neutral-confirmation-v5 (20)",
+        "wall_clock": "17 min 23 s on RTX 4090 (Beam task 54b135a6, created 22:44:07Z, ended 23:01:29Z on 2026-11-07)",
+        "evidence": ["runs/aya-beam-20261107/adapter-v7/study/protocol.json", "runs/aya-beam-20261107/adapter-v7/study/frozen.json", "runs/aya-beam-20261107/adapter-v7/study/outcome.json", "runs/aya-beam-20261107/adapter-v7/study/development/summary.json", "runs/aya-beam-20261107/adapter-v7/study/confirmation/summary.json", "runs/aya-beam-20261107/recovered-get_task.json", "runs/aya-beam-20261107/recovered-logs.json", "docs/VALIDATION.md"]
+      }
+    }
+  ],
+  "shortcut": {
+    "name": "v7-shortcut",
+    "deviation": true,
+    "description": "Trains the v7 recipe from the base model on the same 150 training cases, skipping the v5 and v6 lineage. Its weights are NOT the v7 lineage; its quality is unmeasured; its validation and confirmation sets were already exposed by the recorded v7 study.",
+    "stage": {
+      "name": "v7-shortcut",
+      "resume_from": null,
+      "training_sets": ["screen.json", "neutral-confirmation.json", "neutral-confirmation-v2.json", "neutral-confirmation-v3.json"],
+      "epochs": 3,
+      "learning_rate": 0.0001,
+      "verdict_weight": 10,
+      "trace_prompt": true,
+      "validation": "neutral-confirmation-v4.json",
+      "confirmation": "neutral-confirmation-v5.json"
+    }
+  },
+  "gpu_estimate": {
+    "gpu": "RTX4090",
+    "beam_hourly_usd_all_in": 1.70304,
+    "beam_hourly_basis": "configs/beam.json: RTX4090 0.69 + 2 vCPU x 0.18972 + 32 GiB x 0.0198",
+    "setup_seconds": 311,
+    "step_seconds": 0.5627,
+    "post_seconds": 120,
+    "eval_seconds_per_case": 2.5,
+    "derivation": "step_seconds: Beam log of task 54b135a6, steps 525 to 900 (22:54:13.751Z to 22:57:44.747Z, 375 steps in 211 s). eval_seconds_per_case: v7 development 50.8 s / 20 cases and confirmation 49.8 s / 20 cases, rounded up; v5 and v6 development on 130 cases took 304.8 s and 289.3 s (2.2 to 2.3 s per case). setup_seconds and post_seconds are INFERRED: 17 min 23 s task time (recovered-get_task.json) minus 900 steps, two evaluations and the logged end of evaluation. They are not logged directly. Estimates are for RTX 4090 only.",
+    "timeout_cap_seconds": 2100,
+    "check": "v7 wall clock estimate ~1038 s vs recorded 1043 s (17 min 23 s); v5 ~1016 s and v6 ~1309 s are estimates with no recorded wall clock"
+  }
+}

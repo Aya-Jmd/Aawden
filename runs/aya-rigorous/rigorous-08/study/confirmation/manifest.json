@@ -1,0 +1,142 @@
+{
+  "run_id": "1797b69de5c8dd52",
+  "parent_run": null,
+  "identity_sha256": "1797b69de5c8dd52ed1319a4ebb5920c0103ec67d4cd04709a6cc6da215e1ae4",
+  "identity": {
+    "protocol": {
+      "development": {
+        "path": "datasets/rigorous-development.json",
+        "sha256": "2428b09b4c032521fb0899ef7fa0e6ba6023db213bfc5ea036c917f5057b4e9c",
+        "count": 16
+      },
+      "regression": {
+        "path": "datasets/neutral-confirmation-v5.json",
+        "sha256": "dcab83068fcc14bbeaa130e350a20c6222440a47ccb660b59436d32e6cea0016",
+        "count": 20
+      },
+      "adapter_sha256": "e458a1b0fbc005de188e8284ec1bfff948a25db7fdb16be5173dafd6eb0fedda",
+      "target_accuracy": 1.0,
+      "prompt_version": "aawden-rigorous-review-v6",
+      "variants": [
+        "policy",
+        "scenarios"
+      ],
+      "minimum_dev_accuracy": 0.88,
+      "confirmation": {
+        "path": "datasets/rigorous-confirmation-v3.json",
+        "sha256": "50566f16c245b0172d64463b3fdf271f9f43b1b2684008f3bbc2162e74895d64",
+        "count": 32
+      },
+      "route_by_category": true
+    },
+    "source": "fa44e046f32c3c50bd2afe93745aaa15b6ce05f4e525fddf498e91503cc51bc5",
+    "dataset": "f3213a955d369db97bae9cfb826d7b39dd7025f549b8fc0f897fe8d6dccff90f",
+    "variants": [
+      "category_route"
+    ]
+  },
+  "stage": "adapter_prompt_review",
+  "status": "completed",
+  "evidence_kind": "cohere_local_checkpoint",
+  "created_at": "2026-11-09T13:02:23.742325+00:00",
+  "environment": {
+    "python": "3.11.11",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+    "packages": {
+      "torch": {
+        "version": "2.9.1+cu128",
+        "direct_url": null
+      },
+      "transformers": {
+        "version": "5.22.1",
+        "direct_url": null
+      },
+      "transformer-lens": {
+        "version": "3.8.0",
+        "direct_url": null
+      },
+      "circuitkit": {
+        "version": "0.2.0",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+            "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+          }
+        }
+      },
+      "auditkit": {
+        "version": "1.1.3",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+            "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+          }
+        }
+      },
+      "safetensors": {
+        "version": "0.8.0",
+        "direct_url": null
+      }
+    },
+    "code_commit": null,
+    "code_sha256": "fa44e046f32c3c50bd2afe93745aaa15b6ce05f4e525fddf498e91503cc51bc5",
+    "dependency_lock_hashes": {
+      "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597"
+    }
+  },
+  "failure_reason": null,
+  "attempts": [
+    {
+      "status": "completed",
+      "started_at": "2026-11-09T13:02:23.762589+00:00",
+      "ended_at": "2026-11-09T13:03:44.690536+00:00"
+    }
+  ],
+  "started_at": "2026-11-09T13:02:23.762589+00:00",
+  "model_sha256_by_arm": {
+    "Aya": "6f45b9646bd39e4def42159f36df04f9c0dd38ca0676bd4e8cb042147f93157b"
+  },
+  "completed_at": "2026-11-09T13:03:44.690536+00:00",
+  "artifact_hashes": {
+    "results.json": "4cd64d5e6e189a02c0ab4c630e20c81b1aacddd135ad7d9f456eb5caec4e4cda",
+    "summary.json": "ea177acfe15dbf875a6f00c190b217d9dbf703b56cada5d44225d4600d7dfd30",
+    "auditkit.json": "ed831b4a256d48b8031f121670bf59395e248d619e88d9025d1e278c759ad8dd",
+    "predictions/012042dc60211be45c0c93c0.json": "97c6214ead0827fcc4c2a6adb726fa8cf932ad8910efeed6ac59d00129fec9a5",
+    "predictions/3752651fa677c43b4f4971d7.json": "d2d37621106ceb9c1499f4d7eb74f2d82de3be038587e3648f830504aaeaed44",
+    "predictions/c1f4115b73f82392b3f443f1.json": "6c8147ee6b4333fc7b264d8ed259a55833c7e237c593dc0a4bd2c3c4b6d1308c",
+    "predictions/1b6d4dae0c565f877bafc67a.json": "a5910ced3fa43bcda83aa36345dfdd916033cc4fc4358bab4cf5850c76033c68",
+    "predictions/39f7b33caea8c5749f7d47f0.json": "68afb39c74d1ba6873967343dafeb041720d8666accf624e1ac4a80158a23e85",
+    "predictions/48be4becc3c6eab552e40ce2.json": "fcbedb374d6076d93557246aaf241e378c289b2bc5841334f992cf47efd77943",
+    "predictions/722dddbb314869817cf430d4.json": "5ff7918612195bed919a891ae87e640ee81658c20d059ce949d6475860e3adb1",
+    "predictions/120dfdc4c6a9fa509b705129.json": "9212f158049f0e49bcb70dddb346ad6658182545cab7a8d8466229772befabe1",
+    "predictions/204ff32653ebd020943a2f39.json": "d7015064209abe6ec6eb95fe4c2907a4ca565f0d00c949f88576883f43bbf7e1",
+    "predictions/80cfd759eefc7a5340520612.json": "f71fb1d6ead17706c88fb6e6f7208423c7538284d6c363ebcc33ab1d017c3c19",
+    "predictions/9a7ed4a3d4c9d6c4b4673fa1.json": "edbab6dc3be5d5757f143b7f6ae43c7427fd42c90ff5a3ba3902cf812fb2b291",
+    "predictions/d0e1e6f3045d3d273bc13a48.json": "45a45b0d9109f650cc9f591203cbacd971acad0495c22f4babc387f85ff3c28f",
+    "predictions/f8f0013779cd4940365e17c9.json": "187faf05d0bb53731effbc7408aaf1e3c0f6e065412234951f2437749bc326e9",
+    "predictions/d87c568b8f00bfb001d685a4.json": "b55767946345e43bfe3ffeb835835a905a309a2229498545b06362b4df35283e",
+    "predictions/5a86dad704f1c752d8791550.json": "10fa7fececb458e0fffef5b201c772328fd1b95974da70db257154c2223aa6fb",
+    "predictions/7aa3fd0f50066cfe7390ae7f.json": "1c922b58eae9bfcdad3c7343e9593ee2e57c4e92b0b27541808bf955ff46f951",
+    "predictions/82ee9d3174140dcf087afdd2.json": "a0a1b5ddb91dfae35036a146f3489d668bfd5ce78c5602a499fe6757a36ab114",
+    "predictions/d97323b8d7c08ac5319728d6.json": "be7decfffc752b79889710d52c34d743c63cf7863085f3533b4cd18a79e13642",
+    "predictions/0cf30e2ea266715a4e60f5d9.json": "fd9780c8d71c4c4a8476488a03b7882a82bc1462bb9d2ccbce53d311aee8fbbe",
+    "predictions/b7c574f02832328ad744d192.json": "41622252ed66a7e6d3acb3277660132d80ddeffcf1b31055b55bf55ed00afccd",
+    "predictions/e0e76e471954c01125c07685.json": "050a3f9471124ef564b7a2b0539584fc68186158d254218b7364634f2cc97c3c",
+    "predictions/3e1e26ad9c9d9ee2fc95ebce.json": "4b8b4ee93340c1a1494f3158c5eb014e9f6235b306bf54549de21d33b21b5977",
+    "predictions/3a27ee976a8dce256d12c39f.json": "05c4d50f48efcf681e00d7457c10f9a8f526df4e469ef9fcbdc798b6ee55d199",
+    "predictions/94df8e54ec195c18db2461b2.json": "338da98f621c9c6e93ab2f11bf6bc8dc6372968f027f7b703f251f39837ddc24",
+    "predictions/52e931b12c0a9414ce85ca4f.json": "a9be3675f61c9f81545432231b973c88f92b8b7c6499fe18b8a27c6cf0033c6d",
+    "predictions/4c19a89e3c29e02fb866ddf5.json": "4fb01820e665993355c05d3212746dc721c58c8c7197a03b0e772ec293d59bcd",
+    "predictions/49d6f5947315b2130c4f739d.json": "46d66c9e89ae1a6545f7ab61187314731a317e07588f62979019471d6bc802bd",
+    "predictions/4acc86af43a6515bea7b00df.json": "b312b70e2f36adcf9d9b7314725e1334a71f943228539b40c9ca62db3210ffa1",
+    "predictions/40ef8794e398489ec71c568d.json": "5ce44f5f6562b5f24ae6d96f314203d719996125d8784e9d9aff18c1f968d207",
+    "predictions/ba876498ee5b9c5f129e68dd.json": "e775f7d545a4df708bba77b4ea62af2a6d1d6286dfe157626bfa174bd46094d0",
+    "predictions/68c97540eee9bdbd94b42680.json": "e58865e95034bc8c9db832f81ac4d1db0e4eee268aa71b463163d26addde99b8",
+    "predictions/da6d4f2c2bb082ca5cd01504.json": "f28bc3745ecef27f6e90041d9c30df8a8a947da5f8c6e1731db080cf0138c71a"
+  },
+  "expected_predictions": 32
+}

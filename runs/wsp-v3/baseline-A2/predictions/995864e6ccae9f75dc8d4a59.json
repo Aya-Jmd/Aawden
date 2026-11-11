@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_a93300c8cd2d",
+    "family_id": "wsp_discovery_sql_injection_where_clause_builder",
+    "source_id": "wsp_discovery_sql_injection_where_clause_builder",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting ',' delimiter: line 1 column 187 (char 186)",
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"sql_injection\", \"evidence_lines\":[1,2,3,4,5], \"explanation\":\"The function `lookup` constructs SQL queries dynamically using string concatenation (`\" + ... \"`). This allows an attacker to inject malicious SQL code into the `username` parameter, potentially bypassing access controls and retrieving unauthorized data. The lack of parameterization or prepared statements makes this implementation vulnerable to SQL injection (L10 of the provided code).\", \"confidence\":1}",
+    "prompt_sha256": "ef31813a53743e2301f3a3a519e51de0e3c8ff6f504be43e2f2c2463ddcd266c",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    clauses = []\n    params = []\n    clauses.append(f\"name = '{username}'\")\n    params.extend([])\n    return conn.execute(\"SELECT name FROM users WHERE \" + \" AND \".join(clauses), params).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 234,
+    "output_tokens": 102,
+    "finish_reason": "stop",
+    "latency_seconds": 2.603512052000042,
+    "request_id": "f13552c25afe49a8a02ee048"
+  },
+  "sha256": "e23ff68f370c824e41be3957be23dcd6b1a2cede76dcc0b4987a162bfbfed039"
+}

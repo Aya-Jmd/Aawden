@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_e92f25ce66b9",
+    "family_id": "wsp_discovery_access_control_helper_visibility",
+    "source_id": "wsp_discovery_access_control_helper_visibility",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        3,
+        4
+      ],
+      "explanation": "The function `read_record` allows access to a record based on visibility and tenant/role membership, but does not enforce fine-grained access control for each record. An attacker could potentially access a record owned by another user if they know the `record_id` and can manipulate the `actor` data, as the function only checks `owner_id` and `tenant_id`/`role` for visibility. This violates the threat model's requirement that only the owner of the requested record may receive it.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"access_control\", \"evidence_lines\":[3,4], \"explanation\":\"The function `read_record` allows access to a record based on visibility and tenant/role membership, but does not enforce fine-grained access control for each record. An attacker could potentially access a record owned by another user if they know the `record_id` and can manipulate the `actor` data, as the function only checks `owner_id` and `tenant_id`/`role` for visibility. This violates the threat model's requirement that only the owner of the requested record may receive it.\", \"confidence\":1}",
+    "prompt_sha256": "df76206101b468a6eecf074533bbd13172039b02204e6c772c38d6d0fded26fd",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    def visible(item):\n        return item[\"owner_id\"] == actor[\"id\"]\n    row = records.get(record_id)\n    if row is None:\n        return None\n    return row if visible(row) or row[\"tenant_id\"] == actor[\"tenant_id\"] and actor[\"role\"] == \"member\" else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 274,
+    "output_tokens": 131,
+    "finish_reason": "stop",
+    "latency_seconds": 3.1602606409999225,
+    "request_id": "dff5325a5227464be3d09aae"
+  },
+  "sha256": "3f4cf8aef90af82736f7fd6e23857cd1edd5eb02175beb688162c298562a0664"
+}

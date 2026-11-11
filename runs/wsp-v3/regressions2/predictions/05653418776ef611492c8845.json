@@ -1,0 +1,26 @@
+{
+  "record": {
+    "case_id": "wsp-coding-31",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ndef gen():\n    yield 1\n    yield 2\n    return 3\n\ng = gen()\nresult = list(g) + [next(g, 'done')]\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "8881e76c9ae7e5e8486e9137",
+    "storage_id": "05653418776ef611492c8845",
+    "raw_output": "```json\n{\n  \"answer\": [1, 2, 3, 'done']\n}\n```\n\n**Explanation:**\n\n1. **`gen()` function:** This function uses `yield` statements to generate values. It yields 1, then 2, and finally returns 3 when the iterator is exhausted.\n\n2. **`g = gen()`:**  We create an iterator `g` by calling the `gen()` function.\n\n3. **`result = list(g) + [next(g, 'done')]`:**\n   - `list(g)`: Converts the iterator `g` into a list, `[1, 2]`.\n   - `next(g, 'done')`:  Attempts to get the next item from the iterator `g`. Since it's exhausted, it raises a `StopIteration` exception. We catch this exception and use the value `'done'` as the replacement.\n   - The list and the 'done' value are concatenated, resulting in the final list: `[1, 2, 3, 'done']`.",
+    "input_tokens": 93,
+    "output_tokens": 225,
+    "latency_seconds": 5.5610698119999995,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": "No JSON object in the response"
+  },
+  "sha256": "56a346bf5fc4e666efb8447d57736ef798db44293798d337029faebdf6aa69ef"
+}

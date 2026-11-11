@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_4d731f66abaa",
+    "family_id": "wsp_validation_access_control_lambda_checks",
+    "source_id": "wsp_validation_access_control_lambda_checks",
+    "split": "wsp_validation",
+    "category": "access_control",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [3],\n  \"explanation\": \"The function `read_record` allows any caller to specify `record_id` and retrieve a record if the actor is the owner or part of the same tenant. This introduces a potential vulnerability as an attacker could manipulate `record_id` to access records they are not authorized to see, even if they do not own the record or are not part of its tenant.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "8051922c9a102f9213d6caa8118f067968f0c70cc475e5fd794f6d09e5c03362",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    checks = {\"owner\": lambda: row[\"owner_id\"] == actor[\"id\"], \"tenant\": lambda: row[\"tenant_id\"] == actor[\"tenant_id\"]}\n    return row if checks[\"owner\"]() or checks[\"tenant\"]() else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 272,
+    "output_tokens": 122,
+    "finish_reason": "stop",
+    "latency_seconds": 2.9474268330000086,
+    "request_id": "371e2487cffb4432395b2bb5"
+  },
+  "sha256": "68e1b755683bb90248b172c3556584f58cbbdbd22b78bf8a872fcc6627808e58"
+}

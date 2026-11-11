@@ -1,0 +1,26 @@
+{
+  "record": {
+    "case_id": "wsp-coding-11",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = 1 << 4 >> 2\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "52baec8df665a26e11001bd8",
+    "storage_id": "2c646c33dd32e84e6574f3f9",
+    "raw_output": "```json\n{\n  \"answer\": 8\n}\n```\n\nHere's the breakdown:\n\n* `1 << 4` shifts the binary representation of 1 (0001) four places to the left, resulting in 1000 (16 in decimal).\n* `1000 >> 2` shifts the binary representation of 1000 (16) two places to the right, resulting in 0010 (2 in decimal).",
+    "input_tokens": 66,
+    "output_tokens": 106,
+    "latency_seconds": 2.626724092999993,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  "sha256": "e7ffdf2442c2be252cde99dfd075e8b0cb9b2fdc63cc99150acd0b93ec448424"
+}

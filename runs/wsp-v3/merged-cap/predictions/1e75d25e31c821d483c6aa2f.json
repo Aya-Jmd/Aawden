@@ -1,0 +1,50 @@
+{
+  "record": {
+    "case_id": "c_b700b19582b8",
+    "family_id": "wsp_discovery_sql_injection_quote_count_guard",
+    "source_id": "wsp_discovery_sql_injection_quote_count_guard",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "00b4c817a954e31ad64efa01fe4850af239d18f5aa61dd23eed2cc42238bae04",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     mode = username.count(\"'\")\n3 |     query = f\"SELECT name FROM users WHERE name = '{username}'\" if mode else \"SELECT name FROM users WHERE name = ?\"\n4 |     return conn.execute(query, () if mode else (username,)).fetchall()\n</source>\n Cite at most 4 source lines: only the lines that decide the verdict, not the whole file.Give your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 271,
+    "output_tokens": 39,
+    "finish_reason": "stop",
+    "latency_seconds": 0.989397131000004,
+    "request_id": "eca46e171abc1b428fb15414"
+  },
+  "sha256": "132f1fb57f96b85686700a100292e8534e8e739d75290770a604e828ffc33ab7"
+}

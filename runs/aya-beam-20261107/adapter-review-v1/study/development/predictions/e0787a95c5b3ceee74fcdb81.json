@@ -1,0 +1,46 @@
+{
+  "record": {
+    "case_id": "c_1255dc08a5b7",
+    "family_id": "confirmation_v3_sql_injection_identity_expression",
+    "source_id": "confirmation_v3_sql_injection_identity_expression",
+    "split": "neutral_confirmation_v3",
+    "category": "sql_injection",
+    "method": "contrasts",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Untrusted input can change the SQL syntax.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL syntax.\",\"confidence\":0.9}",
+    "prompt_sha256": "a93702650776dc22785f9ab30c4acfd805616bee756d3cb8134ebb09904208b3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. A bound value used with a query placeholder cannot inject SQL and is not_vulnerable_for_target. A raw name pasted directly into SQL quotes can close the string and is vulnerable."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.\n<source>\n1 | def lookup(conn, username):\n2 |     expr = f\"name = '{username}'\"\n3 |     stmt = \"SELECT name FROM users WHERE (\" + expr + \") AND 1\"\n4 |     return conn.execute(stmt).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 345,
+    "output_tokens": 41,
+    "finish_reason": "stop",
+    "latency_seconds": 2.0269662069999868,
+    "request_id": "da27b39ced6c9eee3e6ce2a5"
+  },
+  "sha256": "fc27ddedbb9f86333c00e75b6cec1f7d758cee676b15862e32917c91f0ae1d0e"
+}

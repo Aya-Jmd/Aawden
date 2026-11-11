@@ -1,0 +1,164 @@
+{
+  "run_id": "eff641192c312351",
+  "parent_run": null,
+  "identity_sha256": "eff641192c312351ea93e387e62720c4ef363607b54167c27b3465a11bc3dafa",
+  "identity": {
+    "protocol": {
+      "adapter_sha256": "e458a1b0fbc005de188e8284ec1bfff948a25db7fdb16be5173dafd6eb0fedda",
+      "target_accuracy": 1.0,
+      "minimum_dev_accuracy": 0.88,
+      "development": {
+        "path": "datasets/rigorous-development.json",
+        "sha256": "2428b09b4c032521fb0899ef7fa0e6ba6023db213bfc5ea036c917f5057b4e9c",
+        "count": 16
+      },
+      "regression": {
+        "path": "datasets/neutral-confirmation-v5.json",
+        "sha256": "dcab83068fcc14bbeaa130e350a20c6222440a47ccb660b59436d32e6cea0016",
+        "count": 20
+      },
+      "prompt_version": "aawden-rigorous-review-v8",
+      "variants": [
+        "policy",
+        "compact"
+      ],
+      "route_by_category": true,
+      "confirmation": {
+        "path": "datasets/rigorous-confirmation-v5.json",
+        "sha256": "f7a7ba5db2e1a1b89bb758e7629898fbd9d73c8ef594cf33790d241c4712ee00",
+        "count": 32
+      },
+      "confirmation_scope": "Python snippets with a single function and supported local assignments, conditional branches and returns",
+      "training": {
+        "exposed": {
+          "path": "datasets/rigorous-confirmation-v3.json",
+          "sha256": "50566f16c245b0172d64463b3fdf271f9f43b1b2684008f3bbc2162e74895d64",
+          "count": 32
+        },
+        "replay": {
+          "path": "datasets/rigorous-confirmation-v4.json",
+          "sha256": "c2b2e09e3288a4214b6920520923e3558894fcd01b2d4eb0b89bf73b9d056fdc",
+          "count": 32
+        },
+        "training_variants": [
+          "compact",
+          "scenarios"
+        ],
+        "before_validation": true,
+        "learning_rate": 6e-05,
+        "epochs": 2,
+        "verdict_weight": 4,
+        "seed": 137
+      }
+    },
+    "source": "be925005fa9e2293873b3a1f714557d753d1adbab54b26449d986da0e2128e58",
+    "dataset": "bd9f43b08a7e8efd6f4916abce78e440ea38360b52e039aa4beb95ba3846d0e6",
+    "variants": [
+      "category_route"
+    ]
+  },
+  "stage": "adapter_prompt_review",
+  "status": "completed",
+  "evidence_kind": "cohere_local_checkpoint",
+  "created_at": "2026-11-09T14:02:22.148279+00:00",
+  "environment": {
+    "python": "3.11.11",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+    "packages": {
+      "torch": {
+        "version": "2.9.1+cu128",
+        "direct_url": null
+      },
+      "transformers": {
+        "version": "5.22.1",
+        "direct_url": null
+      },
+      "transformer-lens": {
+        "version": "3.8.0",
+        "direct_url": null
+      },
+      "circuitkit": {
+        "version": "0.2.0",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+            "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+          }
+        }
+      },
+      "auditkit": {
+        "version": "1.1.3",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+            "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+          }
+        }
+      },
+      "safetensors": {
+        "version": "0.8.0",
+        "direct_url": null
+      }
+    },
+    "code_commit": null,
+    "code_sha256": "be925005fa9e2293873b3a1f714557d753d1adbab54b26449d986da0e2128e58",
+    "dependency_lock_hashes": {
+      "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597"
+    }
+  },
+  "failure_reason": null,
+  "attempts": [
+    {
+      "status": "completed",
+      "started_at": "2026-11-09T14:02:22.164117+00:00",
+      "ended_at": "2026-11-09T14:03:42.140870+00:00"
+    }
+  ],
+  "started_at": "2026-11-09T14:02:22.164117+00:00",
+  "model_sha256_by_arm": {
+    "Aya": "2ec4e100af697e0201952e1217a1beebb2c20a3a041a912ea00a62d5c00773b2"
+  },
+  "completed_at": "2026-11-09T14:03:42.140870+00:00",
+  "artifact_hashes": {
+    "results.json": "3e46bfde794146000fc40cec48e2a536ffb498c7142393ecd9d798e84d62380d",
+    "summary.json": "0fc3509fbb801e4831e14612a38034b4d8fc634034c7e3e8afa987d1678c4f60",
+    "auditkit.json": "6df372c8cebdf0ada847c44d44ea7ce70be478dceea787e7615c090b8dde05a5",
+    "predictions/ee61516aff178689b1b82316.json": "7460f0b45057d8bc84eb3b52cc3d454d6ab3032941e2de9ae6c486d93fecc08b",
+    "predictions/d8cddabe57439029dfee354e.json": "72939ed76767febc9857de6868f9748f4b000619331372e62b6f39a0f3810cd8",
+    "predictions/e9eb588cb0ed250be5f1796e.json": "d232373405da1c9739cbdc87e5cd67982b4f9db9de18ecb37ccdf76d60613baa",
+    "predictions/34e52b3b5994c62c9a982aaa.json": "da8b9d90b7bbf189a3ad54f125d29c6f6ca9acf198f5399a979adbb3934abee0",
+    "predictions/f5461ed4c17754f38ee18f07.json": "57444f05388194977c60e2d8a86634c5969d71ff3b5e1361e27ccb5d4739f0ec",
+    "predictions/3f2d43d23ea5bb0d6266b803.json": "80cd9b4a4db73c49dc44944faff012bce974d48fe0dec353bfbbec3ff5a1875a",
+    "predictions/3068876f053badac5ab88328.json": "986cbdab67fca6c56fc5df89acc8f474f549b7637f54ab6a8f89799ea0a7dc9a",
+    "predictions/6f1d87f84be41cb298c9a2de.json": "6eeb567ee6e6e24887ef8facf1c5c9d5f6762d57ecaa1cc960961ed114b550a2",
+    "predictions/2afc1a7453e2603bcc855828.json": "910ad37f4fda112e4c138237e7e44dbb08201341b3a3686443541a5c183b654f",
+    "predictions/d084ca532053a53ee5c30641.json": "788d2992bae2a06ca5faec6da9b9f1d1f200428676d0af80ecd261849412d478",
+    "predictions/4a560ce56e02bd5e537c2439.json": "d749e479ea38d70a754dbb380d0f1deb4f0784af2e20618b24f96a02b16e4c0e",
+    "predictions/b40523024aee085449ed3d27.json": "15db13feeb464d343e9342e59cacd9bdb8cc988d15be47a3392058bd5594e6f0",
+    "predictions/cb21409097ce461b89d4c5f3.json": "e44cc5c48db2a986e1b9661791e2d34f83afd0ccf948e681c9f563ebbfac4737",
+    "predictions/615d2c557567290abdc08ca3.json": "1156f08f081ec2b7e68ab453286c1b3e743e82f0ab4ff61b76d4f18727c083c4",
+    "predictions/3789efb93c17785de0002dc8.json": "e3f9fa4d189cf431d19a2589cae39a03d6d13bc0dc6776cc8100b946edb01d5d",
+    "predictions/e8f462bc4e0cdedd3e112897.json": "50a3270d30de6269296ff0356b3b29a0e49096dde9718f38d0121f44bd7a368b",
+    "predictions/aecbc164c2dba6df0d5f9f41.json": "ab6790d72cc96e41539330f43baeda9b2b846ec454f601591dec91535b146a5a",
+    "predictions/7889844a08bbe3e8dadb8734.json": "98d896bcd3f61e54eaf607e62817c7b422f5c7cb2cde39458df1edc23dc53f07",
+    "predictions/53bfeacbecef0abc9466bdda.json": "b953f4c6e3ec4e822d9161139ff38b769fc6024bd3ca19f01a250cc6d11cf524",
+    "predictions/0024b3a9a664bf23768300d9.json": "67d6367c921f9c7f11790db4fef2a37935be92701576a99a16a954b77e02a7e8",
+    "predictions/7304d41f4b915d8e9af79b1d.json": "6e6fcae16ecb363e59fe8c14b9a9e1740ae9d582274ebfb0a9640b02ecb04223",
+    "predictions/e2b0e3df85763f576308109e.json": "439772ceaba2b6c74652d276f3e48ac303a2ceae8660a2148acc02fc2de427c7",
+    "predictions/2da8375669f79b73313bad51.json": "9ef925e81224d1e232afe1da1fc4e1c578448811205cf705c229ae1766d98bb9",
+    "predictions/a7ce8315375f29c350b6821b.json": "6bd0bd067a2b211513a2d63ff317dfaf0aa04bbc115c5a3d007e9a0f9021df76",
+    "predictions/a0ce8f469a98dd7e9df0f3b3.json": "fd4d955a852948d746a0d4c17b93f776d775e7c01d80da06aa18703f6d6b3dd5",
+    "predictions/c159c5bf9e6900d14514668e.json": "a9b2fef63ce0a79ddd86bf11a926f1a204da3123ed8d36ad28090b7291f059c0",
+    "predictions/aa55d6cbc2ab4e0218565111.json": "23b9206237f22131353f3d5fb63b697edbee7b92e6bd9dcdd136141d29db00b1",
+    "predictions/bba08b1982bd4db67de6ec6c.json": "e2161b1873333e41916be8d7d6a056d25fcd68702eb33481444450621956b79c",
+    "predictions/1b25bd918ae160d662488376.json": "b44470b4324a109b816281f6c7859cae5e14c1e0251ed9a16b8ea559cb34d612",
+    "predictions/1c7b41cfcd04d489c66d4403.json": "0db977e8be54cb9e7dd8fe6e36b9a5b15758797b54c6bfd6165cf27819efc26f",
+    "predictions/a343b91cc216cff06d5c3be1.json": "9cea675aa2e2f78f3dfb1818f2b72fae41e88b85decd6ae87d97879cea2c4e4f",
+    "predictions/5eda459d37773e4b3b169d0f.json": "6e69b2aef1451d07d53cb12fd069ba2e1e38863be573d210ea8cb3a29476196d"
+  },
+  "expected_predictions": 32
+}

@@ -1,0 +1,48 @@
+{
+  "record": {
+    "case_id": "c_00f24313b92f",
+    "family_id": "wsp_discovery_sql_injection_escape_map_bound",
+    "source_id": "wsp_discovery_sql_injection_escape_map_bound",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2
+      ],
+      "explanation": "The function `lookup` constructs an SQL query dynamically using the user-provided `username` and the `safe` variable. Since the `safe` variable is constructed by joining escaped characters from `username`, it does not fully prevent SQL injection. An attacker can manipulate the `username` to include malicious SQL code, which will be executed when the query is run. For example, using `' OR '1'='1` as the `username` will bypass the escape mechanism and trigger an unauthorized database access.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"sql_injection\", \"evidence_lines\":[2], \"explanation\":\"The function `lookup` constructs an SQL query dynamically using the user-provided `username` and the `safe` variable. Since the `safe` variable is constructed by joining escaped characters from `username`, it does not fully prevent SQL injection. An attacker can manipulate the `username` to include malicious SQL code, which will be executed when the query is run. For example, using `' OR '1'='1` as the `username` will bypass the escape mechanism and trigger an unauthorized database access.\", \"confidence\":1}",
+    "prompt_sha256": "d1ba1dab635fc0fd2e5d7ccf4d57ee2b81465425e3bdec7ad1560f66c9dad197",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    escapes = {\"'\": \"''\"}\n    safe = \"\".join(escapes.get(ch, ch) for ch in username)\n    return conn.execute(\"SELECT name FROM users WHERE name = ?\", (safe.replace(\"''\", \"'\"),)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 238,
+    "output_tokens": 128,
+    "finish_reason": "stop",
+    "latency_seconds": 3.1225728150000123,
+    "request_id": "1039520c6eda0a0bd84d8c72"
+  },
+  "sha256": "ab10444464700c8233ba130ca4fa22407a5fcbebba2be782394609a544b8d368"
+}

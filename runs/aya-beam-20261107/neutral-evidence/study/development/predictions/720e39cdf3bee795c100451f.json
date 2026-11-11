@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_ca66eae29ad0",
+    "family_id": "access_control_scoped_map",
+    "source_id": "access_control_scoped_map",
+    "split": "screen",
+    "category": "access_control",
+    "method": "prefill",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expected exactly the five response fields",
+    "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The code checks if the `record_id` exists in the `visible` dictionary, which is a subset of `records` containing only records owned by the `actor`. However, there is no explicit check to ensure that the `actor` is authorized to access the specific `record_id` (line 3).\",\"decisive_check\":\"Missing check for actor authorization for the specific `record_id`.\",\"evidence_lines\":[2,3],\"verdict\":\"vulnerable\",\"confidence\":1}",
+    "prompt_sha256": "ab1d6c834f1367d03a7cae11ffdda465bfa06fa0c8f2e666f1787846c9d54bce",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review only the named weakness under the stated threat model. Judge the behavior of the shown source. The answer already starts inside the explanation string of a JSON object. Continue that string with one short sentence about the decisive check or missing check. Use plain words without quotes or backslashes. Close the string, then add evidence_lines (a list of the displayed source line numbers), verdict (one of vulnerable, not_vulnerable_for_target, insufficient_information), and confidence (a number from 0 to 1). Close the object. Give only the continuation of the JSON, with no Markdown."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records is a trusted server-side dictionary; record_id is attacker-controlled; actor comes from a trusted authenticated session. Only the owner may read a record. Sharing a tenant or being logged in alone does not authorize a read. Missing records must return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     visible = {key: record for key, record in records.items() if record[\"owner_id\"] == actor[\"id\"]}\n3 |     return visible.get(record_id)\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"category\":\"access_control\",\"explanation\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 285,
+    "output_tokens": 105,
+    "finish_reason": "stop",
+    "latency_seconds": 2.503980417999969,
+    "request_id": "dd3f528f996167ba645b1af6"
+  },
+  "sha256": "826291faba038a989207c26a3d82dd59071f0d6947ad881f6f54ef9db726fb38"
+}

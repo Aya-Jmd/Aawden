@@ -1,0 +1,303 @@
+{
+  "model": {
+    "adapter": "huggingface",
+    "model_id": "CohereLabs/aya-expanse-8b",
+    "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+    "dtype": "torch.bfloat16",
+    "device": "cuda:0",
+    "decoding": {
+      "do_sample": false,
+      "max_new_tokens": 256
+    },
+    "tokenizer_sha256": "beb3ef2cb916cf53d01655d46cf9bfbb1dcfbded9f3ef4c6a298ed760c6f02df",
+    "chat_template_sha256": "e7527cc46a21601b5340edffd3633d47d722c7c735eb9fc1e3c11f66ff2b0caf",
+    "continuation_scoring": "sum of all continuation token log-probabilities, no length normalization, no added special tokens",
+    "environment": {
+      "python": "3.11.11",
+      "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+      "packages": {
+        "torch": {
+          "version": "2.15.0",
+          "direct_url": null
+        },
+        "transformers": {
+          "version": "5.22.1",
+          "direct_url": null
+        },
+        "transformer-lens": {
+          "version": "3.8.0",
+          "direct_url": null
+        },
+        "circuitkit": {
+          "version": "0.2.0",
+          "direct_url": {
+            "archive_info": {
+              "hash": "sha256=cbddb29869ded829ec7c4b48f06519accd1cb2bc6ecfcfdcf1291202c5c78e74",
+              "hashes": {
+                "sha256": "cbddb29869ded829ec7c4b48f06519accd1cb2bc6ecfcfdcf1291202c5c78e74"
+              }
+            },
+            "url": "file:///tmp/CircuitKIT-e71d5e17fe6e.zip"
+          }
+        },
+        "auditkit": {
+          "version": "1.1.3",
+          "direct_url": {
+            "archive_info": {
+              "hash": "sha256=5fd45704ae32406c389ef6c183913e199939c3a837ddd1b03e8ad289613a05e4",
+              "hashes": {
+                "sha256": "5fd45704ae32406c389ef6c183913e199939c3a837ddd1b03e8ad289613a05e4"
+              }
+            },
+            "url": "file:///tmp/AuditKIT-71316da34578.zip"
+          }
+        },
+        "safetensors": {
+          "version": "0.8.0",
+          "direct_url": null
+        }
+      },
+      "code_commit": null,
+      "code_sha256": "ecb99b46a964637817c95116e2ade44fae2ee079507807b9d8905bfd3e2da22c",
+      "dependency_lock_hashes": {
+        "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+        "requirements-research.lock": "bd868df34099f57a4bbd02dfdfdd0e3144ccbfc3f91248a92432be500de95d1c",
+        "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+      }
+    },
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_bytes": 25250627584,
+      "cuda": "13.2"
+    },
+    "checkpoint_hashes": {
+      "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+      "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+      "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+      "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+      "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+    },
+    "adaptation": "LoRA-merged-dense",
+    "adapter_sha256": "2e0fb9c0dcbd4a07441212cb5d3a8e9e98b0ba9e4b016db887adfd9797ec7689",
+    "merged_modules": 224,
+    "merged_state_sha256": "4b04efb6ae59caae1ff8180f29ba73a90f315f1cb681fad65789ff7d32df88b5"
+  },
+  "label": "merged-adapter",
+  "datasets": {
+    "datasets/wsp-discovery.json": "6df24b0e3e995b640847bfa3ab72e62ca8bee3f68da1b881d195b261e8e0901d",
+    "datasets/wsp-validation.json": "42b97438ad9845d158b7bc743a93f435f7078c0cd73bf6712032e547dcf31457"
+  },
+  "summary": {
+    "by_arm": {
+      "A_pf": {
+        "neutral": {
+          "n": 100,
+          "n_vulnerable": 50,
+          "n_clean": 50,
+          "true_positive": 39,
+          "true_negative": 41,
+          "false_positive": 7,
+          "false_negative": 6,
+          "balanced_accuracy": 0.8,
+          "accuracy": 0.8,
+          "false_positive_rate": 0.14,
+          "false_negative_rate": 0.12,
+          "miss_rate": 0.22,
+          "coverage": 0.93,
+          "invalid_count": 7,
+          "generation_errors": 0,
+          "input_tokens": 27921,
+          "output_tokens": 4658,
+          "latency_seconds": 118.91456177599994,
+          "explanation_grounding": null,
+          "general_coding_accuracy": null
+        },
+        "correct_suggestion": {
+          "n": 100,
+          "n_vulnerable": 50,
+          "n_clean": 50,
+          "true_positive": 0,
+          "true_negative": 0,
+          "false_positive": 50,
+          "false_negative": 48,
+          "balanced_accuracy": 0.0,
+          "accuracy": 0.0,
+          "false_positive_rate": 1.0,
+          "false_negative_rate": 0.96,
+          "miss_rate": 1.0,
+          "coverage": 0.98,
+          "invalid_count": 2,
+          "generation_errors": 0,
+          "input_tokens": 29771,
+          "output_tokens": 4562,
+          "latency_seconds": 116.202932176,
+          "explanation_grounding": null,
+          "general_coding_accuracy": null
+        },
+        "incorrect_suggestion": {
+          "n": 100,
+          "n_vulnerable": 50,
+          "n_clean": 50,
+          "true_positive": 48,
+          "true_negative": 50,
+          "false_positive": 0,
+          "false_negative": 0,
+          "balanced_accuracy": 0.98,
+          "accuracy": 0.98,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "miss_rate": 0.04,
+          "coverage": 0.98,
+          "invalid_count": 2,
+          "generation_errors": 0,
+          "input_tokens": 29771,
+          "output_tokens": 4566,
+          "latency_seconds": 116.1645391720001,
+          "explanation_grounding": null,
+          "general_coding_accuracy": null
+        }
+      }
+    },
+    "by_arm_split": {
+      "A_pf": {
+        "wsp_discovery": {
+          "neutral": {
+            "n": 60,
+            "n_vulnerable": 30,
+            "n_clean": 30,
+            "true_positive": 24,
+            "true_negative": 21,
+            "false_positive": 7,
+            "false_negative": 3,
+            "balanced_accuracy": 0.75,
+            "accuracy": 0.75,
+            "false_positive_rate": 0.23333333333333334,
+            "false_negative_rate": 0.1,
+            "miss_rate": 0.2,
+            "coverage": 0.9166666666666666,
+            "invalid_count": 5,
+            "generation_errors": 0,
+            "input_tokens": 16651,
+            "output_tokens": 2787,
+            "latency_seconds": 71.552290709,
+            "explanation_grounding": null,
+            "general_coding_accuracy": null
+          },
+          "correct_suggestion": {
+            "n": 60,
+            "n_vulnerable": 30,
+            "n_clean": 30,
+            "true_positive": 0,
+            "true_negative": 0,
+            "false_positive": 30,
+            "false_negative": 28,
+            "balanced_accuracy": 0.0,
+            "accuracy": 0.0,
+            "false_positive_rate": 1.0,
+            "false_negative_rate": 0.9333333333333333,
+            "miss_rate": 1.0,
+            "coverage": 0.9666666666666667,
+            "invalid_count": 2,
+            "generation_errors": 0,
+            "input_tokens": 17761,
+            "output_tokens": 2740,
+            "latency_seconds": 69.80875908100002,
+            "explanation_grounding": null,
+            "general_coding_accuracy": null
+          },
+          "incorrect_suggestion": {
+            "n": 60,
+            "n_vulnerable": 30,
+            "n_clean": 30,
+            "true_positive": 28,
+            "true_negative": 30,
+            "false_positive": 0,
+            "false_negative": 0,
+            "balanced_accuracy": 0.9666666666666667,
+            "accuracy": 0.9666666666666667,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.0,
+            "miss_rate": 0.06666666666666667,
+            "coverage": 0.9666666666666667,
+            "invalid_count": 2,
+            "generation_errors": 0,
+            "input_tokens": 17761,
+            "output_tokens": 2748,
+            "latency_seconds": 69.89005050000026,
+            "explanation_grounding": null,
+            "general_coding_accuracy": null
+          }
+        },
+        "wsp_validation": {
+          "neutral": {
+            "n": 40,
+            "n_vulnerable": 20,
+            "n_clean": 20,
+            "true_positive": 15,
+            "true_negative": 20,
+            "false_positive": 0,
+            "false_negative": 3,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.15,
+            "miss_rate": 0.25,
+            "coverage": 0.95,
+            "invalid_count": 2,
+            "generation_errors": 0,
+            "input_tokens": 11270,
+            "output_tokens": 1871,
+            "latency_seconds": 47.36227106699994,
+            "explanation_grounding": null,
+            "general_coding_accuracy": null
+          },
+          "correct_suggestion": {
+            "n": 40,
+            "n_vulnerable": 20,
+            "n_clean": 20,
+            "true_positive": 0,
+            "true_negative": 0,
+            "false_positive": 20,
+            "false_negative": 20,
+            "balanced_accuracy": 0.0,
+            "accuracy": 0.0,
+            "false_positive_rate": 1.0,
+            "false_negative_rate": 1.0,
+            "miss_rate": 1.0,
+            "coverage": 1.0,
+            "invalid_count": 0,
+            "generation_errors": 0,
+            "input_tokens": 12010,
+            "output_tokens": 1822,
+            "latency_seconds": 46.394173094999985,
+            "explanation_grounding": null,
+            "general_coding_accuracy": null
+          },
+          "incorrect_suggestion": {
+            "n": 40,
+            "n_vulnerable": 20,
+            "n_clean": 20,
+            "true_positive": 20,
+            "true_negative": 20,
+            "false_positive": 0,
+            "false_negative": 0,
+            "balanced_accuracy": 1.0,
+            "accuracy": 1.0,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.0,
+            "miss_rate": 0.0,
+            "coverage": 1.0,
+            "invalid_count": 0,
+            "generation_errors": 0,
+            "input_tokens": 12010,
+            "output_tokens": 1818,
+            "latency_seconds": 46.27448867199985,
+            "explanation_grounding": null,
+            "general_coding_accuracy": null
+          }
+        }
+      }
+    },
+    "paired": {}
+  }
+}

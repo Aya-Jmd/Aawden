@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_66cb044697b2",
+    "family_id": "sql_injection_fstring",
+    "source_id": "sql_injection_fstring",
+    "split": "screen",
+    "category": "sql_injection",
+    "method": "A",
+    "condition": "neutral",
+    "source_line_count": 2,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1],\n  \"explanation\": \"The function `lookup` directly constructs an SQL query string by concatenating the input `username` with a literal value `?`. This allows an attacker to inject malicious SQL code into the `username` parameter, potentially bypassing access controls and retrieving unauthorized data.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "16628405c3def88e851bb28940b6fc856087cbb133d7b1057c0128ece2a6d2fb",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3; username is untrusted. A lookup must treat the supplied name as a literal value; it must not return other users. The database schema and connection are trusted.\n<source>\ndef lookup(conn, username):\n    return conn.execute(\"SELECT name FROM users WHERE name = ?\", (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 205,
+    "output_tokens": 98,
+    "finish_reason": "stop",
+    "latency_seconds": 2.486782319999975,
+    "request_id": "0d3d11145172566aa3988b22"
+  },
+  "sha256": "8206cf15e8cd80a01c001a04cd5c2d9f5750f45bfece4a291f5b99453605ad00"
+}

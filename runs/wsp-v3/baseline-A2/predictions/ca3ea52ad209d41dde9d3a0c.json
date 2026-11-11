@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_21d530653908",
+    "family_id": "wsp_validation_sql_injection_conditional_expression_bind",
+    "source_id": "wsp_validation_sql_injection_conditional_expression_bind",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1, 2, 3, 4, 5],\n  \"explanation\": \"The function `lookup` is vulnerable to SQL injection because it constructs the SQL query dynamically using the user-provided `username` input. If an attacker provides a malicious username containing SQL syntax, it will be interpreted as part of the query, potentially allowing them to bypass authentication or access unauthorized data.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "9c1697d46e3fe5bd8516c21f9c2adcf330008b0977159df6e01a1971b061d93e",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    sql = \"SELECT name FROM users WHERE name = ?\"\n    args = (username,)\n    sql, args = (sql.replace(\"?\", \"'\" + username + \"'\"), ()) if username[:1].islower() else (sql, args)\n    return conn.execute(sql, args).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 243,
+    "output_tokens": 118,
+    "finish_reason": "stop",
+    "latency_seconds": 2.948339539000017,
+    "request_id": "e680669ad66723223ab6bb0b"
+  },
+  "sha256": "fe71eeda636cca0952cf424dbe82dfc4bb5aa806a1ec0a5430ae2b005b7560bf"
+}

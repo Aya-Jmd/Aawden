@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_89875d0bcf24",
+    "family_id": "wsp_validation_access_control_loop_candidate",
+    "source_id": "wsp_validation_access_control_loop_candidate",
+    "split": "wsp_validation",
+    "category": "access_control",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 9,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [3],\n  \"explanation\": \"The function `read_record` allows any actor to access a record if it belongs to the same tenant, regardless of ownership. This violates the threat model's requirement that only the owner of the requested record may receive it.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "80771260002ab8c3aaf52cde39d97298fb840023059b68844ff12c55e34d6228",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    result = None\n    for candidate in [row]:\n        if candidate[\"owner_id\"] == actor[\"id\"] or candidate[\"tenant_id\"] == actor[\"tenant_id\"]:\n            result = candidate\n    return result\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 263,
+    "output_tokens": 92,
+    "finish_reason": "stop",
+    "latency_seconds": 2.3073704369999177,
+    "request_id": "175d68d601ecfe9b4cf64a17"
+  },
+  "sha256": "a7e9410c99bf7cd058f119cbb47c2c900e40e6252bb63cfcc13e8787c9989153"
+}

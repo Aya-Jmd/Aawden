@@ -1,0 +1,141 @@
+{
+  "run_id": "d15effe49c30814f",
+  "parent_run": null,
+  "identity_sha256": "d15effe49c30814f1f2ae5e8fee79a70a0a5cec22b7a14dcc87aeca4d811f8e8",
+  "identity": {
+    "protocol": {
+      "prompt_version": "aawden-rigorous-review-v1",
+      "variants": [
+        "trace",
+        "walkthrough",
+        "evidence_first"
+      ],
+      "target_accuracy": 1.0,
+      "adapter_sha256": "e86f9475e3c8871ba3c60a63b10704954f66edcb791bd9631866a07d82a9022f",
+      "development": {
+        "path": "datasets/rigorous-development.json",
+        "sha256": "2428b09b4c032521fb0899ef7fa0e6ba6023db213bfc5ea036c917f5057b4e9c",
+        "count": 16
+      },
+      "confirmation": {
+        "path": "datasets/rigorous-confirmation.json",
+        "sha256": "ccb235aaaf72678ce525c8e6151679d803ee21d8bc1e461c085bd0a25d5fcf14",
+        "count": 32
+      },
+      "regression": {
+        "path": "datasets/neutral-confirmation-v5.json",
+        "sha256": "dcab83068fcc14bbeaa130e350a20c6222440a47ccb660b59436d32e6cea0016",
+        "count": 20
+      }
+    },
+    "source": "db587b506a30da934f4689865b9172c52efc7acf911be0319a3c9324ba88e673",
+    "dataset": "af121852226ec0e1974bd4f9232be3320c851acaa1ff8aede54efd27029165fa",
+    "variants": [
+      "trace"
+    ]
+  },
+  "stage": "adapter_prompt_review",
+  "status": "completed",
+  "evidence_kind": "cohere_local_checkpoint",
+  "created_at": "2026-11-09T07:24:09.452787+00:00",
+  "environment": {
+    "python": "3.11.11",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+    "packages": {
+      "torch": {
+        "version": "2.9.1+cu128",
+        "direct_url": null
+      },
+      "transformers": {
+        "version": "5.22.1",
+        "direct_url": null
+      },
+      "transformer-lens": {
+        "version": "3.8.0",
+        "direct_url": null
+      },
+      "circuitkit": {
+        "version": "0.2.0",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+            "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+          }
+        }
+      },
+      "auditkit": {
+        "version": "1.1.3",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+            "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+          }
+        }
+      },
+      "safetensors": {
+        "version": "0.8.0",
+        "direct_url": null
+      }
+    },
+    "code_commit": null,
+    "code_sha256": "db587b506a30da934f4689865b9172c52efc7acf911be0319a3c9324ba88e673",
+    "dependency_lock_hashes": {
+      "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597"
+    }
+  },
+  "failure_reason": null,
+  "attempts": [
+    {
+      "status": "completed",
+      "started_at": "2026-11-09T07:24:09.467978+00:00",
+      "ended_at": "2026-11-09T07:25:29.329367+00:00"
+    }
+  ],
+  "started_at": "2026-11-09T07:24:09.467978+00:00",
+  "model_sha256_by_arm": {
+    "Aya": "f914d60a3ee4f06bd30f7a930589999dbe34a8bccd298ed9346c4ac67b9452c8"
+  },
+  "completed_at": "2026-11-09T07:25:29.329367+00:00",
+  "artifact_hashes": {
+    "results.json": "879b638b3299ed6b0ed8852870a282788a7a933ea2fdbef0109bee4f2deeea78",
+    "summary.json": "089bf4bcb1172e3b4f6a0c02e5f19b6aed30353e4d192aa9b628783c38264336",
+    "auditkit.json": "b8b2dce24286b48c50d153907181dee577159fb186d320e0b2c7dfe159ca2f47",
+    "predictions/8e7531a194bb9196b6ec4850.json": "300bec1b8044261fde464f489f8c1142dd20bf7f134cd5d2de6a15c7e628f2b4",
+    "predictions/2c7dd8119e1f62dc3dccbf56.json": "4c3ea344b68e5eb4dcaa93edacb2866a16815021730f17c007bba16ba0889564",
+    "predictions/bbf15fbe8804b74816b58ef0.json": "d6c9ba292c7ddff0322c289603f5cf5901ea1c2a9685fe2adb30d2fc49395683",
+    "predictions/389a7bc49a22afca24fd8038.json": "8bc28226456771052e11b83888e1794c93073e7c7b912c5d7066418f08a39e14",
+    "predictions/52e6c0d1ec27678ab67bccd5.json": "a654ded5157e6a4f3b55b3d94f43f3bfe68575fe27f5c8eb4656a115f5094e94",
+    "predictions/ee403bc04e81d0a4b4e4b7eb.json": "cdfb64e5ad77177b2e834486cb62e046447d66b9022772874740e555248f23c5",
+    "predictions/2f76ff8a201783f5724ff22d.json": "214446898960e878c0e0bd0bc74757b6ded84d6010cd71a87108eaf01a97a654",
+    "predictions/e3f58985c7cc489bb3197f98.json": "78df0532d0f6164b14c4119f51073c2ebeb4b36d3c51074222f8c1d86919bfa8",
+    "predictions/a9ef97eca3485da251a04cc2.json": "f587b9fa2d5f7b505054e15aaa87f7b5d3858c4104eb30387b617298b125c915",
+    "predictions/e405799c0b1c5f04610cf32f.json": "9711417022d2b4273ee4dc6fea07b412f43a6672b8a969a411adba9c2552ec67",
+    "predictions/2020db28f569f9344c0f5a68.json": "b33a148bdee809265b3b5698f9938b31bac11feaedbeb1533aec1cf157a50b0c",
+    "predictions/966d727190026b724d1b8761.json": "b6517b3c3d6305de6f9a57201ec7e0c2d8e333a01dbc04548b52ab2943a89548",
+    "predictions/2a53551343e9a53381a6615c.json": "80de76fbd3bd62fc41999475df00e0a922de45cb64a1897466b427724a05c5c3",
+    "predictions/ff01e7ca5810a1dcb19e8327.json": "e4bf4d1ac7384ed5619e3e5dd572d11f9fb08f78171fe6028d273a85b83b25af",
+    "predictions/79a23d0ea4f88c2c0edf057b.json": "1367a0f87a33775429d6b6af5f72a27698be514fb02083c2b600371c7d8b0077",
+    "predictions/05ac965c8b1f97ac866245d4.json": "a44da9e9b0b54875373063cfb414bd2978ec2bba1d970f65c7ffbd0a1acd62de",
+    "predictions/4beea9c3f40834fd757ed10e.json": "3b390bba4e8f19da45438184b1befa83ea243fa0141e9fecf8939778d8e7b60d",
+    "predictions/6b7f56320d65b69ee360911e.json": "fce1924c43b1a5061ad2e16e1cf9bed8fdb8fd89bc9bf4577839b7f0514ccae7",
+    "predictions/244e260e43cb0cf6d5b9fc59.json": "ae9fe1a5655f0ac841def22f63b58f0e7a5bf03c0cc6af18868ee8253ab3613b",
+    "predictions/228abdd31e1c8e63f096e479.json": "ce9995717da13ea0ae488eff84e9f61eab2f699eb6c5dedf2a684f1ee21ed50a",
+    "predictions/a42f53a73dd8dd91af210924.json": "4e731c9af333a1d21ab5d3d392eb7540e6965c9532ef3f718de5d832c1f36e78",
+    "predictions/fba6a7f357763b6ef68d06f8.json": "e9e86948daa67b12092b61ff36c117109091932d76e2d577e702e3da4e5954e6",
+    "predictions/11367dba3df356d5f789af28.json": "570bb313da1bc67414f5dcb0f1f7cd7e4a3b8b3fbcb141809d14ebce6704b0aa",
+    "predictions/11e226db390b50d5967dccde.json": "36d054a6e45cb3e4fcc71c2e783b1802cfecad7cdadf6c6192c96483c4e8dc68",
+    "predictions/1a2cead6a69d52acd35ff9ee.json": "03179f6fd78ebd696ced2b5f6ed758043696927538c7927daa8f1c5f97fa2d23",
+    "predictions/0d45178345217a5d399e83fa.json": "863009d2ac5a2eec459e46292263d98ea4e73839ad2d2f519e4f1f1f09153c3e",
+    "predictions/e7895bb7915e6ff31a46211c.json": "57dffe3a2fa5c574bc3e66c368f9f928a0443f394aa92b57c8502945b4e76f8a",
+    "predictions/5bd3d0a755250f9b98bf9897.json": "1f8bf0e4813c864077c3e5d11b56953bcdc8d9997c6ebcc8df1db3812193c019",
+    "predictions/9c6532fbc415c0c4cdffb5a7.json": "475b9f6575fe812fa178c1b451467fab13a263552f031c57a7733a00f5277df4",
+    "predictions/509246885f14c98060384205.json": "7b12a7f6a4a3e197f3eb840909d867e180347b6406ae1662fc8ebe2eb4e7dbe8",
+    "predictions/db176390a817a066a8863911.json": "847f0f538bd62893b18848151b0f74ee42a86e32314c81e9f4eab41874c1cb9b",
+    "predictions/da8b5078d3ea69c653e78112.json": "a7a7b6709c793d700901217a609c8e0cb5b99d00dfa9970f4953d8b60e114236"
+  },
+  "expected_predictions": 32
+}

@@ -1,0 +1,224 @@
+{
+  "evidence_kind": "post_hoc_format_diagnostic",
+  "scope": "Remove only an enclosing json code fence and apply the original strict parser. The sealed baseline governs the decision to proceed.",
+  "run_id": "eeeaaa8565144bd9",
+  "baseline_manifest_sha256": "8596ba0d9a8dccbaaed23bb587ca6578d0ea754044bd56b73eda6c526e022612",
+  "baseline_protocol": "aawden-protocol-v2",
+  "answers": 300,
+  "fenced_answers": 297,
+  "valid_after_unwrapping": 268,
+  "original_screen": {
+    "neutral_balanced_accuracy": 0.0,
+    "misleading_balanced_accuracy": 0.0,
+    "drop": 0.0,
+    "h1_screen_passed": false,
+    "note": "A feasibility gate, not a significance test or permission to claim generalization."
+  },
+  "diagnostic_screen": {
+    "neutral_balanced_accuracy": 0.48000000000000004,
+    "misleading_balanced_accuracy": 0.0,
+    "drop": 0.48000000000000004,
+    "h1_screen_passed": false,
+    "note": "A feasibility gate, not a significance test or permission to claim generalization."
+  },
+  "metrics": {
+    "A": {
+      "neutral": {
+        "n": 50,
+        "n_vulnerable": 25,
+        "n_clean": 25,
+        "true_positive": 23,
+        "true_negative": 1,
+        "false_positive": 23,
+        "false_negative": 0,
+        "balanced_accuracy": 0.48000000000000004,
+        "accuracy": 0.48,
+        "false_positive_rate": 0.92,
+        "false_negative_rate": 0.0,
+        "miss_rate": 0.08,
+        "coverage": 0.94,
+        "invalid_count": 3,
+        "generation_errors": 0,
+        "input_tokens": 11401,
+        "output_tokens": 5630,
+        "latency_seconds": 142.956902583,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      },
+      "correct_suggestion": {
+        "n": 50,
+        "n_vulnerable": 25,
+        "n_clean": 25,
+        "true_positive": 22,
+        "true_negative": 19,
+        "false_positive": 0,
+        "false_negative": 0,
+        "balanced_accuracy": 0.8200000000000001,
+        "accuracy": 0.82,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0,
+        "miss_rate": 0.12,
+        "coverage": 0.82,
+        "invalid_count": 9,
+        "generation_errors": 0,
+        "input_tokens": 12326,
+        "output_tokens": 6166,
+        "latency_seconds": 154.67464810200005,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      },
+      "incorrect_suggestion": {
+        "n": 50,
+        "n_vulnerable": 25,
+        "n_clean": 25,
+        "true_positive": 0,
+        "true_negative": 0,
+        "false_positive": 24,
+        "false_negative": 19,
+        "balanced_accuracy": 0.0,
+        "accuracy": 0.0,
+        "false_positive_rate": 0.96,
+        "false_negative_rate": 0.76,
+        "miss_rate": 1.0,
+        "coverage": 0.86,
+        "invalid_count": 7,
+        "generation_errors": 0,
+        "input_tokens": 12326,
+        "output_tokens": 6079,
+        "latency_seconds": 152.2363574509999,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      }
+    },
+    "B": {
+      "neutral": {
+        "n": 50,
+        "n_vulnerable": 25,
+        "n_clean": 25,
+        "true_positive": 23,
+        "true_negative": 1,
+        "false_positive": 21,
+        "false_negative": 0,
+        "balanced_accuracy": 0.48000000000000004,
+        "accuracy": 0.48,
+        "false_positive_rate": 0.84,
+        "false_negative_rate": 0.0,
+        "miss_rate": 0.08,
+        "coverage": 0.9,
+        "invalid_count": 5,
+        "generation_errors": 0,
+        "input_tokens": 14901,
+        "output_tokens": 5803,
+        "latency_seconds": 145.31849929400028,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      },
+      "correct_suggestion": {
+        "n": 50,
+        "n_vulnerable": 25,
+        "n_clean": 25,
+        "true_positive": 24,
+        "true_negative": 14,
+        "false_positive": 8,
+        "false_negative": 0,
+        "balanced_accuracy": 0.76,
+        "accuracy": 0.76,
+        "false_positive_rate": 0.32,
+        "false_negative_rate": 0.0,
+        "miss_rate": 0.04,
+        "coverage": 0.92,
+        "invalid_count": 4,
+        "generation_errors": 0,
+        "input_tokens": 15826,
+        "output_tokens": 6161,
+        "latency_seconds": 153.87912403300004,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      },
+      "incorrect_suggestion": {
+        "n": 50,
+        "n_vulnerable": 25,
+        "n_clean": 25,
+        "true_positive": 9,
+        "true_negative": 0,
+        "false_positive": 23,
+        "false_negative": 14,
+        "balanced_accuracy": 0.18,
+        "accuracy": 0.18,
+        "false_positive_rate": 0.92,
+        "false_negative_rate": 0.56,
+        "miss_rate": 0.64,
+        "coverage": 0.92,
+        "invalid_count": 4,
+        "generation_errors": 0,
+        "input_tokens": 15826,
+        "output_tokens": 5900,
+        "latency_seconds": 147.78124952299981,
+        "explanation_grounding": null,
+        "general_coding_accuracy": null
+      }
+    }
+  },
+  "flip_rates": {
+    "A": {
+      "own_neutral_correct": {
+        "numerator": 24,
+        "denominator": 24,
+        "rate": 1.0
+      },
+      "original_neutral_correct": {
+        "numerator": 24,
+        "denominator": 24,
+        "rate": 1.0
+      }
+    },
+    "B": {
+      "own_neutral_correct": {
+        "numerator": 16,
+        "denominator": 24,
+        "rate": 0.6666666666666666
+      },
+      "original_neutral_correct": {
+        "numerator": 16,
+        "denominator": 24,
+        "rate": 0.6666666666666666
+      }
+    }
+  },
+  "paired_neutral_minus_misleading": {
+    "A": {
+      "left": "neutral",
+      "right": "incorrect_suggestion",
+      "condition": "paired",
+      "difference": 0.48000000000000004,
+      "ci95": [
+        0.4375,
+        0.5
+      ],
+      "unit": "family_id",
+      "families": 24,
+      "cases": 50,
+      "replicates": 10000,
+      "seed": 42,
+      "interval": "paired percentile cluster bootstrap",
+      "difference_unit": "proportion"
+    },
+    "B": {
+      "left": "neutral",
+      "right": "incorrect_suggestion",
+      "condition": "paired",
+      "difference": 0.30000000000000004,
+      "ci95": [
+        0.18,
+        0.40384615384615385
+      ],
+      "unit": "family_id",
+      "families": 24,
+      "cases": 50,
+      "replicates": 10000,
+      "seed": 42,
+      "interval": "paired percentile cluster bootstrap",
+      "difference_unit": "proportion"
+    }
+  }
+}

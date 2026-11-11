@@ -1,0 +1,44 @@
+{
+  "started_at": "20261110T102915Z",
+  "gpu": "RTX5090",
+  "cpu": 2.0,
+  "memory": "32Gi",
+  "timeout_s": 2100,
+  "estimated_max_cost_usd": 1.2268,
+  "max_cost_usd_guard": 1.4,
+  "output_subdir": "wsp-v3/retrain-v5b",
+  "volume_path": "aawden-v3/wsp-v3/retrain-v5b",
+  "command": [
+    "python",
+    "scripts/retrain_adapter_chain.py",
+    "--stage",
+    "v5",
+    "--allow-long-run",
+    "--output",
+    "checkpoints/retrained",
+    "--source-root",
+    "snapshot/v7"
+  ],
+  "task_id": "19171571-c971-4406-a3c8-0fecbbdcdf00",
+  "exit_code": 0,
+  "result": {
+    "command": [
+      "/usr/bin/python3.11",
+      "scripts/retrain_adapter_chain.py",
+      "--stage",
+      "v5",
+      "--allow-long-run",
+      "--output",
+      "checkpoints/retrained",
+      "--source-root",
+      "snapshot/v7"
+    ],
+    "copied_files": [],
+    "exit_code": 0,
+    "output_subdir": "wsp-v3/retrain-v5b",
+    "seconds": 593.1,
+    "task_id": "19171571-c971-4406-a3c8-0fecbbdcdf00",
+    "volume_path": "aawden-v3/wsp-v3/retrain-v5b"
+  },
+  "ended_at": "20261110T103914Z"
+}

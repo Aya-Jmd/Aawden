@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_1c38f55f7563",
+    "family_id": "sql_injection_percent",
+    "source_id": "sql_injection_percent",
+    "split": "screen",
+    "category": "sql_injection",
+    "method": "contrasts",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expected exactly the five response fields",
+    "raw_output": "{\"category\":\"sql_injection\",\"explanation\":\"The code snippet is vulnerable to SQL injection on line 2. The `username` is directly interpolated into the SQL query string without proper escaping or parameterization. An attacker could supply a malicious username containing SQL syntax, which would be executed by the database.\",\"deciding_check\":\"The use of a formatted string with bound parameters (e.g., `conn.execute(query, {'name': username})`) would prevent SQL injection. The current code constructs the query string directly, leaving it open to manipulation.\",\"verdict\":\"vulnerable\",\"confidence\":1,\"evidence_lines\":[2],\"not_a_mitigation\":true}",
+    "prompt_sha256": "eb7782699bd5c0c0e8368a3e9d1e7158c188bd690cdefae44179f52d2c67772d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review only the named weakness under the stated threat model. Judge the behavior of the shown source. The answer already starts inside the explanation string of a JSON object. Continue that string with one short sentence about the decisive check or missing check. Use plain words without quotes or backslashes. Close the string, then add evidence_lines (a list of the displayed source line numbers), verdict (one of vulnerable, not_vulnerable_for_target, insufficient_information), and confidence (a number from 0 to 1). Close the object. Give only the continuation of the JSON, with no Markdown. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. A bound value used with a query placeholder cannot inject SQL and is not_vulnerable_for_target. A raw name pasted directly into SQL quotes can close the string and is vulnerable."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3; username is untrusted. A lookup must treat the supplied name as a literal value; it must not return other users. The database schema and connection are trusted.\n<source>\n1 | def lookup(conn, username):\n2 |     query = \"SELECT name FROM users WHERE name = :name\"\n3 |     return conn.execute(query, {\"name\": username}).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"category\":\"sql_injection\",\"explanation\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 372,
+    "output_tokens": 128,
+    "finish_reason": "length",
+    "latency_seconds": 3.1367028290000007,
+    "request_id": "b7596150969c124432f3ec64"
+  },
+  "sha256": "6a869b38f8fd4e99afa0a2821107448f6f8acf45e5cb1523d80c92def5dc590b"
+}

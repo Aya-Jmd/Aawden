@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_69b7249cacc4",
+    "family_id": "wsp_discovery_sql_injection_unexecuted_template_tuple",
+    "source_id": "wsp_discovery_sql_injection_unexecuted_template_tuple",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [2, 3, 4],\n  \"explanation\": \"The `lookup` function is vulnerable to SQL injection because it constructs SQL queries dynamically using string formatting (`format()`). This allows an attacker to inject malicious SQL code into the `username` parameter, potentially bypassing access controls and retrieving unauthorized data.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "0536759239a6ae1933f70757631d65d7e267f99aa8bb2977a4ee9e7f9c21c3e0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    templates = (\"SELECT name FROM users WHERE name = ?\", \"SELECT name FROM users WHERE name = '{}'\")\n    index = 0\n    if index == 0:\n        return conn.execute(templates[0], (username,)).fetchall()\n    return conn.execute(templates[1].format(username)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 246,
+    "output_tokens": 101,
+    "finish_reason": "stop",
+    "latency_seconds": 2.538692685000001,
+    "request_id": "164f13106c96e5b75d44a967"
+  },
+  "sha256": "94ec19b6410fbc3a5302462110574ccfd2ddc8c8bc6995e8fc9cfa9881006c6d"
+}

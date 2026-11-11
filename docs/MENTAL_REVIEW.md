@@ -1,0 +1,17 @@
+# Model-generated execution notes
+
+The frozen adapter with the trace prompt scored 75% on the fourth prospective check. All five errors were in access-control cases. SQL reviews were correct on that set. This follow-up keeps the same saved weights and trace instruction.
+
+The first attempt asked original Aya to describe three calls. All ten access-control notes reached the 160-token limit, and validation remained 75%. The fifth set stayed unopened.
+
+Version 2 asks original Aya about one call requesting another user's record. It scores two possible return descriptions through counterbalanced A/B choices, reversing the letter assignments and averaging the semantic score difference. This reduces option-letter bias and avoids long generated notes. It supplies no expected returns, test results, or security verdicts. The model has no code-execution tool. LoRA is temporarily disabled for these scores and restored afterward, including after exceptions. The raw sequence scores and the explicitly unverified estimate are retained.
+
+The frozen adapter then sees the source, threat model, example inputs, and the first pass's unverified notes. It must recheck those notes and generate the original five-field JSON response. SQL cases continue to use the trace prompt directly. The strict parser and scoring denominator are unchanged. Both model passes are recorded, and the notes have their own token and latency accounting.
+
+Use the now-exposed fourth set for validation. Reuse its verified SQL answers when the model, hardware, runtime, and messages match. Proceed only if the two-stage score exceeds both 75% and the prior trace score. Freeze the pipeline before opening a fifth, newly committed 20-case set. The fresh check also records a paired one-pass trace comparison, reusing identical SQL outputs. The primary target remains the two-stage score.
+
+All 20 new executable oracles passed before inference. They cover transaction scopes, trusted query prefixes, lambda executors, typed command objects, command stacks, predicate filters, request-scoped policies, tuple patterns, deferred returns, and indexed results. The source has one author, and the set is a controlled feasibility check. Independent final validation remains separate.
+
+The follow-up performs no training. Across validation and confirmation it needs at most 80 auxiliary sequence-scoring passes and 50 generated reviews, including the paired baseline. It has a 15-minute timeout and the same live $15 credit-floor check with a further $1 margin and a conservative maximum job-cost reserve. Run it locally on compatible hardware with `python aawden.py mental-review --previous runs/aya-beam-20261107/adapter-review-v1/study/confirmation --output runs/mental-review-reproduction`.
+
+Version 2 completed with 75% validation and stopped before the fifth set. All ten return estimates favored None, and the final adapted reviewer labeled every access case vulnerable. This supplies no evidence that the extra stage helps. The job took 6 minutes 9 seconds, and the reported balance afterward was $24.48, a $0.17 reduction from its launch check. Both failed versions remain in the experiment ledger. The fifth set stayed unopened through this experiment and was subsequently scored once by the successful [v7 adapter refinement](BEST_RESULT.md). The selected pipeline uses the trace prompt directly and omits this unsuccessful auxiliary stage.

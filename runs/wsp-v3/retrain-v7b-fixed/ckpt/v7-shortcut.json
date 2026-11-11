@@ -1,0 +1,78 @@
+{
+  "adapter_bytes": 167819216,
+  "adapter_file": "v7-shortcut.safetensors",
+  "adapter_sha256": "0ef034638946d41af7a7bc9dbb82a9b011457570509125b625fc58ffcf6d4660",
+  "chain_script_sha256": "e4bc5483c8ed5322c91464f31a5cc1c7f31cd9ab58f0c3e02e39fbef5015c60f",
+  "deviation": true,
+  "evaluation": {
+    "development_balanced_accuracy": 0.7,
+    "development_set": "neutral-confirmation-v4.json",
+    "threshold_exceeded": false
+  },
+  "examples_per_epoch": 300,
+  "history": [
+    {
+      "epoch": 1,
+      "mean_loss": 0.1648870123320497
+    },
+    {
+      "epoch": 2,
+      "mean_loss": 0.03925693448579599
+    },
+    {
+      "epoch": 3,
+      "mean_loss": 0.025218323141355845
+    }
+  ],
+  "protocol": {
+    "accumulation": 2,
+    "alpha": 32,
+    "conditions": [
+      "neutral",
+      "incorrect_suggestion"
+    ],
+    "epochs": 3,
+    "lr": 0.0001,
+    "rank": 16,
+    "resume_sha256": null,
+    "seed": 42,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "trace_prompt": true,
+    "training_sets": {
+      "neutral-confirmation-v2.json": {
+        "sha256": "61e6ba846fc2bde433cb3183328f2af801c6886dbf3f3471657053b8a9fdf35e"
+      },
+      "neutral-confirmation-v3.json": {
+        "sha256": "5b13a9ae58dde23f5f59d4aa98cb73f7686b6cee1fe77097c38efcbff0b66a39"
+      },
+      "neutral-confirmation.json": {
+        "sha256": "98ab77d1d91e6f323732605086d6b8531a158663b0b8fcdc095e0f75e86efbeb"
+      },
+      "screen.json": {
+        "sha256": "3fedabb747d25b9aa98356a90f102c79a8d1ceb10394a2b5794735be4d55f523"
+      }
+    },
+    "verdict_weight": 10
+  },
+  "reference": {
+    "expected_to_match": false,
+    "note": "Retraining is not byte-identical by design.",
+    "recorded_adapter_sha256": null
+  },
+  "resume_from": null,
+  "resume_sha256": null,
+  "source_fingerprint": "52ec422aec131851e7f0cbeefb861eaf0d7bc4b047b6935eca1e6147a6e077d0",
+  "stage": "v7-shortcut",
+  "steps": 900,
+  "target": "v7",
+  "train_script_sha256": "203b10ca80cff5253f6365cb91643721e5a9424d2d0c95aa881a56766b02d022",
+  "trainable_parameters": 41943040
+}

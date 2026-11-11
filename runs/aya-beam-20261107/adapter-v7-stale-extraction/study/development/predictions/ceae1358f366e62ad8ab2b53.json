@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_78ae86f5748d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Mentally trace the supplied Python function on the exact inputs. Compute its actual return even if unintended. Do not invent checks or apply a security policy absent from the source. Answer only the option letter. You have no execution tool."
+      },
+      {
+        "role": "user",
+        "content": "def read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    identity = (row[\"owner_id\"], actor[\"id\"])\n    return row if identity[0] == identity[1] or actor[\"authenticated\"] else None\n\nrecords = {10: {'owner_id': 'u1', 'tenant_id': 'same', 'members': ['u1'], 'secret': 'owned'}, 20: {'owner_id': 'u2', 'tenant_id': 'same', 'members': ['u2'], 'secret': 'other'}}\nactor = {'id': 'u1', 'tenant_id': 'same', 'role': 'member', 'authenticated': True}\nEvaluate only read_record(records, actor, 20), using the complete records dictionary above."
+      }
+    ],
+    "request_id": "d7bb90539948aed63f5d181d",
+    "working_note": "Counterbalanced language-model return estimate: None. This estimate is unverified.",
+    "sequence_scores": [
+      {
+        "options": "A = None; B = a record dictionary",
+        "A": -28.028335571289062,
+        "B": -19.981460571289062
+      },
+      {
+        "options": "A = a record dictionary; B = None",
+        "A": -32.47262954711914,
+        "B": -19.847631454467773
+      }
+    ],
+    "none_minus_record_margin": 2.2890615463256836,
+    "input_tokens": 1040,
+    "output_tokens": 0,
+    "forward_calls": 4,
+    "latency_seconds": 0.18624758900000415,
+    "model_mode": "original base weights, LoRA disabled; full continuation sequence scores"
+  },
+  "sha256": "deb0705853445f87a332753ca7a5e9c29fcd95aad1460071fda0da6863da325b"
+}

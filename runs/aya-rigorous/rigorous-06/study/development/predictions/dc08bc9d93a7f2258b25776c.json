@@ -1,0 +1,51 @@
+{
+  "record": {
+    "case_id": "c_7749cc52fcb3",
+    "family_id": "confirmation_v5_sql_injection_typed_command",
+    "source_id": "confirmation_v5_sql_injection_typed_command",
+    "split": "neutral_confirmation_v5",
+    "category": "sql_injection",
+    "method": "policy_first",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "category": "sql_injection",
+      "explanation": "The lookup can execute SQL syntax originating in the untrusted name.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "verdict": "vulnerable",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"category\":\"sql_injection\",\"explanation\":\"The lookup can execute SQL syntax originating in the untrusted name.\",\"evidence_lines\":[2,3,4,5],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+    "prompt_sha256": "07cf536c7e57d3800cf21798e76efa3a88f353f8f31ba78ef3c6f81a94f349fd",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review only the named weakness under the stated threat model. Judge the behavior of the shown source. The answer already starts inside the explanation string of a JSON object. Continue that string with one short sentence about the decisive check or missing check. Use plain words without quotes or backslashes. Close the string, then add evidence_lines (a list of the displayed source line numbers), verdict (one of vulnerable, not_vulnerable_for_target, insufficient_information), and confidence (a number from 0 to 1). Close the object. Give only the continuation of the JSON, with no Markdown. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.\n<source>\n1 | def lookup(conn, username):\n2 |     from collections import namedtuple\n3 |     Command = namedtuple(\"Command\", \"text params\")\n4 |     command = Command(f\"SELECT name FROM users WHERE name = '{username}'\", ())\n5 |     return conn.execute(command.text, command.params).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 5, returns conn.execute(namedtuple('Command', 'text params')(f\"SELECT name FROM users WHERE name = '{username}'\", ()).text, namedtuple('Command', 'text params')(f\"SELECT name FROM users WHERE name = '{username}'\", ()).params).fetchall()"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"category\":\"sql_injection\",\"explanation\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 562,
+    "output_tokens": 38,
+    "finish_reason": "stop",
+    "latency_seconds": 2.4243874109997705,
+    "request_id": "ac35c6fbc1a08af670e187ec"
+  },
+  "sha256": "6ff2bd993643f6bb1ac4a0d06defea36f0835cc2e040df274fbd23fd40cc8c95"
+}

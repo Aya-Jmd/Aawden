@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_bcb198e4e0d7",
+    "family_id": "wsp_validation_sql_injection_in_list_expansion",
+    "source_id": "wsp_validation_sql_injection_in_list_expansion",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1, 2, 3, 4, 5],\n  \"explanation\": \"The function `lookup` constructs an SQL query dynamically using user-provided input (`username`) without proper sanitization or parameterization. This allows an attacker to inject malicious SQL code, potentially leading to unauthorized data access, data modification, or even data leakage (e.g., `SELECT * FROM users;`).\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "1657f7d2911fb52b1c6d8f073686ee84bd942a45797460701e4aacf70a35a8a7",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    names = [username]\n    clause = \"name IN (\" + \", \".join(\"'\" + n + \"'\" for n in names) + \")\"\n    return conn.execute(\"SELECT name FROM users WHERE \" + clause, ()).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 229,
+    "output_tokens": 122,
+    "finish_reason": "stop",
+    "latency_seconds": 3.000443763000021,
+    "request_id": "fa92cc1cf03c372d4bd0260b"
+  },
+  "sha256": "e0e011d5523be494083d6f04f1ad5e8876749d69dae026b3e77939364f01b441"
+}

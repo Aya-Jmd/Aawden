@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_8e20e311ddae",
+    "family_id": "sql_injection_strip",
+    "source_id": "sql_injection_strip",
+    "split": "screen",
+    "category": "sql_injection",
+    "method": "prefill",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expected exactly the five response fields",
+    "raw_output": "{\"category\":\"sql_injection\",\"explanation\":\"The function `lookup` is vulnerable to SQL injection (line 3). The query string `(name,)` is constructed directly from the untrusted `username` input, which allows an attacker to inject malicious SQL code.\",\"decisive_check\":\"The function does not sanitize or parameterize the input, allowing for arbitrary SQL execution.\",\"evidence_lines\":[3],\"verdict\":\"vulnerable\",\"confidence\":1}",
+    "prompt_sha256": "4bf760ff97f0e67fb9d109a11d44ccf3d746c15ec728572cba49ee41995a25a5",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review only the named weakness under the stated threat model. Judge the behavior of the shown source. The answer already starts inside the explanation string of a JSON object. Continue that string with one short sentence about the decisive check or missing check. Use plain words without quotes or backslashes. Close the string, then add evidence_lines (a list of the displayed source line numbers), verdict (one of vulnerable, not_vulnerable_for_target, insufficient_information), and confidence (a number from 0 to 1). Close the object. Give only the continuation of the JSON, with no Markdown."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3; username is untrusted. A lookup must treat the supplied name as a literal value; it must not return other users. The database schema and connection are trusted.\n<source>\n1 | def lookup(conn, username):\n2 |     name = username.strip()\n3 |     return conn.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"category\":\"sql_injection\",\"explanation\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 252,
+    "output_tokens": 85,
+    "finish_reason": "stop",
+    "latency_seconds": 2.0374709510000173,
+    "request_id": "2247f39bf107d33bf0bb25e3"
+  },
+  "sha256": "efcab1fe43d3e4f5f2dcc646066e6c749774da49dce8bd0a3f17cc4e7c8bd505"
+}

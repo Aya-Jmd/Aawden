@@ -1,0 +1,927 @@
+{
+  "run_id": "3a99f58e67f5f011",
+  "fingerprint": "3a99f58e67f5f011",
+  "headline": {
+    "aawden_strict_verdict": 0.65625
+  },
+  "stats": {
+    "aawden_strict_verdict": {
+      "name": "aawden_strict_verdict",
+      "count": 32,
+      "mean": 0.65625,
+      "stderr": 0.08396166117267452,
+      "std": 0.47495887979908324,
+      "min": 0.0,
+      "max": 1.0,
+      "values": [
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "predictions": [
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:59a07cbe5fcc24ba0e4a3378",
+      "prompt": "59a07cbe5fcc24ba0e4a3378",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The name stays interpolated even though the other bind argument is a separate bound value.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The name stays interpolated even though the other bind argument is a separate bound value.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:ccb6875cf6d7c3d6c205291c",
+      "prompt": "ccb6875cf6d7c3d6c205291c",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a nonmember session.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a nonmember session.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:58c3cec32b204f550f209e53",
+      "prompt": "58c3cec32b204f550f209e53",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The later assignment overwrites the early owner set for the authenticated session.\",\"evidence_lines\":[2,3,4,5,6,7,8,9,10],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The later assignment overwrites the early owner set for the authenticated session.\",\"evidence_lines\":[2,3,4,5,6,7,8,9,10],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:53c12a8b58a928007e4497eb",
+      "prompt": "53c12a8b58a928007e4497eb",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a suspended session.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a suspended session.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:1710ecaed7c91f8813e52a53",
+      "prompt": "1710ecaed7c91f8813e52a53",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The requested record is returned only to an actor allowed by the stated policy.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"not_vulnerable_for_target\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The requested record is returned only to an actor allowed by the stated policy.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"not_vulnerable_for_target\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:399bfb1ab76a37b7d37ead36",
+      "prompt": "399bfb1ab76a37b7d37ead36",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The literal passed into SQLite preserves doubled quotes.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The literal passed into SQLite preserves doubled quotes.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:7bce84715a66b9adabf4c197",
+      "prompt": "7bce84715a66b9adabf4c197",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a suspended session.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a suspended session.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:fed143c727fa22c146f27ef3",
+      "prompt": "fed143c727fa22c146f27ef3",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a nonowner request.\",\"evidence_lines\":[2,3,4,5,6,7],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a nonowner request.\",\"evidence_lines\":[2,3,4,5,6,7],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:137f42fc3ad66a6dc1e13b56",
+      "prompt": "137f42fc3ad66a6dc1e13b56",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for the requested record.\",\"evidence_lines\":[2,3,4,5,6,7],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for the requested record.\",\"evidence_lines\":[2,3,4,5,6,7],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:b2f4e28ce439f3dddb8fa126",
+      "prompt": "b2f4e28ce439f3dddb8fa126",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The OR operation allows a same tenant nonowner to access the record.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The OR operation allows a same tenant nonowner to access the record.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:63d5f3e53e9ea166a2fac01e",
+      "prompt": "63d5f3e53e9ea166a2fac01e",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The assignment in line 5 overwrites the name before the query is executed.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The assignment in line 5 overwrites the name before the query is executed.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:f9caa8273da2b0fdb5967656",
+      "prompt": "f9caa8273da2b0fdb5967656",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The query stays literal.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The query stays literal.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:c86ee973b91830b73d2438b1",
+      "prompt": "c86ee973b91830b73d2438b1",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The assignment branch is ignored and the name remains a separate bound value.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The assignment branch is ignored and the name remains a separate bound value.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:4fbb36400f9ee816f8534645",
+      "prompt": "4fbb36400f9ee816f8534645",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The literal passed into SQLite preserves doubled quotes.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The literal passed into SQLite preserves doubled quotes.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:c74051ed8ffc79d58e2c081c",
+      "prompt": "c74051ed8ffc79d58e2c081c",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:6c83a7cb800fde3a8ebf1b73",
+      "prompt": "6c83a7cb800fde3a8ebf1b73",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for an authenticated session.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for an authenticated session.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:f4a4ba4c5122a2bf5879fb3d",
+      "prompt": "f4a4ba4c5122a2bf5879fb3d",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for an authenticated session.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for an authenticated session.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:51df96f464224dea8895f197",
+      "prompt": "51df96f464224dea8895f197",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"A name containing a quote takes the alternative branch and binds the name separately.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"A name containing a quote takes the alternative branch and binds the name separately.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:5d8bfa1300e591d7f571c1b2",
+      "prompt": "5d8bfa1300e591d7f571c1b2",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"A name containing a quote takes the raw interpolation branch.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"A name containing a quote takes the raw interpolation branch.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:e9e6defc7c425975fcabc7ce",
+      "prompt": "e9e6defc7c425975fcabc7ce",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The later assignment overwrites the owner set before the access check.\",\"evidence_lines\":[2,3,4,5,6,7,8,9,10],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The later assignment overwrites the owner set before the access check.\",\"evidence_lines\":[2,3,4,5,6,7,8,9,10],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:c7bfcb9853405352d50172cb",
+      "prompt": "c7bfcb9853405352d50172cb",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The requested record is returned only to an actor allowed by the stated policy.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"not_vulnerable_for_target\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The requested record is returned only to an actor allowed by the stated policy.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"not_vulnerable_for_target\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:8b67dcb380ccbe3f191b46cc",
+      "prompt": "8b67dcb380ccbe3f191b46cc",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The name stays bound while the placeholder is replaced.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The name stays bound while the placeholder is replaced.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:8ec7be883dd4f2d92512d2ed",
+      "prompt": "8ec7be883dd4f2d92512d2ed",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for an authenticated session.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for an authenticated session.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:11b19ef560c2070b5f6de600",
+      "prompt": "11b19ef560c2070b5f6de600",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:a2e7c5efce464b458695a5f4",
+      "prompt": "a2e7c5efce464b458695a5f4",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The literal passed into SQLite preserves doubled quotes.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The literal passed into SQLite preserves doubled quotes.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:092c24773308fbb10bb06750",
+      "prompt": "092c24773308fbb10bb06750",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"A name containing a quote takes the assignment branch and binds the name.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"A name containing a quote takes the assignment branch and binds the name.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:872d779669e3ce51d460a145",
+      "prompt": "872d779669e3ce51d460a145",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The name stays bound while the literal is fixed.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The name stays bound while the literal is fixed.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:31e824fca806892cadd4ecee",
+      "prompt": "31e824fca806892cadd4ecee",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a missing record.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a missing record.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:fc52d96fca45262ec98c6dfc",
+      "prompt": "fc52d96fca45262ec98c6dfc",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The name stays bound while the fixed fragment is appended.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The name stays bound while the fixed fragment is appended.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:c8a744591985bdf9c543f203",
+      "prompt": "c8a744591985bdf9c543f203",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The assignment inserts the name before the query is executed.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The assignment inserts the name before the query is executed.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:122f52c80477adbc3d91031b",
+      "prompt": "122f52c80477adbc3d91031b",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The later OR allows a same tenant nonowner to return the record.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The later OR allows a same tenant nonowner to return the record.\",\"evidence_lines\":[2,3,4,5,6,7,8,9],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3a99f58e67f5f011",
+      "task": "generative",
+      "sample_id": "category_route:71cb98253a574c4d6c108d41",
+      "prompt": "71cb98253a574c4d6c108d41",
+      "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The later OR allows a same tenant nonowner to return the record.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "parsed_answer": "{\"category\":\"access_control\",\"explanation\":\"The later OR allows a same tenant nonowner to return the record.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"verdict\":\"vulnerable\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "num_fewshot": null,
+    "limit": null,
+    "seed": null,
+    "trials": 1,
+    "batch_size": "auto",
+    "concurrency": 1,
+    "split": null,
+    "temperature": 0.0,
+    "top_p": null,
+    "top_k": null,
+    "max_tokens": null,
+    "stop_sequences": null,
+    "presence_penalty": null,
+    "frequency_penalty": null,
+    "num_completions": null,
+    "best_of": null,
+    "timeout": null,
+    "max_retries": 0,
+    "retry_delay": 1.0,
+    "judge_model": null,
+    "judge_prompt_version": null,
+    "track_performance": false,
+    "chat_template_kwargs": null,
+    "extra": {
+      "aawden_records_sha256": "a8a64fc782edc8cae173e6e70b8c264080ca84618fcd2f687fea649a5a0daf82",
+      "parser": "strict-v1"
+    }
+  },
+  "model_spec": "<auditkit.model.PrecomputedModel object at 0x7ec925735310>",
+  "errors": [],
+  "unscored": {},
+  "failed_count": 0,
+  "experiment_name": null,
+  "tags": [],
+  "perf": null,
+  "model_size": null,
+  "token_usage": null,
+  "metadata": {
+    "inputs": []
+  }
+}

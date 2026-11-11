@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_00f24313b92f",
+    "family_id": "wsp_discovery_sql_injection_escape_map_bound",
+    "source_id": "wsp_discovery_sql_injection_escape_map_bound",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [3],\n  \"explanation\": \"The function `lookup` is vulnerable to SQL injection because it constructs the SQL query string by concatenating the sanitized `safe` string with a literal placeholder `?`. This allows an attacker to inject malicious SQL code into the `username` parameter, which will be executed by the database. For example, an attacker could provide a username like `' OR '1'='1` to bypass the lookup.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "c19f44524327576eddf241c72b05883b27b1021d6c60d816816a656e54d8ea89",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    escapes = {\"'\": \"''\"}\n    safe = \"\".join(escapes.get(ch, ch) for ch in username)\n    return conn.execute(\"SELECT name FROM users WHERE name = ?\", (safe.replace(\"''\", \"'\"),)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 234,
+    "output_tokens": 127,
+    "finish_reason": "stop",
+    "latency_seconds": 3.01233467499992,
+    "request_id": "9b9ead7ac8d6b8318c468a88"
+  },
+  "sha256": "91959f40f7955b634a6a42807179e2775e789256f8e7a9b136d91458c6c9a07e"
+}

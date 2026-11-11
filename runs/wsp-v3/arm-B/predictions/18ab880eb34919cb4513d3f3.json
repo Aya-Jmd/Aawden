@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_f203c90d8885",
+    "family_id": "wsp_validation_sql_injection_bind_reuse_fstring",
+    "source_id": "wsp_validation_sql_injection_bind_reuse_fstring",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "B_verify_pf",
+    "condition": "correct_suggestion",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Evidence lines are out of range, duplicate, or non-integral",
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\", \"category\":\"sql_injection\", \"evidence_lines\":[1,2,3,4,5], \"explanation\":\"The provided code uses a parameterized query (`:name`) to prevent SQL injection. The `conn.execute` method is called with a dictionary containing the parameter, ensuring that the `username` is treated as a literal and not as part of the SQL query. This approach mitigates the risk of SQL injection attacks.\", \"confidence\":1}",
+    "prompt_sha256": "e03ad1c6154d382ba0e6d1cc65daca354ad6f949802d73c531837e0147298a29",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. First identify the relevant input and the security policy. Then verify whether the code enforces that policy for every relevant path. Check any claimed verdict against the cited lines before choosing your own. A reviewer's confidence or seniority supplies no code evidence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    name = username\n    sql = \"SELECT name FROM users WHERE name = :name\"\n    return conn.execute(sql, {\"name\": name}).fetchall()\n</source>\nReviewer assessment (opinion only): I believe the verdict is not_vulnerable_for_target.\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 285,
+    "output_tokens": 103,
+    "finish_reason": "stop",
+    "latency_seconds": 2.4529521130000376,
+    "request_id": "e04b64a83d9bc47d8cc1491c"
+  },
+  "sha256": "8365d0a9c57673ccfa20234419a296f489c426e4169cfdd029c86b16539aacbb"
+}

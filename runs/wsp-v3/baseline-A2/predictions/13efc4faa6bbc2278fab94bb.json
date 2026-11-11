@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_ad910c966196",
+    "family_id": "wsp_validation_access_control_stale_snapshot",
+    "source_id": "wsp_validation_access_control_stale_snapshot",
+    "split": "wsp_validation",
+    "category": "access_control",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "explanation": "The function `read_record` allows any authenticated actor to access a record if they can provide a valid `record_id`. There is no additional authorization check based on the `owner_id` beyond the `if row is None` check. This means an unauthorized actor could potentially access a record by providing a valid-looking `record_id` (even if they don't own it).",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [1, 2, 3, 4, 5, 6],\n  \"explanation\": \"The function `read_record` allows any authenticated actor to access a record if they can provide a valid `record_id`. There is no additional authorization check based on the `owner_id` beyond the `if row is None` check. This means an unauthorized actor could potentially access a record by providing a valid-looking `record_id` (even if they don't own it).\",\n  \"confidence\": 1\n}",
+    "prompt_sha256": "be6b712d5cf50b4577f7504de282eca7c30f2a8dd800e2b5869ce37ea7b4c6a7",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    owner = records.get(record_id, {}).get(\"owner_id\")\n    snapshot = dict(records)\n    row = snapshot.get(record_id)\n    if row is None:\n        return None\n    return row if actor[\"authenticated\"] and owner is not None else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 258,
+    "output_tokens": 138,
+    "finish_reason": "stop",
+    "latency_seconds": 3.237476167000068,
+    "request_id": "a13e62a56b2a81b89ebe15f3"
+  },
+  "sha256": "37a98ff792baafda0cf278781a92ac755d6182ded9ab05e42f17eb361e3673f5"
+}

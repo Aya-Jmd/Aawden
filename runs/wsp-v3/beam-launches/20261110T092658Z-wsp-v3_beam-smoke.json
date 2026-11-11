@@ -1,0 +1,34 @@
+{
+  "started_at": "20261110T092658Z",
+  "gpu": "RTX4090",
+  "cpu": 2.0,
+  "memory": "32Gi",
+  "timeout_s": 600,
+  "estimated_max_cost_usd": 0.2838,
+  "max_cost_usd_guard": 0.4,
+  "output_subdir": "wsp-v3/beam-smoke",
+  "volume_path": "aawden-v3/wsp-v3/beam-smoke",
+  "command": [
+    "sh",
+    "-c",
+    "{python} aawden.py doctor --config configs/model.json && {python} scripts/beam_entry.py check"
+  ],
+  "task_id": "e053851d-c8c8-4c77-a61a-e3912c097a9c",
+  "exit_code": 1,
+  "result": {
+    "command": [
+      "sh",
+      "-c",
+      "/usr/bin/python3.11 aawden.py doctor --config configs/model.json && /usr/bin/python3.11 scripts/beam_entry.py check"
+    ],
+    "copied_files": [
+      "check.json"
+    ],
+    "exit_code": 1,
+    "output_subdir": "wsp-v3/beam-smoke",
+    "seconds": 13.9,
+    "task_id": "e053851d-c8c8-4c77-a61a-e3912c097a9c",
+    "volume_path": "aawden-v3/wsp-v3/beam-smoke"
+  },
+  "ended_at": "20261110T093548Z"
+}

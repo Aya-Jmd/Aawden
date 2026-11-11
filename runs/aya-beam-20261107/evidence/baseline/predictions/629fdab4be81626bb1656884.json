@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_8f21f5b64f6a",
+    "family_id": "sql_injection_order",
+    "source_id": "sql_injection_order",
+    "split": "screen",
+    "category": "sql_injection",
+    "method": "A",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1],\n  \"explanation\": \"The function `lookup` constructs a SQL query dynamically using f-string formatting, which includes the untrusted `username` variable directly in the query. This allows an attacker to inject malicious SQL code, leading to potential SQL injection vulnerabilities (lines 1).\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "e69613c92c7d43d2130a433ca8255c561888e0190f71d31e058ed2d7b5e112a8",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3; username is untrusted. A lookup must treat the supplied name as a literal value; it must not return other users. The database schema and connection are trusted.\n<source>\ndef lookup(conn, username):\n    query = f\"SELECT name FROM users WHERE name = '{username}' ORDER BY name\"\n    return conn.execute(query).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 214,
+    "output_tokens": 99,
+    "finish_reason": "stop",
+    "latency_seconds": 2.5600810640000873,
+    "request_id": "0ecaa301d815e1148319a70d"
+  },
+  "sha256": "413473bb942a87f0a27ad93af9162cf27a8871ced313a696a15b95f08edbd12e"
+}

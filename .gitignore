@@ -1,0 +1,47 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.vendor/
+.cache/
+*.egg-info/
+dist/
+build/
+
+# Secrets: each collaborator keeps their own .env (see .env.example)
+.env
+.env.*
+!.env.example
+
+# Personal hackathon material, not redistributable
+RESSOURCES/
+
+# Model weights: too large for GitHub and covered by Aya's non-commercial license.
+# Share adapters privately and check them against the SHA-256 in configs/.
+checkpoints/
+*.safetensors
+*.bin
+*.pt
+
+# Experiment outputs: keep only the evidence the docs cite
+runs/*
+!runs/.gitkeep
+!runs/aya-beam-20261107/
+!runs/aya-rigorous/
+runs/**/*.log
+
+# The sealed final set is committed by hash only (configs/wsp-data.json); its cases stay out of git.
+datasets/wsp-final.json
+
+# Adapter weights for the live demo; shipped with the deployment, not the repo.
+demo/
+
+# Local working folders from the pre-hackathon retrain study (weights, source copies, dumps).
+.retrain-source/
+inputs/
+jobinput/
+retrain-in/
+snapshot/
+
+# Agent working memory for this repo's own sessions; not part of the project.
+.handoff/

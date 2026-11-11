@@ -1,0 +1,1476 @@
+[
+  {
+    "case_id": "c_cab5d4f0e9d4",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": true
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_66cb044697b2",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_9b0c6fd257b1",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": true
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_747e9c39fc9d",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_d0d3be6272f8",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": true
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_1c38f55f7563",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_bc47b4be297c",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": true
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_1036acc4e121",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_f7139f4db763",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": true
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_1ff278c4ab38",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_c353f6477461",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": true
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_aa42f4bd85d1",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_a87627aeb8bb",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_d41ceb8d3a89",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_09002537881b",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": true
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_8e20e311ddae",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_17ffdc103265",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": true
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_d63805dc8577",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_da8b14a40f3a",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": true
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_ca3bd6df42f4",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_f77bd1f2bda8",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": true
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_04e9c11fb9c5",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_8f21f5b64f6a",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": true
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_ac60f48104c3",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_access",
+        "input": "alice",
+        "passed": true
+      },
+      {
+        "test": "legitimate_access",
+        "input": "bob",
+        "passed": true
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never') OR 1=1 --",
+        "violation": false
+      },
+      {
+        "test": "adversarial_access",
+        "input": "never' OR '1'='1",
+        "violation": false
+      },
+      {
+        "test": "literal_quote_preserved",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_0d4b51222e65",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_925d109882b9",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_6eea86eb3d56",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_98b339a8264d",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_36a0ff981237",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_a0a2782d091f",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_36aead29833b",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": true
+      },
+      {
+        "test": "administrator_permitted",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_9fe64b1b462b",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      },
+      {
+        "test": "administrator_permitted",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_f37745cec1eb",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_475e0faace60",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_e018d08b67e4",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_3b9224a1096b",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_ed281de5bfcc",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_004da1087312",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_b4abafe007cd",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_fe60d1a2e5f1",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_4cd6854df803",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_5e3902999280",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_212d03fcce6d",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_e8eeb58ea3a4",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_8bba05f0a26b",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": true
+      },
+      {
+        "test": "administrator_permitted",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_b88878c18e4f",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      },
+      {
+        "test": "administrator_permitted",
+        "passed": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_e55ae98fea7c",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_ca66eae29ad0",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_d5bb5125980a",
+    "observed_verdict": "vulnerable",
+    "expected_verdict": "vulnerable",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": true
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": true
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  },
+  {
+    "case_id": "c_17cc477097d3",
+    "observed_verdict": "not_vulnerable_for_target",
+    "expected_verdict": "not_vulnerable_for_target",
+    "passed": true,
+    "checks": [
+      {
+        "test": "legitimate_and_missing_access",
+        "passed": true
+      },
+      {
+        "test": "cross_owner_same_tenant",
+        "violation": false
+      },
+      {
+        "test": "cross_tenant_access",
+        "violation": false
+      }
+    ],
+    "review": "Executable behavioral evidence; authored and reviewed by the same coding agent."
+  }
+]

@@ -1,0 +1,75 @@
+{
+  "adapter_bytes": 167819216,
+  "adapter_file": "v5.safetensors",
+  "adapter_sha256": "f2ea778cb8de8973f1e9ee54229fcdbb0770559939106378b12b5d0b371455f7",
+  "chain_script_sha256": "e4bc5483c8ed5322c91464f31a5cc1c7f31cd9ab58f0c3e02e39fbef5015c60f",
+  "deviation": false,
+  "evaluation": null,
+  "examples_per_epoch": 260,
+  "history": [
+    {
+      "epoch": 1,
+      "mean_loss": 0.17697441132074976
+    },
+    {
+      "epoch": 2,
+      "mean_loss": 0.05687215064112234
+    },
+    {
+      "epoch": 3,
+      "mean_loss": 0.06313400317647112
+    },
+    {
+      "epoch": 4,
+      "mean_loss": 0.05477156614390249
+    }
+  ],
+  "protocol": {
+    "accumulation": 2,
+    "alpha": 32,
+    "conditions": [
+      "neutral",
+      "incorrect_suggestion"
+    ],
+    "epochs": 4,
+    "lr": 0.0002,
+    "rank": 16,
+    "resume_sha256": null,
+    "seed": 42,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "trace_prompt": false,
+    "training_sets": {
+      "neutral-confirmation-v2.json": {
+        "sha256": "61e6ba846fc2bde433cb3183328f2af801c6886dbf3f3471657053b8a9fdf35e"
+      },
+      "neutral-confirmation.json": {
+        "sha256": "98ab77d1d91e6f323732605086d6b8531a158663b0b8fcdc095e0f75e86efbeb"
+      },
+      "screen.json": {
+        "sha256": "3fedabb747d25b9aa98356a90f102c79a8d1ceb10394a2b5794735be4d55f523"
+      }
+    },
+    "verdict_weight": 20
+  },
+  "reference": {
+    "expected_to_match": false,
+    "note": "Retraining is not byte-identical by design.",
+    "recorded_adapter_sha256": "7ff5fdda6ed0f6f8c35e2956f13391f20f79c9a00e36df5889a783e4576fc7bb"
+  },
+  "resume_from": null,
+  "resume_sha256": null,
+  "source_fingerprint": "52ec422aec131851e7f0cbeefb861eaf0d7bc4b047b6935eca1e6147a6e077d0",
+  "stage": "v5",
+  "steps": 1040,
+  "target": "v7",
+  "train_script_sha256": "ae89ac42f54457209119a3b9b72797691a6c6701d1de76c7636ee3cb902c915f",
+  "trainable_parameters": 41943040
+}

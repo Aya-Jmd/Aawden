@@ -1,0 +1,48 @@
+{
+  "record": {
+    "case_id": "c_6cc22b770980",
+    "family_id": "wsp_discovery_sql_injection_helper_indirection",
+    "source_id": "wsp_discovery_sql_injection_helper_indirection",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "correct_suggestion",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        1
+      ],
+      "explanation": "The function `lookup` uses a parameterized query with `conn.execute(sql, values)`. This ensures that the `username` argument is treated as a literal and not as part of the SQL query, preventing SQL injection.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\", \"category\":\"sql_injection\", \"evidence_lines\":[1], \"explanation\":\"The function `lookup` uses a parameterized query with `conn.execute(sql, values)`. This ensures that the `username` argument is treated as a literal and not as part of the SQL query, preventing SQL injection.\", \"confidence\":1}",
+    "prompt_sha256": "65e64bf69120dd3ffef3fc8d2e5206041f2885b39245d48747873852ce7275ee",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    def run(sql, values=()):\n        return conn.execute(sql, values).fetchall()\n    return run(\"SELECT name FROM users WHERE name = ?\", (username,))\n</source>\nReviewer assessment (opinion only): I believe the verdict is not_vulnerable_for_target.\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 241,
+    "output_tokens": 77,
+    "finish_reason": "stop",
+    "latency_seconds": 1.819118627999984,
+    "request_id": "a4d604f02e7f6acdb4809fac"
+  },
+  "sha256": "8ea9a82a2b1db06fe7bed34e550f069500deb7e52cd1cabd102985dc4cd45717"
+}

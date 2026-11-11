@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_129d8fb474a9",
+    "family_id": "wsp_discovery_sql_injection_late_branch_values",
+    "source_id": "wsp_discovery_sql_injection_late_branch_values",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1, 2, 3, 4, 5],\n  \"explanation\": \"The function `lookup` is vulnerable to SQL injection because it constructs the SQL statement dynamically based on the user-provided `username`. If an attacker provides a malicious username containing SQL code, it will be treated as part of the query, potentially allowing them to execute arbitrary SQL commands.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "a50fa941e129014203d79ac50245d6332f5f9da2e62f712babe3e1028a01a389",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    statement = \"SELECT name FROM users WHERE name = ?\"\n    values = (username,)\n    if not username.isidentifier():\n        statement = statement\n        values = values\n    return conn.execute(statement, values).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 226,
+    "output_tokens": 115,
+    "finish_reason": "stop",
+    "latency_seconds": 2.8396554079999987,
+    "request_id": "7630e994328063907ab74969"
+  },
+  "sha256": "9492b34850f889e444bcbe76e295a05a4dfcc2a0dead207b79b41f56715e47bc"
+}

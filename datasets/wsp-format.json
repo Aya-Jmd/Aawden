@@ -1,0 +1,178 @@
+{
+  "purpose": "Original instruction-following items. Each item carries a programmatic verifier spec; scripts/build_wsp_regressions.py checks every verifier against a passing and a failing response.",
+  "cases": [
+    {
+      "id": "wsp-format-01",
+      "prompt": "Return a JSON object with the keys name and city for a fictional person. Output only the JSON.",
+      "verifier": {
+        "type": "json_keys",
+        "keys": [
+          "city",
+          "name"
+        ]
+      }
+    },
+    {
+      "id": "wsp-format-02",
+      "prompt": "Return a JSON object with exactly the keys width, height and depth describing a box. Output only JSON.",
+      "verifier": {
+        "type": "json_keys",
+        "keys": [
+          "depth",
+          "height",
+          "width"
+        ]
+      }
+    },
+    {
+      "id": "wsp-format-03",
+      "prompt": "Output a JSON object with keys title and year for any novel you like, and nothing else.",
+      "verifier": {
+        "type": "json_keys",
+        "keys": [
+          "title",
+          "year"
+        ]
+      }
+    },
+    {
+      "id": "wsp-format-04",
+      "prompt": "Return a JSON object with keys ids (a list of three integers) and total (their sum). Output only JSON.",
+      "verifier": {
+        "type": "json_keys",
+        "keys": [
+          "ids",
+          "total"
+        ]
+      }
+    },
+    {
+      "id": "wsp-format-05",
+      "prompt": "In at most 20 words, explain why the sky is blue.",
+      "verifier": {
+        "type": "max_words",
+        "n": 20
+      }
+    },
+    {
+      "id": "wsp-format-06",
+      "prompt": "Summarize the water cycle in twelve words or fewer.",
+      "verifier": {
+        "type": "max_words",
+        "n": 12
+      }
+    },
+    {
+      "id": "wsp-format-07",
+      "prompt": "Reply with a single word that names a primary color.",
+      "verifier": {
+        "type": "max_words",
+        "n": 1
+      }
+    },
+    {
+      "id": "wsp-format-08",
+      "prompt": "Write at least 40 words about the sea.",
+      "verifier": {
+        "type": "min_words",
+        "n": 40
+      }
+    },
+    {
+      "id": "wsp-format-09",
+      "prompt": "Start your reply with the word Answer: followed by your answer to 7 times 6.",
+      "verifier": {
+        "type": "starts_with",
+        "text": "Answer:"
+      }
+    },
+    {
+      "id": "wsp-format-10",
+      "prompt": "Write a two-sentence note that begins with Dear.",
+      "verifier": {
+        "type": "starts_with",
+        "text": "Dear"
+      }
+    },
+    {
+      "id": "wsp-format-11",
+      "prompt": "Write a short greeting and end it with the exact phrase Thank you.",
+      "verifier": {
+        "type": "ends_with",
+        "text": "Thank you."
+      }
+    },
+    {
+      "id": "wsp-format-12",
+      "prompt": "Write one sentence about rivers using only lowercase letters.",
+      "verifier": {
+        "type": "all_lowercase"
+      }
+    },
+    {
+      "id": "wsp-format-13",
+      "prompt": "Write a haiku in lowercase letters only.",
+      "verifier": {
+        "type": "all_lowercase"
+      }
+    },
+    {
+      "id": "wsp-format-14",
+      "prompt": "Describe a bicycle in one sentence without using any commas.",
+      "verifier": {
+        "type": "no_commas"
+      }
+    },
+    {
+      "id": "wsp-format-15",
+      "prompt": "List exactly three reasons to drink water, each as a bullet starting with '- '. Use no other lines.",
+      "verifier": {
+        "type": "bullet_count",
+        "n": 3
+      }
+    },
+    {
+      "id": "wsp-format-16",
+      "prompt": "List four planets as bullets beginning with '- '. Use no other lines.",
+      "verifier": {
+        "type": "bullet_count",
+        "n": 4
+      }
+    },
+    {
+      "id": "wsp-format-17",
+      "prompt": "Write a sentence that uses the words lantern, harbor and quiet.",
+      "verifier": {
+        "type": "contains_all",
+        "words": [
+          "lantern",
+          "harbor",
+          "quiet"
+        ]
+      }
+    },
+    {
+      "id": "wsp-format-18",
+      "prompt": "Name three fruits in one sentence with no commas.",
+      "verifier": {
+        "type": "no_commas"
+      }
+    },
+    {
+      "id": "wsp-format-19",
+      "prompt": "List five prime numbers under 20 as bullets beginning with '- ' and nothing else.",
+      "verifier": {
+        "type": "bullet_count",
+        "n": 5
+      }
+    },
+    {
+      "id": "wsp-format-20",
+      "prompt": "Give installation instructions for a kettle in three steps, starting with the text Step 1.",
+      "verifier": {
+        "type": "starts_with",
+        "text": "Step 1"
+      }
+    }
+  ]
+}

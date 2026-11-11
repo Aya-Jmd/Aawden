@@ -1,0 +1,48 @@
+{
+  "record": {
+    "case_id": "c_ae9e9e97072f",
+    "family_id": "wsp_validation_access_control_role_matrix",
+    "source_id": "wsp_validation_access_control_role_matrix",
+    "split": "wsp_validation",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        3
+      ],
+      "explanation": "The function `read_record` allows any caller to request a record by `record_id`. While it checks for `None` return to indicate unauthorized access (line 4), it does not enforce that only the owner of the requested record can receive it. The logic in line 6 checks a simple matrix based on `actor['role']` and `row['owner_id'] == actor['id']`, which is insufficient to guarantee that only the record owner receives the record.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"access_control\", \"evidence_lines\":[3], \"explanation\":\"The function `read_record` allows any caller to request a record by `record_id`. While it checks for `None` return to indicate unauthorized access (line 4), it does not enforce that only the owner of the requested record can receive it. The logic in line 6 checks a simple matrix based on `actor['role']` and `row['owner_id'] == actor['id']`, which is insufficient to guarantee that only the record owner receives the record.\", \"confidence\":1}",
+    "prompt_sha256": "8da56faef8220fa6217849cfb5607c6a94f363a05868330437c88e751e35e07a",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    matrix = {(\"member\", True): True, (\"member\", False): False}\n    allowed = matrix.get((actor[\"role\"], row[\"owner_id\"] == actor[\"id\"]), False)\n    return row if allowed else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 271,
+    "output_tokens": 125,
+    "finish_reason": "stop",
+    "latency_seconds": 2.9236543120000533,
+    "request_id": "7cc908b803997da885e5f797"
+  },
+  "sha256": "f4f8934d18a10939a08473b42c921ace6a98c709d3bd1c8432fea2a739d550fd"
+}

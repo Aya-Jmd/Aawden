@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_410c9f4c56ea",
+    "family_id": "confirmation_v3_sql_injection_identity_branch",
+    "source_id": "confirmation_v3_sql_injection_identity_branch",
+    "split": "neutral_confirmation_v3",
+    "category": "sql_injection",
+    "method": "plain",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "9ca28cf0696abe1a4325025288464f239e1c0d243f0caf17dfdeef8b523fa82c",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.\n<source>\n1 | def lookup(conn, username):\n2 |     if username:\n3 |         stmt = f\"SELECT name FROM users WHERE name = '{username}'\"\n4 |     else:\n5 |         stmt = \"SELECT name FROM users WHERE name = ''\"\n6 |     return conn.execute(stmt).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 240,
+    "output_tokens": 54,
+    "finish_reason": "stop",
+    "latency_seconds": 2.7479276190001656,
+    "request_id": "ba716cb45db0d91314b90ba5",
+    "storage_id": "6d07d59be23492c1e603b036"
+  },
+  "sha256": "fee122aa4992b992303fd857b78ab7d67f3c5201ba63a22f80411e264f5f0182"
+}

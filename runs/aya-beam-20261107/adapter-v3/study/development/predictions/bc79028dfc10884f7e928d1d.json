@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_0ca776c1a252",
+    "family_id": "neutral_confirmation_access_control_delegated_guard",
+    "source_id": "neutral_confirmation_access_control_delegated_guard",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "explanation": "A request can return another actor's record without the required policy check.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+    "prompt_sha256": "7d70cf23bd457ba937a3ee0918533a3e3bd05aa0557680c2aac2ace388afc0ed",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     def owner(row):\n3 |         return row[\"owner_id\"] == actor[\"id\"]\n4 |     row = records.get(record_id)\n5 |     if row and (owner(row) or actor.get(\"authenticated\")):\n6 |         return row\n7 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 270,
+    "output_tokens": 52,
+    "finish_reason": "stop",
+    "latency_seconds": 1.646791760000042,
+    "request_id": "2b2783be9aedc6aa03e948e0"
+  },
+  "sha256": "6081cbfa92278da920e068204888ca8725a0a395944a4029e6af71d2ce74e9d8"
+}

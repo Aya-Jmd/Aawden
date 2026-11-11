@@ -1,0 +1,60 @@
+{
+  "started_at": "20261110T125108Z",
+  "gpu": "A10G",
+  "cpu": 2.0,
+  "memory": "32Gi",
+  "timeout_s": 2100,
+  "estimated_max_cost_usd": 1.2326,
+  "max_cost_usd_guard": 1.6,
+  "output_subdir": "wsp-v3/merged-baseline-d",
+  "volume_path": "aawden-v3/wsp-v3/merged-baseline-d",
+  "command": [
+    "python",
+    "scripts/wsp_measure.py",
+    "--arms",
+    "A_pf",
+    "--label",
+    "merged-adapter",
+    "--lora-spec",
+    "configs/merged-v7-adapter-spec.json",
+    "--config",
+    "configs/model-merged-v7.json",
+    "--output",
+    "runs/wsp-v3/merged-baseline-d",
+    "--dataset",
+    "datasets/wsp-discovery.json",
+    "--dataset",
+    "datasets/wsp-validation.json"
+  ],
+  "task_id": "dd07d3d5-495f-47c6-958d-ed76c1424312",
+  "exit_code": 1,
+  "result": {
+    "command": [
+      "/usr/bin/python3.11",
+      "scripts/wsp_measure.py",
+      "--arms",
+      "A_pf",
+      "--label",
+      "merged-adapter",
+      "--lora-spec",
+      "configs/merged-v7-adapter-spec.json",
+      "--config",
+      "configs/model-merged-v7.json",
+      "--output",
+      "runs/wsp-v3/merged-baseline-d",
+      "--dataset",
+      "datasets/wsp-discovery.json",
+      "--dataset",
+      "datasets/wsp-validation.json"
+    ],
+    "copied_files": [
+      "manifest.json"
+    ],
+    "exit_code": 1,
+    "output_subdir": "wsp-v3/merged-baseline-d",
+    "seconds": 67.4,
+    "task_id": "dd07d3d5-495f-47c6-958d-ed76c1424312",
+    "volume_path": "aawden-v3/wsp-v3/merged-baseline-d"
+  },
+  "ended_at": "20261110T125243Z"
+}

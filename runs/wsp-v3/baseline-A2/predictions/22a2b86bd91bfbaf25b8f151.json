@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_699d3fe2b816",
+    "family_id": "wsp_discovery_sql_injection_chained_cursor_call",
+    "source_id": "wsp_discovery_sql_injection_chained_cursor_call",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1],\n  \"explanation\": \"The function `lookup` is vulnerable to SQL injection because it constructs the SQL query dynamically using f-string formatting. The user-provided `username` is directly included in the query without proper sanitization or parameterization. An attacker can manipulate the `username` value to inject malicious SQL code, potentially retrieving unauthorized data or performing arbitrary database operations.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "0c0bc0ee67f8ceeed08ddf843435223e59ae7520331f20edc4d45d23d3cb89ba",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    rows = conn.cursor().execute(\"SELECT name FROM users WHERE name = ?\", (username,)).fetchall()\n    return rows\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 205,
+    "output_tokens": 116,
+    "finish_reason": "stop",
+    "latency_seconds": 3.0681101569998646,
+    "request_id": "84b0f79a4c81571aca27d75e"
+  },
+  "sha256": "fd357d3527d9bdaaeba6d606abd8706357593e10349ce7cae7dbc56383e0f57f"
+}

@@ -1,0 +1,838 @@
+[
+  {
+    "case_id": "c_68be590ef469",
+    "family_id": "rigorous_development_access_control_disallowed_state",
+    "source_id": "rigorous_development_access_control_disallowed_state",
+    "split": "rigorous_development",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The final return checks the owner mismatch and the login status.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final return checks the owner mismatch and the login status.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "cd52f06ec0b8628aab5dba1a14a37371e04fe23ab1b921ed59254f03e1d27bb2",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     denials = {\"owner\": row[\"owner_id\"] != actor[\"id\"], \"login\": not actor[\"authenticated\"]}\n6 |     if denials[\"owner\"] and denials[\"login\"]:\n7 |         return None\n8 |     return row\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)) and (truthy(not actor['authenticated'])), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(not actor['authenticated'])), returns records.get(record_id)"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 650,
+    "output_tokens": 58,
+    "finish_reason": "stop",
+    "latency_seconds": 3.4558592079999926,
+    "request_id": "0b2524a60ee47c102e2d4dcd",
+    "storage_id": "f3f80e475ec0358f4afa017b"
+  },
+  {
+    "case_id": "c_ccad93e7d25e",
+    "family_id": "rigorous_development_access_control_wrong_comparison_field",
+    "source_id": "rigorous_development_access_control_wrong_comparison_field",
+    "split": "rigorous_development",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The projected owner and returned row must match to deny the request.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The projected owner and returned row must match to deny the request.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "80e6510e4c0ed602b9fb0a3afd804256c0e4251b7d12f2e2005799861212332d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     key = \"owner_id\"\n6 |     field = \"id\"\n7 |     expected = actor[field]\n8 |     return row if row[key] == expected else None\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)), returns None"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 581,
+    "output_tokens": 53,
+    "finish_reason": "stop",
+    "latency_seconds": 2.4448414639999783,
+    "request_id": "6aa5089b07ef85b126741bfa",
+    "storage_id": "8ea4c9458fc89d2acd45d9cd"
+  },
+  {
+    "case_id": "c_9adf8461c2f0",
+    "family_id": "rigorous_development_access_control_wrong_comparison_field",
+    "source_id": "rigorous_development_access_control_wrong_comparison_field",
+    "split": "rigorous_development",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The projected field value must match the returned row.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The projected field value must match the returned row.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "bc4c4926a17a37931fb482426a95ab570ea9f8230ef38eb35b10e0f644a62abc",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     key = \"tenant_id\"\n6 |     field = \"tenant_id\"\n7 |     expected = actor[field]\n8 |     return row if row[key] == expected else None\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy(records.get(record_id)['tenant_id'] == actor['tenant_id'])), returns records.get(record_id)\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(records.get(record_id)['tenant_id'] == actor['tenant_id'])), returns None"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 670,
+    "output_tokens": 50,
+    "finish_reason": "stop",
+    "latency_seconds": 2.3109704230000148,
+    "request_id": "ae4f66d265380a66d1d726ee",
+    "storage_id": "f0a45c4d6b762ef707b28471"
+  },
+  {
+    "case_id": "c_69de89a586d3",
+    "family_id": "rigorous_development_access_control_boolean_any",
+    "source_id": "rigorous_development_access_control_boolean_any",
+    "split": "rigorous_development",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The final expression can return the row only when the owner comparison succeeds.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "031c70c78b77a7f137616a05230094b9cf7130dfce9ecafb1c11b2be15b5cbe7",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     tests = (row[\"owner_id\"] == actor[\"id\"], actor[\"authenticated\"])\n6 |     return row if next(iter(tests)) else None\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (truthy(next(iter((False, actor['authenticated']))))), returns records.get(record_id)\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (falsy(next(iter((False, actor['authenticated']))))), returns None"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 640,
+    "output_tokens": 50,
+    "finish_reason": "stop",
+    "latency_seconds": 2.304226147999998,
+    "request_id": "0ee9479348499c85427769bb",
+    "storage_id": "2bf2bee1cf2435c5315a3631"
+  },
+  {
+    "case_id": "c_70b94f41e5a9",
+    "family_id": "rigorous_development_access_control_cached_policy",
+    "source_id": "rigorous_development_access_control_cached_policy",
+    "split": "rigorous_development",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The preexisting session ID survives setdefault and the later update.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The preexisting session ID survives setdefault and the later update.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "82c20d47a6f3057afeb22c255f6e1a462b1d2beb8fb1d1f5b93e74059b95c624",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     permit = {record_id: row[\"owner_id\"] == actor[\"id\"]}\n6 |     permit.setdefault(record_id, True)\n7 |     permit.update({record_id: permit[record_id]})\n8 |     return row if permit[record_id] else None\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy(permit[record_id])), returns row\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(permit[record_id])), returns None"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 655,
+    "output_tokens": 59,
+    "finish_reason": "stop",
+    "latency_seconds": 2.7681001790000153,
+    "request_id": "8ca11797b1b7eabbd95d6fbd",
+    "storage_id": "e587c03a265af4218eac436f"
+  },
+  {
+    "case_id": "c_6e7667272a20",
+    "family_id": "rigorous_development_access_control_boolean_any",
+    "source_id": "rigorous_development_access_control_boolean_any",
+    "split": "rigorous_development",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The final expression can return the row only when the owner comparison succeeds.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "4c7dab4d149dd88dedb8032c0f7682016d00f4b79a2a923309dba8c49ae0c708",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     tests = (row[\"owner_id\"] == actor[\"id\"], actor[\"authenticated\"])\n6 |     return row if any(tests) else None\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (truthy(any((False, actor['authenticated'])))), returns records.get(record_id)\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (falsy(any((False, actor['authenticated'])))), returns None"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 636,
+    "output_tokens": 50,
+    "finish_reason": "stop",
+    "latency_seconds": 2.306885961000006,
+    "request_id": "434224f4f265cccf15601206",
+    "storage_id": "5dbba084821a2cf5b2d7017b"
+  },
+  {
+    "case_id": "c_1401f2313e50",
+    "family_id": "rigorous_development_access_control_disallowed_state",
+    "source_id": "rigorous_development_access_control_disallowed_state",
+    "split": "rigorous_development",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The final return checks the owner denial or the login denial.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final return checks the owner denial or the login denial.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "bf2065653292c578f4a11b5d8280858d591959af883da401a0bcce9040d42e3c",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     denials = {\"owner\": row[\"owner_id\"] != actor[\"id\"], \"login\": not actor[\"authenticated\"]}\n6 |     if denials[\"owner\"] or denials[\"login\"]:\n7 |         return None\n8 |     return row\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 7 when (falsy(records.get(record_id) is None)), returns None"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 593,
+    "output_tokens": 58,
+    "finish_reason": "stop",
+    "latency_seconds": 2.6483098920000145,
+    "request_id": "6b69659d221ada5eb1881489",
+    "storage_id": "95b9b2ebdaf987f50182eef0"
+  },
+  {
+    "case_id": "c_66c27cbeb258",
+    "family_id": "rigorous_development_access_control_cached_policy",
+    "source_id": "rigorous_development_access_control_cached_policy",
+    "split": "rigorous_development",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The final permit preserves the owner check for a return.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final permit preserves the owner check for a return.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+    "prompt_sha256": "7662743781c93917fca3654e273bade9b0ab538a8c68d24df69a26777df4f378",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     permit = {record_id: row[\"owner_id\"] == actor[\"id\"]}\n6 |     permit.setdefault(record_id, True)\n7 |     permit.update({record_id: actor[\"authenticated\"]})\n8 |     return row if permit[record_id] else None\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (truthy(permit[record_id])), returns row\nread_record, line 8 when (falsy(records.get(record_id) is None)) and (falsy(permit[record_id])), returns None"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 654,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 2.6840032789999952,
+    "request_id": "9208ddc7f3daa768b50dd0e1",
+    "storage_id": "0369516fcca7e8c4e53170c1"
+  },
+  {
+    "case_id": "c_86462863a52a",
+    "family_id": "confirmation_v5_access_control_predicate_sequence",
+    "source_id": "confirmation_v5_access_control_predicate_sequence",
+    "split": "neutral_confirmation_v5",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The final expression can return only the requested row or a default return of None.",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final expression can return only the requested row or a default return of None.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+    "prompt_sha256": "30232e292d50344873ba0a6fcfd6255b9bc06ce9b2b6955b1b5e79730d1082d5",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     owner = lambda item: item[\"owner_id\"] == actor[\"id\"]\n3 |     return next((row for key, row in records.items() if key == record_id and (owner(row) or actor[\"authenticated\"])), None)\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 3, returns next((row for key, row in records.items() if key == record_id and (owner(row) or actor['authenticated'])), None)"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 553,
+    "output_tokens": 52,
+    "finish_reason": "stop",
+    "latency_seconds": 2.396904218000003,
+    "request_id": "aea647b545805f71af9b7b69",
+    "storage_id": "b345cd01cc4cdc2eeb3d9c73"
+  },
+  {
+    "case_id": "c_514ebee6f38c",
+    "family_id": "confirmation_v5_access_control_predicate_sequence",
+    "source_id": "confirmation_v5_access_control_predicate_sequence",
+    "split": "neutral_confirmation_v5",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The requested key must be present in the dictionary to return a row.",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The requested key must be present in the dictionary to return a row.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+    "prompt_sha256": "0f049e291665bc6987056ad1cf2ea84f1b27a40b5793bf206e2f7f0e4fb5c6e6",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     owner = lambda item: item[\"owner_id\"] == actor[\"id\"]\n3 |     return next((row for key, row in records.items() if key == record_id and owner(row)), None)\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 3, returns next((row for key, row in records.items() if key == record_id and owner(row)), None)"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 539,
+    "output_tokens": 50,
+    "finish_reason": "stop",
+    "latency_seconds": 2.2681084879999958,
+    "request_id": "05a4823b166064cf7d900ee7",
+    "storage_id": "d9f71a7f6cfb55af44e9ca8d"
+  },
+  {
+    "case_id": "c_7d2a5b0922bd",
+    "family_id": "confirmation_v5_access_control_request_policy",
+    "source_id": "confirmation_v5_access_control_request_policy",
+    "split": "neutral_confirmation_v5",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The final expression can return the row only when the return value of the predicate is true.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the return value of the predicate is true.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "e809ff66352432043c1df1467fde0a05c7052a8fe13c85db0bb3667889bb8750",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     allowed = {record_id: actor[\"authenticated\"]}\n6 |     return row if allowed[record_id] else None\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (truthy({record_id: actor['authenticated']}[record_id])), returns records.get(record_id)\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (falsy({record_id: actor['authenticated']}[record_id])), returns None"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 637,
+    "output_tokens": 54,
+    "finish_reason": "stop",
+    "latency_seconds": 2.455985212999991,
+    "request_id": "21650c05712e0eb571d0ec7a",
+    "storage_id": "92a8a7f2c9f669d6f2705fc9"
+  },
+  {
+    "case_id": "c_916ec0422966",
+    "family_id": "confirmation_v5_access_control_request_policy",
+    "source_id": "confirmation_v5_access_control_request_policy",
+    "split": "neutral_confirmation_v5",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The return checks the owner-filtered map entry for the requested key.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The return checks the owner-filtered map entry for the requested key.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "3056db273520d1c1378d183e0ad0cbe9daf80ec039586fdbdb2356ecab79c019",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     allowed = {record_id: row[\"owner_id\"] == actor[\"id\"]}\n6 |     return row if allowed[record_id] else None\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (truthy({record_id: False}[record_id])), returns records.get(record_id)\nread_record, line 6 when (falsy(records.get(record_id) is None)) and (falsy({record_id: False}[record_id])), returns None"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 638,
+    "output_tokens": 50,
+    "finish_reason": "stop",
+    "latency_seconds": 2.288561595999994,
+    "request_id": "d64f7646c97b790ae0074d48",
+    "storage_id": "e381b663fe301339e02005cb"
+  },
+  {
+    "case_id": "c_a0cb7b039a07",
+    "family_id": "confirmation_v5_access_control_pair_match",
+    "source_id": "confirmation_v5_access_control_pair_match",
+    "split": "neutral_confirmation_v5",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The code can return the requested row without enforcing the stated access policy.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The code can return the requested row without enforcing the stated access policy.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "fe1c8288d3be94d14254e360db668bc50f018e85829a9c85bf54cfdb0be3ae3f",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     match (row, actor[\"id\"]):\n4 |         case ({\"owner_id\": owner}, who) if actor[\"authenticated\"]:\n5 |             return row\n6 |         case _:\n7 |             return None\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\n"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 519,
+    "output_tokens": 52,
+    "finish_reason": "stop",
+    "latency_seconds": 2.3843947390000153,
+    "request_id": "fe47ff94886baeff22bbe956",
+    "storage_id": "866b4a49513dd9dadf60b54b"
+  },
+  {
+    "case_id": "c_60634b662439",
+    "family_id": "confirmation_v5_access_control_pair_match",
+    "source_id": "confirmation_v5_access_control_pair_match",
+    "split": "neutral_confirmation_v5",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The pattern matches the owner-filtered row and returns it only to an owner.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The pattern matches the owner-filtered row and returns it only to an owner.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+    "prompt_sha256": "e3fafcc786be5648f6af050236fd1ece971e4975108a0e6c4dcb4f47d965114f",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     match (row, actor[\"id\"]):\n4 |         case ({\"owner_id\": owner}, who) if owner == who:\n5 |             return row\n6 |         case _:\n7 |             return None\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\n"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 519,
+    "output_tokens": 54,
+    "finish_reason": "stop",
+    "latency_seconds": 2.4715763790000267,
+    "request_id": "09e7eb980cdd982c01c6d1f7",
+    "storage_id": "82f01ccdeaefcdbbf5051f31"
+  },
+  {
+    "case_id": "c_89e7887bad69",
+    "family_id": "confirmation_v5_access_control_deferred_return",
+    "source_id": "confirmation_v5_access_control_deferred_return",
+    "split": "neutral_confirmation_v5",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The return checks the final row value rather than the result of the delegated function.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The return checks the final row value rather than the result of the delegated function.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "881d144a2aa177b4ca62a03fea443bd2c5946fbd22994bd44c0e0391c1f90e35",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     response = (lambda: row) if actor[\"authenticated\"] else (lambda: None)\n6 |     return response()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns ((lambda: row) if actor['authenticated'] else lambda: None)()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 579,
+    "output_tokens": 52,
+    "finish_reason": "stop",
+    "latency_seconds": 2.3868825089999746,
+    "request_id": "4a3328d6bbc65da5c4dfb29c",
+    "storage_id": "4cbdadb7a38b7b939a2af81f"
+  },
+  {
+    "case_id": "c_41cc6a450028",
+    "family_id": "confirmation_v5_access_control_deferred_return",
+    "source_id": "confirmation_v5_access_control_deferred_return",
+    "split": "neutral_confirmation_v5",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The returned row is present only when the owner filter succeeds.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The returned row is present only when the owner filter succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "c993c6808a8bf2fed9070586134e06a49bb51f43d417f589d5cbb6f2cdc81420",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     response = (lambda: row) if row[\"owner_id\"] == actor[\"id\"] else (lambda: None)\n6 |     return response()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns (lambda: None)()"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 576,
+    "output_tokens": 54,
+    "finish_reason": "stop",
+    "latency_seconds": 2.4608481949999828,
+    "request_id": "b7a0c1475a70adb7df8cdd69",
+    "storage_id": "5609d1bd97ab589f3415a0af"
+  },
+  {
+    "case_id": "c_e92807a82617",
+    "family_id": "confirmation_v5_access_control_indexed_result",
+    "source_id": "confirmation_v5_access_control_indexed_result",
+    "split": "neutral_confirmation_v5",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "explanation": "The final expression can return the requested row only when the return type is a row.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the requested row only when the return type is a row.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "83829bf2c0c93c43efcdab5cb7aa7923fddeed212a9056ee28e7ede2f79988c0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     allowed = actor[\"authenticated\"]\n6 |     return (None, row)[int(allowed)]\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns (None, records.get(record_id))[int(actor['authenticated'])]"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 577,
+    "output_tokens": 53,
+    "finish_reason": "stop",
+    "latency_seconds": 2.4403624610000065,
+    "request_id": "002e8c292be24cf45dbf2da7",
+    "storage_id": "f0c99af901011727f24401f6"
+  },
+  {
+    "case_id": "c_56a48d258f7a",
+    "family_id": "confirmation_v5_access_control_indexed_result",
+    "source_id": "confirmation_v5_access_control_indexed_result",
+    "split": "neutral_confirmation_v5",
+    "category": "access_control",
+    "method": "policy",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "explanation": "The returned value depends on the owner comparison.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The returned value depends on the owner comparison.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+    "prompt_sha256": "208ee06f3a4cc0c3100e71febc6d29266d70f3b571be260475dfa2ea0c632954",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Find every path returning a record and check the exact allow rule in the threat model. Ask whether an unauthorized actor could take any such path using an existing record ID. A check on the requested record that enforces the stated rule is sufficient. A login, a tenant match, or a check on some other record does not establish ownership. Honor an administrator or explicit member exception when the policy allows it. Mentally execute the code with a logged-in non-owner from the same tenant, using an existing record ID. Also try a non-owner outside the tenant and a legitimate owner. Substitute the resulting booleans into each guard in execution order, including any/all, and/or, negation and indices into returned values. Track which record is checked, later assignments, and every early return. Return vulnerable only if an unauthorized actor can reach a return of the requested data. Under an owner-only policy, a correctly enforced ownership check alone is enough. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     allowed = row[\"owner_id\"] == actor[\"id\"]\n6 |     return (None, row)[int(allowed)]\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic paths assuming the caller is not the requested record owner\nread_record, line 4 when (truthy(records.get(record_id) is None)), returns None\nread_record, line 6 when (falsy(records.get(record_id) is None)), returns None"
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 567,
+    "output_tokens": 51,
+    "finish_reason": "stop",
+    "latency_seconds": 2.321309579000001,
+    "request_id": "7c70bc8cf1bd6cbeb8055ecc",
+    "storage_id": "4ce49be60bb231143566d66f"
+  }
+]

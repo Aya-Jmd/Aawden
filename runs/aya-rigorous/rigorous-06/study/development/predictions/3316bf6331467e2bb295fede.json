@@ -1,0 +1,51 @@
+{
+  "record": {
+    "case_id": "c_e4019bd5945a",
+    "family_id": "rigorous_development_sql_injection_binding_misdirection",
+    "source_id": "rigorous_development_sql_injection_binding_misdirection",
+    "split": "rigorous_development",
+    "category": "sql_injection",
+    "method": "policy_first",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "category": "sql_injection",
+      "explanation": "The only use of the name is the named bind argument.",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "verdict": "not_vulnerable_for_target",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5],\"verdict\":\"not_vulnerable_for_target\",\"confidence\":0.9}",
+    "prompt_sha256": "eafd833c7609bcb4e98f523fb85e6c7dff5217f241357cecd0bf5b72e5e4a8ae",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review only the named weakness under the stated threat model. Judge the behavior of the shown source. The answer already starts inside the explanation string of a JSON object. Continue that string with one short sentence about the decisive check or missing check. Use plain words without quotes or backslashes. Close the string, then add evidence_lines (a list of the displayed source line numbers), verdict (one of vulnerable, not_vulnerable_for_target, insufficient_information), and confidence (a number from 0 to 1). Close the object. Give only the continuation of the JSON, with no Markdown. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. Use the symbolic path notes to trace the policy or executed query. Other input values in the notes remain unknown. Verify the notes against the original code, including any paths or calls the notes omit. The explanation should identify the relevant branch and its consequence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     statement = \"SELECT name FROM users WHERE name = :value\"\n3 |     values = {\"value\": username}\n4 |     statement = statement.replace(\"SELECT\", \"SELECT\")\n5 |     return conn.execute(statement, values).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nSymbolic SQL text and bind arguments\nlookup, line 5, returns conn.execute('SELECT name FROM users WHERE name = :value', {'value': username}).fetchall()"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"category\":\"sql_injection\",\"explanation\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 520,
+    "output_tokens": 43,
+    "finish_reason": "stop",
+    "latency_seconds": 2.6804342360010196,
+    "request_id": "99a2769b52528dc8f2d1b92f"
+  },
+  "sha256": "183b2128aa9f4145994e708db7f6429f9be01bbf9c0f9c1b1dcc6ac5e1ea7c0d"
+}

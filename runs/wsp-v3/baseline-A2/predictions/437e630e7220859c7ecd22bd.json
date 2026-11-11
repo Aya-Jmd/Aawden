@@ -1,0 +1,52 @@
+{
+  "record": {
+    "case_id": "c_ef3b6d9ac203",
+    "family_id": "wsp_validation_access_control_sentinel_owner",
+    "source_id": "wsp_validation_access_control_sentinel_owner",
+    "split": "wsp_validation",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "explanation": "The `read_record` function implements a simple access control mechanism by checking the `owner_id` of the requested record against the actor's ID. If they match, the record is returned; otherwise, `None` is returned. This ensures that only the owner of a record can access it, as per the threat model.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\", \"category\":\"access_control\", \"evidence_lines\":[1,2,3,4,5], \"explanation\":\"The `read_record` function implements a simple access control mechanism by checking the `owner_id` of the requested record against the actor's ID. If they match, the record is returned; otherwise, `None` is returned. This ensures that only the owner of a record can access it, as per the threat model.\", \"confidence\":1}",
+    "prompt_sha256": "7a16fad1aa5bc7b88a06204f50c38f2ccc2745a04f8773496df8a58dd2f1ec33",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    sentinel = row.get(\"owner_id\") or actor[\"id\"]\n    return row if sentinel == actor[\"id\"] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 250,
+    "output_tokens": 107,
+    "finish_reason": "stop",
+    "latency_seconds": 2.620281138999985,
+    "request_id": "41a31f36d9cca70a0852d3e6"
+  },
+  "sha256": "fda39bae5ce86cc30ef9ea4113471923e47943d816adcc72c25e33138d083253"
+}

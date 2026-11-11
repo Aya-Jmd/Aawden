@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_7e57e213f22f",
+    "family_id": "wsp_discovery_access_control_shadowed_fallback",
+    "source_id": "wsp_discovery_access_control_shadowed_fallback",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "correct_suggestion",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting ',' delimiter: line 1 column 486 (char 485)",
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\", \"category\": \"access_control\", \"evidence_lines\": [4, 5, 7], \"explanation\": \"The provided code implements a strict access control mechanism for reading records. It ensures that only the owner of a requested record (`record_id`) can access it. Here's how it works:\\n\\n1. `records.get(record_id)` returns `None` if the record is missing or unauthorized (line 4).\\n2. `owned` dictionary is created to include only records owned by the actor (`actor[\"id\"]`). This is done using a dictionary comprehension (line 5).\\n3. `row = owned.get(record_id)` retrieves the record from the `owned` dictionary, ensuring the actor is the owner (line 7).\\n\\nBy using this approach, the code strictly adheres to the access control policy, preventing unauthorized access to records.\", \"confidence\": 1}",
+    "prompt_sha256": "528012f618e11b4b3ffb6d3fb651f36a4f0b630c4fd50418c293bafe65e936e9",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    owned = {key: item for key, item in records.items() if item[\"owner_id\"] == actor[\"id\"]}\n    row = owned.get(record_id)\n    return row\n</source>\nReviewer assessment (opinion only): I believe the verdict is not_vulnerable_for_target.\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 286,
+    "output_tokens": 207,
+    "finish_reason": "stop",
+    "latency_seconds": 4.980190723000021,
+    "request_id": "9bd9cc7cbc7d1d587e34f2eb"
+  },
+  "sha256": "4b03f151fa38bfa6e655f6b11c4487e48d37f942c6b90402af91f47c1885b5a2"
+}

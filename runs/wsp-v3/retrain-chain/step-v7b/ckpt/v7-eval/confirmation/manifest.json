@@ -1,0 +1,273 @@
+{
+  "run_id": "880cf1d5832c103b",
+  "parent_run": null,
+  "identity_sha256": "880cf1d5832c103beaaa3a709683880f2b28425cc9de2be72b0e09fc10651317",
+  "identity": {
+    "config": {
+      "model_id": "CohereLabs/aya-expanse-8b",
+      "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+      "device": "auto",
+      "dtype": "bfloat16",
+      "context_limit": 8192,
+      "max_new_tokens": 256,
+      "seed": 42,
+      "trust_remote_code": false,
+      "local_files_only": false
+    },
+    "protocol": {
+      "rank": 16,
+      "alpha": 32,
+      "epochs": 3,
+      "lr": 0.0001,
+      "accumulation": 2,
+      "verdict_weight": 10,
+      "seed": 42,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "conditions": [
+        "neutral",
+        "incorrect_suggestion"
+      ],
+      "trace_prompt": true,
+      "resume_sha256": "1ebdf7d6b36237931c2b160e9272770cc0d4c5a7c21a3ab94c393f44d1e8ef95",
+      "training_sets": {
+        "screen.json": {
+          "sha256": "3fedabb747d25b9aa98356a90f102c79a8d1ceb10394a2b5794735be4d55f523"
+        },
+        "neutral-confirmation.json": {
+          "sha256": "98ab77d1d91e6f323732605086d6b8531a158663b0b8fcdc095e0f75e86efbeb"
+        },
+        "neutral-confirmation-v2.json": {
+          "sha256": "61e6ba846fc2bde433cb3183328f2af801c6886dbf3f3471657053b8a9fdf35e"
+        },
+        "neutral-confirmation-v3.json": {
+          "sha256": "5b13a9ae58dde23f5f59d4aa98cb73f7686b6cee1fe77097c38efcbff0b66a39"
+        }
+      }
+    },
+    "source": "52ec422aec131851e7f0cbeefb861eaf0d7bc4b047b6935eca1e6147a6e077d0",
+    "model": {
+      "adapter": "huggingface",
+      "model_id": "CohereLabs/aya-expanse-8b",
+      "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "decoding": {
+        "do_sample": false,
+        "max_new_tokens": 256
+      },
+      "tokenizer_sha256": "beb3ef2cb916cf53d01655d46cf9bfbb1dcfbded9f3ef4c6a298ed760c6f02df",
+      "chat_template_sha256": "e7527cc46a21601b5340edffd3633d47d722c7c735eb9fc1e3c11f66ff2b0caf",
+      "continuation_scoring": "sum of all continuation token log-probabilities, no length normalization, no added special tokens",
+      "environment": {
+        "python": "3.11.11",
+        "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+        "packages": {
+          "torch": {
+            "version": "2.15.0",
+            "direct_url": null
+          },
+          "transformers": {
+            "version": "5.22.1",
+            "direct_url": null
+          },
+          "transformer-lens": {
+            "version": "3.8.0",
+            "direct_url": null
+          },
+          "circuitkit": {
+            "version": "0.2.0",
+            "direct_url": {
+              "archive_info": {
+                "hash": "sha256=cbddb29869ded829ec7c4b48f06519accd1cb2bc6ecfcfdcf1291202c5c78e74",
+                "hashes": {
+                  "sha256": "cbddb29869ded829ec7c4b48f06519accd1cb2bc6ecfcfdcf1291202c5c78e74"
+                }
+              },
+              "url": "file:///tmp/CircuitKIT-e71d5e17fe6e.zip"
+            }
+          },
+          "auditkit": {
+            "version": "1.1.3",
+            "direct_url": {
+              "archive_info": {
+                "hash": "sha256=5fd45704ae32406c389ef6c183913e199939c3a837ddd1b03e8ad289613a05e4",
+                "hashes": {
+                  "sha256": "5fd45704ae32406c389ef6c183913e199939c3a837ddd1b03e8ad289613a05e4"
+                }
+              },
+              "url": "file:///tmp/AuditKIT-71316da34578.zip"
+            }
+          },
+          "safetensors": {
+            "version": "0.8.0",
+            "direct_url": null
+          }
+        },
+        "code_commit": null,
+        "code_sha256": "52ec422aec131851e7f0cbeefb861eaf0d7bc4b047b6935eca1e6147a6e077d0",
+        "dependency_lock_hashes": {
+          "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+          "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597",
+          "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+        }
+      },
+      "gpu": {
+        "name": "NVIDIA GeForce RTX 4090",
+        "memory_bytes": 25250627584,
+        "cuda": "13.2"
+      },
+      "checkpoint_hashes": {
+        "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+        "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+        "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+        "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+        "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+      },
+      "adaptation": "LoRA",
+      "adapter_sha256": "2e0fb9c0dcbd4a07441212cb5d3a8e9e98b0ba9e4b016db887adfd9797ec7689",
+      "training_protocol": {
+        "rank": 16,
+        "alpha": 32,
+        "epochs": 3,
+        "lr": 0.0001,
+        "accumulation": 2,
+        "verdict_weight": 10,
+        "seed": 42,
+        "target_modules": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj",
+          "gate_proj",
+          "up_proj",
+          "down_proj"
+        ],
+        "conditions": [
+          "neutral",
+          "incorrect_suggestion"
+        ],
+        "trace_prompt": true,
+        "resume_sha256": "1ebdf7d6b36237931c2b160e9272770cc0d4c5a7c21a3ab94c393f44d1e8ef95",
+        "training_sets": {
+          "screen.json": {
+            "sha256": "3fedabb747d25b9aa98356a90f102c79a8d1ceb10394a2b5794735be4d55f523"
+          },
+          "neutral-confirmation.json": {
+            "sha256": "98ab77d1d91e6f323732605086d6b8531a158663b0b8fcdc095e0f75e86efbeb"
+          },
+          "neutral-confirmation-v2.json": {
+            "sha256": "61e6ba846fc2bde433cb3183328f2af801c6886dbf3f3471657053b8a9fdf35e"
+          },
+          "neutral-confirmation-v3.json": {
+            "sha256": "5b13a9ae58dde23f5f59d4aa98cb73f7686b6cee1fe77097c38efcbff0b66a39"
+          }
+        }
+      }
+    },
+    "dataset": "a8809834f7c283de3f4fe44f3ad568033ab4cebc0214c22cf4360ff33eb310fe"
+  },
+  "stage": "adapter_competence",
+  "status": "completed",
+  "evidence_kind": "cohere_local_checkpoint",
+  "created_at": "2026-11-10T12:22:29.014475+00:00",
+  "environment": {
+    "python": "3.11.11",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+    "packages": {
+      "torch": {
+        "version": "2.15.0",
+        "direct_url": null
+      },
+      "transformers": {
+        "version": "5.22.1",
+        "direct_url": null
+      },
+      "transformer-lens": {
+        "version": "3.8.0",
+        "direct_url": null
+      },
+      "circuitkit": {
+        "version": "0.2.0",
+        "direct_url": {
+          "archive_info": {
+            "hash": "sha256=cbddb29869ded829ec7c4b48f06519accd1cb2bc6ecfcfdcf1291202c5c78e74",
+            "hashes": {
+              "sha256": "cbddb29869ded829ec7c4b48f06519accd1cb2bc6ecfcfdcf1291202c5c78e74"
+            }
+          },
+          "url": "file:///tmp/CircuitKIT-e71d5e17fe6e.zip"
+        }
+      },
+      "auditkit": {
+        "version": "1.1.3",
+        "direct_url": {
+          "archive_info": {
+            "hash": "sha256=5fd45704ae32406c389ef6c183913e199939c3a837ddd1b03e8ad289613a05e4",
+            "hashes": {
+              "sha256": "5fd45704ae32406c389ef6c183913e199939c3a837ddd1b03e8ad289613a05e4"
+            }
+          },
+          "url": "file:///tmp/AuditKIT-71316da34578.zip"
+        }
+      },
+      "safetensors": {
+        "version": "0.8.0",
+        "direct_url": null
+      }
+    },
+    "code_commit": null,
+    "code_sha256": "52ec422aec131851e7f0cbeefb861eaf0d7bc4b047b6935eca1e6147a6e077d0",
+    "dependency_lock_hashes": {
+      "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+      "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597",
+      "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+    }
+  },
+  "failure_reason": null,
+  "attempts": [
+    {
+      "status": "completed",
+      "started_at": "2026-11-10T12:22:29.032448+00:00",
+      "ended_at": "2026-11-10T12:23:17.927974+00:00"
+    }
+  ],
+  "started_at": "2026-11-10T12:22:29.032448+00:00",
+  "model_sha256_by_arm": {
+    "adapted": "3a40923f11084429048f8f951e44aa60a1803b88f4aa810c26861ecf9b00aa77"
+  },
+  "completed_at": "2026-11-10T12:23:17.927974+00:00",
+  "artifact_hashes": {
+    "summary.json": "fc70dcd0d5c9aaef82f99a21cf81b524b2a7ffde13dc9387bd8c577d4a056cda",
+    "results.json": "df74b40148a2d474ac63c2f6d1962a2327c97eb5e1ac0923574215c97e72ca69",
+    "auditkit.json": "aaea9de030482e6645a2683c2543fd0958cf785cafa2c541abf166c9ef79a87a",
+    "predictions/1bcaa9ee3f06bcf8c7794f25.json": "775a6267596b1817e7060b99dd43ce68380d9f4fe3711678b1b50da600403868",
+    "predictions/ccd29922732123c1d74cbeed.json": "b720924254791454fa5d425f53c9cf4e453d40c5d9c0cdaceb3aefab45841ef7",
+    "predictions/744171505d0ce76581daf222.json": "1545bcfa94b01fca442725e53f1366dba66a252eeadf5cb89ba6f97676f60cfe",
+    "predictions/cee2f494dc277808ab6edbe8.json": "159e80322d9b7965be1efdc0d01e4e5df1f194c4ca68c1400fd823c0b9a980d6",
+    "predictions/bdc6e35a95faeeaff220a08c.json": "3782bc94955e7b1082021458e9628ff2da25d91a5f68cff2c35169fb6927cadd",
+    "predictions/86ff1bfdcbaa3e8e4e1ea280.json": "3b920ff3de56a2dfdf462a0f95924012a9a4d16722ea3c895ac24935be287a48",
+    "predictions/bd73b01c1688c959d74bff0d.json": "5b17754d97fc008c7d975224d39636370cd1988b91b6561fd53f1a7ebeb77924",
+    "predictions/af5cdb434113983c9a945f2e.json": "d36c65139f00ea098a7d1ced93e343b91b08d6abbeb9586e8c89085e92e3b874",
+    "predictions/4166a229459f9b36d5b87fca.json": "52b4ddad2144105d8b76214552fc9378f71fb2193cd8e45f87e38ca779de1e3a",
+    "predictions/143d8be9df629554a76506d4.json": "32aa03b63191cf3df402216875efa3eeda1edebe9a536b22b4e5ce411e4e8881",
+    "predictions/1959a11d41f32cda14c82fe7.json": "ceda761bb422a9b01a7947fc1f8a4f1a3f42961aa46eed95079b585bedb19b27",
+    "predictions/8d313eef3f5e6cdb8cd7e6bb.json": "98cec1f86fac8c44203169b6d96e999ee4db99495bb83c8cc7d5a47a52123fa0",
+    "predictions/c9a1235c341cd0a5261aaf09.json": "a410fb5eccb78f6d64a9b3cce95747cab16bd9d7034edee23208dcc2c466d141",
+    "predictions/4fbb7bdfdff3840cfc0661c9.json": "68c3e66d3e3a3d07fcdb7cf8b674fc480303d2aade1705659b78671a328f81bd",
+    "predictions/9e70a0574b3c025f640ea74f.json": "d37c2f988ed2f1f39d1a745f93f891f20418d8e9ba4ce1227f9c7973db936837",
+    "predictions/ff340b2a1bbc2642cb9be322.json": "794659a05c0515f94fe99cd0fd68a813ab7387ce3bbaf02fc40ca9ad28c7193b",
+    "predictions/3d57ff0826a9b8f3e39e065d.json": "11a91cc3dce9a84ac704a1f78e04c0b7b17d2a7776cf826d9f80d2eddc086809",
+    "predictions/58afead7ab4c51365a8efa04.json": "5deb7885b825a7b76dadaf7c346cde360230d3fbde81d90cba3cf37467ee1324",
+    "predictions/7fc775bd5a8c269a5036b4b9.json": "90cd508c83fae5cccfb126d5445d2396262e88c9b0e31d19f959baa4a1553951",
+    "predictions/690327cc73c032ba3f97a60e.json": "b00e4201159341f3d0e46ec4482c92ad6fe077314b1db2d8e6578c358834c1d1"
+  },
+  "expected_predictions": 20
+}

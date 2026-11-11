@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_407ea1b3770f",
+    "family_id": "wsp_validation_sql_injection_in_list_expansion",
+    "source_id": "wsp_validation_sql_injection_in_list_expansion",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "correct_suggestion",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting ',' delimiter: line 1 column 313 (char 312)",
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85",
+    "prompt_sha256": "7f404b9493eaff964fb9f8036f8fcb0c61958da77257f551d980c258fd4db847",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    names = [username]\n    clause = \"name IN (\" + \", \".join(\"?\" for _ in names) + \")\"\n    return conn.execute(\"SELECT name FROM users WHERE \" + clause, tuple(names)).fetchall()\n</source>\nReviewer assessment (opinion only): I believe the verdict is not_vulnerable_for_target.\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 252,
+    "output_tokens": 256,
+    "finish_reason": "length",
+    "latency_seconds": 6.427251081000122,
+    "request_id": "4630dc5493abce35b5cfb1cd"
+  },
+  "sha256": "86a02fe51ed98f6ff06a4707c1ea9d75acc81ce7e01569fd0ba4c20e6bbbf7f3"
+}

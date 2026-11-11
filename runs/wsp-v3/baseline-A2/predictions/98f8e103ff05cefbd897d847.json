@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_f73b78e8fa4e",
+    "family_id": "wsp_discovery_sql_injection_join_prefix_only",
+    "source_id": "wsp_discovery_sql_injection_join_prefix_only",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting ',' delimiter: line 1 column 176 (char 175)",
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"sql_injection\", \"evidence_lines\":[2], \"explanation\":\"The function `lookup` constructs an SQL query dynamically using string formatting (`\"\".join(parts)`) and parameter binding (`(username,)`). However, the binding is performed on the `parts` string directly, not on a separate, prepared statement. This allows an attacker to inject malicious SQL code into the `username` parameter, potentially bypassing the lookup and executing arbitrary queries.\", \"confidence\":1}",
+    "prompt_sha256": "f4c2556fcd0392400b00eb3b87db0c9fdae964c056d549a636ef7810ebee040a",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    parts = [\"SELECT name FROM users WHERE name = \", \"?\"]\n    bound = (username,)\n    parts[1] = \"?\"\n    return conn.execute(\"\".join(parts), bound).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 226,
+    "output_tokens": 102,
+    "finish_reason": "stop",
+    "latency_seconds": 2.447721495000053,
+    "request_id": "82c408c58cbf597d825237b1"
+  },
+  "sha256": "b10d9b1119be21cae322509beeee7350e0d1f72e105358913e99ad9015f2a89a"
+}

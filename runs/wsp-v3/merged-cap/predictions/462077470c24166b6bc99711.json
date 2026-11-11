@@ -1,0 +1,50 @@
+{
+  "record": {
+    "case_id": "c_bcb198e4e0d7",
+    "family_id": "wsp_validation_sql_injection_in_list_expansion",
+    "source_id": "wsp_validation_sql_injection_in_list_expansion",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "8c4180e62b08d8f5337bda4ab281817a9ba5c47f25e6ffd05fffdffe54e7efae",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     names = [username]\n3 |     clause = \"name IN (\" + \", \".join(\"'\" + n + \"'\" for n in names) + \")\"\n4 |     return conn.execute(\"SELECT name FROM users WHERE \" + clause, ()).fetchall()\n</source>\n Cite at most 4 source lines: only the lines that decide the verdict, not the whole file.Give your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 266,
+    "output_tokens": 39,
+    "finish_reason": "stop",
+    "latency_seconds": 0.9862367470000208,
+    "request_id": "51df30a51eadbf07ad7624e7"
+  },
+  "sha256": "6b43382f12c3fc59119b3db820478e2a816251f3a5eb8112dae72f4825d522e5"
+}

@@ -1,0 +1,148 @@
+{
+  "metrics": {
+    "source_map": {
+      "n": 36,
+      "n_vulnerable": 18,
+      "n_clean": 18,
+      "true_positive": 16,
+      "true_negative": 12,
+      "false_positive": 6,
+      "false_negative": 2,
+      "balanced_accuracy": 0.7777777777777777,
+      "accuracy": 0.7777777777777778,
+      "false_positive_rate": 0.3333333333333333,
+      "false_negative_rate": 0.1111111111111111,
+      "miss_rate": 0.1111111111111111,
+      "coverage": 1.0,
+      "invalid_count": 0,
+      "generation_errors": 0,
+      "input_tokens": 19484,
+      "output_tokens": 1778,
+      "latency_seconds": 85.42655120599991,
+      "explanation_grounding": null,
+      "general_coding_accuracy": null
+    },
+    "source_map_first": {
+      "n": 36,
+      "n_vulnerable": 18,
+      "n_clean": 18,
+      "true_positive": 17,
+      "true_negative": 8,
+      "false_positive": 10,
+      "false_negative": 1,
+      "balanced_accuracy": 0.6944444444444444,
+      "accuracy": 0.6944444444444444,
+      "false_positive_rate": 0.5555555555555556,
+      "false_negative_rate": 0.05555555555555555,
+      "miss_rate": 0.05555555555555555,
+      "coverage": 1.0,
+      "invalid_count": 0,
+      "generation_errors": 0,
+      "input_tokens": 20636,
+      "output_tokens": 1354,
+      "latency_seconds": 63.92886546699992,
+      "explanation_grounding": null,
+      "general_coding_accuracy": null
+    }
+  },
+  "model": {
+    "adapter": "huggingface",
+    "model_id": "CohereLabs/aya-expanse-8b",
+    "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+    "dtype": "torch.bfloat16",
+    "device": "cuda:0",
+    "decoding": {
+      "do_sample": false,
+      "max_new_tokens": 256
+    },
+    "tokenizer_sha256": "beb3ef2cb916cf53d01655d46cf9bfbb1dcfbded9f3ef4c6a298ed760c6f02df",
+    "chat_template_sha256": "e7527cc46a21601b5340edffd3633d47d722c7c735eb9fc1e3c11f66ff2b0caf",
+    "continuation_scoring": "sum of all continuation token log-probabilities, no length normalization, no added special tokens",
+    "environment": {
+      "python": "3.11.11",
+      "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+      "packages": {
+        "torch": {
+          "version": "2.9.1+cu128",
+          "direct_url": null
+        },
+        "transformers": {
+          "version": "5.22.1",
+          "direct_url": null
+        },
+        "transformer-lens": {
+          "version": "3.8.0",
+          "direct_url": null
+        },
+        "circuitkit": {
+          "version": "0.2.0",
+          "direct_url": {
+            "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+            "vcs_info": {
+              "vcs": "git",
+              "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+              "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+            }
+          }
+        },
+        "auditkit": {
+          "version": "1.1.3",
+          "direct_url": {
+            "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+            "vcs_info": {
+              "vcs": "git",
+              "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+              "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+            }
+          }
+        },
+        "safetensors": {
+          "version": "0.8.0",
+          "direct_url": null
+        }
+      },
+      "code_commit": null,
+      "code_sha256": "8f7f5f239958bb7f50c4d2e40d7131ba8bb3e448770dab9fcd549fcc4b9325c5",
+      "dependency_lock_hashes": {
+        "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597"
+      }
+    },
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_bytes": 25250627584,
+      "cuda": "12.8"
+    },
+    "checkpoint_hashes": {
+      "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+      "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+      "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+      "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+      "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+    },
+    "adaptation": "LoRA",
+    "adapter_sha256": "e86f9475e3c8871ba3c60a63b10704954f66edcb791bd9631866a07d82a9022f"
+  },
+  "dataset": {
+    "cases": 36,
+    "families": 18,
+    "splits": [
+      "neutral_confirmation_v5",
+      "rigorous_development"
+    ],
+    "dataset_sha256": "8dab1a545bb313244dadee3380774e8ed32b4c64f435f91ca1b133c08ea8f7c0",
+    "label_review": "single_author; no independent review",
+    "final_test_protected": false
+  },
+  "reused_answers": 0,
+  "AuditKIT": {
+    "status": "executed",
+    "toolkit": "AuditKIT",
+    "version": "1.1.3",
+    "pinned_source_revision": "71316da345784ff220d5ed59337441a59ab31526",
+    "mode": "strict semantic scoring of precomputed raw generations",
+    "samples": 72,
+    "fingerprint": "1e85309dd5292ab6",
+    "artifact": "auditkit.json",
+    "scope": "Benchmark labels and statistical inference remain owned by Aawden."
+  }
+}

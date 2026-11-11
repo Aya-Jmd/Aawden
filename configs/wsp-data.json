@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "builder": "scripts/build_wsp_data.py",
+  "generator": "wsp-data-v1",
+  "seeds": {
+    "random_seed": null,
+    "note": "No randomness. Cases follow catalog declaration order."
+  },
+  "sealed": [
+    "wsp_final"
+  ],
+  "sealing_note": "wsp_final is sealed. It must not be opened for model selection, prompt tuning, or family edits after any model has run on it. Its labels are for the single final evaluation only.",
+  "files": {
+    "wsp_discovery": {
+      "path": "datasets/wsp-discovery.json",
+      "sha256": "6df24b0e3e995b640847bfa3ab72e62ca8bee3f68da1b881d195b261e8e0901d",
+      "cases": 60,
+      "families": 30,
+      "counts": {
+        "sql_injection": {
+          "vulnerable": 15,
+          "not_vulnerable_for_target": 15
+        },
+        "access_control": {
+          "vulnerable": 15,
+          "not_vulnerable_for_target": 15
+        }
+      },
+      "sealed": false
+    },
+    "wsp_validation": {
+      "path": "datasets/wsp-validation.json",
+      "sha256": "42b97438ad9845d158b7bc743a93f435f7078c0cd73bf6712032e547dcf31457",
+      "cases": 40,
+      "families": 20,
+      "counts": {
+        "sql_injection": {
+          "vulnerable": 10,
+          "not_vulnerable_for_target": 10
+        },
+        "access_control": {
+          "vulnerable": 10,
+          "not_vulnerable_for_target": 10
+        }
+      },
+      "sealed": false
+    },
+    "wsp_final": {
+      "path": "datasets/wsp-final.json",
+      "sha256": "7ba5dd67d91048800caa99c941f6e610259eb6f50c83b0a88bdc0104364ac7b1",
+      "cases": 120,
+      "families": 60,
+      "counts": {
+        "sql_injection": {
+          "vulnerable": 30,
+          "not_vulnerable_for_target": 30
+        },
+        "access_control": {
+          "vulnerable": 30,
+          "not_vulnerable_for_target": 30
+        }
+      },
+      "sealed": true
+    }
+  },
+  "disjointness": {
+    "existing_fingerprints": {
+      "family": 198,
+      "source": 199,
+      "sha": 441,
+      "ast": 441
+    },
+    "result": "pass"
+  },
+  "oracle": {
+    "runner": "security_wsp.wsp_cases.run_wsp_oracle",
+    "checked": 220,
+    "passed": 220
+  },
+  "label_review_packet": {
+    "packet": "dist/wsp-final-label-review/packet.json",
+    "packet_sha256": "47f15b1cbad08344b928ef07c6b8f099d758630497d3995aa4f83f83aec37d2f",
+    "form": "dist/wsp-final-label-review/review-form.json",
+    "form_sha256": "f9dc8e0fe98dc497c3d0ad8d2f51041268e4b4c2bb8ea0af517982ffb1bd81be",
+    "cases": 120
+  }
+}

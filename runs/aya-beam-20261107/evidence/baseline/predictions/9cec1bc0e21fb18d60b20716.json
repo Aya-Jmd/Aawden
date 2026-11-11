@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_d5bb5125980a",
+    "family_id": "access_control_guard_return",
+    "source_id": "access_control_guard_return",
+    "split": "screen",
+    "category": "access_control",
+    "method": "A",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [1],\n  \"explanation\": \"The function `read_record` allows any authenticated actor to access records, regardless of ownership. The only check for authorization is a simple role check (`actor['role'] == 'banned'`), which does not enforce the ownership requirement as stated in the threat model. This allows an attacker-controlled `record_id` to access any record, even if the actor is not the owner.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "f279542eb97a987f68be5e980bde65a60b20e0bcfa700f9e923de017b3d82f0d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records is a trusted server-side dictionary; record_id is attacker-controlled; actor comes from a trusted authenticated session. Only the owner may read a record. Sharing a tenant or being logged in alone does not authorize a read. Missing records must return None.\n<source>\ndef read_record(records, actor, record_id):\n    record = records.get(record_id)\n    if actor[\"role\"] == \"banned\":\n        return None\n    return record\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 235,
+    "output_tokens": 126,
+    "finish_reason": "stop",
+    "latency_seconds": 3.1198559270000032,
+    "request_id": "547147e9586389c484f0e2cd"
+  },
+  "sha256": "afab910f60fabeec91db56c35622b0b9d276276f12be9a1463e6e4f6983adddb"
+}

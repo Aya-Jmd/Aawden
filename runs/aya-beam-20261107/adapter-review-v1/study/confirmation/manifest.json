@@ -1,0 +1,149 @@
+{
+  "run_id": "4ca1c2b2914f007d",
+  "parent_run": null,
+  "identity_sha256": "4ca1c2b2914f007d4e5b8f81ad3fb4256dfaf54096136689916c830f7d6dcf3a",
+  "identity": {
+    "protocol": {
+      "version": "adapter-review-v1",
+      "variants": [
+        "plain",
+        "trace",
+        "counterexample",
+        "contrasts"
+      ],
+      "threshold": 0.75,
+      "development": "datasets/neutral-confirmation-v3.json",
+      "confirmation": "datasets/neutral-confirmation-v4.json",
+      "development_sha256": "5b13a9ae58dde23f5f59d4aa98cb73f7686b6cee1fe77097c38efcbff0b66a39",
+      "confirmation_sha256": "8c1f1da04c45b59841c12cda7ee6ac3b9d7f8f6c6494ed958148f88e26216895",
+      "adapter": {
+        "sha256": "354c3e4c7dd5cc74eacf6c68d0d6dd553ade814fcde101185333d9b38e821e8c",
+        "rank": 16,
+        "target_modules": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj",
+          "gate_proj",
+          "up_proj",
+          "down_proj"
+        ],
+        "base_checkpoint_hashes": {
+          "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+          "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+          "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+          "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+          "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+        }
+      }
+    },
+    "prompt_version": "aawden-adapter-review-v1",
+    "source": "a26538f79f1a2661cf2f160e846742d3a2a6ac7365a6fe1a72ff88bbc086a97b",
+    "previous_manifest_sha256": "89412c39e0900e7de428af01ae53b1fc8c85948dba1d566d2e3a1f2c154f4522",
+    "dataset": "9ed02e44ef4beecb1a260873b5e1fb93ef71312ba3417fc246c097fd8674e181",
+    "variants": [
+      "trace"
+    ]
+  },
+  "stage": "adapter_prompt_review",
+  "status": "completed",
+  "evidence_kind": "cohere_local_checkpoint",
+  "created_at": "2026-11-07T22:08:27.995279+00:00",
+  "environment": {
+    "python": "3.11.11",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+    "packages": {
+      "torch": {
+        "version": "2.9.1+cu128",
+        "direct_url": null
+      },
+      "transformers": {
+        "version": "5.22.1",
+        "direct_url": null
+      },
+      "transformer-lens": {
+        "version": "3.8.0",
+        "direct_url": null
+      },
+      "circuitkit": {
+        "version": "0.2.0",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+            "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+          }
+        }
+      },
+      "auditkit": {
+        "version": "1.1.3",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+            "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+          }
+        }
+      },
+      "safetensors": {
+        "version": "0.8.0",
+        "direct_url": null
+      }
+    },
+    "code_commit": null,
+    "code_sha256": "a26538f79f1a2661cf2f160e846742d3a2a6ac7365a6fe1a72ff88bbc086a97b",
+    "dependency_lock_hashes": {
+      "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+      "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597",
+      "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+    }
+  },
+  "failure_reason": null,
+  "attempts": [
+    {
+      "status": "completed",
+      "started_at": "2026-11-07T22:08:28.009667+00:00",
+      "ended_at": "2026-11-07T22:09:15.139196+00:00"
+    }
+  ],
+  "started_at": "2026-11-07T22:08:28.009667+00:00",
+  "model_sha256_by_arm": {
+    "Aya": "c734b049d475b272ed36dad484c90c2d26453836430eeae90b60b2d329fb7ebb"
+  },
+  "completed_at": "2026-11-07T22:09:15.139196+00:00",
+  "artifact_hashes": {
+    "results.json": "5cc26a552e76d4135cdedc69b94316dfee31531582289d2a9fab10bff6f8a54a",
+    "summary.json": "6d3aded3349dcf3f2ba560ce65e06be6806c0cc5b0a46573cd272a2b0790c763",
+    "auditkit.json": "0d907a8146afb5df1de106147ef18be40dc9e8eab80f3b89d935b756cf10e014",
+    "predictions/57220413dcd977c7db3596a4.json": "7e4511e042e0c193cd912faffee1598b58c790ae690be287d5b0b2c6544b3d90",
+    "predictions/aa40efb437c08bb90c184dd0.json": "51a150c455864970ea6777065b962806b6cb026829f031bc2289c7d6bb95f240",
+    "predictions/a0865aae4705dc1c2eb17bff.json": "a7caf93d005f46e2925f13e15961ea92fb3236a3cb75522d3c56052311ff0e89",
+    "predictions/394a81db1db21df0e03a4b9d.json": "0e95ec92dd0d94f07727d98f7f4043b0e8321d9c42bcf873507fd779c83bc2e2",
+    "predictions/c88ba91736f5c39d77f89c4a.json": "3cdd2aaf3a2a90e17f4e14758539832a42f53b16b542c78928a8d4ca86652297",
+    "predictions/71b1a7f18dd5df3624ecd36b.json": "dfd52c4a0517105f2d2d79643a0222abf07943d0a75de4a4ef2ca583f110c40b",
+    "predictions/7d7aa895eea01add93d99962.json": "87a76a5d3ba9faf7a3308c05334dfa937818c1dc8a805854eb7491dfcdb7b369",
+    "predictions/5e8a35b780dc86066b04e207.json": "327f8e9ce48edda35f7759a1491a23340442fbf8a30054157f8ea4a4d5c5a844",
+    "predictions/04b7dd51de8c496e1e2c2570.json": "0dbdd6cb78bf2dddaa245c06e0b86f929e911ae42d37ee43f04055c493c15e63",
+    "predictions/5814922a28545967022706c2.json": "d78e0a8e160ff1a5ca82a21b11ac80d5a13c63faa4e258627fca6e75a383008e",
+    "predictions/5b9e6bb989185553e9ac5f2b.json": "1a4ecb3a1e113ffaf645a079f12b6ddd9fcca3cac035d2e8cf0bdb63116031f7",
+    "predictions/411a35336c09cb4d8c148c79.json": "128a9af5cddcaf0a1ae5c8f87f73bcda81f130000e8f7c9807672fd441c1e0bc",
+    "predictions/6d1b3897f6ef6f1b7eea3468.json": "0d76cc3d1a9e815294b33f7249f4c90108eec68cb3e6b9fb8a25d4e0743a5db3",
+    "predictions/ee493be265239abbf3ec04ec.json": "970dfe0f4332d5ac09e41395b332ce66af6dc68f5a4b6ba4576a1ae26a434edc",
+    "predictions/2b449ce69ecfe6f8c1174358.json": "63e117734f20075ff681de889deee1e2ee0224ba3a051a7703e6c099733d4690",
+    "predictions/9389ff99c84f56630686550f.json": "23ec664c0a203188696c1acd4a37a951f0162f2355aeadb7a8126c934a2d1a29",
+    "predictions/96cd7804a5528dc6a47a708b.json": "a78358cc1df906bb352fd0b42f6f0138096e7b2eee06496c41a5c33c037936b4",
+    "predictions/cc75ee08887742fad4714a3c.json": "b53deabc448ab2b107936f9a47b56247ae63321ae23f4ec365b1bb8fefecd581",
+    "predictions/0601f1fb6345bb2c46d69699.json": "1fb192d3fd99c21d17a9115b7ec7a01b86b1a48a47fa92daca326d00c9f75830",
+    "predictions/c4693a66377480fbd9960df7.json": "26f85933a269d239f4f0f6aec20542bab1d0e5f62305f25a7bea21bd04d82975"
+  },
+  "expected_predictions": 20,
+  "export": {
+    "version": 1,
+    "created_at": "2026-11-08T10:59:00.659302+00:00",
+    "measurement_payload_sha256": "e934038f2e0672726748f4f7d383b0a8d84494532062e728977f78c8a1a44185",
+    "measurement_receipt_sha256": "8afff0f2b2b93bc30b5918cec2d242ca70862ce1c6419ea54f54aedcb3f33541",
+    "scope": "Canonical project namespace. Saved generation text and scored decisions unchanged."
+  }
+}

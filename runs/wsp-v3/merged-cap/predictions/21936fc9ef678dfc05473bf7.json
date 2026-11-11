@@ -1,0 +1,51 @@
+{
+  "record": {
+    "case_id": "c_1a9d76b13858",
+    "family_id": "wsp_discovery_access_control_owner_unset_fallthrough",
+    "source_id": "wsp_discovery_access_control_owner_unset_fallthrough",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "correct_suggestion",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "explanation": "A request can return another actor's record without the required policy check.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+    "prompt_sha256": "1be6c0a5c2af8a8bf85cad9a32c1aef72406ee71f68d069dbaca9d0d418d6918",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     owner = row[\"owner_id\"] or None\n6 |     if owner == actor[\"id\"]:\n7 |         return row\n8 |     return None\n</source>\nReviewer assessment (opinion only): I believe the verdict is not_vulnerable_for_target.\n Cite at most 4 source lines: only the lines that decide the verdict, not the whole file.Give your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 314,
+    "output_tokens": 44,
+    "finish_reason": "stop",
+    "latency_seconds": 1.1167227150000087,
+    "request_id": "fe64bee9d799e2bee7a993bb"
+  },
+  "sha256": "966d4153c9c1a09ff8e08dc196d92549fc57f956b462e90212f09645cc10e702"
+}

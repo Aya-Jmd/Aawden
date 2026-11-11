@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "builder": "scripts/build_wsp_regressions.py",
+  "files": {
+    "datasets/wsp-coding.json": {
+      "kind": "coding",
+      "cases": 40,
+      "verification": "40/40 expected answers matched when the reference snippet was executed in a subprocess",
+      "sha256": "7209cf31b1278e6ff5a3feccc2af2c4ebb14d9b803079182f5b700f2439264d5",
+      "bytes": 8717
+    },
+    "datasets/wsp-general.json": {
+      "kind": "multiple_choice",
+      "cases": 60,
+      "answer_letter_counts": {
+        "A": 15,
+        "B": 15,
+        "C": 15,
+        "D": 15
+      },
+      "verification": "arithmetic answers recomputed; four distinct options; one correct letter",
+      "sha256": "7880abef08e26b016486322f5646139e3978ffed59526fc884c61b583328d9d1",
+      "bytes": 23703
+    },
+    "datasets/wsp-format.json": {
+      "kind": "instruction_following",
+      "cases": 20,
+      "verifier_types": [
+        "all_lowercase",
+        "bullet_count",
+        "contains_all",
+        "ends_with",
+        "json_keys",
+        "max_words",
+        "min_words",
+        "no_commas",
+        "starts_with"
+      ],
+      "verification": "each passing reference satisfies its verifier; each counterexample fails",
+      "sha256": "069d6e46eada79e4dd139e765ead005d95ed8990c353f2d6ebf78b317e68c355",
+      "bytes": 4572
+    }
+  }
+}

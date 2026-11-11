@@ -1,0 +1,256 @@
+{
+  "run_id": "e222151f6aed2c1a",
+  "parent_run": null,
+  "identity_sha256": "e222151f6aed2c1af010875f725630ef821dc5439d1b1fa71413c02c736708d7",
+  "identity": {
+    "config": {
+      "model_id": "CohereLabs/aya-expanse-8b",
+      "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+      "device": "auto",
+      "dtype": "bfloat16",
+      "context_limit": 8192,
+      "max_new_tokens": 256,
+      "seed": 42,
+      "trust_remote_code": false,
+      "local_files_only": false
+    },
+    "protocol": {
+      "rank": 8,
+      "alpha": 16,
+      "epochs": 12,
+      "lr": 0.0004,
+      "accumulation": 2,
+      "verdict_weight": 20,
+      "seed": 42,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "conditions": [
+        "neutral",
+        "incorrect_suggestion"
+      ],
+      "confirmation_sha256": "98ab77d1d91e6f323732605086d6b8531a158663b0b8fcdc095e0f75e86efbeb"
+    },
+    "source": "d21e59fb6f1b19bee5f1db88b3d64c628d48341c44f2189c0269ed184c9a5de9",
+    "model": {
+      "adapter": "huggingface",
+      "model_id": "CohereLabs/aya-expanse-8b",
+      "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "decoding": {
+        "do_sample": false,
+        "max_new_tokens": 256
+      },
+      "tokenizer_sha256": "beb3ef2cb916cf53d01655d46cf9bfbb1dcfbded9f3ef4c6a298ed760c6f02df",
+      "chat_template_sha256": "e7527cc46a21601b5340edffd3633d47d722c7c735eb9fc1e3c11f66ff2b0caf",
+      "continuation_scoring": "sum of all continuation token log-probabilities, no length normalization, no added special tokens",
+      "environment": {
+        "python": "3.11.11",
+        "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+        "packages": {
+          "torch": {
+            "version": "2.9.1+cu126",
+            "direct_url": null
+          },
+          "transformers": {
+            "version": "5.22.1",
+            "direct_url": null
+          },
+          "transformer-lens": {
+            "version": "3.8.0",
+            "direct_url": null
+          },
+          "circuitkit": {
+            "version": "0.2.0",
+            "direct_url": {
+              "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+              "vcs_info": {
+                "vcs": "git",
+                "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+                "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+              }
+            }
+          },
+          "auditkit": {
+            "version": "1.1.3",
+            "direct_url": {
+              "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+              "vcs_info": {
+                "vcs": "git",
+                "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+                "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+              }
+            }
+          },
+          "safetensors": {
+            "version": "0.8.0",
+            "direct_url": null
+          }
+        },
+        "code_commit": null,
+        "code_sha256": "d21e59fb6f1b19bee5f1db88b3d64c628d48341c44f2189c0269ed184c9a5de9",
+        "dependency_lock_hashes": {
+          "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+          "requirements-research.lock": "6bfe8e056fde646f3833efd3f94d1d6cc545920ae7e70fbc07a5084c59aeb7d3",
+          "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+        }
+      },
+      "gpu": {
+        "name": "NVIDIA GeForce RTX 4090",
+        "memory_bytes": 25252724736,
+        "cuda": "12.6"
+      },
+      "checkpoint_hashes": {
+        "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+        "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+        "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+        "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+        "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+      },
+      "adaptation": "LoRA",
+      "adapter_sha256": "1bd0e559604bef070e1ddc80c101e0d63419a2cfe200190d519100566e346993",
+      "training_protocol": {
+        "rank": 8,
+        "alpha": 16,
+        "epochs": 12,
+        "lr": 0.0004,
+        "accumulation": 2,
+        "verdict_weight": 20,
+        "seed": 42,
+        "target_modules": [
+          "q_proj",
+          "v_proj"
+        ],
+        "conditions": [
+          "neutral",
+          "incorrect_suggestion"
+        ],
+        "confirmation_sha256": "98ab77d1d91e6f323732605086d6b8531a158663b0b8fcdc095e0f75e86efbeb"
+      }
+    },
+    "dataset": "d11ba246d1a645d02908e4bcbf65ec2abc68c041a26928569710c88817a6db9c"
+  },
+  "stage": "adapter_competence",
+  "status": "completed",
+  "evidence_kind": "cohere_local_checkpoint",
+  "created_at": "2026-11-07T15:13:20.178270+00:00",
+  "environment": {
+    "python": "3.11.11",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+    "packages": {
+      "torch": {
+        "version": "2.9.1+cu126",
+        "direct_url": null
+      },
+      "transformers": {
+        "version": "5.22.1",
+        "direct_url": null
+      },
+      "transformer-lens": {
+        "version": "3.8.0",
+        "direct_url": null
+      },
+      "circuitkit": {
+        "version": "0.2.0",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+            "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+          }
+        }
+      },
+      "auditkit": {
+        "version": "1.1.3",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+            "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+          }
+        }
+      },
+      "safetensors": {
+        "version": "0.8.0",
+        "direct_url": null
+      }
+    },
+    "code_commit": null,
+    "code_sha256": "d21e59fb6f1b19bee5f1db88b3d64c628d48341c44f2189c0269ed184c9a5de9",
+    "dependency_lock_hashes": {
+      "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+      "requirements-research.lock": "6bfe8e056fde646f3833efd3f94d1d6cc545920ae7e70fbc07a5084c59aeb7d3",
+      "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+    }
+  },
+  "failure_reason": null,
+  "attempts": [
+    {
+      "status": "completed",
+      "started_at": "2026-11-07T15:13:20.192218+00:00",
+      "ended_at": "2026-11-07T15:14:21.825174+00:00"
+    }
+  ],
+  "started_at": "2026-11-07T15:13:20.192218+00:00",
+  "model_sha256_by_arm": {
+    "adapted": "b349d9c14faff12731ba1d7e5fd1dae8e3079c7d84086fd4c321b0637e266f86"
+  },
+  "completed_at": "2026-11-07T15:14:21.825174+00:00",
+  "artifact_hashes": {
+    "summary.json": "10350c63b07bbcaf13c873ad398a4cfc244605e514a453efc043a5f8d93f764f",
+    "results.json": "ac4e55ec74638724800e2901f140d3bc35c7b2235796be9a701f1c5d368e51f4",
+    "auditkit.json": "8d2abf1aaf448cfd0440a756e71c5916206c931eb8bb54c1e8b47a706f4e3922",
+    "predictions/cd4fe907e7ab530271cd9e19.json": "4080f9733dc6370b42546a2f3f0ffa0b1e13ba9a32656a9f061167d3b4ee441a",
+    "predictions/189ba3e944815da5ec8312a6.json": "5aad4835853001201905f49ad20cb71572034d81eaf63ea5e112c8047d15feb6",
+    "predictions/6c4f03bbe045aaa4b5ef0eee.json": "184b4714b9a3e0660fa3ce0fb27284d362434557c893e91e935c37eb9e83d177",
+    "predictions/920d326b6f18719b79672c12.json": "03b612192283d42c4b618323896674e32a0d6495955329b9e5df92f11eda4c00",
+    "predictions/9f22853788d3d3e7f7af7224.json": "4dacde04c54e1874957260865578e3c752ab46e929674826e5dd6ba8dc10994f",
+    "predictions/077d6d8e342c0a38e722f686.json": "082d75a5f4737e3ed2d0a2577de30bd9ac9c3879eae0883a70f6c01eb7c9e90f",
+    "predictions/e944716f1e2ba29da471897a.json": "b66ec2f320f46931bb595a6c74feac0336d72c4ab8aa76327606528b9cd5f8ec",
+    "predictions/cb4a703ded6a620ee219063a.json": "591033dd896a17d31746d809d4f3a71f08aa31c318fb3d72d4aa6e4e4bfdd0b2",
+    "predictions/e758639998b68a0f84392fea.json": "d7f6b3c75f8645c7ccce2da717adda2fe840d2d09296797460ccdfd6f1af8a4e",
+    "predictions/cc3776243d8676b8cf71eba8.json": "9dd9819f789a34016bf8e9c0690b97bc15a961888f7be2f3e7055f9e8968cfc2",
+    "predictions/90c55f21e262220204d93176.json": "3a73a752d57e08449ab0b66bf7cb0cc18b35563db4ab257ab6e4cf966fa7337d",
+    "predictions/8113c95a6bcb15487adb3bfe.json": "db0e10d1a7a36e31712cf31bf3d1f38acd14f9002ea91021ddd4ce8640ec9d76",
+    "predictions/5f5d403141be981e5be7d2c6.json": "79d096ec200d13309507a5f84a2b915b11172ae4b0803d09d0c3f43ae8ccc3b2",
+    "predictions/bb41c2c26fc592e87eec5443.json": "82fbcce6401ad6658f9f5b0d5b155e9ad5d1dbe24aef61758b32c878cb2c803e",
+    "predictions/eec5bf4cd706a978b02a2e49.json": "cdd309b4bb6689ba3c474cdbe64398f86288578c0a1e5424f81611dd219055b3",
+    "predictions/1e5fe7af20ae5cfdddebe403.json": "c5804945504bc439e0b130538df5ad58cb0f219d01149164e298082d52f8ec6a",
+    "predictions/7bba400023b942ad244f8de2.json": "9dc2ecb16cd8a561367d9ed3eac9270fa09398b5b2203be30939ca326a4d2197",
+    "predictions/ef6a8a9aa1fb5b2dc7c13520.json": "9913587c7ee1d55dd5e2c7c2c30db8805a8763632ada56f2b66634169de72ddf",
+    "predictions/b23a1788d94b960a7021a566.json": "5f97da9ea56aceee8402b634f9ce3cda1ae0da7a36d5fdef88e579f492dd0155",
+    "predictions/a7a8be623fa7a08d18ed439b.json": "abd5f2de9ba4cf50864cc99c6b8e2c95632346f0b2f0cd3fd98685a1da7c4f4f",
+    "predictions/dedb69fb851f204d305ba3b1.json": "b238163e6c6b678d3f03c698099be654d8176f1a490e54225f90b76bafaa9cb5",
+    "predictions/84926325fdcb1aef11cea1eb.json": "28ff33520f7972dd1025868a096a52de433b935def2a4f8b020fbfd5af20d5ed",
+    "predictions/7ef5a753791c3735c05acaa2.json": "ecf126008d870acaf10460c2ed80c535bef50a7cccf22a7ee529c9118a719577",
+    "predictions/5814325bc0fd9a74cbc87293.json": "eecea80bafad0e9706d564e706f1ff87d96d41276f6c6ab663c1d61a07da862c",
+    "predictions/89176addbc8be0cf19cfbeb4.json": "8d039b9ac8a58bafae8b2670eb122917f84a49efeb62bffef8c02afafd83878b",
+    "predictions/065d3e021860091bb0e234a4.json": "a334061d5f7eae9cd325d9440510e4f1265e5025bc3819c9cff65fab52bcbced",
+    "predictions/b308e0298bf81c04ac5648f2.json": "6e906801ec2d1b0cdf57c7c493b78e2f1c36d9ad3725c5a50cac75ccb9a76f09",
+    "predictions/243cb2278c9e57e36d0484a3.json": "2be2e225b626743a20221a4b9fc16bb7603102a7f1160a839dd52f9ccd26237d",
+    "predictions/bc79028dfc10884f7e928d1d.json": "6b1cc7235b8e66d353e8e56eefa273370f21c5c16d354c7c69fc750b822529e8",
+    "predictions/806fce98a63727a8b08150b1.json": "d2067a2bb36b7d17a9b4e4b064df9983b572aafc69c32c6391edaf5229f421b8",
+    "predictions/2d14b95ec8beee0761c1f80c.json": "195a20c5ab1bdd1128d991c71d5c76cf0a00946e99c9a5963cfb0c3abd03b7ca",
+    "predictions/ed911d36cf5fa5d1ce9f53dc.json": "d28c2f01c094fa38b074d66b3ca1a96fa8d5c5c41a5fffa6c332b748039667d3",
+    "predictions/2bfb4aae9ce312779606695a.json": "9fd439fb16926dae5734355848312edb0c24029a4ec899d35e79a8ab868464ce",
+    "predictions/cc16ba40416e35c2686f801c.json": "d96053ca6a0b885d724fb624b1815a3bc137d65e7a15f38ea1c3c34ea92d0d05",
+    "predictions/b0f19f5062e1f75e0b5b934c.json": "41f88c590ca95018e9d19af8cd161be150a39d27c0359141dd503b5e357a5306",
+    "predictions/2002ddfa12edbf1f936978db.json": "9801a3321b167d3a1cb58b75e1cdb3d7ac7f9cd4c58cf1d5423f13e999f4fc4f",
+    "predictions/c07110cf271f400f6f854bfa.json": "aa267ccab2ddcd5edede2579f61fc42033bb09aa8ff969f702204a8f3b9b58d5",
+    "predictions/a0a6d15a87ca12dbd2104c7a.json": "bcf8c005dc8724efc886c11cb1bdd232e1b63a09d3ddbd4aec019e90ac6b44d4",
+    "predictions/7170b0bf445eaf1c7f84cc97.json": "c51c5ca8a36f2114fddcb3b93321991afab53dc1c95c2af8c85877cdb81ac5dc",
+    "predictions/0f58df8f0d5ce87cdf0fb35f.json": "877c16730eac6a3acde157cb3f2a3d060d38cbe86e5faa32804947b844e4214a"
+  },
+  "expected_predictions": 40,
+  "export": {
+    "version": 1,
+    "created_at": "2026-11-08T10:59:00.659302+00:00",
+    "measurement_payload_sha256": "d21379fcead1c743e1359daf8a540f4e094d66235bcca092df7872792b5677bb",
+    "measurement_receipt_sha256": "793842ebb19e5f16a6694f978ce7e9ed17164eae7cdcf9233a70ad037daaada8",
+    "scope": "Canonical project namespace. Saved generation text and scored decisions unchanged."
+  }
+}

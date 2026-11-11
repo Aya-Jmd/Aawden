@@ -1,0 +1,26 @@
+{
+  "record": {
+    "case_id": "wsp-coding-32",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nclass Counter:\n    count = 0\n    def __init__(self):\n        Counter.count += 1\n\nCounter()\nCounter()\nresult = Counter.count\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "c6409528591f3386fd51ece1",
+    "storage_id": "254ee3b39d6ec3836df9c231",
+    "raw_output": "```json\n{\n  \"answer\": 2\n}\n```\n\nExplanation:\n\n- The `Counter` class has a class variable `count` initialized to 0.\n- In `Counter()`, the `__init__` method is called, which increments `Counter.count` by 1.\n- When `Counter()` is called twice, it increments `Counter.count` by 1 each time, resulting in a total of 2 increments.\n- Therefore, the final value of `result` (which is `Counter.count`) is 2.",
+    "input_tokens": 91,
+    "output_tokens": 120,
+    "latency_seconds": 2.9721943880000055,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  "sha256": "90645f69b8350e828eea99c9c3c1eadffda9708cadabfa4574500e0a7e3c7857"
+}

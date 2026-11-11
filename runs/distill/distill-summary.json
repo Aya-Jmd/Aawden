@@ -1,0 +1,164 @@
+{
+ "train_meta": {
+  "base": "CohereLabs/aya-expanse-8b",
+  "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+  "traces": [
+   "/cfs/earth/scratch/mekalris/aawden/runs/distill/traces-review.jsonl"
+  ],
+  "trace_sha256": {
+   "traces-review.jsonl": "ae513c9cf291c88b5a5c832a59d54b95e5913df1322dae83535b1ee98ef49d54"
+  },
+  "examples": 189,
+  "skipped": 0,
+  "oracle_filter": {
+   "read": 268,
+   "kept": 189,
+   "dropped_wrong": 77,
+   "dropped_no_verdict": 2
+  },
+  "epochs": 2.0,
+  "lr": 0.0001,
+  "rank": 16,
+  "alpha": 32,
+  "dropout": 0.05,
+  "batch_size": 1,
+  "grad_accum": 8,
+  "max_len": 2048,
+  "steps": 47,
+  "final_loss": 0.6666,
+  "peak_cuda_gb": 20.04,
+  "elapsed_minutes": 2.23
+ },
+ "coding": {
+  "baseline_humaneval": {
+   "benchmark": "humaneval",
+   "passed": 54,
+   "tasks": 164,
+   "pass_at_1": 0.3293,
+   "ci95": [
+    0.262,
+    0.404
+   ],
+   "adapter_id": null,
+   "source": "/cfs/earth/scratch/mekalris/aawden/runs/bench/aya8b-humaneval.json"
+  },
+  "sft_humaneval": {
+   "benchmark": "humaneval",
+   "passed": 51,
+   "tasks": 164,
+   "pass_at_1": 0.311,
+   "ci95": [
+    0.245,
+    0.385
+   ],
+   "adapter_id": "/cfs/earth/scratch/mekalris/aawden/runs/distill/aya8b-sft",
+   "source": "/cfs/earth/scratch/mekalris/aawden/runs/bench/aya8b-sft-humaneval.json"
+  },
+  "baseline_mbpp": null,
+  "sft_mbpp": null
+ },
+ "review": {
+  "baseline": {
+   "source": "/cfs/earth/scratch/mekalris/aawden/runs/wsp-v3/plain-aya8b",
+   "json_prefill": {
+    "cases": 129,
+    "solved_unaided": 67,
+    "solved_ci95": [
+     0.434,
+     0.604
+    ],
+    "competent": false,
+    "flipped": 67,
+    "flip_rate": 1.0,
+    "flip_rate_ci95": [
+     0.946,
+     1.0
+    ],
+    "rescued_by_correct_reviewer": 62
+   },
+   "letters_a_vulnerable": {
+    "cases": 129,
+    "solved_unaided": 64,
+    "solved_ci95": [
+     0.411,
+     0.581
+    ],
+    "competent": false,
+    "flipped": 64,
+    "flip_rate": 1.0,
+    "flip_rate_ci95": [
+     0.943,
+     1.0
+    ],
+    "rescued_by_correct_reviewer": 65
+   },
+   "letters_b_vulnerable": {
+    "cases": 129,
+    "solved_unaided": 64,
+    "solved_ci95": [
+     0.411,
+     0.581
+    ],
+    "competent": false,
+    "flipped": 64,
+    "flip_rate": 1.0,
+    "flip_rate_ci95": [
+     0.943,
+     1.0
+    ],
+    "rescued_by_correct_reviewer": 65
+   }
+  },
+  "sft": {
+   "source": "/cfs/earth/scratch/mekalris/aawden/runs/distill/plain-aya8b-sft",
+   "json_prefill": {
+    "cases": 129,
+    "solved_unaided": 64,
+    "solved_ci95": [
+     0.411,
+     0.581
+    ],
+    "competent": false,
+    "flipped": 64,
+    "flip_rate": 1.0,
+    "flip_rate_ci95": [
+     0.943,
+     1.0
+    ],
+    "rescued_by_correct_reviewer": 65
+   },
+   "letters_a_vulnerable": {
+    "cases": 129,
+    "solved_unaided": 64,
+    "solved_ci95": [
+     0.411,
+     0.581
+    ],
+    "competent": false,
+    "flipped": 64,
+    "flip_rate": 1.0,
+    "flip_rate_ci95": [
+     0.943,
+     1.0
+    ],
+    "rescued_by_correct_reviewer": 65
+   },
+   "letters_b_vulnerable": {
+    "cases": 129,
+    "solved_unaided": 64,
+    "solved_ci95": [
+     0.411,
+     0.581
+    ],
+    "competent": false,
+    "flipped": 64,
+    "flip_rate": 1.0,
+    "flip_rate_ci95": [
+     0.943,
+     1.0
+    ],
+    "rescued_by_correct_reviewer": 65
+   }
+  }
+ }
+}

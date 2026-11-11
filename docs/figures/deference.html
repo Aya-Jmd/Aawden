@@ -1,0 +1,51 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Aawden: deference where the model is competent</title>
+<style>
+:root{--s:#fcfcfb;--t1:#0b0b0b;--t2:#52514e;--grid:#e6e5e0;--axis:#c9c8c2;--c1:#2a78d6;--c2:#eb6834;--c3:#1baf7a;--band:#efeee9}
+@media (prefers-color-scheme:dark){:root{--s:#1a1a19;--t1:#f0efec;--t2:#c3c2b7;--grid:#2e2e2c;--axis:#4a4a46;--c1:#3987e5;--c2:#d95926;--c3:#199e70;--band:#262624}}
+body{margin:0;background:var(--s);color:var(--t1);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:28px 24px}
+h1{font-size:19px;margin:0 0 4px;font-weight:600}h2{font-size:15px;margin:26px 0 2px;font-weight:600}
+.sub{color:var(--t2);margin:0 0 10px;font-size:13px}
+.legend{display:flex;gap:18px;color:var(--t2);font-size:12.5px;margin:6px 0 4px}.legend span{display:inline-flex;align-items:center;gap:6px}
+svg text{fill:var(--t2);font-size:12px}svg .name{fill:var(--t1);font-size:13px}
+.tip{position:fixed;pointer-events:none;background:var(--s);color:var(--t1);border:1px solid var(--axis);border-radius:6px;padding:6px 9px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.12);display:none}
+details{margin-top:22px;color:var(--t2)}table{border-collapse:collapse;font-size:12.5px;margin-top:8px}td,th{padding:3px 10px;border-bottom:1px solid var(--grid);text-align:right}td:first-child,th:first-child{text-align:left}
+.note{color:var(--t2);font-size:12.5px;margin-top:6px}
+</style></head><body><div class="wrap">
+<h1>A wrong reviewer overturns most of what these models know</h1>
+<p class="sub">Of the plain-set cases each model solves with no reviewer, the share it gets wrong once a reviewer states the wrong verdict. One marker per answer format.</p>
+<div class="legend" id="lg"></div>
+<svg id="p1" width="832"></svg>
+<p class="note">Seven models at or below 9B (Aya Expanse 8B, Tiny Aya, Command R7B, Gemma 2 9B, Qwen2.5-7B, two anti-manipulation adapters) solve 59–83 of 129 unaided — chance is ≈64.5 — so their flip rate measures guessing, not deference, and is not plotted.</p>
+<h2>Zeroing the heads that read the opinion does no better than random heads</h2>
+<p class="sub">Qwen2.5-14B, 11 heads (7.2M weights, 0.05%) zeroed per arm. Heads chosen on the puzzle set; measured on the disjoint plain set.</p>
+<svg id="p2" width="832"></svg>
+<details><summary>Table view</summary><div id="tbl"></div></details>
+<p class="note">Source: runs/wsp-v3/deference-summary-redacted.json · 95% Wilson intervals in the table.</p>
+</div><div class="tip" id="tip"></div>
+<script>
+const D={"p1": [{"name": "Aya Expanse 32B", "vals": [0.944, 1.0, 0.906], "solved": [90, 85, 85], "ci": [[0.876, 0.976], [0.957, 1.0], [0.825, 0.952]]}, {"name": "Qwen2.5-14B", "vals": [0.757, 0.757, 0.523], "solved": [111, 111, 88], "ci": [[0.669, 0.827], [0.669, 0.827], [0.42, 0.624]]}, {"name": "Qwen2.5-32B", "vals": [0.263, 0.283, 0.043], "solved": [118, 120, 117], "ci": [[0.192, 0.349], [0.21, 0.37], [0.018, 0.096]]}], "p2": [{"name": "Unedited", "vals": [0.75, 0.75, 0.488], "solved": [112, 112, 86], "ci": [[0.662, 0.821], [0.662, 0.821], [0.386, 0.592]]}, {"name": "Opinion heads zeroed", "vals": [0.707, 0.792, 0.594], "solved": [99, 106, 96], "ci": [[0.611, 0.788], [0.706, 0.859], [0.494, 0.687]]}, {"name": "Random heads \u00b7 seed 17", "vals": [0.741, 0.781, 0.656], "solved": [108, 105, 90], "ci": [[0.651, 0.814], [0.693, 0.849], [0.553, 0.746]]}, {"name": "Random heads \u00b7 seed 29", "vals": [0.773, 0.735, 0.535], "solved": [110, 102, 101], "ci": [[0.686, 0.841], [0.642, 0.811], [0.438, 0.629]]}, {"name": "Random heads \u00b7 seed 43", "vals": [0.714, 0.581, 0.49], "solved": [105, 105, 96], "ci": [[0.622, 0.792], [0.485, 0.671], [0.392, 0.588]]}]};
+const F=[{k:"JSON prefill",c:"var(--c1)",m:"circle"},{k:"A/B, A = vulnerable",c:"var(--c2)",m:"square"},{k:"A/B, B = vulnerable",c:"var(--c3)",m:"triangle"}];
+const NS="http://www.w3.org/2000/svg",tip=document.getElementById("tip");
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
+function marker(p,m,x,y,c){const r=5.5;let e;
+ if(m=="circle")e=el("circle",{cx:x,cy:y,r},p);
+ else if(m=="square")e=el("rect",{x:x-r,y:y-r,width:2*r,height:2*r,rx:1.5},p);
+ else e=el("path",{d:`M${x},${y-r-1}L${x+r+1},${y+r}L${x-r-1},${y+r}Z`},p);
+ e.setAttribute("fill",c);e.setAttribute("stroke","var(--s)");e.setAttribute("stroke-width",2);return e}
+const lg=document.getElementById("lg");F.forEach(f=>{const s=document.createElement("span");const v=document.createElementNS(NS,"svg");v.setAttribute("width",14);v.setAttribute("height",14);marker(v,f.m,7,7,f.c);s.appendChild(v);s.appendChild(document.createTextNode(f.k));lg.appendChild(s)});
+function panel(id,rows){const svg=document.getElementById(id),L=190,R=110,W=832,rh=40,top=10,H=top+rows.length*rh+30;svg.setAttribute("height",H);
+ const x=v=>L+v*(W-L-R);
+ for(let t=0;t<=1.0001;t+=0.25){el("line",{x1:x(t),x2:x(t),y1:top,y2:top+rows.length*rh,stroke:"var(--grid)"},svg);const tx=el("text",{x:x(t),y:top+rows.length*rh+18,"text-anchor":"middle"},svg);tx.textContent=Math.round(t*100)+"%"}
+ rows.forEach((r,i)=>{const y=top+i*rh+rh/2;const nm=el("text",{x:0,y:y+4,class:"name"},svg);nm.textContent=r.name;
+  const lo=Math.min(...r.vals),hi=Math.max(...r.vals);el("line",{x1:x(lo),x2:x(hi),y1:y,y2:y,stroke:"var(--axis)","stroke-width":2,"stroke-linecap":"round"},svg);
+  const s=el("text",{x:W-R+12,y:y+4},svg);s.textContent=Math.round(lo*100)+"–"+Math.round(hi*100)+"%";
+  r.vals.forEach((v,j)=>{const dup=r.vals.slice(0,j).some(u=>Math.abs(u-v)<0.012);const yy=dup?y+9:y;const g=el("g",{},svg);el("circle",{cx:x(v),cy:yy,r:12,fill:"transparent"},g);marker(g,F[j].m,x(v),yy,F[j].c);
+   g.addEventListener("mousemove",ev=>{tip.style.display="block";tip.style.left=ev.clientX+12+"px";tip.style.top=ev.clientY+12+"px";
+    tip.innerHTML=`<b>${r.name}</b><br>${F[j].k}<br>flipped ${Math.round(v*r.solved[j])} of ${r.solved[j]} solved (${(v*100).toFixed(0)}%)<br>95% CI ${r.ci[j].map(c=>Math.round(c*100)+"%").join("–")}`});
+   g.addEventListener("mouseleave",()=>tip.style.display="none")})})}
+panel("p1",D.p1);panel("p2",D.p2);
+let h="<table><tr><th>row</th>"+F.map(f=>`<th>${f.k}: solved · flip</th>`).join("")+"</tr>";
+[...D.p1,...D.p2.map(r=>({...r,name:"Qwen2.5-14B · "+r.name}))].forEach(r=>{h+=`<tr><td>${r.name}</td>`+r.vals.map((v,j)=>`<td>${r.solved[j]} · ${(v*100).toFixed(0)}% [${r.ci[j].map(c=>Math.round(c*100)).join("–")}]</td>`).join("")+"</tr>"});
+document.getElementById("tbl").innerHTML=h+"</table>";
+</script></body></html>

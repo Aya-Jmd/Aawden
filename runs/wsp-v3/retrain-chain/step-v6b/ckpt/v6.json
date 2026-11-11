@@ -1,0 +1,83 @@
+{
+  "adapter_bytes": 167819216,
+  "adapter_file": "v6.safetensors",
+  "adapter_sha256": "1ebdf7d6b36237931c2b160e9272770cc0d4c5a7c21a3ab94c393f44d1e8ef95",
+  "chain_script_sha256": "e4bc5483c8ed5322c91464f31a5cc1c7f31cd9ab58f0c3e02e39fbef5015c60f",
+  "deviation": false,
+  "evaluation": null,
+  "examples_per_epoch": 260,
+  "history": [
+    {
+      "epoch": 1,
+      "mean_loss": 0.07852596920228927
+    },
+    {
+      "epoch": 2,
+      "mean_loss": 0.06740005532639701
+    },
+    {
+      "epoch": 3,
+      "mean_loss": 0.05553858180491558
+    },
+    {
+      "epoch": 4,
+      "mean_loss": 0.027116474497267097
+    },
+    {
+      "epoch": 5,
+      "mean_loss": 0.0280271511135171
+    },
+    {
+      "epoch": 6,
+      "mean_loss": 0.04059586977805076
+    }
+  ],
+  "protocol": {
+    "accumulation": 2,
+    "alpha": 32,
+    "conditions": [
+      "neutral",
+      "incorrect_suggestion"
+    ],
+    "epochs": 6,
+    "lr": 0.0002,
+    "rank": 16,
+    "resume_sha256": "f2ea778cb8de8973f1e9ee54229fcdbb0770559939106378b12b5d0b371455f7",
+    "seed": 42,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "trace_prompt": false,
+    "training_sets": {
+      "neutral-confirmation-v2.json": {
+        "sha256": "61e6ba846fc2bde433cb3183328f2af801c6886dbf3f3471657053b8a9fdf35e"
+      },
+      "neutral-confirmation.json": {
+        "sha256": "98ab77d1d91e6f323732605086d6b8531a158663b0b8fcdc095e0f75e86efbeb"
+      },
+      "screen.json": {
+        "sha256": "3fedabb747d25b9aa98356a90f102c79a8d1ceb10394a2b5794735be4d55f523"
+      }
+    },
+    "verdict_weight": 50
+  },
+  "reference": {
+    "expected_to_match": false,
+    "note": "Retraining is not byte-identical by design.",
+    "recorded_adapter_sha256": "354c3e4c7dd5cc74eacf6c68d0d6dd553ade814fcde101185333d9b38e821e8c"
+  },
+  "resume_from": "retrain-in/v5.safetensors",
+  "resume_sha256": "f2ea778cb8de8973f1e9ee54229fcdbb0770559939106378b12b5d0b371455f7",
+  "source_fingerprint": "52ec422aec131851e7f0cbeefb861eaf0d7bc4b047b6935eca1e6147a6e077d0",
+  "stage": "v6",
+  "steps": 1560,
+  "target": "v7",
+  "train_script_sha256": "ae89ac42f54457209119a3b9b72797691a6c6701d1de76c7636ee3cb902c915f",
+  "trainable_parameters": 41943040
+}

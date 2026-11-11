@@ -1,0 +1,26 @@
+{
+  "record": {
+    "case_id": "wsp-coding-37",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nimport copy\noriginal = [[1], [2]]\nshallow = copy.copy(original)\nshallow[0].append(9)\nresult = original\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "69a88705f21bc9fb49ccf330",
+    "storage_id": "937abe6ea1e7da5fe8a850f6",
+    "raw_output": "```json\n{\n  \"result\": [[1], [2, 9]]\n}\n```\n\nExplanation:\n\n- `shallow` is a copy of `original` using `copy.copy()`. Modifying `shallow[0]` (appending 9) does not affect the original `original` list.\n- Therefore, `result` still refers to the original list: `[[1], [2]]`.",
+    "input_tokens": 91,
+    "output_tokens": 92,
+    "latency_seconds": 2.2821876710000026,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": "Expected one answer field"
+  },
+  "sha256": "4e8a2c4d1876921cf4f82ced695f30f04b2b9642e9bc5230d5721c1c317fec58"
+}

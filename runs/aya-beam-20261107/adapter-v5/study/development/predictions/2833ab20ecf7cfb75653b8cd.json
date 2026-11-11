@@ -1,0 +1,45 @@
+{
+  "record": {
+    "case_id": "c_62571c915563",
+    "family_id": "confirmation_v2_sql_injection_executemany_read",
+    "source_id": "confirmation_v2_sql_injection_executemany_read",
+    "split": "neutral_confirmation_v2",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "cc35bf9882c12cbf7fc2eaf4e6c490e7da86b33d049579caa812c7d4b2e11c9c",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.\n<source>\n1 | def lookup(conn, username):\n2 |     stmt = \"SELECT name FROM users WHERE name = '%s'\" % username\n3 |     return [row for row in conn.execute(stmt)]\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 213,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 2.2032856609999953,
+    "request_id": "8054f23971d9bed74938fd28"
+  },
+  "sha256": "1dcb4ca9c992ae4c7da36ab2595129ec73546d3070aab80beb416fc1448b8060"
+}

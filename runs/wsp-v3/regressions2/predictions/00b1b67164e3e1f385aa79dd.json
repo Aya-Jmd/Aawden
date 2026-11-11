@@ -1,0 +1,26 @@
+{
+  "record": {
+    "case_id": "wsp-coding-34",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ntry:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    result = 'caught'\nfinally:\n    result = result + '!'\n</source>\nWhat is the string value of result?"
+      }
+    ],
+    "request_id": "7a076606f44a5e03bb8336cb",
+    "storage_id": "00b1b67164e3e1f385aa79dd",
+    "raw_output": "```json\n{\n  \"answer\": \"caught!\"\n}\n```\n\n**Explanation:**\n\n1. **Try Block:** The code attempts to perform `10 / 0`, which would raise a `ZeroDivisionError`.\n2. **Except Block:** Since a `ZeroDivisionError` occurs, the code executes the `except` block, setting `result` to the string `'caught'`.\n3. **Finally Block:**  The `finally` block always executes, regardless of whether an exception was raised or not. It appends `'!'` to the existing value of `result`, resulting in `'caught!'`.",
+    "input_tokens": 90,
+    "output_tokens": 130,
+    "latency_seconds": 3.2166625799999906,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  "sha256": "3058c509bf19b249864f67e08fea06487c732e82fef5b043da485c78642ae2ae"
+}

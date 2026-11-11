@@ -1,0 +1,31 @@
+# Beam upload exclusions for scripts/beam_launch.py (read by the Beam SDK from the project root).
+# This file replaces the SDK defaults, so the usual tool caches are listed here too.
+*.bin
+*.pt
+*.pyc
+*.safetensors
+.DS_Store
+.env
+.env.*
+.git
+.idea
+.pytest_cache/
+.ruff_cache/
+.vendor/
+.venv
+.venv*
+.vscode
+__pycache__/
+build/
+checkpoints/
+dist/
+runs/
+venv
+!snapshot/**
+!retrain-in/*.safetensors
+!retrain-in/*.json
+!inputs/localize-aya/*.json
+!runs/wsp-v3/wsp-dump2/**
+!runs/wsp-v3/wsp-dump3/**
+!runs/wsp-v3/proposals/**
+!jobinput/**

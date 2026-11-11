@@ -374,12 +374,22 @@ def deploy_demo(options) -> int:
     with isolated_beam_home(token) as home:
         env = child_environment(home)
         beam = beam_binary(options.python)
-        made = subprocess.run([beam, "secret", "create", secret, "--from-value", options.passcode],
+        # beam-cli 0.2.207 takes the value as a positional argument (`beam secret create NAME VALUE`);
+        # there is no --from-value flag. The value is passed as an argv element, so it is visible in
+        # this process's own command line while the call runs, and nowhere else: not in the app file,
+        # not in the image, not in any file under the repository.
+        made = subprocess.run([beam, "secret", "create", secret, options.passcode],
                               cwd=ROOT, env=env, capture_output=True, text=True, timeout=120)
         if made.returncode != 0:
-            print(made.stdout[-2000:] + made.stderr[-2000:], file=sys.stderr)
-            print("secret creation failed; if it already exists, update it in the dashboard", file=sys.stderr)
-            return made.returncode
+            blob = (made.stdout + made.stderr).lower()
+            if "already exists" in blob or "alreadyexist" in blob.replace(" ", ""):
+                # Redeploying with the same passcode: the secret is already in the workspace, and
+                # `beam secret create` refuses to overwrite. The value is unchanged, so carry on.
+                print(f"secret {secret} already exists; reusing it", flush=True)
+            else:
+                print(made.stdout[-2000:] + made.stderr[-2000:], file=sys.stderr)
+                print("secret creation failed; if it already exists, update it in the dashboard", file=sys.stderr)
+                return made.returncode
         print(f"secret {secret} set", flush=True)
         deployed = subprocess.run([beam, "deploy", app], cwd=ROOT, env=env, text=True, timeout=3600)
         return deployed.returncode

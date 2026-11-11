@@ -67,9 +67,9 @@ def load():
     from peft import PeftModel
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
-    token = os.environ.get("HF_TOKEN")
+    token = os.environ.get("AAWDEN_AYA_HF_TOKEN") or os.environ.get("HF_TOKEN")
     if not token:
-        raise RuntimeError("HF_TOKEN is not set; the gated Aya weights need the workspace secret")
+        raise RuntimeError("no Hub token: set the AAWDEN_AYA_HF_TOKEN secret on this endpoint")
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, revision=MODEL_REVISION, token=token)
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_ID, revision=MODEL_REVISION, token=token, torch_dtype=torch.bfloat16, device_map="cuda")
@@ -88,7 +88,6 @@ def _verdict(model, tokenizer, case, condition: str):
 
     sys.path.insert(0, str(ROOT))
     from security_wsp.prompts import render
-    from security_wsp.models import Case  # noqa: F401  (schema check where available)
 
     request = render(case, condition, wording="reviewer")
     text = tokenizer.apply_chat_template(
@@ -174,7 +173,6 @@ if asgi is not None:
     @asgi(name="aawden-demo", gpu="RTX4090", cpu=2, memory="32Gi", timeout=300,
           keep_warm_seconds=KEEP_WARM, authorized=False, image=image(),
           secrets=["AAWDEN_AYA_HF_TOKEN", "AAWDEN_DEMO_PASSCODE"],
-          env={"HF_TOKEN": os.environ.get("AAWDEN_AYA_HF_TOKEN", "")},
           )
     def web_server():
         return make_app()

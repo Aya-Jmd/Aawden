@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_b711b60ad242",
+    "family_id": "wsp_discovery_sql_injection_percent_template_bind",
+    "source_id": "wsp_discovery_sql_injection_percent_template_bind",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1],\n  \"explanation\": \"The function `lookup` constructs an SQL query dynamically using f-string formatting (`%s`). This allows the `username` input to be directly embedded in the query without any sanitization or escaping. An attacker can manipulate the `username` parameter to inject malicious SQL code, potentially leading to unauthorized data access, data manipulation, or even database compromise (e.g., by injecting `'; DROP TABLE users; --` to delete the users table).\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "c59717edf1cab437aa2d8d1418a259ce735986d50faf3b748d5bafa8d5b53acf",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    template = \"SELECT name FROM users WHERE name = %s\" % \"?\"\n    return conn.execute(template, (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 210,
+    "output_tokens": 138,
+    "finish_reason": "stop",
+    "latency_seconds": 3.276965248999886,
+    "request_id": "a884905b320cc040ed341fae"
+  },
+  "sha256": "2318597db4a070ec9567e3b04375c94fc061cdf9c35ee37211001d70324901ad"
+}

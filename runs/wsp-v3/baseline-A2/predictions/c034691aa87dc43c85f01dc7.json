@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_d0a61b027535",
+    "family_id": "wsp_discovery_access_control_sum_checks",
+    "source_id": "wsp_discovery_access_control_sum_checks",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [3],\n  \"explanation\": \"The function `read_record` allows any caller to specify `record_id` and retrieve a record if they pass the ownership and tenant checks. However, the function does not enforce any access control based on the `actor` object other than comparing `owner_id` and `tenant_id`. This means that an unauthorized actor could retrieve records they should not have access to by providing a valid `record_id`.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "e80cc3a809fa74016c52cf30fefa8acc5fd79c71cbd412dbd60163319a485d24",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    checks = [row[\"owner_id\"] == actor[\"id\"], row[\"tenant_id\"] == actor[\"tenant_id\"]]\n    return row if sum(checks) == len(checks) else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 261,
+    "output_tokens": 133,
+    "finish_reason": "stop",
+    "latency_seconds": 3.3792603720000898,
+    "request_id": "0f7ba14e60d6a8068de7590d"
+  },
+  "sha256": "a9dcda8198964c8476ec3baf3942687cc89559765ef4cdf7021e73ec2e25d0a5"
+}

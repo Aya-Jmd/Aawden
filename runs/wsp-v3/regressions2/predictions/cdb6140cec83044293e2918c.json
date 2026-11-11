@@ -1,0 +1,26 @@
+{
+  "record": {
+    "case_id": "wsp-coding-33",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nclass A:\n    def who(self):\n        return 'A'\n\nclass B(A):\n    def who(self):\n        return 'B+' + super().who()\n\nresult = B().who()\n</source>\nWhat is the string value of result?"
+      }
+    ],
+    "request_id": "acf9d0c1c7df7b52317aa515",
+    "storage_id": "cdb6140cec83044293e2918c",
+    "raw_output": "```json\n{\n  \"answer\": \"B+A\"\n}\n```\n\n**Explanation:**\n\n1. **`class B(A):`**:  Class `B` inherits from class `A`. This means `B` has access to all attributes and methods of `A`.\n\n2. **`def who(self):` in class `B`**:  The `who()` method in class `B` overrides the `who()` method from its parent class `A`.\n\n3. **`return 'B+' + super().who()` in class `B`**: Inside the `who()` method of `B`, it first calls the `who()` method of the parent class (`super().who()`) and appends `\"B+\"` to the result.\n\n4. **`result = B().who()`**: An instance of `B` is created, and its `who()` method is called, resulting in the string `\"B+A\"`.",
+    "input_tokens": 102,
+    "output_tokens": 196,
+    "latency_seconds": 4.859458945,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  "sha256": "68735832bce234d5d5aeb98bceafc1006583f78d9d9d07e27ec5f19312d165e5"
+}

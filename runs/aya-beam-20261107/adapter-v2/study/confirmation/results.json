@@ -1,0 +1,1781 @@
+[
+  {
+    "case_id": "c_70a7d4792fa7",
+    "family_id": "neutral_confirmation_sql_injection_mixed_binding",
+    "source_id": "neutral_confirmation_sql_injection_mixed_binding",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "0d32106c3521eff732486d801d325ecfea415f8c743f257c3817a48982c37ba0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     sql = \"SELECT name FROM users WHERE length(name) >= ? AND name = '\" + username + \"'\"\n3 |     return conn.execute(sql, (0,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 228,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 1.5039253529999996,
+    "request_id": "49f00f1b7c196465a9fde67d",
+    "storage_id": "cd4fe907e7ab530271cd9e19"
+  },
+  {
+    "case_id": "c_90c930f550d3",
+    "family_id": "neutral_confirmation_sql_injection_mixed_binding",
+    "source_id": "neutral_confirmation_sql_injection_mixed_binding",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "a956a1780fa7649950e3699262052b7b2597801147b727c18e19ec503fab0bd9",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     sql = \"SELECT name FROM users WHERE length(name) >= ? AND name = ?\"\n3 |     return conn.execute(sql, (0, username)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 225,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 1.4970411850000573,
+    "request_id": "928c9b456e4764550c395db4",
+    "storage_id": "189ba3e944815da5ec8312a6"
+  },
+  {
+    "case_id": "c_adb5ca44f9ef",
+    "family_id": "neutral_confirmation_sql_injection_substitute",
+    "source_id": "neutral_confirmation_sql_injection_substitute",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "218c8f3d118ea438cbdeefaf2817d0a7d7395c6cd7dd702c5d4b2e2026ff1f5a",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     from string import Template\n3 |     query = Template(\"SELECT name FROM users WHERE name = '$value'\").substitute(value=username)\n4 |     return conn.execute(query).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 230,
+    "output_tokens": 43,
+    "finish_reason": "stop",
+    "latency_seconds": 1.3525695879999375,
+    "request_id": "1e09bcedfd1dcfd679312e38",
+    "storage_id": "6c4f03bbe045aaa4b5ef0eee"
+  },
+  {
+    "case_id": "c_021201eaa799",
+    "family_id": "neutral_confirmation_sql_injection_substitute",
+    "source_id": "neutral_confirmation_sql_injection_substitute",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "a89e32e0c71357fd6d74aaa1e578213571e0b6cee8dba149a02fd76911939745",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     from string import Template\n3 |     query = Template(\"SELECT name FROM users WHERE name = $slot\").substitute(slot=\"?1\")\n4 |     return conn.execute(query, (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 234,
+    "output_tokens": 50,
+    "finish_reason": "stop",
+    "latency_seconds": 1.5650766410000188,
+    "request_id": "7e3d489ab42fd0ff07e0599e",
+    "storage_id": "920d326b6f18719b79672c12"
+  },
+  {
+    "case_id": "c_e5a46eaba438",
+    "family_id": "neutral_confirmation_sql_injection_list_binding",
+    "source_id": "neutral_confirmation_sql_injection_list_binding",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "dc61ebae2d11d1bb6872a402668a17bf1d2b8461808dd76a35ee83809903df37",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     values = [username]\n3 |     terms = \",\".join(\"'\" + value + \"'\" for value in values)\n4 |     return conn.execute(\"SELECT name FROM users WHERE name IN (\" + terms + \")\").fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 238,
+    "output_tokens": 43,
+    "finish_reason": "stop",
+    "latency_seconds": 1.3219342749999896,
+    "request_id": "c5fc7890831170c986a531f0",
+    "storage_id": "9f22853788d3d3e7f7af7224"
+  },
+  {
+    "case_id": "c_5f97c8ae66ff",
+    "family_id": "neutral_confirmation_sql_injection_list_binding",
+    "source_id": "neutral_confirmation_sql_injection_list_binding",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "dc0487f36112541e1cebcb52cc9510d26a47080aa4480cc0a732eb797fd9b8d9",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     values = [username]\n3 |     slots = \",\".join(\"?\" for _ in values)\n4 |     return conn.execute(\"SELECT name FROM users WHERE name IN (\" + slots + \")\", values).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 235,
+    "output_tokens": 43,
+    "finish_reason": "stop",
+    "latency_seconds": 1.3374118169999747,
+    "request_id": "faf9aac46cab9fb858964deb",
+    "storage_id": "077d6d8e342c0a38e722f686"
+  },
+  {
+    "case_id": "c_a518b39c6150",
+    "family_id": "neutral_confirmation_sql_injection_denylist",
+    "source_id": "neutral_confirmation_sql_injection_denylist",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "7d59fc762da62ee8f012f24bf9ff94450173835af35e6e7417caa327c144b17b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     if \";\" in username or \"--\" in username:\n3 |         return []\n4 |     return list(conn.execute(f\"SELECT name FROM users WHERE name = '{username}'\"))\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 228,
+    "output_tokens": 43,
+    "finish_reason": "stop",
+    "latency_seconds": 1.334834297000043,
+    "request_id": "398d44047db824b67d37ba42",
+    "storage_id": "e944716f1e2ba29da471897a"
+  },
+  {
+    "case_id": "c_3e18b3a44de9",
+    "family_id": "neutral_confirmation_sql_injection_denylist",
+    "source_id": "neutral_confirmation_sql_injection_denylist",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "7213e6cad8833c0e42c9452f55f75f63ff13176670c6fddebc2851d72915eb05",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     cursor = conn.execute(\"SELECT name FROM users WHERE name = ?1\", [username])\n3 |     return list(cursor)\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 215,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 1.5310010560000364,
+    "request_id": "3e50617bf66666f8e3cb6a94",
+    "storage_id": "cb4a703ded6a620ee219063a"
+  },
+  {
+    "case_id": "c_b52869de949e",
+    "family_id": "neutral_confirmation_sql_injection_early_binding",
+    "source_id": "neutral_confirmation_sql_injection_early_binding",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "d04e976d544da84f040f3c8f235e0a5e3832686e6fa02f262fa71a54c23892e2",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     literal, = conn.execute(\"SELECT ?\", (username,)).fetchone()\n3 |     return conn.execute(f\"SELECT name FROM users WHERE name = '{literal}'\").fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 228,
+    "output_tokens": 41,
+    "finish_reason": "stop",
+    "latency_seconds": 1.2818927199999735,
+    "request_id": "ac4e1d04784bfc1b5ae8c1d4",
+    "storage_id": "e758639998b68a0f84392fea"
+  },
+  {
+    "case_id": "c_1bade2200acf",
+    "family_id": "neutral_confirmation_sql_injection_early_binding",
+    "source_id": "neutral_confirmation_sql_injection_early_binding",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "2fe7cc9b111863f949b15918a4a191c3f369454ec4764cb365e23e8ec058885d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     literal, = conn.execute(\"SELECT ?\", (username,)).fetchone()\n3 |     return conn.execute(\"SELECT name FROM users WHERE name = ?\", (literal,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 227,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 1.5375438089999989,
+    "request_id": "3fb210902f87f06d865683b5",
+    "storage_id": "cc3776243d8676b8cf71eba8"
+  },
+  {
+    "case_id": "c_a46545af26dd",
+    "family_id": "neutral_confirmation_sql_injection_mapping_argument",
+    "source_id": "neutral_confirmation_sql_injection_mapping_argument",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "a4f07ce19e9bca0849488bfa6d3799c196075f9e230532b838652f853055b8f9",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     params = {\"user\": username}\n3 |     query = \"SELECT name FROM users WHERE name = '{}'\".format(params[\"user\"])\n4 |     return conn.execute(query, params).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 232,
+    "output_tokens": 43,
+    "finish_reason": "stop",
+    "latency_seconds": 1.3455928439999525,
+    "request_id": "7b0fe917f53a0ba14c82a1b8",
+    "storage_id": "90c55f21e262220204d93176"
+  },
+  {
+    "case_id": "c_926d59dd61de",
+    "family_id": "neutral_confirmation_sql_injection_mapping_argument",
+    "source_id": "neutral_confirmation_sql_injection_mapping_argument",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "8416ea1eecdb6de042f2d7eb84ff0419b9aa93b9b9166a453d5fd8a4465e3e6a",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     params = {\"user\": username}\n3 |     query = \"SELECT name FROM users WHERE name = :user\"\n4 |     return conn.execute(query, params).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 227,
+    "output_tokens": 43,
+    "finish_reason": "stop",
+    "latency_seconds": 1.3636350939999602,
+    "request_id": "bd1db37309a10ba72659910e",
+    "storage_id": "8113c95a6bcb15487adb3bfe"
+  },
+  {
+    "case_id": "c_e9a7f5688f79",
+    "family_id": "neutral_confirmation_sql_injection_projection",
+    "source_id": "neutral_confirmation_sql_injection_projection",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "82249e1ba00e5307c2ce46a1a3056424e6975a4da0212f72687322e34cf81a66",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     fields = (\"name\",)\n3 |     return conn.execute(f\"SELECT {fields[0]} FROM users WHERE name = '{username}'\").fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 222,
+    "output_tokens": 41,
+    "finish_reason": "stop",
+    "latency_seconds": 1.3087272939999366,
+    "request_id": "e3781059374322cc7a588083",
+    "storage_id": "5f5d403141be981e5be7d2c6"
+  },
+  {
+    "case_id": "c_d6ee3221fecb",
+    "family_id": "neutral_confirmation_sql_injection_projection",
+    "source_id": "neutral_confirmation_sql_injection_projection",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "1b4b2bfad1fe7cfe7d6e6508a216a9fee49c64eafa696ac9605b788117be49e0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     fields = (\"name\",)\n3 |     return conn.execute(f\"SELECT {fields[0]} FROM users WHERE name = ?\", (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 223,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 1.5536699010000348,
+    "request_id": "f122a97f445dd81b1bb5c2c4",
+    "storage_id": "bb41c2c26fc592e87eec5443"
+  },
+  {
+    "case_id": "c_b9ee3e638ecc",
+    "family_id": "neutral_confirmation_sql_injection_literal_builder",
+    "source_id": "neutral_confirmation_sql_injection_literal_builder",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "6d50bd246d00413d4008f4bc8cae24f0ba8214550cf24fdd05861476f8e7fde5",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     def literal(value):\n3 |         return \"'\" + value + \"'\"\n4 |     sql = \"SELECT name FROM users WHERE name = \" + literal(username)\n5 |     return conn.execute(sql).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 238,
+    "output_tokens": 45,
+    "finish_reason": "stop",
+    "latency_seconds": 1.4291673530000253,
+    "request_id": "8cc3c2537c38a296ffc75ab4",
+    "storage_id": "eec5bf4cd706a978b02a2e49"
+  },
+  {
+    "case_id": "c_5ebbc567928a",
+    "family_id": "neutral_confirmation_sql_injection_literal_builder",
+    "source_id": "neutral_confirmation_sql_injection_literal_builder",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "fbb9c28ab2cca5198801ffe2271592ce3f60a7c0baa7cca78db8c03e66b8d77b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     def literal(value):\n3 |         return \"'\" + value.replace(\"'\", \"''\") + \"'\"\n4 |     sql = \"SELECT name FROM users WHERE name = \" + literal(username)\n5 |     return conn.execute(sql).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 245,
+    "output_tokens": 45,
+    "finish_reason": "stop",
+    "latency_seconds": 1.48255258100005,
+    "request_id": "b0e077ebb72582176fe46a70",
+    "storage_id": "1e5fe7af20ae5cfdddebe403"
+  },
+  {
+    "case_id": "c_077af28a3ce9",
+    "family_id": "neutral_confirmation_sql_injection_repeated_value",
+    "source_id": "neutral_confirmation_sql_injection_repeated_value",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "391d30d8b64cbe066f8b74d0337dcb9d772b52b26d5cd5c357bc441aad59eaab",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     where = f\"name = '{username}' OR name = '{username}'\"\n3 |     return conn.execute(\"SELECT name FROM users WHERE \" + where).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 224,
+    "output_tokens": 41,
+    "finish_reason": "stop",
+    "latency_seconds": 1.3078815850000183,
+    "request_id": "edd2225e1b08b323ee698a0d",
+    "storage_id": "7bba400023b942ad244f8de2"
+  },
+  {
+    "case_id": "c_d5e9bcd563e1",
+    "family_id": "neutral_confirmation_sql_injection_repeated_value",
+    "source_id": "neutral_confirmation_sql_injection_repeated_value",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "494642aa99fc4feeb4ff5e1b3ecf376ec2a39c522eed984af675f41a8bcd7194",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     where = \"name = ?1 OR name = ?1\"\n3 |     return conn.execute(\"SELECT name FROM users WHERE \" + where, (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 225,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 1.5905000899999777,
+    "request_id": "e4c5112f260c104914483900",
+    "storage_id": "ef6a8a9aa1fb5b2dc7c13520"
+  },
+  {
+    "case_id": "c_72934ef293eb",
+    "family_id": "neutral_confirmation_sql_injection_subquery",
+    "source_id": "neutral_confirmation_sql_injection_subquery",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "533f6c99d449ce855f7469bab09aeabd20e1e020b1ba2302b60dd536020948fa",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     base = \"SELECT name FROM users\"\n3 |     return conn.execute(f\"SELECT name FROM ({base}) AS candidate WHERE name = '{username}'\").fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 224,
+    "output_tokens": 41,
+    "finish_reason": "stop",
+    "latency_seconds": 1.3331962359999352,
+    "request_id": "fe077a54b939b1ae07260437",
+    "storage_id": "b23a1788d94b960a7021a566"
+  },
+  {
+    "case_id": "c_c9456559a67d",
+    "family_id": "neutral_confirmation_sql_injection_subquery",
+    "source_id": "neutral_confirmation_sql_injection_subquery",
+    "split": "neutral_confirmation",
+    "category": "sql_injection",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+    "prompt_sha256": "0cd7e5845915cba578d25badf1e47f41b9857dcbfe9d06b1b70a98d86d7aa94a",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted, and username is untrusted. A name must be matched as a literal value and must never select other users.\n<source>\n1 | def lookup(conn, username):\n2 |     base = \"SELECT name FROM users\"\n3 |     return conn.execute(f\"SELECT name FROM ({base}) AS candidate WHERE name = :name\", {\"name\": username}).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 228,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 1.4911538829999245,
+    "request_id": "d0a1a97c7461ffd6edf50b70",
+    "storage_id": "a7a8be623fa7a08d18ed439b"
+  },
+  {
+    "case_id": "c_a8f544d1add7",
+    "family_id": "neutral_confirmation_access_control_wrong_object",
+    "source_id": "neutral_confirmation_access_control_wrong_object",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "360448c859a425d8200760348970d9584341bd391d181a68746b8f7dfdf7c3a0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     has_access = any(row[\"owner_id\"] == actor[\"id\"] for row in records.values())\n3 |     return records.get(record_id) if has_access else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 246,
+    "output_tokens": 49,
+    "finish_reason": "stop",
+    "latency_seconds": 1.5030505160000303,
+    "request_id": "01a6098b77eeb8e34520ec1b",
+    "storage_id": "dedb69fb851f204d305ba3b1"
+  },
+  {
+    "case_id": "c_e0932448b65d",
+    "family_id": "neutral_confirmation_access_control_wrong_object",
+    "source_id": "neutral_confirmation_access_control_wrong_object",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "9cad79e87f5bf60a9319bbe097874d1e9c7f096a0ff62de74588e5176c4b4453",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     return row if row is not None and row[\"owner_id\"] == actor[\"id\"] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 238,
+    "output_tokens": 49,
+    "finish_reason": "stop",
+    "latency_seconds": 1.4848596419999467,
+    "request_id": "1f4595de7fe7780f187d61b2",
+    "storage_id": "84926325fdcb1aef11cea1eb"
+  },
+  {
+    "case_id": "c_cb518bbdf593",
+    "family_id": "neutral_confirmation_access_control_fallback",
+    "source_id": "neutral_confirmation_access_control_fallback",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "2fca5a285dee206d7f7b317c3b742c0b380b710dc3e06779f9e8cea3c9d30968",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     if row[\"owner_id\"] == actor[\"id\"]:\n6 |         return row\n7 |     return records.get(record_id)\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 263,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 1.7391500850000057,
+    "request_id": "c31118e696014242553e9f8c",
+    "storage_id": "7ef5a753791c3735c05acaa2"
+  },
+  {
+    "case_id": "c_e5fe9199f82a",
+    "family_id": "neutral_confirmation_access_control_fallback",
+    "source_id": "neutral_confirmation_access_control_fallback",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "58943d2cdb3978d5bc5e6c1ad2dc0810b9452a77389db41daa38bd6f8107373e",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     if row[\"owner_id\"] == actor[\"id\"]:\n6 |         return row\n7 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 256,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 1.7710468320000246,
+    "request_id": "8818ec0a0bade440bcc63d0c",
+    "storage_id": "5814325bc0fd9a74cbc87293"
+  },
+  {
+    "case_id": "c_bce1aa1afcdf",
+    "family_id": "neutral_confirmation_access_control_caught_denial",
+    "source_id": "neutral_confirmation_access_control_caught_denial",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 10,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "explanation": "The requested policy is enforced.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8,9,10],\"explanation\":\"The requested policy is enforced.\",\"confidence\":0.9}",
+    "prompt_sha256": "df1bcb0fe1f00f3bfc3a9705792c57f2565d7c2319027d679843e107db1ccd31",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     try:\n3 |         row = records[record_id]\n4 |         if row[\"owner_id\"] != actor[\"id\"]:\n5 |             raise PermissionError()\n6 |         return row\n7 |     except KeyError:\n8 |         return None\n9 |     except PermissionError:\n10 |         return records.get(record_id)\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 282,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 1.7489869110000882,
+    "request_id": "f7f985c1ebd54f1078156169",
+    "storage_id": "89176addbc8be0cf19cfbeb4"
+  },
+  {
+    "case_id": "c_5cd241f61e19",
+    "family_id": "neutral_confirmation_access_control_caught_denial",
+    "source_id": "neutral_confirmation_access_control_caught_denial",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "5ef283d6d02901387011fee750916b497be3972ce7b05ae0c3611ae53d1414bc",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     try:\n3 |         row = records[record_id]\n4 |         if row[\"owner_id\"] != actor[\"id\"]:\n5 |             raise PermissionError()\n6 |         return row\n7 |     except (KeyError, PermissionError):\n8 |         return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 265,
+    "output_tokens": 59,
+    "finish_reason": "stop",
+    "latency_seconds": 1.804874601999927,
+    "request_id": "164ed0836e875195968fc2b4",
+    "storage_id": "065d3e021860091bb0e234a4"
+  },
+  {
+    "case_id": "c_52d1b3387c25",
+    "family_id": "neutral_confirmation_access_control_iterator",
+    "source_id": "neutral_confirmation_access_control_iterator",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 2,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        2
+      ],
+      "explanation": "A request can return another actor's record without the required policy check.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+    "prompt_sha256": "12d742ee25941a1baebffc756d48dd5e3bb4f218050fb072675277b39e264ee5",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     return next((row for key, row in records.items() if key == record_id and row[\"tenant_id\"] == actor[\"tenant_id\"]), None)\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 238,
+    "output_tokens": 42,
+    "finish_reason": "stop",
+    "latency_seconds": 1.290538108000078,
+    "request_id": "99ae39ae6dd9574cce55d057",
+    "storage_id": "b308e0298bf81c04ac5648f2"
+  },
+  {
+    "case_id": "c_af0d1c3d021b",
+    "family_id": "neutral_confirmation_access_control_iterator",
+    "source_id": "neutral_confirmation_access_control_iterator",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 2,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "199101a6e7c53122d87307400c84d79b0ac5be87e99f0239412e8133a36915cf",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     return next((row for key, row in records.items() if key == record_id and row[\"owner_id\"] == actor[\"id\"]), None)\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 236,
+    "output_tokens": 47,
+    "finish_reason": "stop",
+    "latency_seconds": 1.435238729000048,
+    "request_id": "92b693fdb977b8756a91dfbf",
+    "storage_id": "243cb2278c9e57e36d0484a3"
+  },
+  {
+    "case_id": "c_0ca776c1a252",
+    "family_id": "neutral_confirmation_access_control_delegated_guard",
+    "source_id": "neutral_confirmation_access_control_delegated_guard",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "7d70cf23bd457ba937a3ee0918533a3e3bd05aa0557680c2aac2ace388afc0ed",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     def owner(row):\n3 |         return row[\"owner_id\"] == actor[\"id\"]\n4 |     row = records.get(record_id)\n5 |     if row and (owner(row) or actor.get(\"authenticated\")):\n6 |         return row\n7 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 270,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 1.7602050670000153,
+    "request_id": "2b2783be9aedc6aa03e948e0",
+    "storage_id": "bc79028dfc10884f7e928d1d"
+  },
+  {
+    "case_id": "c_a3af6d5352f5",
+    "family_id": "neutral_confirmation_access_control_delegated_guard",
+    "source_id": "neutral_confirmation_access_control_delegated_guard",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "2d6a5f2bf6a4369dbb343b5895cbdc054bb3537a58ce67f54abaf99134c3bb24",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     def owner(row):\n3 |         return row[\"owner_id\"] == actor[\"id\"]\n4 |     row = records.get(record_id)\n5 |     if row and owner(row):\n6 |         return row\n7 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 261,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 1.7680568580000227,
+    "request_id": "20056b1e9ff773eb1b10588c",
+    "storage_id": "806fce98a63727a8b08150b1"
+  },
+  {
+    "case_id": "c_4be0832154f6",
+    "family_id": "neutral_confirmation_access_control_owner_index",
+    "source_id": "neutral_confirmation_access_control_owner_index",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "explanation": "The requested record is returned only when the acting user is the recorded owner.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The requested record is returned only when the acting user is the recorded owner.\",\"confidence\":0.9}",
+    "prompt_sha256": "522a9af22f479edc70fd8f82200483c6589cabaf728b8d39ee2b7d2f49a1f237",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     owners = {key: row[\"owner_id\"] for key, row in records.items()}\n3 |     if actor[\"id\"] in owners.values():\n4 |         return records.get(record_id)\n5 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 256,
+    "output_tokens": 55,
+    "finish_reason": "stop",
+    "latency_seconds": 1.6920661819999623,
+    "request_id": "b9da6a291cae528d1c2fb82d",
+    "storage_id": "2d14b95ec8beee0761c1f80c"
+  },
+  {
+    "case_id": "c_61e4458183d9",
+    "family_id": "neutral_confirmation_access_control_owner_index",
+    "source_id": "neutral_confirmation_access_control_owner_index",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "512a8ea1cb5fdacfc11b41d05efa130ae68f7c8d4e6daceb40dc5d512f525477",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     owners = {key: row[\"owner_id\"] for key, row in records.items()}\n3 |     if owners.get(record_id) == actor[\"id\"]:\n4 |         return records.get(record_id)\n5 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 260,
+    "output_tokens": 53,
+    "finish_reason": "stop",
+    "latency_seconds": 1.6272686109999768,
+    "request_id": "ecb5860c8719abd583d21b83",
+    "storage_id": "ed911d36cf5fa5d1ce9f53dc"
+  },
+  {
+    "case_id": "c_1b8a735b8a89",
+    "family_id": "neutral_confirmation_access_control_administrator",
+    "source_id": "neutral_confirmation_access_control_administrator",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "explanation": "A request can return another actor's record without the required policy check.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+    "prompt_sha256": "5d3122ddf766b9a95d703fd11981ab9d592b2995dbcbcfbd3d12611d285aea8a",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. An owner or an administrator may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None or actor[\"role\"] == \"guest\":\n4 |         return None\n5 |     return row\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 244,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 1.495277783000006,
+    "request_id": "ae98ec63ee296bcbfbf4f2f1",
+    "storage_id": "2bfb4aae9ce312779606695a"
+  },
+  {
+    "case_id": "c_234f001a9813",
+    "family_id": "neutral_confirmation_access_control_administrator",
+    "source_id": "neutral_confirmation_access_control_administrator",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "8f7e6e172d18c362495a816ee428ed9ce0308636092818f4eed6891bbbb2e48d",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. An owner or an administrator may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     if actor[\"role\"] == \"admin\":\n6 |         return row\n7 |     return row if row[\"owner_id\"] == actor[\"id\"] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 269,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 1.8022021040000027,
+    "request_id": "46395c888564d9f6f7848424",
+    "storage_id": "cc16ba40416e35c2686f801c"
+  },
+  {
+    "case_id": "c_e4c8a60c0d00",
+    "family_id": "neutral_confirmation_access_control_member_index",
+    "source_id": "neutral_confirmation_access_control_member_index",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The requested record is returned only when the acting user is a member of the record as stated by the policy.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the acting user is a member of the record as stated by the policy.\",\"confidence\":0.9}",
+    "prompt_sha256": "075ea3c597e948f6e1bc14469deb4865126d70a9e7281e6e10a7fc0361bffd96",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only an explicitly listed record member may read it. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     permitted = {m for row in records.values() for m in row[\"members\"]}\n3 |     return records.get(record_id) if actor[\"id\"] in permitted else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 245,
+    "output_tokens": 58,
+    "finish_reason": "stop",
+    "latency_seconds": 1.8240300300000172,
+    "request_id": "3f3a38f1b879f69b9bfcb381",
+    "storage_id": "b0f19f5062e1f75e0b5b934c"
+  },
+  {
+    "case_id": "c_0d7906824e8d",
+    "family_id": "neutral_confirmation_access_control_member_index",
+    "source_id": "neutral_confirmation_access_control_member_index",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The requested record is returned only when the actor is a member of the record as stated by the policy.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the actor is a member of the record as stated by the policy.\",\"confidence\":0.9}",
+    "prompt_sha256": "667fc79f51c218ac5dde700284a353efc4f077078f405c8e37b0f54d3d44440b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only an explicitly listed record member may read it. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     members_by_id = {key: row[\"members\"] for key, row in records.items()}\n3 |     return records.get(record_id) if actor[\"id\"] in members_by_id.get(record_id, ()) else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 261,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 1.7437682179999001,
+    "request_id": "20c134886ddb07c7ce4a2415",
+    "storage_id": "2002ddfa12edbf1f936978db"
+  },
+  {
+    "case_id": "c_76b3cc47b75b",
+    "family_id": "neutral_confirmation_access_control_sentinel",
+    "source_id": "neutral_confirmation_access_control_sentinel",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "explanation": "A request can return another actor's record without the required policy check.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+    "prompt_sha256": "89a131e0d968b8857899217ff365c1ec5791ce9de400d16ccf6d704a62c74718",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id, {})\n3 |     if not row:\n4 |         return None\n5 |     identity = row.get(\"tenant_id\")\n6 |     return row if identity == actor[\"tenant_id\"] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 259,
+    "output_tokens": 50,
+    "finish_reason": "stop",
+    "latency_seconds": 1.5452470489999541,
+    "request_id": "826f83034bc40649ca6522bc",
+    "storage_id": "c07110cf271f400f6f854bfa"
+  },
+  {
+    "case_id": "c_55622ee23e02",
+    "family_id": "neutral_confirmation_access_control_sentinel",
+    "source_id": "neutral_confirmation_access_control_sentinel",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "67aed345c02a29518861f274f544d8852a85db07fe124174d8bffbeeeeb6e196",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id, {})\n3 |     if not row:\n4 |         return None\n5 |     identity = row.get(\"owner_id\")\n6 |     return row if identity == actor[\"id\"] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 257,
+    "output_tokens": 55,
+    "finish_reason": "stop",
+    "latency_seconds": 1.6721791769999754,
+    "request_id": "0747246d999a4262b380ce0c",
+    "storage_id": "a0a6d15a87ca12dbd2104c7a"
+  },
+  {
+    "case_id": "c_67ba9fcefa89",
+    "family_id": "neutral_confirmation_access_control_guard_order",
+    "source_id": "neutral_confirmation_access_control_guard_order",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "6b1f2f669e5c44f56cf121b0331601f71e7c80a671f88385e584d8b9eda8d304",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row and actor.get(\"authenticated\"):\n4 |         return row\n5 |     if row and actor[\"id\"] == row[\"owner_id\"]:\n6 |         return row\n7 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 262,
+    "output_tokens": 57,
+    "finish_reason": "stop",
+    "latency_seconds": 1.7401720410000507,
+    "request_id": "5c4d84298a1a9e12e4ed086a",
+    "storage_id": "7170b0bf445eaf1c7f84cc97"
+  },
+  {
+    "case_id": "c_160650e5cd0c",
+    "family_id": "neutral_confirmation_access_control_guard_order",
+    "source_id": "neutral_confirmation_access_control_guard_order",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 5,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "43e3152cc6c5a6e6e44b8adb033c99cf06650b7826a13d829f0a5ded4853bfc8",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row and actor.get(\"authenticated\") and actor[\"id\"] == row[\"owner_id\"]:\n4 |         return row\n5 |     return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 250,
+    "output_tokens": 53,
+    "finish_reason": "stop",
+    "latency_seconds": 1.6543853709999894,
+    "request_id": "9ff11fa8eb031ca2234b23e6",
+    "storage_id": "0f58df8f0d5ce87cdf0fb35f"
+  }
+]

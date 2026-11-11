@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_66cb044697b2",
+    "family_id": "sql_injection_fstring",
+    "source_id": "sql_injection_fstring",
+    "split": "screen",
+    "category": "sql_injection",
+    "method": "prefill",
+    "condition": "neutral",
+    "source_line_count": 2,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expected exactly the five response fields",
+    "raw_output": "{\"category\":\"sql_injection\",\"explanation\":\"The function `lookup` is vulnerable to SQL injection because it constructs a SQL query dynamically using the user-supplied `username` without proper sanitization or parameterization. This allows an attacker to inject malicious SQL code, potentially retrieving data from other users or performing unauthorized actions.\",\"deciding_check\":\"The code does not use parameterized queries or prepared statements, which are essential for preventing SQL injection. Instead, it directly concatenates the username into the query string.\",\"evidence_lines\":[1,2],\"verdict\":\"vulnerable\",\"confidence\":1}",
+    "prompt_sha256": "81ec5196bd303623104556e5cfad55e42f46263a3da819962b850ccad471043e",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review only the named weakness under the stated threat model. Judge the behavior of the shown source. The answer already starts inside the explanation string of a JSON object. Continue that string with one short sentence about the decisive check or missing check. Use plain words without quotes or backslashes. Close the string, then add evidence_lines (a list of the displayed source line numbers), verdict (one of vulnerable, not_vulnerable_for_target, insufficient_information), and confidence (a number from 0 to 1). Close the object. Give only the continuation of the JSON, with no Markdown."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3; username is untrusted. A lookup must treat the supplied name as a literal value; it must not return other users. The database schema and connection are trusted.\n<source>\n1 | def lookup(conn, username):\n2 |     return conn.execute(\"SELECT name FROM users WHERE name = ?\", (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"category\":\"sql_injection\",\"explanation\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 242,
+    "output_tokens": 110,
+    "finish_reason": "stop",
+    "latency_seconds": 2.638423357999983,
+    "request_id": "6bce7f4c7873ab82eead796f"
+  },
+  "sha256": "700d1b98b33dbe62df81213d0dc49e7a3c99652f58ccdd12d7897295ba3a3726"
+}

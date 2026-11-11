@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_f203c90d8885",
+    "family_id": "wsp_validation_sql_injection_bind_reuse_fstring",
+    "source_id": "wsp_validation_sql_injection_bind_reuse_fstring",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "correct_suggestion",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Evidence lines are out of range, duplicate, or non-integral",
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\", \"category\":\"sql_injection\", \"evidence_lines\":[1,2,3,4,5], \"explanation\":\"The function `lookup` uses a parameterized query with `:name` placeholder. This ensures that the `username` input is treated as a literal and not as part of the SQL query. The `conn.execute` method automatically escapes and sanitizes the input, preventing SQL injection attacks. The `fetchall()` method retrieves all rows from the result set, but since the query is designed to return only matching names, it does not execute arbitrary code or access unauthorized data.\", \"confidence\":1.0}",
+    "prompt_sha256": "491735ea56a8592033fe8cb893e45f7866b07ab569f6275f435fa0c15fa60d0e",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    name = username\n    sql = \"SELECT name FROM users WHERE name = :name\"\n    return conn.execute(sql, {\"name\": name}).fetchall()\n</source>\nReviewer assessment (opinion only): I believe the verdict is not_vulnerable_for_target.\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 238,
+    "output_tokens": 136,
+    "finish_reason": "stop",
+    "latency_seconds": 3.265731145000018,
+    "request_id": "2feab00374fb34728a5fe565"
+  },
+  "sha256": "41a111c855e1a8288fccadc6e0aba10a2f17b13aa8f5e9646b7e5b41537680ef"
+}

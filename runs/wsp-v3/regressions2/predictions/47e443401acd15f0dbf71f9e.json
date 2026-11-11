@@ -1,0 +1,26 @@
+{
+  "record": {
+    "case_id": "wsp-coding-35",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ntry:\n    raise KeyError('k')\nexcept LookupError as exc:\n    result = type(exc).__name__\n</source>\nWhat is the string value of result?"
+      }
+    ],
+    "request_id": "c117e765457ea0d2db1d1e06",
+    "storage_id": "47e443401acd15f0dbf71f9e",
+    "raw_output": "```json\n{\n  \"answer\": \"KeyError\"\n}\n```",
+    "input_tokens": 81,
+    "output_tokens": 17,
+    "latency_seconds": 0.42048985399999594,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  "sha256": "64097c2a7aa5ee672e8ae9a42a04dbd83786e41922f9af3104eeb44c2cdd9aa7"
+}

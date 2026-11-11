@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_d99380e30418",
+    "family_id": "wsp_validation_sql_injection_placeholder_replace",
+    "source_id": "wsp_validation_sql_injection_placeholder_replace",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1],\n  \"explanation\": \"The function `lookup` constructs a SQL query dynamically by replacing `@who` with `?`. However, it does not properly sanitize the `username` input, which could allow an attacker to inject malicious SQL code. This can lead to unauthorized access, data leakage, or even data manipulation.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "f92f98de7bdb07177cea3eb7fa2a2cd20697ebee1f159263b0fcbd8f866e0797",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    template = \"SELECT name FROM users WHERE name = @who\"\n    query = template.replace(\"@who\", \"?\")\n    return conn.execute(query, (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 218,
+    "output_tokens": 105,
+    "finish_reason": "stop",
+    "latency_seconds": 2.558066046999784,
+    "request_id": "597fce310db7bdb0e7019810"
+  },
+  "sha256": "77fc79c059137521527b3cf7d731d6a5acde8f84a16c7d9f8e415c066b0a3035"
+}

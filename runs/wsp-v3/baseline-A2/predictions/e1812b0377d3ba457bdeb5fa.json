@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_ae9e9e97072f",
+    "family_id": "wsp_validation_access_control_role_matrix",
+    "source_id": "wsp_validation_access_control_role_matrix",
+    "split": "wsp_validation",
+    "category": "access_control",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [3],\n  \"explanation\": \"The function `read_record` allows any caller to determine if a record is accessible to the current actor by checking the `actor['role']` and comparing it to the record's `owner_id`. However, the logic for authorization is overly permissive, as it returns `True` for any actor who is a 'member', regardless of their specific role or if they match the record owner (line 3). This means that even an unauthorized user with the 'member' role could access records they shouldn't.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "63d9970f185f6f7745a5b357706999d465a939ef3e9ade952136fc2b1c1c133f",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    matrix = {(\"member\", True): True, (\"member\", False): False}\n    allowed = matrix.get((actor[\"role\"], row[\"owner_id\"] == actor[\"id\"]), False)\n    return row if allowed else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 267,
+    "output_tokens": 152,
+    "finish_reason": "stop",
+    "latency_seconds": 3.684032894000211,
+    "request_id": "4ba1424c83e412630b214dcb"
+  },
+  "sha256": "0730b32bdb58064c8769e068434eeaca55612e3f749d3d0079f7def383a7a86a"
+}

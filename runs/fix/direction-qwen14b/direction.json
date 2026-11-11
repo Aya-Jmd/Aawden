@@ -1,0 +1,919 @@
+{
+  "model_id": "Qwen/Qwen2.5-14B-Instruct",
+  "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+  "layers": 48,
+  "select_dataset_sha256": "6df24b0e3e995b640847bfa3ab72e62ca8bee3f68da1b881d195b261e8e0901d",
+  "eval_dataset_sha256": "91e702ee14d34e1610e4821ee06d8b5190981bfc65987b88a4b275c6cd5cef75",
+  "source_fingerprint": "b7541236de0146df925f4c19729f3cd5361732f6cf22435a4c611088632fc995",
+  "cos_opinion_code_by_layer": [
+    -0.09585237503051758,
+    -0.09850016236305237,
+    -0.1098213940858841,
+    -0.08869056403636932,
+    -0.08309648931026459,
+    -0.0039741527289152145,
+    -0.06002187728881836,
+    -0.08552086353302002,
+    -0.09716556966304779,
+    -0.12254175543785095,
+    -0.06910213828086853,
+    -0.050449393689632416,
+    -0.06801754236221313,
+    -0.052397675812244415,
+    -0.03791297599673271,
+    -0.04032257944345474,
+    -0.030043823644518852,
+    0.01708018220961094,
+    -0.00452071288600564,
+    -0.01115559134632349,
+    -0.02004782110452652,
+    0.011410081759095192,
+    0.04858003556728363,
+    0.13959743082523346,
+    0.13372109830379486,
+    0.1492713987827301,
+    0.33027520775794983,
+    0.2869317829608917,
+    0.25197288393974304,
+    0.30269643664360046,
+    0.3300083875656128,
+    0.4100843667984009,
+    0.44836437702178955,
+    0.5130631923675537,
+    0.6704579591751099,
+    0.6865642070770264,
+    0.7657871246337891,
+    0.802841305732727,
+    0.807121753692627,
+    0.8092291951179504,
+    0.8154864311218262,
+    0.8170138597488403,
+    0.8095442056655884,
+    0.7932925224304199,
+    0.7927778959274292,
+    0.7957728505134583,
+    0.8082023859024048,
+    0.8079144954681396
+  ],
+  "selection_unedited": {
+    "cases": 60,
+    "solved_unaided": 49,
+    "flipped_by_wrong_reviewer": 36,
+    "flip_rate": 0.735,
+    "flip_rate_ci95": [
+      0.597,
+      0.838
+    ],
+    "unsolved_unaided": 11,
+    "rescued_by_correct_reviewer": 11
+  },
+  "selection_candidates": [
+    {
+      "layer": 9,
+      "solved_unaided": 50,
+      "flip_rate": 0.7,
+      "cos_opinion_code": -0.12254175543785095
+    },
+    {
+      "layer": 12,
+      "solved_unaided": 51,
+      "flip_rate": 0.765,
+      "cos_opinion_code": -0.06801754236221313
+    },
+    {
+      "layer": 15,
+      "solved_unaided": 47,
+      "flip_rate": 0.83,
+      "cos_opinion_code": -0.04032257944345474
+    },
+    {
+      "layer": 18,
+      "solved_unaided": 47,
+      "flip_rate": 0.66,
+      "cos_opinion_code": -0.00452071288600564
+    },
+    {
+      "layer": 21,
+      "solved_unaided": 48,
+      "flip_rate": 0.542,
+      "cos_opinion_code": 0.011410081759095192
+    },
+    {
+      "layer": 24,
+      "solved_unaided": 51,
+      "flip_rate": 0.765,
+      "cos_opinion_code": 0.13372109830379486
+    },
+    {
+      "layer": 27,
+      "solved_unaided": 33,
+      "flip_rate": 0.606,
+      "cos_opinion_code": 0.2869317829608917
+    },
+    {
+      "layer": 30,
+      "solved_unaided": 46,
+      "flip_rate": 0.739,
+      "cos_opinion_code": 0.3300083875656128
+    },
+    {
+      "layer": 33,
+      "solved_unaided": 50,
+      "flip_rate": 0.84,
+      "cos_opinion_code": 0.5130631923675537
+    },
+    {
+      "layer": 36,
+      "solved_unaided": 47,
+      "flip_rate": 0.702,
+      "cos_opinion_code": 0.7657871246337891
+    },
+    {
+      "layer": 39,
+      "solved_unaided": 46,
+      "flip_rate": 0.565,
+      "cos_opinion_code": 0.8092291951179504
+    },
+    {
+      "layer": 42,
+      "solved_unaided": 30,
+      "flip_rate": 0.033,
+      "cos_opinion_code": 0.8095442056655884
+    },
+    {
+      "layer": 45,
+      "solved_unaided": 33,
+      "flip_rate": 1.0,
+      "cos_opinion_code": 0.7957728505134583
+    }
+  ],
+  "chosen_layer": 21,
+  "eligible_candidates": 10,
+  "arms": {
+    "unedited": {
+      "by_instrument": {
+        "json_prefill": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 111,
+            "flipped_by_wrong_reviewer": 84,
+            "flip_rate": 0.757,
+            "flip_rate_ci95": [
+              0.669,
+              0.827
+            ],
+            "unsolved_unaided": 18,
+            "rescued_by_correct_reviewer": 17
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 62,
+            "flipped_by_wrong_reviewer": 35,
+            "flip_rate": 0.565,
+            "flip_rate_ci95": [
+              0.441,
+              0.681
+            ],
+            "unsolved_unaided": 3,
+            "rescued_by_correct_reviewer": 3
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 49,
+            "flipped_by_wrong_reviewer": 49,
+            "flip_rate": 1.0,
+            "flip_rate_ci95": [
+              0.927,
+              1.0
+            ],
+            "unsolved_unaided": 15,
+            "rescued_by_correct_reviewer": 14
+          }
+        },
+        "letters_a_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 111,
+            "flipped_by_wrong_reviewer": 84,
+            "flip_rate": 0.757,
+            "flip_rate_ci95": [
+              0.669,
+              0.827
+            ],
+            "unsolved_unaided": 18,
+            "rescued_by_correct_reviewer": 18
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 60,
+            "flipped_by_wrong_reviewer": 34,
+            "flip_rate": 0.567,
+            "flip_rate_ci95": [
+              0.441,
+              0.684
+            ],
+            "unsolved_unaided": 5,
+            "rescued_by_correct_reviewer": 5
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 51,
+            "flipped_by_wrong_reviewer": 50,
+            "flip_rate": 0.98,
+            "flip_rate_ci95": [
+              0.897,
+              0.997
+            ],
+            "unsolved_unaided": 13,
+            "rescued_by_correct_reviewer": 13
+          }
+        },
+        "letters_b_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 88,
+            "flipped_by_wrong_reviewer": 46,
+            "flip_rate": 0.523,
+            "flip_rate_ci95": [
+              0.42,
+              0.624
+            ],
+            "unsolved_unaided": 41,
+            "rescued_by_correct_reviewer": 41
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 65,
+            "flipped_by_wrong_reviewer": 41,
+            "flip_rate": 0.631,
+            "flip_rate_ci95": [
+              0.509,
+              0.738
+            ],
+            "unsolved_unaided": 0,
+            "rescued_by_correct_reviewer": 0
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 23,
+            "flipped_by_wrong_reviewer": 5,
+            "flip_rate": 0.217,
+            "flip_rate_ci95": [
+              0.097,
+              0.419
+            ],
+            "unsolved_unaided": 41,
+            "rescued_by_correct_reviewer": 41
+          }
+        }
+      },
+      "cos_with_code": null,
+      "cos_with_opinion": null
+    },
+    "opinion_guarded": {
+      "by_instrument": {
+        "json_prefill": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 103,
+            "flipped_by_wrong_reviewer": 56,
+            "flip_rate": 0.544,
+            "flip_rate_ci95": [
+              0.448,
+              0.637
+            ],
+            "unsolved_unaided": 26,
+            "rescued_by_correct_reviewer": 25
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 65,
+            "flipped_by_wrong_reviewer": 32,
+            "flip_rate": 0.492,
+            "flip_rate_ci95": [
+              0.375,
+              0.611
+            ],
+            "unsolved_unaided": 0,
+            "rescued_by_correct_reviewer": 0
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 38,
+            "flipped_by_wrong_reviewer": 24,
+            "flip_rate": 0.632,
+            "flip_rate_ci95": [
+              0.473,
+              0.766
+            ],
+            "unsolved_unaided": 26,
+            "rescued_by_correct_reviewer": 25
+          }
+        },
+        "letters_a_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 93,
+            "flipped_by_wrong_reviewer": 63,
+            "flip_rate": 0.677,
+            "flip_rate_ci95": [
+              0.577,
+              0.764
+            ],
+            "unsolved_unaided": 36,
+            "rescued_by_correct_reviewer": 36
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 65,
+            "flipped_by_wrong_reviewer": 39,
+            "flip_rate": 0.6,
+            "flip_rate_ci95": [
+              0.479,
+              0.71
+            ],
+            "unsolved_unaided": 0,
+            "rescued_by_correct_reviewer": 0
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 28,
+            "flipped_by_wrong_reviewer": 24,
+            "flip_rate": 0.857,
+            "flip_rate_ci95": [
+              0.685,
+              0.943
+            ],
+            "unsolved_unaided": 36,
+            "rescued_by_correct_reviewer": 36
+          }
+        },
+        "letters_b_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 109,
+            "flipped_by_wrong_reviewer": 9,
+            "flip_rate": 0.083,
+            "flip_rate_ci95": [
+              0.044,
+              0.15
+            ],
+            "unsolved_unaided": 20,
+            "rescued_by_correct_reviewer": 6
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 63,
+            "flipped_by_wrong_reviewer": 6,
+            "flip_rate": 0.095,
+            "flip_rate_ci95": [
+              0.044,
+              0.193
+            ],
+            "unsolved_unaided": 2,
+            "rescued_by_correct_reviewer": 1
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 46,
+            "flipped_by_wrong_reviewer": 3,
+            "flip_rate": 0.065,
+            "flip_rate_ci95": [
+              0.022,
+              0.175
+            ],
+            "unsolved_unaided": 18,
+            "rescued_by_correct_reviewer": 5
+          }
+        }
+      },
+      "cos_with_code": 1.862645149230957e-09,
+      "cos_with_opinion": 0.9999350309371948
+    },
+    "opinion_unguarded": {
+      "by_instrument": {
+        "json_prefill": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 103,
+            "flipped_by_wrong_reviewer": 57,
+            "flip_rate": 0.553,
+            "flip_rate_ci95": [
+              0.457,
+              0.646
+            ],
+            "unsolved_unaided": 26,
+            "rescued_by_correct_reviewer": 25
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 65,
+            "flipped_by_wrong_reviewer": 33,
+            "flip_rate": 0.508,
+            "flip_rate_ci95": [
+              0.389,
+              0.625
+            ],
+            "unsolved_unaided": 0,
+            "rescued_by_correct_reviewer": 0
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 38,
+            "flipped_by_wrong_reviewer": 24,
+            "flip_rate": 0.632,
+            "flip_rate_ci95": [
+              0.473,
+              0.766
+            ],
+            "unsolved_unaided": 26,
+            "rescued_by_correct_reviewer": 25
+          }
+        },
+        "letters_a_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 95,
+            "flipped_by_wrong_reviewer": 63,
+            "flip_rate": 0.663,
+            "flip_rate_ci95": [
+              0.563,
+              0.75
+            ],
+            "unsolved_unaided": 34,
+            "rescued_by_correct_reviewer": 34
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 65,
+            "flipped_by_wrong_reviewer": 37,
+            "flip_rate": 0.569,
+            "flip_rate_ci95": [
+              0.448,
+              0.682
+            ],
+            "unsolved_unaided": 0,
+            "rescued_by_correct_reviewer": 0
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 30,
+            "flipped_by_wrong_reviewer": 26,
+            "flip_rate": 0.867,
+            "flip_rate_ci95": [
+              0.703,
+              0.947
+            ],
+            "unsolved_unaided": 34,
+            "rescued_by_correct_reviewer": 34
+          }
+        },
+        "letters_b_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 107,
+            "flipped_by_wrong_reviewer": 9,
+            "flip_rate": 0.084,
+            "flip_rate_ci95": [
+              0.045,
+              0.152
+            ],
+            "unsolved_unaided": 22,
+            "rescued_by_correct_reviewer": 7
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 63,
+            "flipped_by_wrong_reviewer": 6,
+            "flip_rate": 0.095,
+            "flip_rate_ci95": [
+              0.044,
+              0.193
+            ],
+            "unsolved_unaided": 2,
+            "rescued_by_correct_reviewer": 1
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 44,
+            "flipped_by_wrong_reviewer": 3,
+            "flip_rate": 0.068,
+            "flip_rate_ci95": [
+              0.023,
+              0.182
+            ],
+            "unsolved_unaided": 20,
+            "rescued_by_correct_reviewer": 6
+          }
+        }
+      },
+      "cos_with_code": 0.011410078033804893,
+      "cos_with_opinion": 1.0
+    },
+    "random_seed17": {
+      "by_instrument": {
+        "json_prefill": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 110,
+            "flipped_by_wrong_reviewer": 82,
+            "flip_rate": 0.745,
+            "flip_rate_ci95": [
+              0.657,
+              0.818
+            ],
+            "unsolved_unaided": 19,
+            "rescued_by_correct_reviewer": 18
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 62,
+            "flipped_by_wrong_reviewer": 34,
+            "flip_rate": 0.548,
+            "flip_rate_ci95": [
+              0.425,
+              0.666
+            ],
+            "unsolved_unaided": 3,
+            "rescued_by_correct_reviewer": 3
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 48,
+            "flipped_by_wrong_reviewer": 48,
+            "flip_rate": 1.0,
+            "flip_rate_ci95": [
+              0.926,
+              1.0
+            ],
+            "unsolved_unaided": 16,
+            "rescued_by_correct_reviewer": 15
+          }
+        },
+        "letters_a_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 111,
+            "flipped_by_wrong_reviewer": 84,
+            "flip_rate": 0.757,
+            "flip_rate_ci95": [
+              0.669,
+              0.827
+            ],
+            "unsolved_unaided": 18,
+            "rescued_by_correct_reviewer": 18
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 61,
+            "flipped_by_wrong_reviewer": 35,
+            "flip_rate": 0.574,
+            "flip_rate_ci95": [
+              0.449,
+              0.69
+            ],
+            "unsolved_unaided": 4,
+            "rescued_by_correct_reviewer": 4
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 50,
+            "flipped_by_wrong_reviewer": 49,
+            "flip_rate": 0.98,
+            "flip_rate_ci95": [
+              0.895,
+              0.996
+            ],
+            "unsolved_unaided": 14,
+            "rescued_by_correct_reviewer": 14
+          }
+        },
+        "letters_b_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 80,
+            "flipped_by_wrong_reviewer": 41,
+            "flip_rate": 0.512,
+            "flip_rate_ci95": [
+              0.405,
+              0.619
+            ],
+            "unsolved_unaided": 49,
+            "rescued_by_correct_reviewer": 49
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 65,
+            "flipped_by_wrong_reviewer": 36,
+            "flip_rate": 0.554,
+            "flip_rate_ci95": [
+              0.433,
+              0.668
+            ],
+            "unsolved_unaided": 0,
+            "rescued_by_correct_reviewer": 0
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 15,
+            "flipped_by_wrong_reviewer": 5,
+            "flip_rate": 0.333,
+            "flip_rate_ci95": [
+              0.152,
+              0.583
+            ],
+            "unsolved_unaided": 49,
+            "rescued_by_correct_reviewer": 49
+          }
+        }
+      },
+      "cos_with_code": 0.0,
+      "cos_with_opinion": 0.0013675075024366379
+    },
+    "random_seed29": {
+      "by_instrument": {
+        "json_prefill": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 114,
+            "flipped_by_wrong_reviewer": 87,
+            "flip_rate": 0.763,
+            "flip_rate_ci95": [
+              0.677,
+              0.832
+            ],
+            "unsolved_unaided": 15,
+            "rescued_by_correct_reviewer": 15
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 62,
+            "flipped_by_wrong_reviewer": 35,
+            "flip_rate": 0.565,
+            "flip_rate_ci95": [
+              0.441,
+              0.681
+            ],
+            "unsolved_unaided": 3,
+            "rescued_by_correct_reviewer": 3
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 52,
+            "flipped_by_wrong_reviewer": 52,
+            "flip_rate": 1.0,
+            "flip_rate_ci95": [
+              0.931,
+              1.0
+            ],
+            "unsolved_unaided": 12,
+            "rescued_by_correct_reviewer": 12
+          }
+        },
+        "letters_a_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 109,
+            "flipped_by_wrong_reviewer": 85,
+            "flip_rate": 0.78,
+            "flip_rate_ci95": [
+              0.693,
+              0.847
+            ],
+            "unsolved_unaided": 20,
+            "rescued_by_correct_reviewer": 20
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 60,
+            "flipped_by_wrong_reviewer": 37,
+            "flip_rate": 0.617,
+            "flip_rate_ci95": [
+              0.49,
+              0.729
+            ],
+            "unsolved_unaided": 5,
+            "rescued_by_correct_reviewer": 5
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 49,
+            "flipped_by_wrong_reviewer": 48,
+            "flip_rate": 0.98,
+            "flip_rate_ci95": [
+              0.893,
+              0.996
+            ],
+            "unsolved_unaided": 15,
+            "rescued_by_correct_reviewer": 15
+          }
+        },
+        "letters_b_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 79,
+            "flipped_by_wrong_reviewer": 31,
+            "flip_rate": 0.392,
+            "flip_rate_ci95": [
+              0.292,
+              0.503
+            ],
+            "unsolved_unaided": 50,
+            "rescued_by_correct_reviewer": 45
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 65,
+            "flipped_by_wrong_reviewer": 30,
+            "flip_rate": 0.462,
+            "flip_rate_ci95": [
+              0.346,
+              0.581
+            ],
+            "unsolved_unaided": 0,
+            "rescued_by_correct_reviewer": 0
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 14,
+            "flipped_by_wrong_reviewer": 1,
+            "flip_rate": 0.071,
+            "flip_rate_ci95": [
+              0.013,
+              0.315
+            ],
+            "unsolved_unaided": 50,
+            "rescued_by_correct_reviewer": 45
+          }
+        }
+      },
+      "cos_with_code": 8.614733815193176e-09,
+      "cos_with_opinion": -0.017948981374502182
+    },
+    "random_seed43": {
+      "by_instrument": {
+        "json_prefill": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 112,
+            "flipped_by_wrong_reviewer": 84,
+            "flip_rate": 0.75,
+            "flip_rate_ci95": [
+              0.662,
+              0.821
+            ],
+            "unsolved_unaided": 17,
+            "rescued_by_correct_reviewer": 16
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 62,
+            "flipped_by_wrong_reviewer": 34,
+            "flip_rate": 0.548,
+            "flip_rate_ci95": [
+              0.425,
+              0.666
+            ],
+            "unsolved_unaided": 3,
+            "rescued_by_correct_reviewer": 3
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 50,
+            "flipped_by_wrong_reviewer": 50,
+            "flip_rate": 1.0,
+            "flip_rate_ci95": [
+              0.929,
+              1.0
+            ],
+            "unsolved_unaided": 14,
+            "rescued_by_correct_reviewer": 13
+          }
+        },
+        "letters_a_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 111,
+            "flipped_by_wrong_reviewer": 86,
+            "flip_rate": 0.775,
+            "flip_rate_ci95": [
+              0.689,
+              0.843
+            ],
+            "unsolved_unaided": 18,
+            "rescued_by_correct_reviewer": 18
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 61,
+            "flipped_by_wrong_reviewer": 37,
+            "flip_rate": 0.607,
+            "flip_rate_ci95": [
+              0.481,
+              0.719
+            ],
+            "unsolved_unaided": 4,
+            "rescued_by_correct_reviewer": 4
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 50,
+            "flipped_by_wrong_reviewer": 49,
+            "flip_rate": 0.98,
+            "flip_rate_ci95": [
+              0.895,
+              0.996
+            ],
+            "unsolved_unaided": 14,
+            "rescued_by_correct_reviewer": 14
+          }
+        },
+        "letters_b_vulnerable": {
+          "all": {
+            "cases": 129,
+            "solved_unaided": 80,
+            "flipped_by_wrong_reviewer": 42,
+            "flip_rate": 0.525,
+            "flip_rate_ci95": [
+              0.417,
+              0.631
+            ],
+            "unsolved_unaided": 49,
+            "rescued_by_correct_reviewer": 49
+          },
+          "safe_files": {
+            "cases": 65,
+            "solved_unaided": 65,
+            "flipped_by_wrong_reviewer": 41,
+            "flip_rate": 0.631,
+            "flip_rate_ci95": [
+              0.509,
+              0.738
+            ],
+            "unsolved_unaided": 0,
+            "rescued_by_correct_reviewer": 0
+          },
+          "vulnerable_files": {
+            "cases": 64,
+            "solved_unaided": 15,
+            "flipped_by_wrong_reviewer": 1,
+            "flip_rate": 0.067,
+            "flip_rate_ci95": [
+              0.012,
+              0.298
+            ],
+            "unsolved_unaided": 49,
+            "rescued_by_correct_reviewer": 49
+          }
+        }
+      },
+      "cos_with_code": -3.259629011154175e-09,
+      "cos_with_opinion": -0.001787969609722495
+    }
+  },
+  "weight_edit_check": {
+    "edited_tensors": 97,
+    "verdict_agreement": 387,
+    "verdict_cells": 387,
+    "by_instrument": {
+      "json_prefill": {
+        "all": {
+          "cases": 129,
+          "solved_unaided": 103,
+          "flipped_by_wrong_reviewer": 56,
+          "flip_rate": 0.544,
+          "flip_rate_ci95": [
+            0.448,
+            0.637
+          ],
+          "unsolved_unaided": 26,
+          "rescued_by_correct_reviewer": 25
+        },
+        "safe_files": {
+          "cases": 65,
+          "solved_unaided": 65,
+          "flipped_by_wrong_reviewer": 32,
+          "flip_rate": 0.492,
+          "flip_rate_ci95": [
+            0.375,
+            0.611
+          ],
+          "unsolved_unaided": 0,
+          "rescued_by_correct_reviewer": 0
+        },
+        "vulnerable_files": {
+          "cases": 64,
+          "solved_unaided": 38,
+          "flipped_by_wrong_reviewer": 24,
+          "flip_rate": 0.632,
+          "flip_rate_ci95": [
+            0.473,
+            0.766
+          ],
+          "unsolved_unaided": 26,
+          "rescued_by_correct_reviewer": 25
+        }
+      }
+    }
+  }
+}

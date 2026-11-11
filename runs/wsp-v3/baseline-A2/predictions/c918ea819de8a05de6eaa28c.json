@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_090ea2935adf",
+    "family_id": "wsp_discovery_sql_injection_sort_key_interpolation",
+    "source_id": "wsp_discovery_sql_injection_sort_key_interpolation",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1, 2, 3, 4],\n  \"explanation\": \"The function `lookup` constructs a SQL query dynamically using user-provided input (username) without proper sanitization or parameterization. This allows an attacker to inject malicious SQL code, potentially leading to unauthorized data access, modification, or disclosure (e.g., through `ORDER BY` manipulation or other SQL injection techniques).\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "34e8eba3d150e606dbe51df0914e94a3c6dbe4ec7d778be277e7b6150681bf0e",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    order = \"name\"\n    query = f\"SELECT name FROM users WHERE name = ? ORDER BY {order}\"\n    return conn.execute(query, (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 217,
+    "output_tokens": 121,
+    "finish_reason": "stop",
+    "latency_seconds": 2.83781233600007,
+    "request_id": "62fb640dd3e073af34183ce8"
+  },
+  "sha256": "d465da5575031b38fd7c31a7d83827a2b472d27e137810d7b4287008b562e585"
+}

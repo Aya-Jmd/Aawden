@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_d5f1f62be3ae",
+    "family_id": "wsp_discovery_sql_injection_numeric_guard_fallthrough",
+    "source_id": "wsp_discovery_sql_injection_numeric_guard_fallthrough",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [3],\n  \"explanation\": \"The function `lookup` is vulnerable to SQL injection because it constructs the SQL query dynamically using the user-provided `username` directly in the query string. If a malicious user provides a username that contains SQL syntax or special characters, it could be interpreted as part of the query, potentially allowing for unauthorized data access or manipulation.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "3e69f9e9be8d71b7fa7993bb910cba364cbbaa0da5da5e433bef15cf79000295",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    if username.isdigit():\n        return []\n    return conn.execute(\"SELECT name FROM users WHERE name = ?\", (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 209,
+    "output_tokens": 112,
+    "finish_reason": "stop",
+    "latency_seconds": 2.702836077000029,
+    "request_id": "16d62b951cae18916c8e4cf6"
+  },
+  "sha256": "1fa9ec5e791f671798ba100e5c87a63b93b9f3fb2274a059bd550ab59325f0e3"
+}

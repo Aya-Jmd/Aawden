@@ -1,0 +1,36 @@
+{
+  "purpose": "Development smoke examples. Prepare independent cases for the final coding comparison.",
+  "cases": [
+    {
+      "case_id": "coding-smoke-slice",
+      "code": "items = [1, 2, 3, 4, 5]\nresult = items[-2::-2]",
+      "question": "What is the value of result?",
+      "expected": [
+        4,
+        2
+      ]
+    },
+    {
+      "case_id": "coding-smoke-counts",
+      "code": "counts = {}\nfor letter in 'abacaba':\n    counts[letter] = counts.get(letter, 0) + 1\nresult = counts",
+      "question": "What is the value of result?",
+      "expected": {
+        "a": 4,
+        "b": 2,
+        "c": 1
+      }
+    },
+    {
+      "case_id": "coding-smoke-boundary",
+      "code": "def reaches_limit(amount, limit):\n    return amount >= limit\n\nresult = reaches_limit(10, 10)",
+      "question": "What is the Boolean value of result?",
+      "expected": true
+    },
+    {
+      "case_id": "coding-smoke-iterator",
+      "code": "numbers = iter([2, 4, 6])\nnext(numbers)\nresult = sum(numbers)",
+      "question": "What is the value of result?",
+      "expected": 10
+    }
+  ]
+}

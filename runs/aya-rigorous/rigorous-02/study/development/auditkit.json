@@ -1,0 +1,2979 @@
+{
+  "run_id": "30d006e8686c737e",
+  "fingerprint": "30d006e8686c737e",
+  "headline": {
+    "aawden_strict_verdict": 0.7777777777777778
+  },
+  "stats": {
+    "aawden_strict_verdict": {
+      "name": "aawden_strict_verdict",
+      "count": 108,
+      "mean": 0.7777777777777778,
+      "stderr": 0.04000457221239422,
+      "std": 0.41573970964154927,
+      "min": 0.0,
+      "max": 1.0,
+      "values": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0
+      ]
+    }
+  },
+  "predictions": [
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:c872d21626091b98f070d466",
+      "prompt": "c872d21626091b98f070d466",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:7b2315cfe7bca90991b6deeb",
+      "prompt": "7b2315cfe7bca90991b6deeb",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:48aafa957aa90d6560d2c07e",
+      "prompt": "48aafa957aa90d6560d2c07e",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:6012b61b3843acbbc5f3031a",
+      "prompt": "6012b61b3843acbbc5f3031a",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:55b40172985ad2aa3bd732e3",
+      "prompt": "55b40172985ad2aa3bd732e3",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:8a4b7f2d98547fa36840fab1",
+      "prompt": "8a4b7f2d98547fa36840fab1",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:af24543c249852ccde9b628c",
+      "prompt": "af24543c249852ccde9b628c",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:3456bf7b1ee6a8e01aa2e318",
+      "prompt": "3456bf7b1ee6a8e01aa2e318",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:d3e0809d91d88b08fefb58fc",
+      "prompt": "d3e0809d91d88b08fefb58fc",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:be6e08b68feb9404c1d1cbee",
+      "prompt": "be6e08b68feb9404c1d1cbee",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:08b487cb4b9216f3f41df2d8",
+      "prompt": "08b487cb4b9216f3f41df2d8",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:28afed9942b01e84ec852cff",
+      "prompt": "28afed9942b01e84ec852cff",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:86d4d2097f6fca6511318e40",
+      "prompt": "86d4d2097f6fca6511318e40",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:6f409df11bf26652296e6a09",
+      "prompt": "6f409df11bf26652296e6a09",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:59d3bd72e2ce8d1b89bb6285",
+      "prompt": "59d3bd72e2ce8d1b89bb6285",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:25d85992e4a9e4cf549b949b",
+      "prompt": "25d85992e4a9e4cf549b949b",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:4798e355f28424cda79b9dae",
+      "prompt": "4798e355f28424cda79b9dae",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:f0ff108de0db100a60dd10ff",
+      "prompt": "f0ff108de0db100a60dd10ff",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:5fb25108eca567e63d7f5e6c",
+      "prompt": "5fb25108eca567e63d7f5e6c",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:7223bd7e2a9de45d460b18e6",
+      "prompt": "7223bd7e2a9de45d460b18e6",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:f28006fdc4b385d10bc75d7c",
+      "prompt": "f28006fdc4b385d10bc75d7c",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:1ad62200b1a91d71a464898f",
+      "prompt": "1ad62200b1a91d71a464898f",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:e55d7f7786248ab3373c12f2",
+      "prompt": "e55d7f7786248ab3373c12f2",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:4fdd7b4fee00349c9c664c87",
+      "prompt": "4fdd7b4fee00349c9c664c87",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:3ab0b4407f80db4cbe9dc7b4",
+      "prompt": "3ab0b4407f80db4cbe9dc7b4",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:f7056fe2fc56ac5b6cae4154",
+      "prompt": "f7056fe2fc56ac5b6cae4154",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:244c5b053c6411aca768593c",
+      "prompt": "244c5b053c6411aca768593c",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:dc4bf2a6dca1cea51ced30ab",
+      "prompt": "dc4bf2a6dca1cea51ced30ab",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:2aac0b8383296241fdbbb2ca",
+      "prompt": "2aac0b8383296241fdbbb2ca",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:71da680260b806a58f47ddbd",
+      "prompt": "71da680260b806a58f47ddbd",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:6b99b51dc8c56dd5f44e73bc",
+      "prompt": "6b99b51dc8c56dd5f44e73bc",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:555f20aa7cedde6003cbda3d",
+      "prompt": "555f20aa7cedde6003cbda3d",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:7f91fbd3772d7597b2fcc760",
+      "prompt": "7f91fbd3772d7597b2fcc760",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:1499dccd55ace1056f883218",
+      "prompt": "1499dccd55ace1056f883218",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:fb4ae38a3a0bfbd56e93068d",
+      "prompt": "fb4ae38a3a0bfbd56e93068d",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "trace:fbfc1309c096c06c11e293f8",
+      "prompt": "fbfc1309c096c06c11e293f8",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:640a8f5466b809f0d179b30a",
+      "prompt": "640a8f5466b809f0d179b30a",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:be71314707711e885bd5855e",
+      "prompt": "be71314707711e885bd5855e",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:b7f8fe76e19d05a17f9553da",
+      "prompt": "b7f8fe76e19d05a17f9553da",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:a2bf3a3bae4a3725a085d7dd",
+      "prompt": "a2bf3a3bae4a3725a085d7dd",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:040110848f5fb65a7f8bcb98",
+      "prompt": "040110848f5fb65a7f8bcb98",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:9424e76564e6357f42118a94",
+      "prompt": "9424e76564e6357f42118a94",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:4bb9b7b9298c17eece01a64f",
+      "prompt": "4bb9b7b9298c17eece01a64f",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:5a6d9979f573e3e7537077ea",
+      "prompt": "5a6d9979f573e3e7537077ea",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:67a3c6afab6581856fcf0c51",
+      "prompt": "67a3c6afab6581856fcf0c51",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:11f886ee7f35691fa5e8eb2d",
+      "prompt": "11f886ee7f35691fa5e8eb2d",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:b794c9d1a50579ccdde50e00",
+      "prompt": "b794c9d1a50579ccdde50e00",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:62ba3592c8b4b03afd5ceb8b",
+      "prompt": "62ba3592c8b4b03afd5ceb8b",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:b2aaf1a74c081ce2727dce41",
+      "prompt": "b2aaf1a74c081ce2727dce41",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:41512522ebe0b660fdc98243",
+      "prompt": "41512522ebe0b660fdc98243",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:53c7b06fa2d29fa289c2fe95",
+      "prompt": "53c7b06fa2d29fa289c2fe95",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:ea4817d5ac37b6c05285c670",
+      "prompt": "ea4817d5ac37b6c05285c670",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:70029639feee9e737bbf680d",
+      "prompt": "70029639feee9e737bbf680d",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:41d006c0dec2aae6dbcfc249",
+      "prompt": "41d006c0dec2aae6dbcfc249",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:e453be5b0e4630a6e7e5f032",
+      "prompt": "e453be5b0e4630a6e7e5f032",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:b480be6748e6a1970d7bc198",
+      "prompt": "b480be6748e6a1970d7bc198",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:0a7e64c0b03f475218b9e565",
+      "prompt": "0a7e64c0b03f475218b9e565",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:248343ce056bf4abd592b4d2",
+      "prompt": "248343ce056bf4abd592b4d2",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:f8fca7fa42fc72217b12f254",
+      "prompt": "f8fca7fa42fc72217b12f254",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:755f013a32333b718c21aa60",
+      "prompt": "755f013a32333b718c21aa60",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:dcd5e626949c2488e44ce756",
+      "prompt": "dcd5e626949c2488e44ce756",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:9b63ed9e33aab26ae44ab961",
+      "prompt": "9b63ed9e33aab26ae44ab961",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:2a275352e8c1733ee8aea8a4",
+      "prompt": "2a275352e8c1733ee8aea8a4",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:2560fbb61b4876f071252cb9",
+      "prompt": "2560fbb61b4876f071252cb9",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:2fa7b22a951771ef7aa8e53a",
+      "prompt": "2fa7b22a951771ef7aa8e53a",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:4141f96fb7e148469f7e584f",
+      "prompt": "4141f96fb7e148469f7e584f",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:3ed715b817644cb83eeb653b",
+      "prompt": "3ed715b817644cb83eeb653b",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:de449b4281ee141c869cf8f8",
+      "prompt": "de449b4281ee141c869cf8f8",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:48d6ab453c0e61f281912ab8",
+      "prompt": "48d6ab453c0e61f281912ab8",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:51076062d0c12986e406cfd6",
+      "prompt": "51076062d0c12986e406cfd6",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:052750ef8d5f08915596151f",
+      "prompt": "052750ef8d5f08915596151f",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "walkthrough:cef6ae55ac569656bd9a8d12",
+      "prompt": "cef6ae55ac569656bd9a8d12",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:8dec2d78e9d40c44fb98b566",
+      "prompt": "8dec2d78e9d40c44fb98b566",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:1a417012af69880f44da18f0",
+      "prompt": "1a417012af69880f44da18f0",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:d146b5da69c32ee94ccd8dc3",
+      "prompt": "d146b5da69c32ee94ccd8dc3",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:af65f3878b417fc4f36edc2d",
+      "prompt": "af65f3878b417fc4f36edc2d",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:491247eaf26d278600ca88d4",
+      "prompt": "491247eaf26d278600ca88d4",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:cb2e633051216fcdb597d492",
+      "prompt": "cb2e633051216fcdb597d492",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:cfe68c49666a55d215030fdb",
+      "prompt": "cfe68c49666a55d215030fdb",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:bd2be706279e4f9e23a39459",
+      "prompt": "bd2be706279e4f9e23a39459",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:9f41550eac395093d45bdf8f",
+      "prompt": "9f41550eac395093d45bdf8f",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:93db5ba658e8bf6766e3aa43",
+      "prompt": "93db5ba658e8bf6766e3aa43",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:a37e21fc5e707aa0732d852f",
+      "prompt": "a37e21fc5e707aa0732d852f",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:36460ffc7e83a26e95d0d7be",
+      "prompt": "36460ffc7e83a26e95d0d7be",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:a934d99986daa27f5af7f7ad",
+      "prompt": "a934d99986daa27f5af7f7ad",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:da0a0f22c4a9dfc7162c0c66",
+      "prompt": "da0a0f22c4a9dfc7162c0c66",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:1717b79a434c6d7d54e2a26b",
+      "prompt": "1717b79a434c6d7d54e2a26b",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:9729f0d3c19d9ccdc94c801c",
+      "prompt": "9729f0d3c19d9ccdc94c801c",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:cb02959edb1399fef27f52a6",
+      "prompt": "cb02959edb1399fef27f52a6",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:1de71db63cd1fa512c608943",
+      "prompt": "1de71db63cd1fa512c608943",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:3582bece81df6b17908929f1",
+      "prompt": "3582bece81df6b17908929f1",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:32f5c9cb718ef923d0dd61b3",
+      "prompt": "32f5c9cb718ef923d0dd61b3",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:118e4a0d609c6dcc950ad6bc",
+      "prompt": "118e4a0d609c6dcc950ad6bc",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:f99b68aad0df32fd3fe4cc5e",
+      "prompt": "f99b68aad0df32fd3fe4cc5e",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:53044c5685bf19d2e60a91f4",
+      "prompt": "53044c5685bf19d2e60a91f4",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:d9bc473c2c231b30d8c651bf",
+      "prompt": "d9bc473c2c231b30d8c651bf",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:d58891af50b1e99e341bde27",
+      "prompt": "d58891af50b1e99e341bde27",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:9c75eefc411ae539121958f6",
+      "prompt": "9c75eefc411ae539121958f6",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:c9032bfbd9dfbd15805a1907",
+      "prompt": "c9032bfbd9dfbd15805a1907",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:a4f99c05a2ff03fb0ad1e324",
+      "prompt": "a4f99c05a2ff03fb0ad1e324",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:7864632dd671d9ff3fe9de1f",
+      "prompt": "7864632dd671d9ff3fe9de1f",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:35980b8ba06c0b015018fa03",
+      "prompt": "35980b8ba06c0b015018fa03",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:6b2b59e06ae4e2c73f2a2819",
+      "prompt": "6b2b59e06ae4e2c73f2a2819",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:06850047f94749523974639d",
+      "prompt": "06850047f94749523974639d",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:483e37bbed96ca4199121489",
+      "prompt": "483e37bbed96ca4199121489",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:50321c5833fceabc324510c0",
+      "prompt": "50321c5833fceabc324510c0",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:e70d4ffa244ce9ee8b8e421a",
+      "prompt": "e70d4ffa244ce9ee8b8e421a",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "30d006e8686c737e",
+      "task": "generative",
+      "sample_id": "evidence_first:03632e65cc4068cb61d7dbe1",
+      "prompt": "03632e65cc4068cb61d7dbe1",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "num_fewshot": null,
+    "limit": null,
+    "seed": null,
+    "trials": 1,
+    "batch_size": "auto",
+    "concurrency": 1,
+    "split": null,
+    "temperature": 0.0,
+    "top_p": null,
+    "top_k": null,
+    "max_tokens": null,
+    "stop_sequences": null,
+    "presence_penalty": null,
+    "frequency_penalty": null,
+    "num_completions": null,
+    "best_of": null,
+    "timeout": null,
+    "max_retries": 0,
+    "retry_delay": 1.0,
+    "judge_model": null,
+    "judge_prompt_version": null,
+    "track_performance": false,
+    "chat_template_kwargs": null,
+    "extra": {
+      "aawden_records_sha256": "606937c8096941c327203fdeae727bf80ad7a689f5e3d4e49acd4f2868bda84c",
+      "parser": "strict-v1"
+    }
+  },
+  "model_spec": "<auditkit.model.PrecomputedModel object at 0x7eb97a346150>",
+  "errors": [],
+  "unscored": {},
+  "failed_count": 0,
+  "experiment_name": null,
+  "tags": [],
+  "perf": null,
+  "model_size": null,
+  "token_usage": null,
+  "metadata": {
+    "inputs": []
+  }
+}

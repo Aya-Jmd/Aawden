@@ -1,0 +1,48 @@
+{
+  "record": {
+    "case_id": "c_c24827b4ccf8",
+    "family_id": "wsp_discovery_sql_injection_sort_key_interpolation",
+    "source_id": "wsp_discovery_sql_injection_sort_key_interpolation",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2
+      ],
+      "explanation": "The function `lookup` constructs a SQL query dynamically using user-provided input (`username`). Since the `username` is directly embedded into the query without proper sanitization or parameterization, an attacker could inject malicious SQL code, potentially leading to unauthorized data access, data manipulation, or even a denial of service (DoS).",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"sql_injection\", \"evidence_lines\":[2], \"explanation\":\"The function `lookup` constructs a SQL query dynamically using user-provided input (`username`). Since the `username` is directly embedded into the query without proper sanitization or parameterization, an attacker could inject malicious SQL code, potentially leading to unauthorized data access, data manipulation, or even a denial of service (DoS).\", \"confidence\":1}",
+    "prompt_sha256": "5e7395eee0b3e9f789c06235172719878602aed9301a4991e4d10bd296d31cbe",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    order = \"name\"\n    query = f\"SELECT name FROM users WHERE name = '{username}' ORDER BY {order}\"\n    return conn.execute(query, ()).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 221,
+    "output_tokens": 91,
+    "finish_reason": "stop",
+    "latency_seconds": 2.1852860489999557,
+    "request_id": "0cf6d81085384cbdc44bcadf"
+  },
+  "sha256": "6d34c1dc0c87afa3b86db8c225549fe11cba9fa69e0f21f46ff06885dac49e4d"
+}

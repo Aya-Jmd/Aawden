@@ -1,0 +1,46 @@
+{
+  "record": {
+    "case_id": "c_399fbdb24741",
+    "family_id": "confirmation_v5_sql_injection_command_stack",
+    "source_id": "confirmation_v5_sql_injection_command_stack",
+    "split": "neutral_confirmation_v5",
+    "category": "sql_injection",
+    "method": "source_map",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "sql_injection",
+      "explanation": "The lookup keeps the name literal.",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The lookup keeps the name literal.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+    "prompt_sha256": "eda4a9ba58a438961fce1b518ea445feef189d6067111e4b5354bc7f3c95012a",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. The syntax notes are derived from the source and may omit paths. Verify the specific input-to-output behavior directly. In the explanation, name the decisive operator or argument and why that behavior does or does not violate the stated policy."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.\n<source>\n1 | def lookup(conn, username):\n2 |     commands = [(\"SELECT name FROM users WHERE name = :value\", {\"value\": username})]\n3 |     query, values = commands.pop()\n4 |     return conn.execute(query, values).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nPython syntax notes\nFunction lookup starts at line 1.\nLine 4 returns conn.execute(query, values).fetchall().\nLine 4 calls execute with SQL text query and bindings values."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 482,
+    "output_tokens": 45,
+    "finish_reason": "stop",
+    "latency_seconds": 2.1250066949999677,
+    "request_id": "a9db1f9e09275eee42e48639"
+  },
+  "sha256": "33fbf2bd3efa871057000316db91a4f7b8b8c0debc2af4a4226602657b0d3495"
+}

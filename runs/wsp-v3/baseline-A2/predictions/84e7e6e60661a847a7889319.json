@@ -1,0 +1,52 @@
+{
+  "record": {
+    "case_id": "c_4d731f66abaa",
+    "family_id": "wsp_validation_access_control_lambda_checks",
+    "source_id": "wsp_validation_access_control_lambda_checks",
+    "split": "wsp_validation",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "explanation": "The function `read_record` allows any caller to specify a `record_id` and retrieve the corresponding record. While it performs some basic checks to ensure the actor is either the owner or part of the tenant associated with the record, it does not enforce fine-grained access control. Specifically, it does not verify the actor's role or any other permissions for the requested record. This means an attacker could potentially access records they are not authorized to see by providing a valid `record_id` (lines 2-4).",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\n \"category\":\"access_control\",\n \"evidence_lines\":[2,3,4,5,6],\n \"explanation\":\"The function `read_record` allows any caller to specify a `record_id` and retrieve the corresponding record. While it performs some basic checks to ensure the actor is either the owner or part of the tenant associated with the record, it does not enforce fine-grained access control. Specifically, it does not verify the actor's role or any other permissions for the requested record. This means an attacker could potentially access records they are not authorized to see by providing a valid `record_id` (lines 2-4).\",\n \"confidence\":1}",
+    "prompt_sha256": "010c167b888ccd32d863d8e05b894af5dd98b24f6e8ecd23ef590bbb8e1a58f6",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    checks = {\"owner\": lambda: row[\"owner_id\"] == actor[\"id\"], \"tenant\": lambda: row[\"tenant_id\"] == actor[\"tenant_id\"]}\n    return row if checks[\"owner\"]() or checks[\"tenant\"]() else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 276,
+    "output_tokens": 146,
+    "finish_reason": "stop",
+    "latency_seconds": 3.47369685700005,
+    "request_id": "23126dc0151ab25cad900063"
+  },
+  "sha256": "f4311e01c027552233b72ad956ee8efc870335db3bb49a52e4e378855b27b43d"
+}

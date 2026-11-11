@@ -1,0 +1,41 @@
+{
+ "model_id": "CohereLabs/aya-expanse-8b",
+ "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+ "device": "auto",
+ "dtype": "bfloat16",
+ "context_limit": 8192,
+ "max_new_tokens": 256,
+ "seed": 42,
+ "trust_remote_code": false,
+ "local_files_only": false,
+ "lora_adapter": {
+  "checkpoint": "retrain-in/v7.safetensors",
+  "sha256": "2e0fb9c0dcbd4a07441212cb5d3a8e9e98b0ba9e4b016db887adfd9797ec7689",
+  "rank": 16,
+  "alpha": 32,
+  "target_modules": [
+   "q_proj",
+   "k_proj",
+   "v_proj",
+   "o_proj",
+   "gate_proj",
+   "up_proj",
+   "down_proj"
+  ],
+  "base_checkpoint_hashes": {
+   "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+   "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+   "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+   "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+   "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+  }
+ },
+ "merge_lora": true,
+ "base_route": "b_merged_adapter",
+ "merged_base_note": "Protocol v3 route (b): the edit base is the retrained LoRA merged into dense weights, so a sparse patch applies to plain tensor names.",
+ "adapted_from": {
+  "adapter_sha256": "2e0fb9c0dcbd4a07441212cb5d3a8e9e98b0ba9e4b016db887adfd9797ec7689",
+  "rank": 16,
+  "alpha": 32
+ }
+}

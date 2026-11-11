@@ -1,0 +1,52 @@
+{
+  "record": {
+    "case_id": "c_3cca64de2d18",
+    "family_id": "wsp_discovery_access_control_policy_role_grant",
+    "source_id": "wsp_discovery_access_control_policy_role_grant",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "4755379821c79683b3420ce09ed3e3cefdab6549354582b9b65f57b1c3bbc8c0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     policy = {\"owner\": row[\"owner_id\"] == actor[\"id\"]}\n6 |     return row if policy[\"owner\"] else None\n</source>\n Cite at most 4 source lines: only the lines that decide the verdict, not the whole file.Give your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 288,
+    "output_tokens": 51,
+    "finish_reason": "stop",
+    "latency_seconds": 1.2929631890000337,
+    "request_id": "f7ee73bf66bf8bd2613e20bf"
+  },
+  "sha256": "87c6e25005a56ab01eb8d885fb9c12a26e3eef5bd5a920b04387df71c4673785"
+}

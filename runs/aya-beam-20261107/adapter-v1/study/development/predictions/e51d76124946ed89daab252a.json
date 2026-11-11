@@ -1,0 +1,45 @@
+{
+  "record": {
+    "case_id": "c_fe60d1a2e5f1",
+    "family_id": "access_control_membership",
+    "source_id": "access_control_membership",
+    "split": "screen",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "A request can return another actor's record without the required policy check.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+    "prompt_sha256": "ff8e23f8520e1101fbbb861aad6c2e44c5ee42bde67b2c9357d47b69ea7e486f",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records is a trusted server-side dictionary; record_id is attacker-controlled; actor comes from a trusted authenticated session. Only an explicitly listed record member may read it. Sharing a tenant or being logged in alone does not authorize a read. Missing records must return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     record = records.get(record_id)\n3 |     return record if record and actor[\"id\"] in record[\"members\"] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 245,
+    "output_tokens": 44,
+    "finish_reason": "stop",
+    "latency_seconds": 1.3239374949999956,
+    "request_id": "4e4c091f45d51919b9ce8b19"
+  },
+  "sha256": "859707a8e284080cd9808502e945d1db2c461804689625cfef24dc37439a6401"
+}

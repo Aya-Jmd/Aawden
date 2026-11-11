@@ -1,0 +1,48 @@
+{
+  "record": {
+    "case_id": "c_09ddef1f4100",
+    "family_id": "wsp_validation_access_control_owners_add_gate",
+    "source_id": "wsp_validation_access_control_owners_add_gate",
+    "split": "wsp_validation",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        3
+      ],
+      "explanation": "The function `read_record` allows any authenticated actor to access a record if they have the same `id` as the record's owner, regardless of their role or tenant membership. This is a violation of the threat model, which states that only the owner of the requested record should receive it.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"access_control\", \"evidence_lines\":[3], \"explanation\":\"The function `read_record` allows any authenticated actor to access a record if they have the same `id` as the record's owner, regardless of their role or tenant membership. This is a violation of the threat model, which states that only the owner of the requested record should receive it.\", \"confidence\":1}",
+    "prompt_sha256": "1a51eab353b9a08acf9c777a82fc656f68c7b43efa4d3b2d53f7610dc115c5b7",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    owners = {row[\"owner_id\"]}\n    if actor[\"authenticated\"]:\n        owners.add(actor[\"id\"])\n    return row if actor[\"id\"] in owners else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 259,
+    "output_tokens": 86,
+    "finish_reason": "stop",
+    "latency_seconds": 2.1096660079999765,
+    "request_id": "0768ec54ee4a5f2419caa166"
+  },
+  "sha256": "73e7671a965b11817ce7dd18762356cc7044e03b936c10a3681a575365b16de6"
+}

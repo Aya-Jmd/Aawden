@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_f7139f4db763",
+    "family_id": "sql_injection_cursor",
+    "source_id": "sql_injection_cursor",
+    "split": "screen",
+    "category": "sql_injection",
+    "method": "prefill",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 661 (char 660)",
+    "raw_output": "{\"category\":\"sql_injection\",\"explanation\":\"The function `lookup` is vulnerable to SQL injection (line 3). The user-supplied `username` is directly incorporated into the SQL query without proper sanitization or parameterization. An attacker could supply a malicious username containing SQL code, which would be executed by the database (e.g., `'; DROP TABLE users; --`).\",\"deciding_check\":\"The code does not use parameterized queries or prepared statements to prevent SQL injection.\", \"missing_check\":\"Implement parameterized queries or prepared statements to protect against SQL injection (line 3).\", \"evidence_lines\":[3], \"verdict\":\"vulnerable\", \"confidence\":",
+    "prompt_sha256": "56919a8b17ea4f8515f4aa9fb4b3e584588ad5926af61f24a200708dab57ca1a",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review only the named weakness under the stated threat model. Judge the behavior of the shown source. The answer already starts inside the explanation string of a JSON object. Continue that string with one short sentence about the decisive check or missing check. Use plain words without quotes or backslashes. Close the string, then add evidence_lines (a list of the displayed source line numbers), verdict (one of vulnerable, not_vulnerable_for_target, insufficient_information), and confidence (a number from 0 to 1). Close the object. Give only the continuation of the JSON, with no Markdown."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3; username is untrusted. A lookup must treat the supplied name as a literal value; it must not return other users. The database schema and connection are trusted.\n<source>\n1 | def lookup(conn, username):\n2 |     cursor = conn.cursor()\n3 |     cursor.execute(f\"SELECT name FROM users WHERE name = '{username}'\")\n4 |     return cursor.fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"category\":\"sql_injection\",\"explanation\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 259,
+    "output_tokens": 128,
+    "finish_reason": "length",
+    "latency_seconds": 3.1110414199999923,
+    "request_id": "0d6f25ca14c8faf3c6019f74"
+  },
+  "sha256": "57a730cc448d79deb8ff63bfe58145b49d1a6ddc9bdc5f0c4f2e0f05c8556c6f"
+}

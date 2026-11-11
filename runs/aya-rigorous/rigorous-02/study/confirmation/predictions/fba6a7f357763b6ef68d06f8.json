@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_ea045fc09ed9",
+    "family_id": "rigorous_confirmation_sql_injection_conditional_normalization",
+    "source_id": "rigorous_confirmation_sql_injection_conditional_normalization",
+    "split": "rigorous_confirmation",
+    "category": "sql_injection",
+    "method": "trace",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "76fb14b2a229f30d4027e3317ac7105f144269e6527e3907eb89059f4b625b4b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     if username.isalpha():\n3 |         operand = \"'\" + username + \"'\"\n4 |         params = ()\n5 |     else:\n6 |         operand, params = \"?\", (username,)\n7 |     return conn.execute(\"SELECT name FROM users WHERE name = \" + operand, params).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 333,
+    "output_tokens": 49,
+    "finish_reason": "stop",
+    "latency_seconds": 2.324082654999984,
+    "request_id": "e795101e7c6b10f1757da1ee"
+  },
+  "sha256": "a027ee78a28cfcf0365b52de46e049042b33b5e481596d447a6bf0c2a8cb5316"
+}

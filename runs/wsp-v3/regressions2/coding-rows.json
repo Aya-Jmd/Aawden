@@ -1,0 +1,922 @@
+[
+  {
+    "case_id": "wsp-coding-01",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nx = [3, 1, 2]\nx.sort(reverse=True)\nresult = x[0] * 10 + x[-1]\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "4ce76809cac047f6db90ce5d",
+    "storage_id": "7b441420ef205118474b32b1",
+    "raw_output": "```json\n{\n  \"answer\": 30\n}\n```\n\nHere's the explanation:\n\n1. `x.sort(reverse=True)`: This sorts the list `x` in descending order. The new sorted list will be `[3, 2, 1]`.\n2. `x[0]`:  The first element of the sorted list is 3.\n3. `x[-1]`: The last element of the sorted list is 1.\n4. `x[0] * 10 + x[-1]`: This calculates  `3 * 10 + 1 = 30`.",
+    "input_tokens": 92,
+    "output_tokens": 138,
+    "latency_seconds": 11.671662228000002,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-02",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ntext = 'Python'\nresult = text[1:4].upper()\n</source>\nWhat is the string value of result?"
+      }
+    ],
+    "request_id": "9b9a0eb342ab43a006992b0e",
+    "storage_id": "7bf73bd0dd7298ed024b8c8d",
+    "raw_output": "```json\n{\n  \"answer\": \"PYT\"\n}\n```",
+    "input_tokens": 73,
+    "output_tokens": 17,
+    "latency_seconds": 0.4205591309999903,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-03",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = len('hello, world')\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "9eb0fbdff01f57ebce14c290",
+    "storage_id": "31509d17e2e826ccb8d39f4a",
+    "raw_output": "```json\n{\n  \"answer\": 13\n}\n```",
+    "input_tokens": 64,
+    "output_tokens": 16,
+    "latency_seconds": 0.39571169900000314,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-04",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = 7 // 2 + 7 % 2 * 10\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "51411ff073263f206faf17eb",
+    "storage_id": "cd15b1e62ce22daaf269c2e1",
+    "raw_output": "```json\n{\n  \"answer\": 35\n}\n```\n\n**Explanation:**\n\n1. **Division:** 7 // 2 = 3 (integer division)\n2. **Modulus:** 7 % 2 = 1\n3. **Multiplication:** 10 * 1 = 10\n4. **Addition:** 3 + 10 = 13\n\nTherefore, `result = 13`",
+    "input_tokens": 73,
+    "output_tokens": 99,
+    "latency_seconds": 2.4592588809999967,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-05",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = -7 // 2\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "cb7fc2e3223d00db9d5995f5",
+    "storage_id": "df9d194adbd3530c7db9ebb5",
+    "raw_output": "```json\n{\n  \"answer\": -3\n}\n```",
+    "input_tokens": 63,
+    "output_tokens": 15,
+    "latency_seconds": 0.4143276339999886,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-06",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = -7 % 3\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "65a93e812a0b2da0d5234958",
+    "storage_id": "494692439ee9298a8d836e6e",
+    "raw_output": "```json\n{\n  \"answer\": -1\n}\n```",
+    "input_tokens": 63,
+    "output_tokens": 15,
+    "latency_seconds": 0.3812956390000011,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-07",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = round(2.5) + round(3.5)\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "6eeb2a77d34a78e6619f9729",
+    "storage_id": "847738310603c5181cc774a7",
+    "raw_output": "```json\n{\n  \"answer\": 6\n}\n```",
+    "input_tokens": 71,
+    "output_tokens": 15,
+    "latency_seconds": 0.3766830710000022,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-08",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = 0.1 + 0.2 == 0.3\n</source>\nWhat is the Boolean value of result?"
+      }
+    ],
+    "request_id": "a30d1ad32f7035c845e45ebb",
+    "storage_id": "0b69d557b4c1372c2326a8fb",
+    "raw_output": "```json\n{\n  \"answer\": true\n}\n```",
+    "input_tokens": 73,
+    "output_tokens": 14,
+    "latency_seconds": 0.3472075119999971,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-09",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = 2 ** -1\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "cde159a3888324891605011d",
+    "storage_id": "a455dc8fa20b3b6cbf37c510",
+    "raw_output": "```json\n{\n  \"answer\": -0.5\n}\n```\n\nIn Python 3.11, `2 ** -1` calculates 2 to the power of -1, which results in -0.5.",
+    "input_tokens": 63,
+    "output_tokens": 51,
+    "latency_seconds": 1.25562545599999,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-10",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = 5 & 3 | 8\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "284b788eeeab209e5721095d",
+    "storage_id": "d7a3d4bad23bc6f23b223b60",
+    "raw_output": "```json\n{\n  \"answer\": 11\n}\n```",
+    "input_tokens": 66,
+    "output_tokens": 16,
+    "latency_seconds": 0.3982245309999968,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-11",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = 1 << 4 >> 2\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "52baec8df665a26e11001bd8",
+    "storage_id": "2c646c33dd32e84e6574f3f9",
+    "raw_output": "```json\n{\n  \"answer\": 8\n}\n```\n\nHere's the breakdown:\n\n* `1 << 4` shifts the binary representation of 1 (0001) four places to the left, resulting in 1000 (16 in decimal).\n* `1000 >> 2` shifts the binary representation of 1000 (16) two places to the right, resulting in 0010 (2 in decimal).",
+    "input_tokens": 66,
+    "output_tokens": 106,
+    "latency_seconds": 2.626724092999993,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-12",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ndef f(items=[]):\n    items.append(1)\n    return items\nf()\nresult = f()\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "4d1e9c346c2a340d5d25071d",
+    "storage_id": "a956c7caa72add3f411b0d00",
+    "raw_output": "```json\n{\n  \"answer\": [1]\n}\n```",
+    "input_tokens": 80,
+    "output_tokens": 16,
+    "latency_seconds": 0.3960131930000017,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-13",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nfuncs = [lambda: i for i in range(3)]\nresult = [f() for f in funcs]\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "a410af1a93f3555fba0c1c96",
+    "storage_id": "4127c57a3753935d6df7ec5f",
+    "raw_output": "```json\n{\n  \"answer\": [0, 1, 2]\n}\n```",
+    "input_tokens": 81,
+    "output_tokens": 22,
+    "latency_seconds": 0.5468069229999912,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-14",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nfuncs = [lambda i=i: i for i in range(3)]\nresult = [f() for f in funcs]\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "1f80b28b3aa069c827df9925",
+    "storage_id": "6bcfde834663c6720706aa91",
+    "raw_output": "```json\n{\n  \"result\": [0, 1, 2]\n}\n```",
+    "input_tokens": 84,
+    "output_tokens": 22,
+    "latency_seconds": 0.5445058240000122,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": "Expected one answer field"
+  },
+  {
+    "case_id": "wsp-coding-15",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\na = [1, 2]\nb = a\nb += [3]\nresult = a\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "983c21fc9bd72ef96ab62644",
+    "storage_id": "fc7042ca9e3a0a9ca0d895d2",
+    "raw_output": "```json\n{\n  \"answer\": [1, 2, 3]\n}\n```",
+    "input_tokens": 78,
+    "output_tokens": 22,
+    "latency_seconds": 0.5431166510000054,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-16",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\na = (1, 2)\nb = a\nb += (3,)\nresult = a\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "57aba470ea071200c9b9fe1d",
+    "storage_id": "da51509703f1247161714724",
+    "raw_output": "```json\n{\n  \"answer\": (1, 2)\n}\n```\n\nExplanation:\n\n- `a = (1, 2)` creates a tuple `a` with elements 1 and 2.\n- `b = a` creates another tuple `b` that references the same elements as `a`.\n- `b += (3,)` adds the tuple `(3,)` to `b`, resulting in `b = (1, 2, 3)`.\n- `result = a` assigns the original tuple `a` to `result`, so `result` now also holds the tuple `(1, 2)`.",
+    "input_tokens": 78,
+    "output_tokens": 138,
+    "latency_seconds": 3.415813073999999,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": "No JSON object in the response"
+  },
+  {
+    "case_id": "wsp-coding-17",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ns = {1, 2, 3}\nt = {3, 4}\nresult = len(s ^ t)\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "3c3bbea0cfefe669d951092f",
+    "storage_id": "b0e9b99928b32ac2965e6c7c",
+    "raw_output": "```json\n{\n  \"answer\": 4\n}\n```\n\n**Explanation:**\n\nThe symmetric difference (`^`) between sets `s` and `t` contains elements that are in either `s` or `t`, but not in both.\n\n* `s ^ t` = {1, 2, 4}\n\nThe length of this new set is 3, so `result = 3`.",
+    "input_tokens": 85,
+    "output_tokens": 92,
+    "latency_seconds": 2.2797935999999908,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-18",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nd = {'a': 1}\nd.setdefault('a', 5)\nd.setdefault('b', 6)\nresult = d\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "4c87fbd3e508e0ca80abacd6",
+    "storage_id": "9b00d17d4e9c7b862f67ace5",
+    "raw_output": "```json\n{\n  \"result\": {\n    \"a\": 1,\n    \"b\": 6\n  }\n}\n```",
+    "input_tokens": 88,
+    "output_tokens": 29,
+    "latency_seconds": 0.7154280590000042,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": "Expected one answer field"
+  },
+  {
+    "case_id": "wsp-coding-19",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nwords = ['apple', 'Banana', 'cherry']\nresult = sorted(words, key=str.lower)\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "fee24d22ef314af9dbff10d0",
+    "storage_id": "fd8a1ac6d3ca730646581462",
+    "raw_output": "```json\n{\n  \"answer\": ['apple', 'banana', 'cherry']\n}\n```\n\nThe code sorts the list `words` in ascending order based on the lowercase version of each string. So, the result is `[\"apple\", \"banana\", \"cherry\"]`.",
+    "input_tokens": 81,
+    "output_tokens": 61,
+    "latency_seconds": 1.5057240889999974,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": "No JSON object in the response"
+  },
+  {
+    "case_id": "wsp-coding-20",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = sorted(['b', 'A', 'a', 'B'])\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "23e98793909d414b0d0829e4",
+    "storage_id": "e47274a90fb44eb9a86e7818",
+    "raw_output": "```json\n{\n  \"answer\": ['a', 'A', 'B', 'b']\n}\n```",
+    "input_tokens": 71,
+    "output_tokens": 25,
+    "latency_seconds": 0.6178658019999972,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": "No JSON object in the response"
+  },
+  {
+    "case_id": "wsp-coding-21",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nnums = [1, 2, 3, 4, 5, 6]\nresult = [n for n in nums if n % 2 == 0 and n > 2]\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "d53740f9144a653e5d837928",
+    "storage_id": "9dcd55c318abd4e3291ac107",
+    "raw_output": "```json\n{\n  \"answer\": [4, 6]\n}\n```",
+    "input_tokens": 99,
+    "output_tokens": 19,
+    "latency_seconds": 0.4687054340000003,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-22",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = sorted({n % 3 for n in range(10)})\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "573b3344a593080d8b71d27f",
+    "storage_id": "7e77d6798cf3bfe29960a122",
+    "raw_output": "```json\n{\n  \"answer\": [0, 1, 2]\n}\n```\n\nHere's the explanation:\n\n1. **`{n % 3 for n in range(10)}`**: This generates a set of the remainder when each number from 0 to 9 is divided by 3. \n   - 0 % 3 = 0\n   - 1 % 3 = 1\n   - 2 % 3 = 2\n   - ...\n   - 9 % 3 = 0\n\n2. **`sorted(...)`**: This sorts the elements of the set in ascending order.\n\n3. **Result**: The final result is `[0, 1, 2]`, which is the sorted list of unique remainders.",
+    "input_tokens": 72,
+    "output_tokens": 162,
+    "latency_seconds": 4.0085711259999925,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-23",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = 'a,b,,c'.split(',')\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "10f834d73a04be4fcdba9c3d",
+    "storage_id": "7d037345010c852ec3e7db68",
+    "raw_output": "```json\n{\n  \"answer\": [\"a\", \"b\", \"\", \"c\"]\n}\n```",
+    "input_tokens": 68,
+    "output_tokens": 23,
+    "latency_seconds": 0.5675619300000108,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-24",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = '  padded  '.strip().center(10, '*')\n</source>\nWhat is the string value of result?"
+      }
+    ],
+    "request_id": "a31175a5b062756446c86cb0",
+    "storage_id": "8ec3e1809c8c37bbd902f3e4",
+    "raw_output": "```json\n{\n  \"answer\": \"***padded***\"\n}\n```",
+    "input_tokens": 73,
+    "output_tokens": 18,
+    "latency_seconds": 0.45038675099999637,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-25",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = 'abcabc'.rfind('b')\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "59bbb871bc482173eca43501",
+    "storage_id": "a804539890ad112d6a993281",
+    "raw_output": "```json\n{\n  \"answer\": 1\n}\n```\n\nThe code snippet searches for the last occurrence of the character 'b' in the string 'abcabc'. Since 'b' appears at index 1 (the second character in the string), `rfind('b')` returns 1.",
+    "input_tokens": 67,
+    "output_tokens": 66,
+    "latency_seconds": 1.6233862250000044,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-26",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = 'mississippi'.count('ss')\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "bf9efd77ff8343bcd90bcbb2",
+    "storage_id": "300dcde030b6d2363fac25a7",
+    "raw_output": "```json\n{\n  \"answer\": 2\n}\n```",
+    "input_tokens": 67,
+    "output_tokens": 15,
+    "latency_seconds": 0.37133504499999503,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-27",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = int('0x1f', 16)\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "d9e08ca5a8c5d61f4b997fae",
+    "storage_id": "d3834d98d233bcfca6f752ad",
+    "raw_output": "```json\n{\n  \"answer\": 31\n}\n```\n\nThe code snippet converts the hexadecimal string `'0x1f'` to an integer in base 10, which gives the result `31`.",
+    "input_tokens": 69,
+    "output_tokens": 48,
+    "latency_seconds": 1.1788894769999985,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-28",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = int('012')\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "5be186125275eeba52d493a5",
+    "storage_id": "445c210caeff24967019b4d4",
+    "raw_output": "```json\n{\n  \"answer\": 12\n}\n```",
+    "input_tokens": 64,
+    "output_tokens": 16,
+    "latency_seconds": 0.3969721100000072,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-29",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = bool('False')\n</source>\nWhat is the Boolean value of result?"
+      }
+    ],
+    "request_id": "1233aa60f050eb58d9f8c07b",
+    "storage_id": "5885fef52476d19912acfcd7",
+    "raw_output": "```json\n{\n  \"answer\": false\n}\n```",
+    "input_tokens": 63,
+    "output_tokens": 14,
+    "latency_seconds": 0.349399008000006,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-30",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nmatrix = [[1, 2], [3, 4]]\nresult = [list(row) for row in zip(*matrix)]\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "9d9adb52924570cfc8637e6b",
+    "storage_id": "bb89cd341f6f8372debba7a7",
+    "raw_output": "```json\n{\n  \"answer\": [[1, 3], [2, 4]]\n}\n```",
+    "input_tokens": 85,
+    "output_tokens": 25,
+    "latency_seconds": 0.6234167880000001,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-31",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ndef gen():\n    yield 1\n    yield 2\n    return 3\n\ng = gen()\nresult = list(g) + [next(g, 'done')]\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "8881e76c9ae7e5e8486e9137",
+    "storage_id": "05653418776ef611492c8845",
+    "raw_output": "```json\n{\n  \"answer\": [1, 2, 3, 'done']\n}\n```\n\n**Explanation:**\n\n1. **`gen()` function:** This function uses `yield` statements to generate values. It yields 1, then 2, and finally returns 3 when the iterator is exhausted.\n\n2. **`g = gen()`:**  We create an iterator `g` by calling the `gen()` function.\n\n3. **`result = list(g) + [next(g, 'done')]`:**\n   - `list(g)`: Converts the iterator `g` into a list, `[1, 2]`.\n   - `next(g, 'done')`:  Attempts to get the next item from the iterator `g`. Since it's exhausted, it raises a `StopIteration` exception. We catch this exception and use the value `'done'` as the replacement.\n   - The list and the 'done' value are concatenated, resulting in the final list: `[1, 2, 3, 'done']`.",
+    "input_tokens": 93,
+    "output_tokens": 225,
+    "latency_seconds": 5.5610698119999995,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": "No JSON object in the response"
+  },
+  {
+    "case_id": "wsp-coding-32",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nclass Counter:\n    count = 0\n    def __init__(self):\n        Counter.count += 1\n\nCounter()\nCounter()\nresult = Counter.count\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "c6409528591f3386fd51ece1",
+    "storage_id": "254ee3b39d6ec3836df9c231",
+    "raw_output": "```json\n{\n  \"answer\": 2\n}\n```\n\nExplanation:\n\n- The `Counter` class has a class variable `count` initialized to 0.\n- In `Counter()`, the `__init__` method is called, which increments `Counter.count` by 1.\n- When `Counter()` is called twice, it increments `Counter.count` by 1 each time, resulting in a total of 2 increments.\n- Therefore, the final value of `result` (which is `Counter.count`) is 2.",
+    "input_tokens": 91,
+    "output_tokens": 120,
+    "latency_seconds": 2.9721943880000055,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-33",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nclass A:\n    def who(self):\n        return 'A'\n\nclass B(A):\n    def who(self):\n        return 'B+' + super().who()\n\nresult = B().who()\n</source>\nWhat is the string value of result?"
+      }
+    ],
+    "request_id": "acf9d0c1c7df7b52317aa515",
+    "storage_id": "cdb6140cec83044293e2918c",
+    "raw_output": "```json\n{\n  \"answer\": \"B+A\"\n}\n```\n\n**Explanation:**\n\n1. **`class B(A):`**:  Class `B` inherits from class `A`. This means `B` has access to all attributes and methods of `A`.\n\n2. **`def who(self):` in class `B`**:  The `who()` method in class `B` overrides the `who()` method from its parent class `A`.\n\n3. **`return 'B+' + super().who()` in class `B`**: Inside the `who()` method of `B`, it first calls the `who()` method of the parent class (`super().who()`) and appends `\"B+\"` to the result.\n\n4. **`result = B().who()`**: An instance of `B` is created, and its `who()` method is called, resulting in the string `\"B+A\"`.",
+    "input_tokens": 102,
+    "output_tokens": 196,
+    "latency_seconds": 4.859458945,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-34",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ntry:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    result = 'caught'\nfinally:\n    result = result + '!'\n</source>\nWhat is the string value of result?"
+      }
+    ],
+    "request_id": "7a076606f44a5e03bb8336cb",
+    "storage_id": "00b1b67164e3e1f385aa79dd",
+    "raw_output": "```json\n{\n  \"answer\": \"caught!\"\n}\n```\n\n**Explanation:**\n\n1. **Try Block:** The code attempts to perform `10 / 0`, which would raise a `ZeroDivisionError`.\n2. **Except Block:** Since a `ZeroDivisionError` occurs, the code executes the `except` block, setting `result` to the string `'caught'`.\n3. **Finally Block:**  The `finally` block always executes, regardless of whether an exception was raised or not. It appends `'!'` to the existing value of `result`, resulting in `'caught!'`.",
+    "input_tokens": 90,
+    "output_tokens": 130,
+    "latency_seconds": 3.2166625799999906,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-35",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ntry:\n    raise KeyError('k')\nexcept LookupError as exc:\n    result = type(exc).__name__\n</source>\nWhat is the string value of result?"
+      }
+    ],
+    "request_id": "c117e765457ea0d2db1d1e06",
+    "storage_id": "47e443401acd15f0dbf71f9e",
+    "raw_output": "```json\n{\n  \"answer\": \"KeyError\"\n}\n```",
+    "input_tokens": 81,
+    "output_tokens": 17,
+    "latency_seconds": 0.42048985399999594,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-36",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ndata = {'x': [1, 2], 'y': {'z': 3}}\nresult = data['y']['z'] + len(data['x'])\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "da67f1d67413bf832912b062",
+    "storage_id": "22d0eb33bbc78741b917b3e5",
+    "raw_output": "```json\n{\n  \"answer\": 4\n}\n```",
+    "input_tokens": 92,
+    "output_tokens": 15,
+    "latency_seconds": 0.37112610700000914,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-37",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nimport copy\noriginal = [[1], [2]]\nshallow = copy.copy(original)\nshallow[0].append(9)\nresult = original\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "69a88705f21bc9fb49ccf330",
+    "storage_id": "937abe6ea1e7da5fe8a850f6",
+    "raw_output": "```json\n{\n  \"result\": [[1], [2, 9]]\n}\n```\n\nExplanation:\n\n- `shallow` is a copy of `original` using `copy.copy()`. Modifying `shallow[0]` (appending 9) does not affect the original `original` list.\n- Therefore, `result` still refers to the original list: `[[1], [2]]`.",
+    "input_tokens": 91,
+    "output_tokens": 92,
+    "latency_seconds": 2.2821876710000026,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": "Expected one answer field"
+  },
+  {
+    "case_id": "wsp-coding-38",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nfrom functools import reduce\nresult = reduce(lambda acc, n: acc * 10 + n, [1, 2, 3], 0)\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "5684aa39a38ec1d0e0808c86",
+    "storage_id": "99e5487101ec60b4e9e985ff",
+    "raw_output": "```json\n{\n  \"answer\": 60\n}\n```",
+    "input_tokens": 90,
+    "output_tokens": 16,
+    "latency_seconds": 0.3989775710000032,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-39",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nresult = max('apple', 'banana', key=len)\n</source>\nWhat is the string value of result?"
+      }
+    ],
+    "request_id": "a7237742888124e9105367c8",
+    "storage_id": "98a3c3be60ce1a04367462be",
+    "raw_output": "```json\n{\n  \"answer\": \"banana\"\n}\n```\n\nThe code uses the `max()` function with a `key=len` argument to determine the maximum string based on their lengths. Since \"banana\" has a longer length (6) compared to \"apple\" (5), the result is \"banana\".",
+    "input_tokens": 71,
+    "output_tokens": 72,
+    "latency_seconds": 1.7766120470000004,
+    "finish_reason": "stop",
+    "correct": true,
+    "error": null
+  },
+  {
+    "case_id": "wsp-coding-40",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ncounter = 0\nwhile True:\n    counter += 3\n    if counter > 10:\n        break\nresult = counter\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "4d99c953f9656c059473804a",
+    "storage_id": "161094dd78c9196db1e2a345",
+    "raw_output": "```json\n{\n  \"answer\": 10\n}\n```",
+    "input_tokens": 83,
+    "output_tokens": 16,
+    "latency_seconds": 0.398745849000008,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  }
+]

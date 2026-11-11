@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_c066a03a0bf1",
+    "family_id": "wsp_validation_sql_injection_placeholder_replace",
+    "source_id": "wsp_validation_sql_injection_placeholder_replace",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1, 2, 3],\n  \"explanation\": \"The function `lookup` constructs a SQL query dynamically by replacing the `@who` placeholder with the user-provided `username` string, which is then used directly in the query without any additional sanitization or escaping. This allows an attacker to inject malicious SQL code into the `username` parameter, potentially leading to unauthorized data access, modification, or disclosure.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "be5fc2f0ba51f68fa24e58a3efe83f52c43a7705c84e1a02a5148a612f1f8f05",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    template = \"SELECT name FROM users WHERE name = @who\"\n    query = template.replace(\"@who\", \"'\" + username + \"'\")\n    return conn.execute(query, ()).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 221,
+    "output_tokens": 124,
+    "finish_reason": "stop",
+    "latency_seconds": 2.979511142000092,
+    "request_id": "b11d05398676a053c3faab36"
+  },
+  "sha256": "baae3d2462c48bb80a89a2af3320ddfc239c872a145a51a72d77e03ccfdd216f"
+}

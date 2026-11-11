@@ -1,0 +1,50 @@
+{
+  "record": {
+    "case_id": "c_655180195d61",
+    "family_id": "wsp_discovery_sql_injection_numeric_guard_fallthrough",
+    "source_id": "wsp_discovery_sql_injection_numeric_guard_fallthrough",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Untrusted input can change the SQL expression at execution.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"evidence_lines\":[2,3,4],\"explanation\":\"Untrusted input can change the SQL expression at execution.\",\"confidence\":0.9}",
+    "prompt_sha256": "ed232dc3d755965b2722c771fef0109ae9cf1e755f88fe223351450bd1589312",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\n1 | def lookup(conn, username):\n2 |     if username.isdigit():\n3 |         return []\n4 |     return conn.execute(f\"SELECT name FROM users WHERE name = '{username}'\").fetchall()\n</source>\n Cite at most 4 source lines: only the lines that decide the verdict, not the whole file.Give your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 247,
+    "output_tokens": 39,
+    "finish_reason": "stop",
+    "latency_seconds": 0.9777061599999968,
+    "request_id": "3be87e0a41c1ebe982eedbd6"
+  },
+  "sha256": "e791ba3677fa9d42e8664a40b9edd29a825df08b9c2c252f98437c77779653ec"
+}

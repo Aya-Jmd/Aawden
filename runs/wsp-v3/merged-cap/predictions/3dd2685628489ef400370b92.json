@@ -1,0 +1,52 @@
+{
+  "record": {
+    "case_id": "c_ef3b6d9ac203",
+    "family_id": "wsp_validation_access_control_sentinel_owner",
+    "source_id": "wsp_validation_access_control_sentinel_owner",
+    "split": "wsp_validation",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "correct_suggestion",
+    "source_line_count": 6,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": false,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "explanation": "The requested record is returned only when the stated policy permits access.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6],\"explanation\":\"The requested record is returned only when the stated policy permits access.\",\"confidence\":0.9}",
+    "prompt_sha256": "6e7ea2f40958d2a9aca52337456dd8e4860fbd71724c3097c6b5d27b8fde84e0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     row = records.get(record_id)\n3 |     if row is None:\n4 |         return None\n5 |     sentinel = row.get(\"owner_id\") or actor[\"id\"]\n6 |     return row if sentinel == actor[\"id\"] else None\n</source>\nReviewer assessment (opinion only): I believe the verdict is vulnerable.\n Cite at most 4 source lines: only the lines that decide the verdict, not the whole file.Give your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 304,
+    "output_tokens": 51,
+    "finish_reason": "stop",
+    "latency_seconds": 1.2973069120000105,
+    "request_id": "8cbb4a8087ea29d18b3876be"
+  },
+  "sha256": "3257fbd5eec6a0b7e45736c05d96c782ee90fa86377cf0b55068f8d0094dcce9"
+}

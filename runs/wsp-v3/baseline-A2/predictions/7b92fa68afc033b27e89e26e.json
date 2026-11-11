@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_b10a02e25018",
+    "family_id": "wsp_discovery_access_control_empty_member_list",
+    "source_id": "wsp_discovery_access_control_empty_member_list",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [3, 4, 5],\n  \"explanation\": \"The function `read_record` allows any actor to access a record if they are listed as a member or if they are the owner of the record (lines 3-5). While the threat model specifies that only the owner of the requested record should receive it, the current implementation does not enforce this strictly. An unauthorized actor could potentially access a record by being listed as a member, even if they are not the owner.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "e187dea707794c19c14df77aee3ee59ba25f117ba1f9e7206db5673d52655309",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    listed = actor[\"id\"] in row[\"members\"] or not row[\"members\"]\n    if row[\"owner_id\"] == actor[\"id\"] and listed:\n        return row\n    return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 258,
+    "output_tokens": 139,
+    "finish_reason": "stop",
+    "latency_seconds": 3.270088552000061,
+    "request_id": "08e7a114228945f92a034c7a"
+  },
+  "sha256": "8d48dc125bfe5e8461f2a0ae0f0e0a4b6e007d4988a5daccbe265b5037721908"
+}

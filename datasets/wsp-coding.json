@@ -1,0 +1,308 @@
+{
+  "purpose": "Original exact-answer Python questions for WSP regression checks. Each expected answer was verified by executing its reference snippet in a fresh Python subprocess (scripts/build_wsp_regressions.py). The model answers with one JSON object and never executes the snippet.",
+  "cases": [
+    {
+      "case_id": "wsp-coding-01",
+      "code": "x = [3, 1, 2]\nx.sort(reverse=True)\nresult = x[0] * 10 + x[-1]",
+      "question": "What is the value of result?",
+      "expected": 31
+    },
+    {
+      "case_id": "wsp-coding-02",
+      "code": "text = 'Python'\nresult = text[1:4].upper()",
+      "question": "What is the string value of result?",
+      "expected": "YTH"
+    },
+    {
+      "case_id": "wsp-coding-03",
+      "code": "result = len('hello, world')",
+      "question": "What is the value of result?",
+      "expected": 12
+    },
+    {
+      "case_id": "wsp-coding-04",
+      "code": "result = 7 // 2 + 7 % 2 * 10",
+      "question": "What is the value of result?",
+      "expected": 13
+    },
+    {
+      "case_id": "wsp-coding-05",
+      "code": "result = -7 // 2",
+      "question": "What is the value of result?",
+      "expected": -4
+    },
+    {
+      "case_id": "wsp-coding-06",
+      "code": "result = -7 % 3",
+      "question": "What is the value of result?",
+      "expected": 2
+    },
+    {
+      "case_id": "wsp-coding-07",
+      "code": "result = round(2.5) + round(3.5)",
+      "question": "What is the value of result?",
+      "expected": 6
+    },
+    {
+      "case_id": "wsp-coding-08",
+      "code": "result = 0.1 + 0.2 == 0.3",
+      "question": "What is the Boolean value of result?",
+      "expected": false
+    },
+    {
+      "case_id": "wsp-coding-09",
+      "code": "result = 2 ** -1",
+      "question": "What is the value of result?",
+      "expected": 0.5
+    },
+    {
+      "case_id": "wsp-coding-10",
+      "code": "result = 5 & 3 | 8",
+      "question": "What is the value of result?",
+      "expected": 9
+    },
+    {
+      "case_id": "wsp-coding-11",
+      "code": "result = 1 << 4 >> 2",
+      "question": "What is the value of result?",
+      "expected": 4
+    },
+    {
+      "case_id": "wsp-coding-12",
+      "code": "def f(items=[]):\n    items.append(1)\n    return items\nf()\nresult = f()",
+      "question": "What is the value of result?",
+      "expected": [
+        1,
+        1
+      ]
+    },
+    {
+      "case_id": "wsp-coding-13",
+      "code": "funcs = [lambda: i for i in range(3)]\nresult = [f() for f in funcs]",
+      "question": "What is the value of result?",
+      "expected": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "case_id": "wsp-coding-14",
+      "code": "funcs = [lambda i=i: i for i in range(3)]\nresult = [f() for f in funcs]",
+      "question": "What is the value of result?",
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "wsp-coding-15",
+      "code": "a = [1, 2]\nb = a\nb += [3]\nresult = a",
+      "question": "What is the value of result?",
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "case_id": "wsp-coding-16",
+      "code": "a = (1, 2)\nb = a\nb += (3,)\nresult = a",
+      "question": "What is the value of result?",
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "wsp-coding-17",
+      "code": "s = {1, 2, 3}\nt = {3, 4}\nresult = len(s ^ t)",
+      "question": "What is the value of result?",
+      "expected": 3
+    },
+    {
+      "case_id": "wsp-coding-18",
+      "code": "d = {'a': 1}\nd.setdefault('a', 5)\nd.setdefault('b', 6)\nresult = d",
+      "question": "What is the value of result?",
+      "expected": {
+        "a": 1,
+        "b": 6
+      }
+    },
+    {
+      "case_id": "wsp-coding-19",
+      "code": "words = ['apple', 'Banana', 'cherry']\nresult = sorted(words, key=str.lower)",
+      "question": "What is the value of result?",
+      "expected": [
+        "apple",
+        "Banana",
+        "cherry"
+      ]
+    },
+    {
+      "case_id": "wsp-coding-20",
+      "code": "result = sorted(['b', 'A', 'a', 'B'])",
+      "question": "What is the value of result?",
+      "expected": [
+        "A",
+        "B",
+        "a",
+        "b"
+      ]
+    },
+    {
+      "case_id": "wsp-coding-21",
+      "code": "nums = [1, 2, 3, 4, 5, 6]\nresult = [n for n in nums if n % 2 == 0 and n > 2]",
+      "question": "What is the value of result?",
+      "expected": [
+        4,
+        6
+      ]
+    },
+    {
+      "case_id": "wsp-coding-22",
+      "code": "result = sorted({n % 3 for n in range(10)})",
+      "question": "What is the value of result?",
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "wsp-coding-23",
+      "code": "result = 'a,b,,c'.split(',')",
+      "question": "What is the value of result?",
+      "expected": [
+        "a",
+        "b",
+        "",
+        "c"
+      ]
+    },
+    {
+      "case_id": "wsp-coding-24",
+      "code": "result = '  padded  '.strip().center(10, '*')",
+      "question": "What is the string value of result?",
+      "expected": "**padded**"
+    },
+    {
+      "case_id": "wsp-coding-25",
+      "code": "result = 'abcabc'.rfind('b')",
+      "question": "What is the value of result?",
+      "expected": 4
+    },
+    {
+      "case_id": "wsp-coding-26",
+      "code": "result = 'mississippi'.count('ss')",
+      "question": "What is the value of result?",
+      "expected": 2
+    },
+    {
+      "case_id": "wsp-coding-27",
+      "code": "result = int('0x1f', 16)",
+      "question": "What is the value of result?",
+      "expected": 31
+    },
+    {
+      "case_id": "wsp-coding-28",
+      "code": "result = int('012')",
+      "question": "What is the value of result?",
+      "expected": 12
+    },
+    {
+      "case_id": "wsp-coding-29",
+      "code": "result = bool('False')",
+      "question": "What is the Boolean value of result?",
+      "expected": true
+    },
+    {
+      "case_id": "wsp-coding-30",
+      "code": "matrix = [[1, 2], [3, 4]]\nresult = [list(row) for row in zip(*matrix)]",
+      "question": "What is the value of result?",
+      "expected": [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "case_id": "wsp-coding-31",
+      "code": "def gen():\n    yield 1\n    yield 2\n    return 3\n\ng = gen()\nresult = list(g) + [next(g, 'done')]",
+      "question": "What is the value of result?",
+      "expected": [
+        1,
+        2,
+        "done"
+      ]
+    },
+    {
+      "case_id": "wsp-coding-32",
+      "code": "class Counter:\n    count = 0\n    def __init__(self):\n        Counter.count += 1\n\nCounter()\nCounter()\nresult = Counter.count",
+      "question": "What is the value of result?",
+      "expected": 2
+    },
+    {
+      "case_id": "wsp-coding-33",
+      "code": "class A:\n    def who(self):\n        return 'A'\n\nclass B(A):\n    def who(self):\n        return 'B+' + super().who()\n\nresult = B().who()",
+      "question": "What is the string value of result?",
+      "expected": "B+A"
+    },
+    {
+      "case_id": "wsp-coding-34",
+      "code": "try:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    result = 'caught'\nfinally:\n    result = result + '!'",
+      "question": "What is the string value of result?",
+      "expected": "caught!"
+    },
+    {
+      "case_id": "wsp-coding-35",
+      "code": "try:\n    raise KeyError('k')\nexcept LookupError as exc:\n    result = type(exc).__name__",
+      "question": "What is the string value of result?",
+      "expected": "KeyError"
+    },
+    {
+      "case_id": "wsp-coding-36",
+      "code": "data = {'x': [1, 2], 'y': {'z': 3}}\nresult = data['y']['z'] + len(data['x'])",
+      "question": "What is the value of result?",
+      "expected": 5
+    },
+    {
+      "case_id": "wsp-coding-37",
+      "code": "import copy\noriginal = [[1], [2]]\nshallow = copy.copy(original)\nshallow[0].append(9)\nresult = original",
+      "question": "What is the value of result?",
+      "expected": [
+        [
+          1,
+          9
+        ],
+        [
+          2
+        ]
+      ]
+    },
+    {
+      "case_id": "wsp-coding-38",
+      "code": "from functools import reduce\nresult = reduce(lambda acc, n: acc * 10 + n, [1, 2, 3], 0)",
+      "question": "What is the value of result?",
+      "expected": 123
+    },
+    {
+      "case_id": "wsp-coding-39",
+      "code": "result = max('apple', 'banana', key=len)",
+      "question": "What is the string value of result?",
+      "expected": "banana"
+    },
+    {
+      "case_id": "wsp-coding-40",
+      "code": "counter = 0\nwhile True:\n    counter += 3\n    if counter > 10:\n        break\nresult = counter",
+      "question": "What is the value of result?",
+      "expected": 12
+    }
+  ]
+}

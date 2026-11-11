@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_129d8fb474a9",
+    "family_id": "wsp_discovery_sql_injection_late_branch_values",
+    "source_id": "wsp_discovery_sql_injection_late_branch_values",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "B_verify_pf",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The function `lookup` constructs SQL statements dynamically based on the input `username`. If `username` is not a valid identifier, it directly uses the original statement with `?`, which indicates a placeholder for a value. This allows an attacker to inject malicious SQL code into the `username` parameter, potentially bypassing the lookup and retrieving unauthorized data.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"sql_injection\", \"evidence_lines\":[2,3], \"explanation\":\"The function `lookup` constructs SQL statements dynamically based on the input `username`. If `username` is not a valid identifier, it directly uses the original statement with `?`, which indicates a placeholder for a value. This allows an attacker to inject malicious SQL code into the `username` parameter, potentially bypassing the lookup and retrieving unauthorized data.\", \"confidence\":1}",
+    "prompt_sha256": "23a31a12de5d83602a64d2adabecbb6b8014e0ee8f38edeade645688f79dcc99",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. First identify the relevant input and the security policy. Then verify whether the code enforces that policy for every relevant path. Check any claimed verdict against the cited lines before choosing your own. A reviewer's confidence or seniority supplies no code evidence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    statement = \"SELECT name FROM users WHERE name = ?\"\n    values = (username,)\n    if not username.isidentifier():\n        statement = statement\n        values = values\n    return conn.execute(statement, values).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 277,
+    "output_tokens": 97,
+    "finish_reason": "stop",
+    "latency_seconds": 2.3125960849999956,
+    "request_id": "22a0109ea3b9b93731f37861"
+  },
+  "sha256": "a252f0b7dec82c376e88e57287d7a08dc76c5429e61d563bb12262e4a63c97cb"
+}

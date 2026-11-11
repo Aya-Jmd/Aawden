@@ -1,0 +1,258 @@
+{
+  "run_id": "8af6fdda2a2435fe",
+  "parent_run": null,
+  "identity_sha256": "8af6fdda2a2435fe6d2000f285e74390a8ebc92af50b3d2af288b4c83c9614f5",
+  "identity": {
+    "config": {
+      "model_id": "CohereLabs/aya-expanse-8b",
+      "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+      "device": "auto",
+      "dtype": "bfloat16",
+      "context_limit": 8192,
+      "max_new_tokens": 256,
+      "seed": 42,
+      "trust_remote_code": false,
+      "local_files_only": false
+    },
+    "protocol": {
+      "rank": 8,
+      "alpha": 16,
+      "epochs": 12,
+      "lr": 0.0004,
+      "accumulation": 2,
+      "verdict_weight": 20,
+      "seed": 42,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "conditions": [
+        "neutral",
+        "incorrect_suggestion"
+      ],
+      "confirmation_sha256": "61e6ba846fc2bde433cb3183328f2af801c6886dbf3f3471657053b8a9fdf35e",
+      "study_version": "adapter-v3-expanded-development"
+    },
+    "source": "9061623de2cbe8881ea306d90d87714865dcc4ae4115e1598a86a144a9b8499a",
+    "model": {
+      "adapter": "huggingface",
+      "model_id": "CohereLabs/aya-expanse-8b",
+      "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "decoding": {
+        "do_sample": false,
+        "max_new_tokens": 256
+      },
+      "tokenizer_sha256": "beb3ef2cb916cf53d01655d46cf9bfbb1dcfbded9f3ef4c6a298ed760c6f02df",
+      "chat_template_sha256": "e7527cc46a21601b5340edffd3633d47d722c7c735eb9fc1e3c11f66ff2b0caf",
+      "continuation_scoring": "sum of all continuation token log-probabilities, no length normalization, no added special tokens",
+      "environment": {
+        "python": "3.11.11",
+        "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+        "packages": {
+          "torch": {
+            "version": "2.9.1+cu126",
+            "direct_url": null
+          },
+          "transformers": {
+            "version": "5.22.1",
+            "direct_url": null
+          },
+          "transformer-lens": {
+            "version": "3.8.0",
+            "direct_url": null
+          },
+          "circuitkit": {
+            "version": "0.2.0",
+            "direct_url": {
+              "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+              "vcs_info": {
+                "vcs": "git",
+                "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+                "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+              }
+            }
+          },
+          "auditkit": {
+            "version": "1.1.3",
+            "direct_url": {
+              "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+              "vcs_info": {
+                "vcs": "git",
+                "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+                "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+              }
+            }
+          },
+          "safetensors": {
+            "version": "0.8.0",
+            "direct_url": null
+          }
+        },
+        "code_commit": null,
+        "code_sha256": "9061623de2cbe8881ea306d90d87714865dcc4ae4115e1598a86a144a9b8499a",
+        "dependency_lock_hashes": {
+          "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+          "requirements-research.lock": "6bfe8e056fde646f3833efd3f94d1d6cc545920ae7e70fbc07a5084c59aeb7d3",
+          "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+        }
+      },
+      "gpu": {
+        "name": "NVIDIA GeForce RTX 4090",
+        "memory_bytes": 25252724736,
+        "cuda": "12.6"
+      },
+      "checkpoint_hashes": {
+        "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+        "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+        "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+        "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+        "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+      },
+      "adaptation": "LoRA",
+      "adapter_sha256": "43677ed874fe34a5224cfbd9cd1899fc3176cf8df1ef142d589deaf8d822599b",
+      "training_protocol": {
+        "rank": 8,
+        "alpha": 16,
+        "epochs": 12,
+        "lr": 0.0004,
+        "accumulation": 2,
+        "verdict_weight": 20,
+        "seed": 42,
+        "target_modules": [
+          "q_proj",
+          "v_proj"
+        ],
+        "conditions": [
+          "neutral",
+          "incorrect_suggestion"
+        ],
+        "confirmation_sha256": "61e6ba846fc2bde433cb3183328f2af801c6886dbf3f3471657053b8a9fdf35e",
+        "study_version": "adapter-v3-expanded-development"
+      }
+    },
+    "dataset": "14795bced69f435b95cbbf2dac9305ccd7c981cc336069999a0489cab701d6f4"
+  },
+  "stage": "adapter_competence",
+  "status": "completed",
+  "evidence_kind": "cohere_local_checkpoint",
+  "created_at": "2026-11-07T15:37:43.848861+00:00",
+  "environment": {
+    "python": "3.11.11",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+    "packages": {
+      "torch": {
+        "version": "2.9.1+cu126",
+        "direct_url": null
+      },
+      "transformers": {
+        "version": "5.22.1",
+        "direct_url": null
+      },
+      "transformer-lens": {
+        "version": "3.8.0",
+        "direct_url": null
+      },
+      "circuitkit": {
+        "version": "0.2.0",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/CircuitKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78",
+            "requested_revision": "e71d5e17fe6e2abfde47ec9a7fbaf31649601b78"
+          }
+        }
+      },
+      "auditkit": {
+        "version": "1.1.3",
+        "direct_url": {
+          "url": "https://github.com/Lexsi-Labs/AuditKIT.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "71316da345784ff220d5ed59337441a59ab31526",
+            "requested_revision": "71316da345784ff220d5ed59337441a59ab31526"
+          }
+        }
+      },
+      "safetensors": {
+        "version": "0.8.0",
+        "direct_url": null
+      }
+    },
+    "code_commit": null,
+    "code_sha256": "9061623de2cbe8881ea306d90d87714865dcc4ae4115e1598a86a144a9b8499a",
+    "dependency_lock_hashes": {
+      "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+      "requirements-research.lock": "6bfe8e056fde646f3833efd3f94d1d6cc545920ae7e70fbc07a5084c59aeb7d3",
+      "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+    }
+  },
+  "failure_reason": null,
+  "attempts": [
+    {
+      "status": "completed",
+      "started_at": "2026-11-07T15:37:43.862459+00:00",
+      "ended_at": "2026-11-07T15:38:45.392470+00:00"
+    }
+  ],
+  "started_at": "2026-11-07T15:37:43.862459+00:00",
+  "model_sha256_by_arm": {
+    "adapted": "3d8e5b6a909dc93d171d3baf43c8840bbcc9f003c09191aa4bfa071eb4575e42"
+  },
+  "completed_at": "2026-11-07T15:38:45.392470+00:00",
+  "artifact_hashes": {
+    "summary.json": "766774e5453b35bcabd7f92a02f52ef5598574126532f8f78f8d85105a269f65",
+    "results.json": "8e2a6af50f734c9c736401d7fb5b4656433e6e5e55494686ee8dd25be7f7d8e5",
+    "auditkit.json": "2e3c23c784e023288b4899f7d51274742a3f4ae3f4208d06b8b730223ba87f01",
+    "predictions/2833ab20ecf7cfb75653b8cd.json": "c5ef8d0816e4355cf42e742d31c9eee19815d7bfed94959fa52c5a34eaaa71c2",
+    "predictions/ff8fe7d1f0248d36a3a3e448.json": "9e87b7d3d6832aa2b80914da04877da90cec3c98bc3d4cfe129fd5ce46feb423",
+    "predictions/f53a9b82e9a81eaf6d4c8f3b.json": "1ad9f136f27cf0352a3cff722b4bcec86b750d7d23b5171fffe4d724bcd0fbf6",
+    "predictions/54b64e2a1dd80319b5009372.json": "0e7a9633f488c572c283dcf8adec290c083a5a7d6a32b8f65157041d9fcfc1e0",
+    "predictions/395e144a7961ff2f9b9b35b8.json": "e8e517976ebc3be448d7436dea420ed191758c50eb8bce4259f0e81c5dc2f085",
+    "predictions/946b2f01b63faed393614d59.json": "49e465eea109a2774f4ee12bac208d89d84cb11706aaba341d15f24c2d8d8bac",
+    "predictions/2e1c96bb70419f2f4d82ecec.json": "43ef8acf580eaa9daaf92bab6212883448edc10c18f444118171d1ebd66ed0e1",
+    "predictions/1b091ea076a98d2b0a3633b2.json": "93538b31dedc6d30bb1201acf12ee11676878e360cd4e433b9b57ea45880e817",
+    "predictions/3e73b944274f9c7126860a71.json": "551e4ae14d3103b5800e8b663e7137665a9daa800eedc8751e30b391c1b1c514",
+    "predictions/41e51b58a006f9425b954176.json": "f3dea7f560f2549537bfcb6702d5edf56c8250a008796cc95afca3a31a70c395",
+    "predictions/cda464f58d2886a30050ad69.json": "e6e809b5d0fc19e08a7f0d74c5c5fceee1cb29ba97cca1806c97b43bdbcc1f6e",
+    "predictions/745244f396ec6daed77df6b4.json": "4bed8a4f95201a120995dbcbd27fbdd275ab034ab664b0e6f0c108585c8a970b",
+    "predictions/92a50c3d99c9e135d916a82b.json": "a347b401d0e583d1dd1b73952205bf13dfc6e3507ab23fc0c7baafa55e1b539b",
+    "predictions/6d4e3f0c11a660def68d0fec.json": "a392976b53f57a0bbb3cc2ed654d678605cd5681f0aa5d87525f2379fdb6da20",
+    "predictions/70fa639546ecd23a33b9dfd1.json": "c749c4d2daa161fbbfc0d34852bc3d1e041c37b4dd64aef42d9e97b6f79118ab",
+    "predictions/afb8372e16aae9a2175c0882.json": "c45f8a8c7e788c853cf157d680f8acf3508100b03e8cf09f0cb9197d2825bd24",
+    "predictions/e443773259211c51bfdac0ee.json": "bab008806359eaa3fb4bb871817469f8e9faf1aca318e031ecac4dddb6be7ea0",
+    "predictions/a0e0eceef613e6e20d56dd0b.json": "2e6ff909e7bebe4215d2f8e3ea367d29ab404e67250bd546806dff1367faaced",
+    "predictions/8e84659dc4943f3325ac8e52.json": "1e542a49e032882ee02338d2c819c3a465572ba25ecb1d86202c57a7b46a6f89",
+    "predictions/89b001470e1aa9f17af6a6da.json": "e7b24f2788eadfaa60425fa5350b060242bb457bad83a8edb847d36ad9221990",
+    "predictions/a01ea6348692a85cfbf0fe0c.json": "484d2a2f8d4bf6d339b77c88d15dcbc0290bb5f5dcf2b1a00dc3ca55e0ea0013",
+    "predictions/9e55c6f0eedc01b7ba7c1032.json": "ae18c85aaf7b6196eba578641dbf18ed97d6b19c5b050bb90742282a32b36088",
+    "predictions/a241d99c7fe4ce16410c8e36.json": "bd1c83361d85650ce9b594073f0ac615af2d2af5292c1e9ea8f3cd0ce94e3e91",
+    "predictions/90f350575c61c289bf2e251b.json": "39c1e513fa43e226c4c1aa2bc128825ae0bf680f8a52bb16248210e4f608c493",
+    "predictions/aba6ba7e035fc9495ce29a4a.json": "3822fa3b498ac174ed9feb372cc4aa86b1abd65c5acf31a111c61267d8f0b063",
+    "predictions/7e86f80875126526ae2b7fb6.json": "37fc1e960642bfaf4a4995551ad8f3066da092ec93972bbcb1cc2b1f2c7012b9",
+    "predictions/586b416fef984ec0ae6c1be5.json": "0ddac3b837c76a3e6c5717725dd172bab374a9b14efd6c77f4b30cdafe49e1c8",
+    "predictions/995c59f19746c34e34a53799.json": "67acf857bfaac78cdbce199a3ae2060b4ecfcaa87aa0b4f8f169f2ff04f5cb66",
+    "predictions/f58b5b14b56d2a94ec3d1661.json": "c857b10df5e46bd56b8454c73ac47cb43e8ba9f823d31acffb5e28d5c83c9dc8",
+    "predictions/2079e1024e2ae3113ef5edb1.json": "0272ee6f84d869034368bbd6968493ef82e11efbb3575c3131fec577b37e10e0",
+    "predictions/28f7619f84a12c49c9aa17cd.json": "e2c969e4dd7a690c45dacb7229b5ee3872bba9d51c5ed4dc968edb820f46a1af",
+    "predictions/2727ea180005dafa82ee8da3.json": "69967866c41c068bd6c90ee4c4e1fbf2dec9922fc6125ebb9a6166f58a4c2b67",
+    "predictions/54b8eb85ae8c9f38bacd7382.json": "30d90bc234d6930b26291ce27b5225cee647c8e6ce226c3404080eac4b32eace",
+    "predictions/012bebb6723e58394df08b37.json": "d22cb4c84bc50e100396c30755c99a503097f87b4a90714d338b92cff0086e62",
+    "predictions/8d020f41964db3b25f953e88.json": "223cb7cb0de8c0f185b84543db216a7d7223ca8ef1f55ff11c1da1193fa4175b",
+    "predictions/9f1e704ff3d8d130ca1ac1de.json": "df72d5974c98c390cae52f97125d293f941a1ae04e923cd08ddbac76c00ebf73",
+    "predictions/ab34de1d4029cae60c3c4785.json": "5afa031a9e95518be3c745f9dea5e006f203e7affc86e71c8cb7393ae3b3c288",
+    "predictions/abcaef1e489bf29dd885624b.json": "a22d99bd95e8893f0e3583d94adf30efc2f728fe52d31094f808e88d0ca31306",
+    "predictions/dd3236e81c1cbbbff035d32c.json": "750f78864d70f04845d19a07ae239d3112b11e7f046bef884b9280bd1d30e669",
+    "predictions/8fc264f1a1402e971a4c0ec5.json": "448645c06fac1dd062d870e145c2f029caeffbdd6653cf0fcc987c850e1bbc95"
+  },
+  "expected_predictions": 40,
+  "export": {
+    "version": 1,
+    "created_at": "2026-11-08T10:59:00.659302+00:00",
+    "measurement_payload_sha256": "44c94d481f3fb777b7bbaff3c8f9470559e7a3b9cba056b5e981e0bc59ae9966",
+    "measurement_receipt_sha256": "282d907804ae2de47184e4c8bf1f93a98cfcd95f16e0ad91ec33c7c35ef3e8a4",
+    "scope": "Canonical project namespace. Saved generation text and scored decisions unchanged."
+  }
+}

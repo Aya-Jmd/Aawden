@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_f79175ae8b3e",
+    "family_id": "wsp_discovery_sql_injection_escape_map_bound",
+    "source_id": "wsp_discovery_sql_injection_escape_map_bound",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1],\n  \"explanation\": \"The function `lookup` constructs an SQL query dynamically by concatenating the user-provided `username` directly into the query string. This allows an attacker to inject malicious SQL code, leading to potential SQL injection vulnerabilities (lines 1).\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "148409a3cee4e9d9947997f2ee23da805543270e92a9f89ba8959b14d7f97ebb",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    escapes = {\"'\": \"''\"}\n    safe = \"\".join(escapes.get(ch, ch) for ch in username)\n    return conn.execute(\"SELECT name FROM users WHERE name = '\" + username + \"'\").fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 229,
+    "output_tokens": 95,
+    "finish_reason": "stop",
+    "latency_seconds": 2.230420484999968,
+    "request_id": "653198b56726a3e2d32ce3ba"
+  },
+  "sha256": "1cf5167fcbdb0516879f5884c7fe08e89219aa8054670974b98f99ead37f9621"
+}

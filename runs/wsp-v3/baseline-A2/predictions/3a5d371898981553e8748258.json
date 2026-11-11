@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_56eb3ef62213",
+    "family_id": "wsp_discovery_sql_injection_late_branch_values",
+    "source_id": "wsp_discovery_sql_injection_late_branch_values",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [2, 3, 4],\n  \"explanation\": \"The function `lookup` is vulnerable to SQL injection because it constructs SQL statements dynamically based on the input `username`. If `username` contains malicious input (e.g., SQL keywords or special characters), the resulting SQL statement could be manipulated to execute arbitrary SQL code.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "f75dabd6f5de3270fec52848d0e05198b3c9580128695c9d65ca984e87998de4",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    statement = \"SELECT name FROM users WHERE name = ?\"\n    values = (username,)\n    if not username.isidentifier():\n        statement = f\"SELECT name FROM users WHERE name = '{username}'\"\n        values = ()\n    return conn.execute(statement, values).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 238,
+    "output_tokens": 107,
+    "finish_reason": "stop",
+    "latency_seconds": 2.5689001780000353,
+    "request_id": "577f2b0655fb30aa0ab61a34"
+  },
+  "sha256": "b1f67dfae806de185f6fdbc2bfc2d1162c8b27c348608d7a82889b0743a0d06f"
+}

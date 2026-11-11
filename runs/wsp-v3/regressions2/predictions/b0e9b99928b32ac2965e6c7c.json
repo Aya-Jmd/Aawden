@@ -1,0 +1,26 @@
+{
+  "record": {
+    "case_id": "wsp-coding-17",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\ns = {1, 2, 3}\nt = {3, 4}\nresult = len(s ^ t)\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "3c3bbea0cfefe669d951092f",
+    "storage_id": "b0e9b99928b32ac2965e6c7c",
+    "raw_output": "```json\n{\n  \"answer\": 4\n}\n```\n\n**Explanation:**\n\nThe symmetric difference (`^`) between sets `s` and `t` contains elements that are in either `s` or `t`, but not in both.\n\n* `s ^ t` = {1, 2, 4}\n\nThe length of this new set is 3, so `result = 3`.",
+    "input_tokens": 85,
+    "output_tokens": 92,
+    "latency_seconds": 2.2797935999999908,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": null
+  },
+  "sha256": "189cd6badf657eb4e7e58a5467200fb06d1a1ca76593955253a7e44ce707a47a"
+}

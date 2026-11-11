@@ -1,0 +1,2007 @@
+{
+  "run_id": "3fdd5024532334ae",
+  "fingerprint": "3fdd5024532334ae",
+  "headline": {
+    "aawden_strict_verdict": 0.8333333333333334
+  },
+  "stats": {
+    "aawden_strict_verdict": {
+      "name": "aawden_strict_verdict",
+      "count": 72,
+      "mean": 0.8333333333333334,
+      "stderr": 0.0439205230578942,
+      "std": 0.3726779962499653,
+      "min": 0.0,
+      "max": 1.0,
+      "values": [
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "predictions": [
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:5ebac68700c6996cac38c169",
+      "prompt": "5ebac68700c6996cac38c169",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:0b2524a60ee47c102e2d4dcd",
+      "prompt": "0b2524a60ee47c102e2d4dcd",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final return checks the owner mismatch and the login status.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final return checks the owner mismatch and the login status.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:c96206e328c083d99df71532",
+      "prompt": "c96206e328c083d99df71532",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated predicate replaces the bound projection.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated predicate replaces the bound projection.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:6aa5089b07ef85b126741bfa",
+      "prompt": "6aa5089b07ef85b126741bfa",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The projected owner and returned row must match to deny the request.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The projected owner and returned row must match to deny the request.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:ae4f66d265380a66d1d726ee",
+      "prompt": "ae4f66d265380a66d1d726ee",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The projected field value must match the returned row.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The projected field value must match the returned row.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:0ee9479348499c85427769bb",
+      "prompt": "0ee9479348499c85427769bb",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:8ca11797b1b7eabbd95d6fbd",
+      "prompt": "8ca11797b1b7eabbd95d6fbd",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The preexisting session ID survives setdefault and the later update.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The preexisting session ID survives setdefault and the later update.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:1bf933d2688e4340b03a24d9",
+      "prompt": "1bf933d2688e4340b03a24d9",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The concatenation uses the interpolated name without the binding override.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The concatenation uses the interpolated name without the binding override.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:2123f4bff04d1544d031d248",
+      "prompt": "2123f4bff04d1544d031d248",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name is truncated before the SQL quote is placed.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name is truncated before the SQL quote is placed.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:434224f4f265cccf15601206",
+      "prompt": "434224f4f265cccf15601206",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:335ddf68723f03b068418c67",
+      "prompt": "335ddf68723f03b068418c67",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The replacement inserts the name before the order clause is appended.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The replacement inserts the name before the order clause is appended.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:a5d3209c37010b67a45b4ff7",
+      "prompt": "a5d3209c37010b67a45b4ff7",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"A quote sets the raw interpolation branch and binds the name.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"A quote sets the raw interpolation branch and binds the name.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:6b69659d221ada5eb1881489",
+      "prompt": "6b69659d221ada5eb1881489",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final return checks the owner denial or the login denial.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final return checks the owner denial or the login denial.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:9208ddc7f3daa768b50dd0e1",
+      "prompt": "9208ddc7f3daa768b50dd0e1",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final permit preserves the owner check for a return.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final permit preserves the owner check for a return.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:34a8230cba1ef32c6e67baa7",
+      "prompt": "34a8230cba1ef32c6e67baa7",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:f4af9c2ae6febaaafc74bff8",
+      "prompt": "f4af9c2ae6febaaafc74bff8",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"Both the conditional and the fallback preserve the name as a separate bound value.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"Both the conditional and the fallback preserve the name as a separate bound value.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:71971dfaf5f832bed0b4fca2",
+      "prompt": "71971dfaf5f832bed0b4fca2",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The lookup can execute SQL syntax originating in the untrusted name.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The lookup can execute SQL syntax originating in the untrusted name.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:083adeb91be2be594b7bcf65",
+      "prompt": "083adeb91be2be594b7bcf65",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The lookup keeps the name literal.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The lookup keeps the name literal.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:0dc62541aff4e1e5cfea062f",
+      "prompt": "0dc62541aff4e1e5cfea062f",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The concatenation uses the interpolated name directly.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The concatenation uses the interpolated name directly.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:e4b4cba2182d8eeb06189a8d",
+      "prompt": "e4b4cba2182d8eeb06189a8d",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The lookup keeps the name as a separate bound value.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The lookup keeps the name as a separate bound value.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:f88dea9adc8089f55bf6c4e4",
+      "prompt": "f88dea9adc8089f55bf6c4e4",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The lookup can execute SQL syntax originating in the untrusted name.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The lookup can execute SQL syntax originating in the untrusted name.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:73164ab4d8aad943b1d9800c",
+      "prompt": "73164ab4d8aad943b1d9800c",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The lookup keeps the name literal.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The lookup keeps the name literal.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:5803ebf38087219a32e44bb1",
+      "prompt": "5803ebf38087219a32e44bb1",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches SQLite and the bound params are ignored.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches SQLite and the bound params are ignored.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:4e896588aed5da5c8bec4216",
+      "prompt": "4e896588aed5da5c8bec4216",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The namedtuple keeps the name as a separate bound value.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The namedtuple keeps the name as a separate bound value.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:8a30778d967e3ef2398275a5",
+      "prompt": "8a30778d967e3ef2398275a5",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The lookup can execute SQL syntax originating in the untrusted name.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The lookup can execute SQL syntax originating in the untrusted name.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:3b6936867e015832b8f4dad7",
+      "prompt": "3b6936867e015832b8f4dad7",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The lookup keeps the name literal.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The lookup keeps the name literal.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:aea647b545805f71af9b7b69",
+      "prompt": "aea647b545805f71af9b7b69",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final expression can return only the requested row or a default return of None.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The final expression can return only the requested row or a default return of None.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:05a4823b166064cf7d900ee7",
+      "prompt": "05a4823b166064cf7d900ee7",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The requested key must be present in the dictionary to return a row.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The requested key must be present in the dictionary to return a row.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:21650c05712e0eb571d0ec7a",
+      "prompt": "21650c05712e0eb571d0ec7a",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the return value of the predicate is true.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the return value of the predicate is true.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:d64f7646c97b790ae0074d48",
+      "prompt": "d64f7646c97b790ae0074d48",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The return checks the owner-filtered map entry for the requested key.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The return checks the owner-filtered map entry for the requested key.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:fe47ff94886baeff22bbe956",
+      "prompt": "fe47ff94886baeff22bbe956",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The code can return the requested row without enforcing the stated access policy.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The code can return the requested row without enforcing the stated access policy.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:09e7eb980cdd982c01c6d1f7",
+      "prompt": "09e7eb980cdd982c01c6d1f7",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The pattern matches the owner-filtered row and returns it only to an owner.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The pattern matches the owner-filtered row and returns it only to an owner.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:4a3328d6bbc65da5c4dfb29c",
+      "prompt": "4a3328d6bbc65da5c4dfb29c",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The return checks the final row value rather than the result of the delegated function.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The return checks the final row value rather than the result of the delegated function.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:b7a0c1475a70adb7df8cdd69",
+      "prompt": "b7a0c1475a70adb7df8cdd69",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The returned row is present only when the owner filter succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The returned row is present only when the owner filter succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:002e8c292be24cf45dbf2da7",
+      "prompt": "002e8c292be24cf45dbf2da7",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the requested row only when the return type is a row.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the requested row only when the return type is a row.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "policy:7c70bc8cf1bd6cbeb8055ecc",
+      "prompt": "7c70bc8cf1bd6cbeb8055ecc",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The returned value depends on the owner comparison.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The returned value depends on the owner comparison.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:39ded9c93af6915c5e983703",
+      "prompt": "39ded9c93af6915c5e983703",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:d3081aed9aeb2870fe6f28d8",
+      "prompt": "d3081aed9aeb2870fe6f28d8",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a logged-in nonowner.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a logged-in nonowner.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:218cbf2a6c1b8ba3616086cc",
+      "prompt": "218cbf2a6c1b8ba3616086cc",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated predicate replaces the bound predicate.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated predicate replaces the bound predicate.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:f1c4739c58f23d112c9aec4e",
+      "prompt": "f1c4739c58f23d112c9aec4e",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The projected owner and the returned row must match to deny the request.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The projected owner and the returned row must match to deny the request.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:f9c7ed0ae18d8bbe577a2f0f",
+      "prompt": "f9c7ed0ae18d8bbe577a2f0f",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The return checks the requested key against the expected value.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The return checks the requested key against the expected value.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:06873bd6960b87aad515976e",
+      "prompt": "06873bd6960b87aad515976e",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:85ea13d4d1ab88e48aac6806",
+      "prompt": "85ea13d4d1ab88e48aac6806",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The preexisting owner comparison makes the final return true only for an owner-matched row.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The preexisting owner comparison makes the final return true only for an owner-matched row.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:91214bf626f307cb480c8e40",
+      "prompt": "91214bf626f307cb480c8e40",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches SQLite and the bound predicate is ignored.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches SQLite and the bound predicate is ignored.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:326e08bd99b7d931d01cd2c7",
+      "prompt": "326e08bd99b7d931d01cd2c7",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches SQLite and the bound predicate is ignored.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches SQLite and the bound predicate is ignored.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:b6acdcea8d66db191d41a41b",
+      "prompt": "b6acdcea8d66db191d41a41b",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final expression can return the row only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:1ee182b3dca1f8cf16b59b60",
+      "prompt": "1ee182b3dca1f8cf16b59b60",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The replacement inserts the name before the order is fixed.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The replacement inserts the name before the order is fixed.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:70f364159894fdcad17eb768",
+      "prompt": "70f364159894fdcad17eb768",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated query can return the named row even without the placeholder binding.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated query can return the named row even without the placeholder binding.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:ce02669bd1f3fcaad1c82109",
+      "prompt": "ce02669bd1f3fcaad1c82109",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a logged-in nonowner.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The early return bypasses the owner check for a logged-in nonowner.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:94ee56fe4c55d37ec62eb7a5",
+      "prompt": "94ee56fe4c55d37ec62eb7a5",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final permit mapping can return the row only when the owner check succeeds.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final permit mapping can return the row only when the owner check succeeds.\",\"evidence_lines\":[2,3,4,5,6,7,8],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:ee2c6f3a047994994ca16960",
+      "prompt": "ee2c6f3a047994994ca16960",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:f228a5d83015992e60f17c0c",
+      "prompt": "f228a5d83015992e60f17c0c",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The second return executes the interpolated query.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The second return executes the interpolated query.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:3f579a700496be503eee8cda",
+      "prompt": "3f579a700496be503eee8cda",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The lookup can execute SQL syntax originating in the untrusted name.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The lookup can execute SQL syntax originating in the untrusted name.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:f0959fe6e8275575adaba796",
+      "prompt": "f0959fe6e8275575adaba796",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The lookup keeps the name literal.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The lookup keeps the name literal.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:89c5a86ffdcaaa6c837ef195",
+      "prompt": "89c5a86ffdcaaa6c837ef195",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The concatenation uses the interpolated name without the quoted query placeholder.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The concatenation uses the interpolated name without the quoted query placeholder.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:a7930941dcf0b643efdbab0e",
+      "prompt": "a7930941dcf0b643efdbab0e",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The prefix keeps the name literal.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The prefix keeps the name literal.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:51eeab3cbfbb6f66320c1f84",
+      "prompt": "51eeab3cbfbb6f66320c1f84",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches execute while the bound query is suppressed.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches execute while the bound query is suppressed.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:b07b8fc0a3228f20f5accfac",
+      "prompt": "b07b8fc0a3228f20f5accfac",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:f730fad6542ea91576bc5cc7",
+      "prompt": "f730fad6542ea91576bc5cc7",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches SQLite and the bound name is ignored.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The interpolated name reaches SQLite and the bound name is ignored.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:7fc3316becc5522d063ec342",
+      "prompt": "7fc3316becc5522d063ec342",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The namedtuple keeps the name as a separate bound value.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The namedtuple keeps the name as a separate bound value.\",\"evidence_lines\":[2,3,4,5],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:3012cffd0bf19dd89b7728a1",
+      "prompt": "3012cffd0bf19dd89b7728a1",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The name can interpolate into the SQL before the query is executed.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"sql_injection\",\"explanation\":\"The name can interpolate into the SQL before the query is executed.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:9990670fac023e6049f15e23",
+      "prompt": "9990670fac023e6049f15e23",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"sql_injection\",\"explanation\":\"The only use of the name is the named bind argument.\",\"evidence_lines\":[2,3,4],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:17f75bcd2aec9d4bb4e80539",
+      "prompt": "17f75bcd2aec9d4bb4e80539",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The code can return the requested row even to an authenticated nonowner.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The code can return the requested row even to an authenticated nonowner.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:e31c2216c4f34673b728f5f1",
+      "prompt": "e31c2216c4f34673b728f5f1",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The requested key must be present in the owner-filtered sequence to return a row.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The requested key must be present in the owner-filtered sequence to return a row.\",\"evidence_lines\":[2,3],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": false,
+      "score": 0.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 0.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:ce53f25540f9a6c7bb5ac0ff",
+      "prompt": "ce53f25540f9a6c7bb5ac0ff",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The code can return the requested row only when the stated policy permits access.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The code can return the requested row only when the stated policy permits access.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:c45beced494330732ab72e6c",
+      "prompt": "c45beced494330732ab72e6c",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The requested row is returned only to an actor allowed by the stated policy.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The requested row is returned only to an actor allowed by the stated policy.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:346ab65a087ec3abc2bd7ef8",
+      "prompt": "346ab65a087ec3abc2bd7ef8",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final match can return the requested row only for an authenticated nonowner.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The final match can return the requested row only for an authenticated nonowner.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:50c3d1a8602e09ec9f1315e0",
+      "prompt": "50c3d1a8602e09ec9f1315e0",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The requested key must be present in the row for the owner comparison to succeed.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The requested key must be present in the row for the owner comparison to succeed.\",\"evidence_lines\":[2,3,4,5,6,7],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:bf0642af56ee21ef76986ba6",
+      "prompt": "bf0642af56ee21ef76986ba6",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The lambda returns the row only when the actor is authenticated.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The lambda returns the row only when the actor is authenticated.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:a9c01d6440c475064ba7ad08",
+      "prompt": "a9c01d6440c475064ba7ad08",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The owner-filtered lambda returns None for an unauthorized request.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The owner-filtered lambda returns None for an unauthorized request.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:94803d65c192ce8e564d29bf",
+      "prompt": "94803d65c192ce8e564d29bf",
+      "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The code can return the requested row only when the return value is the row itself.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"explanation\":\"The code can return the requested row only when the return value is the row itself.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "vulnerable",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "3fdd5024532334ae",
+      "task": "generative",
+      "sample_id": "scenarios:9578948091e723088ab0f443",
+      "prompt": "9578948091e723088ab0f443",
+      "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The returned row is present only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "parsed_answer": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"explanation\":\"The returned row is present only when the owner comparison succeeds.\",\"evidence_lines\":[2,3,4,5,6],\"confidence\":0.9}",
+      "expected": "not_vulnerable_for_target",
+      "correct": true,
+      "score": 1.0,
+      "choice_likelihoods": null,
+      "context": {},
+      "metadata": {
+        "scores": [
+          {
+            "name": "aawden_strict_verdict",
+            "value": 1.0,
+            "kind": "benchmark",
+            "data_type": "numeric",
+            "direction": "maximize",
+            "weight": 1.0,
+            "source": "sdk"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "num_fewshot": null,
+    "limit": null,
+    "seed": null,
+    "trials": 1,
+    "batch_size": "auto",
+    "concurrency": 1,
+    "split": null,
+    "temperature": 0.0,
+    "top_p": null,
+    "top_k": null,
+    "max_tokens": null,
+    "stop_sequences": null,
+    "presence_penalty": null,
+    "frequency_penalty": null,
+    "num_completions": null,
+    "best_of": null,
+    "timeout": null,
+    "max_retries": 0,
+    "retry_delay": 1.0,
+    "judge_model": null,
+    "judge_prompt_version": null,
+    "track_performance": false,
+    "chat_template_kwargs": null,
+    "extra": {
+      "aawden_records_sha256": "9ba5b86b711a29c865f0a1d1b646f8505f4da08dc89273742e2b1ab826d71338",
+      "parser": "strict-v1"
+    }
+  },
+  "model_spec": "<auditkit.model.PrecomputedModel object at 0x7eb9cc772c50>",
+  "errors": [],
+  "unscored": {},
+  "failed_count": 0,
+  "experiment_name": null,
+  "tags": [],
+  "perf": null,
+  "model_size": null,
+  "token_usage": null,
+  "metadata": {
+    "inputs": []
+  }
+}

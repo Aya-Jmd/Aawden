@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_1a9d76b13858",
+    "family_id": "wsp_discovery_access_control_owner_unset_fallthrough",
+    "source_id": "wsp_discovery_access_control_owner_unset_fallthrough",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting ',' delimiter: line 1 column 323 (char 322)",
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83",
+    "prompt_sha256": "0613896a407e5f206f79bfe7d119452184c686ea1a0c028aa09df86e332d2375",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    owner = row[\"owner_id\"] or None\n    if owner == actor[\"id\"]:\n        return row\n    return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 247,
+    "output_tokens": 256,
+    "finish_reason": "length",
+    "latency_seconds": 6.403667100000007,
+    "request_id": "52b97cdffae128c6a17eff5d"
+  },
+  "sha256": "23e908595b20f848e1f1002434c85bded059f2e43c0b97210e0f08eadf7f01cf"
+}

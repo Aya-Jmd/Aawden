@@ -1,0 +1,90 @@
+{
+  "model_id": "CohereLabs/aya-expanse-8b",
+  "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+  "dtype": "bfloat16",
+  "device": "cuda:0",
+  "adapter_id": "/cfs/earth/scratch/mekalris/aawden/runs/fix/aya8b-curr-s17",
+  "adapter_revision": null,
+  "wording": "reviewer",
+  "adapter_is_local_dir": true,
+  "adapter_sha256": {
+    "adapter_config.json": "e628184f1fffa38d31c8c46eb7ad0cbde98dd1430f6e446c0b6ae2aa92288c7e",
+    "adapter_model.safetensors": "6ab68d79390b9bfff7948038cca56c05ec467127737f1d2a6c53eb996088f56e",
+    "loss.json": "e673dfe64413d1d264307866cb28dbd8c3032f21d58741051fbd3101c7764e04",
+    "tokenizer.json": "d72cb57ce120d4797ec0a544cee3792f228c9dca4cb1863e11cb341f0ec3e576",
+    "tokenizer_config.json": "d8efae710390e35dffdcb6de386e5104d3719f6bb63f9be33975ef52e7e3276c",
+    "train_meta.json": "e0a9b6e609f9f340f8103746c05dfd66b9adae471a7f5f5b5213a26c70d43edd"
+  },
+  "transformers_version": "5.22.2",
+  "cases": 64,
+  "dataset_sha256": "89d8c5c8e3b85b612ce8bf3e8a29795c86a3b1411d457dafca22e9ed460e7f8f",
+  "source_fingerprint": "fb74a9d395162a75e61569d3f9a77e5c9d82b8ed0f68f22f48a117cd1c7d8673",
+  "instruments": [
+    "json_prefill",
+    "letters_a_vulnerable",
+    "letters_b_vulnerable"
+  ],
+  "system_role_folded": [],
+  "code_effect_by_opinion": {
+    "opinion_vulnerable": {
+      "clean_mean": -1.9853661613867075,
+      "clean_n": 32,
+      "vuln_mean": 7.117228509719098,
+      "vuln_n": 32,
+      "c": 9.102594671105805
+    },
+    "opinion_not_vulnerable": {
+      "clean_mean": -1.4374363785064475,
+      "clean_n": 32,
+      "vuln_mean": 7.801023064016363,
+      "vuln_n": 32,
+      "c": 9.23845944252281
+    }
+  },
+  "balanced_accuracy": {
+    "neutral": {
+      "tp": 32,
+      "tn": 17,
+      "fp": 15,
+      "fn": 0,
+      "sensitivity": 1.0,
+      "specificity": 0.53125,
+      "balanced_accuracy": 0.765625
+    },
+    "correct_suggestion": {
+      "tp": 32,
+      "tn": 15,
+      "fp": 17,
+      "fn": 0,
+      "sensitivity": 1.0,
+      "specificity": 0.46875,
+      "balanced_accuracy": 0.734375
+    },
+    "incorrect_suggestion": {
+      "tp": 32,
+      "tn": 17,
+      "fp": 15,
+      "fn": 0,
+      "sensitivity": 1.0,
+      "specificity": 0.53125,
+      "balanced_accuracy": 0.765625
+    },
+    "J": 0.5
+  },
+  "opinion_copying": {
+    "follows": 62,
+    "total": 128,
+    "by_condition": {
+      "correct_suggestion": {
+        "follows": 47,
+        "total": 64
+      },
+      "incorrect_suggestion": {
+        "follows": 15,
+        "total": 64
+      }
+    },
+    "rate": 0.484375
+  },
+  "note": "The instrument is wsp_localize.margin_table's continuation scoring, unchanged from the Aya study. Only the model loader differs, because HuggingFaceAdapter refuses non-Cohere checkpoints, plus the system-role fallback recorded in `system_role_folded`."
+}

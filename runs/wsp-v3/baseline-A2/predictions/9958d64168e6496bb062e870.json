@@ -1,0 +1,50 @@
+{
+  "record": {
+    "case_id": "c_cb777710eafe",
+    "family_id": "wsp_discovery_access_control_string_prefix_owner",
+    "source_id": "wsp_discovery_access_control_string_prefix_owner",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        4,
+        5,
+        7
+      ],
+      "explanation": "The provided code implements a strict access control mechanism for reading records. It checks if the actor's ID matches the owner ID of the requested record (line 4). If they don't match, it returns None (line 7), effectively preventing unauthorized access. This ensures that only the owner of a record can access it.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\", \"category\": \"access_control\", \"evidence_lines\": [4, 5, 7], \"explanation\": \"The provided code implements a strict access control mechanism for reading records. It checks if the actor's ID matches the owner ID of the requested record (line 4). If they don't match, it returns None (line 7), effectively preventing unauthorized access. This ensures that only the owner of a record can access it.\", \"confidence\": 1}",
+    "prompt_sha256": "143ff4b6bdf1ca81ee4bde71018f3f95717cf18e809f0b603c70629faf947c66",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    if actor[\"id\"] == row[\"owner_id\"]:\n        return row\n    return None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 241,
+    "output_tokens": 107,
+    "finish_reason": "stop",
+    "latency_seconds": 2.582697713000016,
+    "request_id": "f430c18dc25cad1e37e4837e"
+  },
+  "sha256": "e088f32fbd905264719154dff564baedbec6f2fe3e2489f48bac27d836124da6"
+}

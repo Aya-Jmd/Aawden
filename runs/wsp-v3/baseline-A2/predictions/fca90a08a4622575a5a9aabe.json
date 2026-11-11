@@ -1,0 +1,50 @@
+{
+  "record": {
+    "case_id": "c_baedc9eee460",
+    "family_id": "wsp_validation_access_control_swapped_fields",
+    "source_id": "wsp_validation_access_control_swapped_fields",
+    "split": "wsp_validation",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 6,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        4,
+        5,
+        6
+      ],
+      "explanation": "The provided code implements a strict access control mechanism for reading records. It checks if the `viewer` (the actor requesting the record) is the `owner` of the requested `record_id`. If not, it returns `None`, preventing unauthorized access. This ensures that only the owner of a record can retrieve it, adhering to the threat model.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\", \"category\": \"access_control\", \"evidence_lines\": [4, 5, 6], \"explanation\": \"The provided code implements a strict access control mechanism for reading records. It checks if the `viewer` (the actor requesting the record) is the `owner` of the requested `record_id`. If not, it returns `None`, preventing unauthorized access. This ensures that only the owner of a record can retrieve it, adhering to the threat model.\", \"confidence\": 1}",
+    "prompt_sha256": "a6421ea535312b42611c2da4a61ecf9c23464e3bd1a676c43d5e4c25c40ff0cd",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    viewer, owner = actor[\"id\"], row[\"owner_id\"]\n    return row if viewer == owner else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 246,
+    "output_tokens": 113,
+    "finish_reason": "stop",
+    "latency_seconds": 2.7474172199999884,
+    "request_id": "b0c731834044890d7bbc2791"
+  },
+  "sha256": "dbcc0e26755780b3524715673ad33068a3b6c2886fd2ac52e2af347f2e7b4df2"
+}

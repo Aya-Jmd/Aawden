@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "cases": 20,
+    "families": 10,
+    "splits": [
+      "neutral_confirmation_v3"
+    ],
+    "dataset_sha256": "d05de1078cdc167aa4ea5d6ab546d2429bae8b07726f4b66a25afefe7231b794",
+    "label_review": "single_author; no independent review",
+    "final_test_protected": false
+  },
+  "cases": [
+    {
+      "case_id": "c_72841ceaab02",
+      "family_id": "confirmation_v3_sql_injection_indirect_renderer",
+      "source_id": "confirmation_v3_sql_injection_indirect_renderer",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "sql_injection",
+      "code": "def lookup(conn, username):\n    def prepare(value):\n        return \"SELECT name FROM users WHERE name = '\" + value + \"'\", ()\n    query, args = prepare(username)\n    return conn.execute(query, args).fetchall()\n",
+      "threat_model": "Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.",
+      "oracle_verdict": "vulnerable",
+      "source_sha256": "0d9f7471356e43d3a02661eca5bd37f33ff4b8fb8e9dfe81b4bc38be9c50bf63",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_8dd8efd6b2b6",
+      "family_id": "confirmation_v3_sql_injection_indirect_renderer",
+      "source_id": "confirmation_v3_sql_injection_indirect_renderer",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "sql_injection",
+      "code": "def lookup(conn, username):\n    def prepare(value):\n        return \"SELECT name FROM users WHERE name = ?\", (value,)\n    query, args = prepare(username)\n    return conn.execute(query, args).fetchall()\n",
+      "threat_model": "Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.",
+      "oracle_verdict": "not_vulnerable_for_target",
+      "source_sha256": "17f292326e10d77e608a3f526e81060cc572e5abc91e02eb315cd38cf9b009ce",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_e3c078e9c8e0",
+      "family_id": "confirmation_v3_sql_injection_tuple_slot",
+      "source_id": "confirmation_v3_sql_injection_tuple_slot",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "sql_injection",
+      "code": "def lookup(conn, username):\n    stmt = \"SELECT name FROM users WHERE name = '%s'\"\n    args = (username,)\n    return conn.execute(stmt % args).fetchall()\n",
+      "threat_model": "Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.",
+      "oracle_verdict": "vulnerable",
+      "source_sha256": "6e8d3a190400b1b0a74d646bcb217625a73f775357c82d5cfa7df6f111e73555",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_66594e944aa7",
+      "family_id": "confirmation_v3_sql_injection_tuple_slot",
+      "source_id": "confirmation_v3_sql_injection_tuple_slot",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "sql_injection",
+      "code": "def lookup(conn, username):\n    stmt = \"SELECT name FROM users WHERE name = ?\"\n    args = (username,)\n    return conn.execute(stmt, args).fetchall()\n",
+      "threat_model": "Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.",
+      "oracle_verdict": "not_vulnerable_for_target",
+      "source_sha256": "754ed99fa8c4e89a8ec962ecd10ca43c5d0ac51ac73f2674182d20a3fa9ac1bf",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_410c9f4c56ea",
+      "family_id": "confirmation_v3_sql_injection_identity_branch",
+      "source_id": "confirmation_v3_sql_injection_identity_branch",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "sql_injection",
+      "code": "def lookup(conn, username):\n    if username:\n        stmt = f\"SELECT name FROM users WHERE name = '{username}'\"\n    else:\n        stmt = \"SELECT name FROM users WHERE name = ''\"\n    return conn.execute(stmt).fetchall()\n",
+      "threat_model": "Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.",
+      "oracle_verdict": "vulnerable",
+      "source_sha256": "18ac3cf5c1a40e6cd5d07be84020fc76e340bab64b1daeb71268bc32faa9082b",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_c6fc58605cd9",
+      "family_id": "confirmation_v3_sql_injection_identity_branch",
+      "source_id": "confirmation_v3_sql_injection_identity_branch",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "sql_injection",
+      "code": "def lookup(conn, username):\n    if username:\n        args = (username,)\n    else:\n        args = (\"\",)\n    return conn.execute(\"SELECT name FROM users WHERE name = ?\", args).fetchall()\n",
+      "threat_model": "Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.",
+      "oracle_verdict": "not_vulnerable_for_target",
+      "source_sha256": "d214e17356c2e3fa7cd5fd9f96d0f818aa9b67ebc1ed16280a7872d63155f927",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_1255dc08a5b7",
+      "family_id": "confirmation_v3_sql_injection_identity_expression",
+      "source_id": "confirmation_v3_sql_injection_identity_expression",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "sql_injection",
+      "code": "def lookup(conn, username):\n    expr = f\"name = '{username}'\"\n    stmt = \"SELECT name FROM users WHERE (\" + expr + \") AND 1\"\n    return conn.execute(stmt).fetchall()\n",
+      "threat_model": "Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.",
+      "oracle_verdict": "vulnerable",
+      "source_sha256": "42585b13e47e6348e36df292336fd5d964b60b13efe8742006fb6609b74ad39a",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_ed69d8f0e51e",
+      "family_id": "confirmation_v3_sql_injection_identity_expression",
+      "source_id": "confirmation_v3_sql_injection_identity_expression",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "sql_injection",
+      "code": "def lookup(conn, username):\n    expr = \"name = :lookup\"\n    stmt = \"SELECT name FROM users WHERE (\" + expr + \") AND 1\"\n    return conn.execute(stmt, {\"lookup\": username}).fetchall()\n",
+      "threat_model": "Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.",
+      "oracle_verdict": "not_vulnerable_for_target",
+      "source_sha256": "67439cdd78f9bf4988591033ee7e8200275f77bce45827311ffd23de1169b837",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_0e68000d0b26",
+      "family_id": "confirmation_v3_sql_injection_separate_execution",
+      "source_id": "confirmation_v3_sql_injection_separate_execution",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "sql_injection",
+      "code": "def lookup(conn, username):\n    query = \"SELECT name FROM users WHERE name = '{}'\"\n    execute = conn.execute\n    return execute(query.format(username)).fetchall()\n",
+      "threat_model": "Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.",
+      "oracle_verdict": "vulnerable",
+      "source_sha256": "2410f94d2956bf028dc674aacdbde69b76a7b0b317baf20d9f88469758623844",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_1135a26c1351",
+      "family_id": "confirmation_v3_sql_injection_separate_execution",
+      "source_id": "confirmation_v3_sql_injection_separate_execution",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "sql_injection",
+      "code": "def lookup(conn, username):\n    query = \"SELECT name FROM users WHERE name = ?\"\n    execute = conn.execute\n    return execute(query, [username]).fetchall()\n",
+      "threat_model": "Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.",
+      "oracle_verdict": "not_vulnerable_for_target",
+      "source_sha256": "3c86115253c4cb526ed59b867631ffd467e8aae776c048b086bae67174d3bd04",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_068dfb38186d",
+      "family_id": "confirmation_v3_access_control_inverted_denial",
+      "source_id": "confirmation_v3_access_control_inverted_denial",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "access_control",
+      "code": "def read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    unauthorized = row[\"owner_id\"] != actor[\"id\"]\n    if unauthorized and not actor[\"authenticated\"]:\n        return None\n    return row\n",
+      "threat_model": "records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.",
+      "oracle_verdict": "vulnerable",
+      "source_sha256": "59b7cc236c0b4bf17158871fdb4cdcbe9ed12177f88fe49be32742904a0739ec",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_75ce906684a3",
+      "family_id": "confirmation_v3_access_control_inverted_denial",
+      "source_id": "confirmation_v3_access_control_inverted_denial",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "access_control",
+      "code": "def read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    unauthorized = row[\"owner_id\"] != actor[\"id\"]\n    if unauthorized:\n        return None\n    return row\n",
+      "threat_model": "records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.",
+      "oracle_verdict": "not_vulnerable_for_target",
+      "source_sha256": "a5fb5a5cd1302bfd46ec63810658ce2a60d1f1cafe92d07e4b04fb7571fe175d",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_d4e52c48b5d6",
+      "family_id": "confirmation_v3_access_control_two_policy_steps",
+      "source_id": "confirmation_v3_access_control_two_policy_steps",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "access_control",
+      "code": "def read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    checks = {\"owner\": row[\"owner_id\"] == actor[\"id\"], \"session\": actor[\"authenticated\"]}\n    if checks[\"session\"]:\n        return row\n    return None\n",
+      "threat_model": "records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.",
+      "oracle_verdict": "vulnerable",
+      "source_sha256": "4d20116e8e5c4e867af32030a1ba0847dc15c03cd0af830bce0046477a60f4cd",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_4ba8675139a7",
+      "family_id": "confirmation_v3_access_control_two_policy_steps",
+      "source_id": "confirmation_v3_access_control_two_policy_steps",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "access_control",
+      "code": "def read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    checks = {\"owner\": row[\"owner_id\"] == actor[\"id\"], \"session\": actor[\"authenticated\"]}\n    if checks[\"session\"] and checks[\"owner\"]:\n        return row\n    return None\n",
+      "threat_model": "records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.",
+      "oracle_verdict": "not_vulnerable_for_target",
+      "source_sha256": "4d91004858e2069f80927999aeccec5a6ffc2939fdb4367203b6ad82422beafe",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_100e557e6a3a",
+      "family_id": "confirmation_v3_access_control_cached_owner_ids",
+      "source_id": "confirmation_v3_access_control_cached_owner_ids",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "access_control",
+      "code": "def read_record(records, actor, record_id):\n    owned_ids = [key for key in records if records[key][\"owner_id\"] == actor[\"id\"]]\n    if len(owned_ids) > 0:\n        return records.get(record_id)\n    return None\n",
+      "threat_model": "records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.",
+      "oracle_verdict": "vulnerable",
+      "source_sha256": "55f75715859f8f94bfa09eb1a5c63aa5634433c570e0ce87bdf650b50695f233",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_ad56fa564727",
+      "family_id": "confirmation_v3_access_control_cached_owner_ids",
+      "source_id": "confirmation_v3_access_control_cached_owner_ids",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "access_control",
+      "code": "def read_record(records, actor, record_id):\n    owned_ids = [key for key in records if records[key][\"owner_id\"] == actor[\"id\"]]\n    if record_id in owned_ids:\n        return records.get(record_id)\n    return None\n",
+      "threat_model": "records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.",
+      "oracle_verdict": "not_vulnerable_for_target",
+      "source_sha256": "83c7498e6eb5f26df629fa9f64d5e4e789351b44049aa2d7173849e7c04ac75d",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_0ced2bef078a",
+      "family_id": "confirmation_v3_access_control_post_check_copy",
+      "source_id": "confirmation_v3_access_control_post_check_copy",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "access_control",
+      "code": "def read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    if row[\"owner_id\"] == actor[\"id\"]:\n        return dict(row)\n    return row\n",
+      "threat_model": "records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.",
+      "oracle_verdict": "vulnerable",
+      "source_sha256": "2d8b7c3eba5919978b1d91b76e7a566ecb108966f039d573fb01c967e0449344",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_773556bf5c1c",
+      "family_id": "confirmation_v3_access_control_post_check_copy",
+      "source_id": "confirmation_v3_access_control_post_check_copy",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "access_control",
+      "code": "def read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    if row[\"owner_id\"] == actor[\"id\"]:\n        return dict(row)\n    return None\n",
+      "threat_model": "records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.",
+      "oracle_verdict": "not_vulnerable_for_target",
+      "source_sha256": "2a31db5c2d1e8600a69cf302b494101a73876993665a784c515d2d56db2b1e05",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_ef8b5f8871f8",
+      "family_id": "confirmation_v3_access_control_guard_closure",
+      "source_id": "confirmation_v3_access_control_guard_closure",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "access_control",
+      "code": "def read_record(records, actor, record_id):\n    def denied(row):\n        return row[\"owner_id\"] != actor[\"id\"]\n    row = records.get(record_id)\n    if row is None:\n        return None\n    return row if not denied(row) or actor[\"authenticated\"] else None\n",
+      "threat_model": "records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.",
+      "oracle_verdict": "vulnerable",
+      "source_sha256": "8abe60695f709bf479d4ef669b7e91cc8ca8020b8c4b28f0d492dc1efdc93ed3",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    },
+    {
+      "case_id": "c_f2820ac30df7",
+      "family_id": "confirmation_v3_access_control_guard_closure",
+      "source_id": "confirmation_v3_access_control_guard_closure",
+      "split": "neutral_confirmation_v3",
+      "language": "python",
+      "target_category": "access_control",
+      "code": "def read_record(records, actor, record_id):\n    def denied(row):\n        return row[\"owner_id\"] != actor[\"id\"]\n    row = records.get(record_id)\n    if row is None:\n        return None\n    return row if not denied(row) else None\n",
+      "threat_model": "records and the authenticated actor session are trusted. record_id is attacker-controlled. Only the owner may read a record. Login and tenant membership alone do not permit reading another owner's record. Missing records return None.",
+      "oracle_verdict": "not_vulnerable_for_target",
+      "source_sha256": "c4120d200763deea38bee44c1d25cee58b0d9dbde3fd31b16976b73e0a854748",
+      "oracle_test_ids": [
+        "legitimate_access",
+        "adversarial_access",
+        "missing_or_literal_input"
+      ],
+      "label_status": "executable_oracle_single_author",
+      "reviewer_id": null,
+      "license": "project-original-MIT",
+      "provenance_url": null
+    }
+  ]
+}

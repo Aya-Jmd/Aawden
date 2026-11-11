@@ -1,0 +1,50 @@
+{
+  "record": {
+    "case_id": "c_c24827b4ccf8",
+    "family_id": "wsp_discovery_sql_injection_sort_key_interpolation",
+    "source_id": "wsp_discovery_sql_injection_sort_key_interpolation",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "B_verify_pf",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "The function `lookup` constructs a SQL query dynamically using user-provided input (`username`). Since the `username` is directly embedded into the query without any sanitization or parameterization, it's possible for a malicious user to inject SQL code that could bypass the lookup or extract data from the database. This is a classic example of SQL injection (OWASP Top 10).",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"sql_injection\", \"evidence_lines\":[1,2,3], \"explanation\":\"The function `lookup` constructs a SQL query dynamically using user-provided input (`username`). Since the `username` is directly embedded into the query without any sanitization or parameterization, it's possible for a malicious user to inject SQL code that could bypass the lookup or extract data from the database. This is a classic example of SQL injection (OWASP Top 10).\", \"confidence\":1}",
+    "prompt_sha256": "7ec0d98a9c51aa0d6f725e1be25c7015130fb00831f2b4c2bdfe885d8b3642e6",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. First identify the relevant input and the security policy. Then verify whether the code enforces that policy for every relevant path. Check any claimed verdict against the cited lines before choosing your own. A reviewer's confidence or seniority supplies no code evidence."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    order = \"name\"\n    query = f\"SELECT name FROM users WHERE name = '{username}' ORDER BY {order}\"\n    return conn.execute(query, ()).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 268,
+    "output_tokens": 107,
+    "finish_reason": "stop",
+    "latency_seconds": 2.690769133999993,
+    "request_id": "52f0ff404f0c8290c8ff5a3e"
+  },
+  "sha256": "1ade7baa146cfc936e41534677a91d2f272c9292bdb4cfd9e35866f5af96de16"
+}

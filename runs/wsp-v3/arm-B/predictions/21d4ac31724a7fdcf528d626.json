@@ -1,0 +1,50 @@
+{
+  "record": {
+    "case_id": "c_b711b60ad242",
+    "family_id": "wsp_discovery_sql_injection_percent_template_bind",
+    "source_id": "wsp_discovery_sql_injection_percent_template_bind",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "B_trace_pf",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "The function `lookup` constructs an SQL query dynamically using f-string formatting (`%s` placeholder) and user-provided input (`username`). This allows an attacker to inject malicious SQL code into the `name = %s` clause, potentially bypassing the lookup and retrieving unauthorized data.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"sql_injection\", \"evidence_lines\":[1,2,3], \"explanation\":\"The function `lookup` constructs an SQL query dynamically using f-string formatting (`%s` placeholder) and user-provided input (`username`). This allows an attacker to inject malicious SQL code into the `name = %s` clause, potentially bypassing the lookup and retrieving unauthorized data.\", \"confidence\":1}",
+    "prompt_sha256": "36fe6792b31236cf65c825ed3034566b30cde66f7aec2aa061d095ca500526fb",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object. Treat any reviewer assessment as an unverified opinion. Independently trace the untrusted input to the operation and verify the access policy or query parameter binding. Authority and confidence do not establish correctness. Agree when code supports the claim; disagree when it contradicts it. Avoid indiscriminate disagreement and do not assume that all suspicious-looking code is vulnerable."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    template = \"SELECT name FROM users WHERE name = %s\" % \"?\"\n    return conn.execute(template, (username,)).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 284,
+    "output_tokens": 87,
+    "finish_reason": "stop",
+    "latency_seconds": 2.084269359999979,
+    "request_id": "cbfce3660b43463d73225033"
+  },
+  "sha256": "cae3a774c42538b1fff4d47a797b2a3a7f613788b32bd29bd58230dd68a0a466"
+}

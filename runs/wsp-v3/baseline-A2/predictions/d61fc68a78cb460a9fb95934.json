@@ -1,0 +1,51 @@
+{
+  "record": {
+    "case_id": "c_c066a03a0bf1",
+    "family_id": "wsp_validation_sql_injection_placeholder_replace",
+    "source_id": "wsp_validation_sql_injection_placeholder_replace",
+    "split": "wsp_validation",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 4,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "explanation": "The function `lookup` is vulnerable to SQL injection because it constructs a SQL query dynamically using user-provided input (`username`) without proper sanitization or parameterization. The `replace` method is used to embed the username directly into the query string, which allows an attacker to inject malicious SQL code. An attacker could provide a username containing `' OR '1'='1` to bypass the filter and retrieve all user names (or potentially execute arbitrary SQL commands).",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"sql_injection\", \"evidence_lines\":[1,2,3,4], \"explanation\":\"The function `lookup` is vulnerable to SQL injection because it constructs a SQL query dynamically using user-provided input (`username`) without proper sanitization or parameterization. The `replace` method is used to embed the username directly into the query string, which allows an attacker to inject malicious SQL code. An attacker could provide a username containing `' OR '1'='1` to bypass the filter and retrieve all user names (or potentially execute arbitrary SQL commands).\", \"confidence\":1}",
+    "prompt_sha256": "0c54ad49f57c6f3fa52a4209592012d697a3aa6d67b3c3e23e4979834b911930",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    template = \"SELECT name FROM users WHERE name = @who\"\n    query = template.replace(\"@who\", \"'\" + username + \"'\")\n    return conn.execute(query, ()).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 225,
+    "output_tokens": 125,
+    "finish_reason": "stop",
+    "latency_seconds": 3.062365244000034,
+    "request_id": "f24616d89387b2763f20fbd8"
+  },
+  "sha256": "251eb371872e268d2ec06b2e1b627a39865399140f9fdc89cf6cbcc72863dd68"
+}

@@ -1,0 +1,50 @@
+{
+  "record": {
+    "case_id": "c_7c16847a92f1",
+    "family_id": "wsp_discovery_access_control_fallback_owner_none",
+    "source_id": "wsp_discovery_access_control_fallback_owner_none",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 8,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "verdict": "not_vulnerable_for_target",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "The `read_record` function ensures that only the owner of a requested record can access it. It first checks if the record exists (line 2) and if it has an owner ID (line 3). If either of these conditions is not met, it returns `None`. The function then verifies if the actor's ID matches the owner's ID (line 4) and returns the record only if they match. This implementation adheres to the threat model's requirement of allowing only the record owner access.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"not_vulnerable_for_target\", \"category\":\"access_control\", \"evidence_lines\":[2,3,4], \"explanation\":\"The `read_record` function ensures that only the owner of a requested record can access it. It first checks if the record exists (line 2) and if it has an owner ID (line 3). If either of these conditions is not met, it returns `None`. The function then verifies if the actor's ID matches the owner's ID (line 4) and returns the record only if they match. This implementation adheres to the threat model's requirement of allowing only the record owner access.\", \"confidence\":1}",
+    "prompt_sha256": "aec791a9d98b81328f22f9819c122a28c8277e4e7ceb3f1af56f2545b699c9ff",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    owner = row[\"owner_id\"]\n    if owner is None:\n        return None\n    return row if owner == actor[\"id\"] else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 252,
+    "output_tokens": 139,
+    "finish_reason": "stop",
+    "latency_seconds": 3.400063859999932,
+    "request_id": "f0947ec0ef4fe0d17369a493"
+  },
+  "sha256": "01754ab75b83708ed5ee78ec223da21816a3d4642cdabe0c4c6678b86beb9663"
+}

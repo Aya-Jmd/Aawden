@@ -1,0 +1,26 @@
+{
+  "record": {
+    "case_id": "wsp-coding-14",
+    "arm": "original",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Answer the Python 3.11 code question. Return exactly one JSON object with one key, answer. Use a JSON value for the requested result."
+      },
+      {
+        "role": "user",
+        "content": "<source>\nfuncs = [lambda i=i: i for i in range(3)]\nresult = [f() for f in funcs]\n</source>\nWhat is the value of result?"
+      }
+    ],
+    "request_id": "1f80b28b3aa069c827df9925",
+    "storage_id": "6bcfde834663c6720706aa91",
+    "raw_output": "```json\n{\n  \"result\": [0, 1, 2]\n}\n```",
+    "input_tokens": 84,
+    "output_tokens": 22,
+    "latency_seconds": 0.5445058240000122,
+    "finish_reason": "stop",
+    "correct": false,
+    "error": "Expected one answer field"
+  },
+  "sha256": "466de809c806a83f0122655a89dd3b07747f76a999b75d598906a0ce42161632"
+}

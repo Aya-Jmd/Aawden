@@ -1,0 +1,52 @@
+{
+  "record": {
+    "case_id": "c_bce1aa1afcdf",
+    "family_id": "neutral_confirmation_access_control_caught_denial",
+    "source_id": "neutral_confirmation_access_control_caught_denial",
+    "split": "neutral_confirmation",
+    "category": "access_control",
+    "method": "adapted",
+    "condition": "neutral",
+    "source_line_count": 10,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "explanation": "A request can return another actor's record without the required policy check.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7,8,9,10],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+    "prompt_sha256": "df1bcb0fe1f00f3bfc3a9705792c57f2565d7c2319027d679843e107db1ccd31",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The server-side records dictionary and actor session are trusted. The request controls record_id. Only the owner may read a record. Login and tenant membership alone do not grant access. Return None for missing records.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     try:\n3 |         row = records[record_id]\n4 |         if row[\"owner_id\"] != actor[\"id\"]:\n5 |             raise PermissionError()\n6 |         return row\n7 |     except KeyError:\n8 |         return None\n9 |     except PermissionError:\n10 |         return records.get(record_id)\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 282,
+    "output_tokens": 59,
+    "finish_reason": "stop",
+    "latency_seconds": 2.7279434420001962,
+    "request_id": "f7f985c1ebd54f1078156169"
+  },
+  "sha256": "2fba77e3319c819480a19d4189070e64cd332dda82637d3d9ab2fa72f21f7de4"
+}

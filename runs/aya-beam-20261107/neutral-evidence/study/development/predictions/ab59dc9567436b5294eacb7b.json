@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_bc47b4be297c",
+    "family_id": "sql_injection_format",
+    "source_id": "sql_injection_format",
+    "split": "screen",
+    "category": "sql_injection",
+    "method": "prefill",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Unterminated string starting at: line 1 column 660 (char 659)",
+    "raw_output": "{\"category\":\"sql_injection\",\"explanation\":\"The function `lookup` is vulnerable to SQL injection (line 2). The query string constructs a SQL statement by concatenating the untrusted `username` directly into the query without any sanitization or parameterization. An attacker could supply a malicious username containing SQL code, which would be executed by the database (e.g., `'; DROP TABLE users; --`).\",\"decisive_check\":\"The use of `format` with `{}` does not protect against injection; it only marks the string for formatting. Parameterized queries or prepared statements are required to prevent SQL injection.\",\"evidence_lines\":[2],\"verdict\":\"vulnerable\",\"",
+    "prompt_sha256": "5f0f2e46441ba2b3896b588587aef94cf3f875b0b01efac9e8454c39637cb0ed",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review only the named weakness under the stated threat model. Judge the behavior of the shown source. The answer already starts inside the explanation string of a JSON object. Continue that string with one short sentence about the decisive check or missing check. Use plain words without quotes or backslashes. Close the string, then add evidence_lines (a list of the displayed source line numbers), verdict (one of vulnerable, not_vulnerable_for_target, insufficient_information), and confidence (a number from 0 to 1). Close the object. Give only the continuation of the JSON, with no Markdown."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3; username is untrusted. A lookup must treat the supplied name as a literal value; it must not return other users. The database schema and connection are trusted.\n<source>\n1 | def lookup(conn, username):\n2 |     query = \"SELECT name FROM users WHERE name = '{}'\".format(username)\n3 |     return conn.execute(query).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"category\":\"sql_injection\",\"explanation\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 252,
+    "output_tokens": 128,
+    "finish_reason": "length",
+    "latency_seconds": 3.0547267690000126,
+    "request_id": "25a3c3ce0bf59f9ed224c4ba"
+  },
+  "sha256": "23341f8f0dfa0f456e45b0a2906cbcedc2b9cab370427a15cef3280b640c4ea3"
+}

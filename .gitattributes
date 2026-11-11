@@ -1,0 +1,7 @@
+# Configs and manifests record SHA-256 hashes of exact file bytes.
+# Keep these files identical on Windows, macOS and Linux checkouts.
+/datasets/*.json text eol=lf
+/configs/*.json text eol=lf
+
+# Experiment evidence: store and check out byte-for-byte, no line-ending conversion
+/runs/** -text

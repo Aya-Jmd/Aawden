@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_e92f25ce66b9",
+    "family_id": "wsp_discovery_access_control_helper_visibility",
+    "source_id": "wsp_discovery_access_control_helper_visibility",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"access_control\",\n  \"evidence_lines\": [3, 4, 6],\n  \"explanation\": \"The `read_record` function allows access to a record based on visibility and tenant/role membership. However, it does not enforce strict ownership control, as it returns the record if the caller is either the owner (`visible(row)`) or a tenant member with the 'member' role (`row[\"tenant_id\"] == actor[\"tenant_id\"] and actor[\"role\"] == \"member\"`). This could allow unauthorized access if an attacker manipulates the `record_id` to target records owned by others within the same tenant or if they exploit role escalation vulnerabilities.\",\n  \"confidence\": 0.9\n}\n```",
+    "prompt_sha256": "0e71f1ae30b8701265c6a7d5c12ffaaad8d82024914fbbcec061ecf17f0b47d1",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    def visible(item):\n        return item[\"owner_id\"] == actor[\"id\"]\n    row = records.get(record_id)\n    if row is None:\n        return None\n    return row if visible(row) or row[\"tenant_id\"] == actor[\"tenant_id\"] and actor[\"role\"] == \"member\" else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 270,
+    "output_tokens": 172,
+    "finish_reason": "stop",
+    "latency_seconds": 4.293619732000025,
+    "request_id": "12e506010ae4551b77db3b37"
+  },
+  "sha256": "c4bc77effb54c9ae84357bc3affec1b057ba08348687d4a541746d570ba981b2"
+}

@@ -1,0 +1,40 @@
+{
+  "record": {
+    "case_id": "c_6eea86eb3d56",
+    "family_id": "access_control_login_only",
+    "source_id": "access_control_login_only",
+    "split": "screen",
+    "category": "access_control",
+    "method": "prefill",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expected exactly the five response fields",
+    "raw_output": "{\"category\":\"access_control\",\"explanation\":\"The code checks if the actor is authenticated before allowing access to a record (line 3). This is a correct implementation of the access control rule, as it ensures only authorized users can read records.\",\"deciding_check\":\"actor.get('authenticated')\",\"missing_check\":null,\"evidence_lines\":[2,3],\"verdict\":\"not_vulnerable_for_target\",\"confidence\":1}",
+    "prompt_sha256": "995b60ee2f7b60b439f86a09bcba215c8ea687072c5abcf94d8e22f43d33b2ad",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review only the named weakness under the stated threat model. Judge the behavior of the shown source. The answer already starts inside the explanation string of a JSON object. Continue that string with one short sentence about the decisive check or missing check. Use plain words without quotes or backslashes. Close the string, then add evidence_lines (a list of the displayed source line numbers), verdict (one of vulnerable, not_vulnerable_for_target, insufficient_information), and confidence (a number from 0 to 1). Close the object. Give only the continuation of the JSON, with no Markdown."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: records is a trusted server-side dictionary; record_id is attacker-controlled; actor comes from a trusted authenticated session. Only the owner may read a record. Sharing a tenant or being logged in alone does not authorize a read. Missing records must return None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     record = records.get(record_id)\n3 |     return record if actor.get(\"authenticated\") else None\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"category\":\"access_control\",\"explanation\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 270,
+    "output_tokens": 83,
+    "finish_reason": "stop",
+    "latency_seconds": 2.0023494440000036,
+    "request_id": "6126065cc52635379afa5db0"
+  },
+  "sha256": "8f44bbf1b433701559f0122b22050ebff19c07d76aef06b0b51768dcbfe66d85"
+}

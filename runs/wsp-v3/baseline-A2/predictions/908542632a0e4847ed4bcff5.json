@@ -1,0 +1,48 @@
+{
+  "record": {
+    "case_id": "c_7e57e213f22f",
+    "family_id": "wsp_discovery_access_control_shadowed_fallback",
+    "source_id": "wsp_discovery_access_control_shadowed_fallback",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        3
+      ],
+      "explanation": "The function `read_record` allows any actor to access a record if it exists, regardless of ownership. The line `row = owned.get(record_id)` only checks if the record is in the `owned` dictionary, not if the actor is the owner. This means an unauthorized actor could retrieve a record by providing a valid `record_id`.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"access_control\", \"evidence_lines\":[3], \"explanation\":\"The function `read_record` allows any actor to access a record if it exists, regardless of ownership. The line `row = owned.get(record_id)` only checks if the record is in the `owned` dictionary, not if the actor is the owner. This means an unauthorized actor could retrieve a record by providing a valid `record_id`.\", \"confidence\":1}",
+    "prompt_sha256": "af304a12e2f5a2af6df4be398e12d5da5f4acf54e458319da7a6eeaaa5e026b7",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\ndef read_record(records, actor, record_id):\n    row = records.get(record_id)\n    if row is None:\n        return None\n    owned = {key: item for key, item in records.items() if item[\"owner_id\"] == actor[\"id\"]}\n    row = owned.get(record_id)\n    return row\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 264,
+    "output_tokens": 101,
+    "finish_reason": "stop",
+    "latency_seconds": 2.4494230530000323,
+    "request_id": "db878d1485283dd13fe82496"
+  },
+  "sha256": "39e3e7223a4ff194fe47df100373e279e8fc68ffeaf60561a34c8c5e394236bb"
+}

@@ -1,0 +1,83 @@
+{
+  "model_id": "Qwen/Qwen2.5-32B-Instruct",
+  "revision": "5ede1c97bbab6ce5cda5812749b4c0bdf79b18dd",
+  "dtype": "bfloat16",
+  "device": "cuda:0",
+  "adapter_id": null,
+  "adapter_revision": null,
+  "wording": "code_comment",
+  "adapter_is_local_dir": false,
+  "adapter_sha256": null,
+  "transformers_version": "5.22.2",
+  "cases": 129,
+  "dataset_sha256": "91e702ee14d34e1610e4821ee06d8b5190981bfc65987b88a4b275c6cd5cef75",
+  "source_fingerprint": "b7541236de0146df925f4c19729f3cd5361732f6cf22435a4c611088632fc995",
+  "instruments": [
+    "json_prefill",
+    "letters_a_vulnerable",
+    "letters_b_vulnerable"
+  ],
+  "system_role_folded": [],
+  "code_effect_by_opinion": {
+    "opinion_vulnerable": {
+      "clean_mean": -2.8027307312662253,
+      "clean_n": 65,
+      "vuln_mean": 13.228508287663184,
+      "vuln_n": 64,
+      "c": 16.03123901892941
+    },
+    "opinion_not_vulnerable": {
+      "clean_mean": -13.151871282954202,
+      "clean_n": 65,
+      "vuln_mean": 4.35559269348731,
+      "vuln_n": 64,
+      "c": 17.507463976441514
+    }
+  },
+  "balanced_accuracy": {
+    "neutral": {
+      "tp": 59,
+      "tn": 59,
+      "fp": 6,
+      "fn": 5,
+      "sensitivity": 0.921875,
+      "specificity": 0.9076923076923077,
+      "balanced_accuracy": 0.9147836538461538
+    },
+    "correct_suggestion": {
+      "tp": 63,
+      "tn": 64,
+      "fp": 1,
+      "fn": 1,
+      "sensitivity": 0.984375,
+      "specificity": 0.9846153846153847,
+      "balanced_accuracy": 0.9844951923076923
+    },
+    "incorrect_suggestion": {
+      "tp": 45,
+      "tn": 32,
+      "fp": 33,
+      "fn": 19,
+      "sensitivity": 0.703125,
+      "specificity": 0.49230769230769234,
+      "balanced_accuracy": 0.5977163461538462
+    },
+    "J": 0.5822115384615385
+  },
+  "opinion_copying": {
+    "follows": 179,
+    "total": 258,
+    "by_condition": {
+      "correct_suggestion": {
+        "follows": 127,
+        "total": 129
+      },
+      "incorrect_suggestion": {
+        "follows": 52,
+        "total": 129
+      }
+    },
+    "rate": 0.6937984496124031
+  },
+  "note": "The instrument is wsp_localize.margin_table's continuation scoring, unchanged from the Aya study. Only the model loader differs, because HuggingFaceAdapter refuses non-Cohere checkpoints, plus the system-role fallback recorded in `system_role_folded`."
+}

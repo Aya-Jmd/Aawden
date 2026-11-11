@@ -1,0 +1,120 @@
+{
+  "label": "original",
+  "model": {
+    "adapter": "huggingface",
+    "model_id": "CohereLabs/aya-expanse-8b",
+    "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+    "dtype": "torch.bfloat16",
+    "device": "cuda:0",
+    "decoding": {
+      "do_sample": false,
+      "max_new_tokens": 256
+    },
+    "tokenizer_sha256": "beb3ef2cb916cf53d01655d46cf9bfbb1dcfbded9f3ef4c6a298ed760c6f02df",
+    "chat_template_sha256": "e7527cc46a21601b5340edffd3633d47d722c7c735eb9fc1e3c11f66ff2b0caf",
+    "continuation_scoring": "sum of all continuation token log-probabilities, no length normalization, no added special tokens",
+    "environment": {
+      "python": "3.11.11",
+      "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+      "packages": {
+        "torch": {
+          "version": "2.15.0",
+          "direct_url": null
+        },
+        "transformers": {
+          "version": "5.22.1",
+          "direct_url": null
+        },
+        "transformer-lens": {
+          "version": "3.8.0",
+          "direct_url": null
+        },
+        "circuitkit": {
+          "version": "0.2.0",
+          "direct_url": {
+            "archive_info": {
+              "hash": "sha256=cbddb29869ded829ec7c4b48f06519accd1cb2bc6ecfcfdcf1291202c5c78e74",
+              "hashes": {
+                "sha256": "cbddb29869ded829ec7c4b48f06519accd1cb2bc6ecfcfdcf1291202c5c78e74"
+              }
+            },
+            "url": "file:///tmp/CircuitKIT-e71d5e17fe6e.zip"
+          }
+        },
+        "auditkit": {
+          "version": "1.1.3",
+          "direct_url": {
+            "archive_info": {
+              "hash": "sha256=5fd45704ae32406c389ef6c183913e199939c3a837ddd1b03e8ad289613a05e4",
+              "hashes": {
+                "sha256": "5fd45704ae32406c389ef6c183913e199939c3a837ddd1b03e8ad289613a05e4"
+              }
+            },
+            "url": "file:///tmp/AuditKIT-71316da34578.zip"
+          }
+        },
+        "safetensors": {
+          "version": "0.8.0",
+          "direct_url": null
+        }
+      },
+      "code_commit": null,
+      "code_sha256": "b2e63bcdd81151a588b6bf98483910d07affaeb225605c6fbce46709425f5400",
+      "dependency_lock_hashes": {
+        "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+        "requirements-research.lock": "bd868df34099f57a4bbd02dfdfdd0e3144ccbfc3f91248a92432be500de95d1c",
+        "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+      }
+    },
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_bytes": 25252724736,
+      "cuda": "13.2"
+    }
+  },
+  "coding": {
+    "dataset_sha256": "7209cf31b1278e6ff5a3feccc2af2c4ebb14d9b803079182f5b700f2439264d5",
+    "arm": "original",
+    "cases": 40,
+    "correct": 14,
+    "accuracy": 0.35,
+    "invalid": 7,
+    "scope": "Exact answers to ordinary Python code questions. No model-generated code is executed. Single arm: no difference is computed."
+  },
+  "general": {
+    "cases": 60,
+    "correct": 51,
+    "invalid": 0,
+    "accuracy": 0.85
+  },
+  "format": {
+    "cases": 20,
+    "passed": 17,
+    "pass_rate": 0.85,
+    "invalid": 0
+  },
+  "forward": {
+    "calls": 160,
+    "prompts": 160
+  },
+  "dataset_sha256": {
+    "coding": "7209cf31b1278e6ff5a3feccc2af2c4ebb14d9b803079182f5b700f2439264d5",
+    "general": "7880abef08e26b016486322f5646139e3978ffed59526fc884c61b583328d9d1",
+    "format": "069d6e46eada79e4dd139e765ead005d95ed8990c353f2d6ebf78b317e68c355"
+  },
+  "note": "A single arm measured with the same helpers the frozen final evaluation uses. Differences are only meaningful once an edited arm is measured identically.",
+  "coding_rescore": {
+    "at": "2026-11-10",
+    "parser": "security_wsp.parsing.tolerant_json",
+    "reason": "strict_json refused answers wrapped in a ```json fence and an explanation",
+    "before": {
+      "correct": 0,
+      "invalid": 40
+    },
+    "after": {
+      "correct": 14,
+      "invalid": 7
+    },
+    "unchanged": "raw_output, request_id, storage_id, model, dataset hash"
+  }
+}

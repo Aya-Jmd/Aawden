@@ -1,0 +1,166 @@
+{
+  "metrics": {
+    "n": 20,
+    "n_vulnerable": 10,
+    "n_clean": 10,
+    "true_positive": 10,
+    "true_negative": 10,
+    "false_positive": 0,
+    "false_negative": 0,
+    "balanced_accuracy": 1.0,
+    "accuracy": 1.0,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.0,
+    "miss_rate": 0.0,
+    "coverage": 1.0,
+    "invalid_count": 0,
+    "generation_errors": 0,
+    "input_tokens": 6433,
+    "output_tokens": 978,
+    "latency_seconds": 48.344837115000246,
+    "explanation_grounding": null,
+    "general_coding_accuracy": null
+  },
+  "dataset": {
+    "cases": 20,
+    "families": 10,
+    "splits": [
+      "neutral_confirmation_v5"
+    ],
+    "dataset_sha256": "a8809834f7c283de3f4fe44f3ad568033ab4cebc0214c22cf4360ff33eb310fe",
+    "label_review": "single_author; no independent review",
+    "final_test_protected": false
+  },
+  "threshold_exceeded": true,
+  "model": {
+    "adapter": "huggingface",
+    "model_id": "CohereLabs/aya-expanse-8b",
+    "revision": "5062468bf9bc0c6035fd64e06274333ec127d980",
+    "dtype": "torch.bfloat16",
+    "device": "cuda:0",
+    "decoding": {
+      "do_sample": false,
+      "max_new_tokens": 256
+    },
+    "tokenizer_sha256": "beb3ef2cb916cf53d01655d46cf9bfbb1dcfbded9f3ef4c6a298ed760c6f02df",
+    "chat_template_sha256": "e7527cc46a21601b5340edffd3633d47d722c7c735eb9fc1e3c11f66ff2b0caf",
+    "continuation_scoring": "sum of all continuation token log-probabilities, no length normalization, no added special tokens",
+    "environment": {
+      "python": "3.11.11",
+      "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+      "packages": {
+        "torch": {
+          "version": "2.15.0",
+          "direct_url": null
+        },
+        "transformers": {
+          "version": "5.22.1",
+          "direct_url": null
+        },
+        "transformer-lens": {
+          "version": "3.8.0",
+          "direct_url": null
+        },
+        "circuitkit": {
+          "version": "0.2.0",
+          "direct_url": {
+            "archive_info": {
+              "hash": "sha256=cbddb29869ded829ec7c4b48f06519accd1cb2bc6ecfcfdcf1291202c5c78e74",
+              "hashes": {
+                "sha256": "cbddb29869ded829ec7c4b48f06519accd1cb2bc6ecfcfdcf1291202c5c78e74"
+              }
+            },
+            "url": "file:///tmp/CircuitKIT-e71d5e17fe6e.zip"
+          }
+        },
+        "auditkit": {
+          "version": "1.1.3",
+          "direct_url": {
+            "archive_info": {
+              "hash": "sha256=5fd45704ae32406c389ef6c183913e199939c3a837ddd1b03e8ad289613a05e4",
+              "hashes": {
+                "sha256": "5fd45704ae32406c389ef6c183913e199939c3a837ddd1b03e8ad289613a05e4"
+              }
+            },
+            "url": "file:///tmp/AuditKIT-71316da34578.zip"
+          }
+        },
+        "safetensors": {
+          "version": "0.8.0",
+          "direct_url": null
+        }
+      },
+      "code_commit": null,
+      "code_sha256": "52ec422aec131851e7f0cbeefb861eaf0d7bc4b047b6935eca1e6147a6e077d0",
+      "dependency_lock_hashes": {
+        "requirements-core.lock": "670459cdab476fd75e82454412e7083f6a2ac33e418c9224cdf4e0b97f747b68",
+        "requirements-research.lock": "0ec42a8e9b403b51d710fba433eba3417d6e488094c0888336a1d26e58917597",
+        "dependency-sources.lock.json": "9726b70f09da58ec23155652bf6df47c1f59b107fababbd9f18049c9c5652337"
+      }
+    },
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_bytes": 25250627584,
+      "cuda": "13.2"
+    },
+    "checkpoint_hashes": {
+      "model.safetensors.index.json": "deaecc92e00b66a2fdd24576148760e930dc39b6c5c0db8c3c3e34ecd8e0da8f",
+      "model-00001-of-00004.safetensors": "4caed059a6c25f86bc9c576c852438b220179a410725e8c6e02a02567bb25811",
+      "model-00002-of-00004.safetensors": "c98d47d38a411c1f71b6ef21d85890f90f8b215df49ee11679b2f21deb411ddd",
+      "model-00003-of-00004.safetensors": "d879c402bed6398a700784fade48fd3fc9941d86c621caf0973fedc54b2c8400",
+      "model-00004-of-00004.safetensors": "d0510958ff72c271230ddc0c880c49102bcd8dedc6d00ab290cffb51efe335f3"
+    },
+    "adaptation": "LoRA",
+    "adapter_sha256": "2e0fb9c0dcbd4a07441212cb5d3a8e9e98b0ba9e4b016db887adfd9797ec7689",
+    "training_protocol": {
+      "rank": 16,
+      "alpha": 32,
+      "epochs": 3,
+      "lr": 0.0001,
+      "accumulation": 2,
+      "verdict_weight": 10,
+      "seed": 42,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "conditions": [
+        "neutral",
+        "incorrect_suggestion"
+      ],
+      "trace_prompt": true,
+      "resume_sha256": "1ebdf7d6b36237931c2b160e9272770cc0d4c5a7c21a3ab94c393f44d1e8ef95",
+      "training_sets": {
+        "screen.json": {
+          "sha256": "3fedabb747d25b9aa98356a90f102c79a8d1ceb10394a2b5794735be4d55f523"
+        },
+        "neutral-confirmation.json": {
+          "sha256": "98ab77d1d91e6f323732605086d6b8531a158663b0b8fcdc095e0f75e86efbeb"
+        },
+        "neutral-confirmation-v2.json": {
+          "sha256": "61e6ba846fc2bde433cb3183328f2af801c6886dbf3f3471657053b8a9fdf35e"
+        },
+        "neutral-confirmation-v3.json": {
+          "sha256": "5b13a9ae58dde23f5f59d4aa98cb73f7686b6cee1fe77097c38efcbff0b66a39"
+        }
+      }
+    }
+  },
+  "scope": "Trained LoRA adapter. Single-author feasibility cases.",
+  "AuditKIT": {
+    "status": "executed",
+    "toolkit": "AuditKIT",
+    "version": "1.1.3",
+    "pinned_source_revision": "71316da345784ff220d5ed59337441a59ab31526",
+    "mode": "strict semantic scoring of precomputed raw generations",
+    "samples": 20,
+    "fingerprint": "177edae270c8ffcd",
+    "artifact": "auditkit.json",
+    "scope": "Benchmark labels and statistical inference remain owned by Aawden."
+  }
+}

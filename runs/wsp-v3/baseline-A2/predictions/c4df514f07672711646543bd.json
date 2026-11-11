@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_129d8fb474a9",
+    "family_id": "wsp_discovery_sql_injection_late_branch_values",
+    "source_id": "wsp_discovery_sql_injection_late_branch_values",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "vulnerable",
+    "correct": false,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "sql_injection",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "explanation": "The function `lookup` constructs SQL statements dynamically based on the input `username`. If `username` contains malicious input, it could be used to execute arbitrary SQL code. For example, if a user inputs `' OR 1=1 --` as the username, the resulting SQL statement would be `'SELECT name FROM users WHERE name = ' OR 1=1 --'`. This would bypass the filter and potentially return all user names from the database.",
+      "confidence": 1
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\", \"category\":\"sql_injection\", \"evidence_lines\":[2,3], \"explanation\":\"The function `lookup` constructs SQL statements dynamically based on the input `username`. If `username` contains malicious input, it could be used to execute arbitrary SQL code. For example, if a user inputs `' OR 1=1 --` as the username, the resulting SQL statement would be `'SELECT name FROM users WHERE name = ' OR 1=1 --'`. This would bypass the filter and potentially return all user names from the database.\", \"confidence\":1}",
+    "prompt_sha256": "ad23fe837aaf26ec1d28789e7f51976aab5cb6bbb3bf31a08e5ca8ef7d824d38",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    statement = \"SELECT name FROM users WHERE name = ?\"\n    values = (username,)\n    if not username.isidentifier():\n        statement = statement\n        values = values\n    return conn.execute(statement, values).fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 230,
+    "output_tokens": 119,
+    "finish_reason": "stop",
+    "latency_seconds": 2.78976976200002,
+    "request_id": "3da65be78814e6cfbf6570b4"
+  },
+  "sha256": "975c692edaddb63e7fb064c2190642b0284551c53382bba0fbcbdf16da2400ca"
+}

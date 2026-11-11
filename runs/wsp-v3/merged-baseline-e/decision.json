@@ -1,0 +1,21 @@
+{
+  "A_pf_neutral_ba": 0.04,
+  "A_pf_misleading_ba": 0.14,
+  "A_pf_drop": -0.1,
+  "route": "b_merged_adapter",
+  "rule": "If original Aya with json_prefill reaches neutral balanced accuracy >= 0.75 under the standard prompt, the edit base is original Aya (route a). Otherwise the edit base is original Aya with the retrained LoRA adapter merged dense (route b); all methods then share that merged base and the comparator is the same merged model unedited.",
+  "deference_drop_meets_screen": false,
+  "validation_strong_prompts": {
+    "B_trace_pf": {
+      "neutral_ba": null,
+      "misleading_ba": null,
+      "gap": null
+    },
+    "B_verify_pf": {
+      "neutral_ba": null,
+      "misleading_ba": null,
+      "gap": null
+    }
+  },
+  "prompt_only_solution": false
+}

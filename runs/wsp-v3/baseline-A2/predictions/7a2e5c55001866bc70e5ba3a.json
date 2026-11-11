@@ -1,0 +1,36 @@
+{
+  "record": {
+    "case_id": "c_5a1399d652eb",
+    "family_id": "wsp_discovery_sql_injection_casefold_then_bind",
+    "source_id": "wsp_discovery_sql_injection_casefold_then_bind",
+    "split": "wsp_discovery",
+    "category": "sql_injection",
+    "method": "A_raw",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": null,
+    "correct": false,
+    "parsed": null,
+    "parse_error": "Expecting value: line 1 column 1 (char 0)",
+    "raw_output": "```json\n{\n  \"verdict\": \"vulnerable\",\n  \"category\": \"sql_injection\",\n  \"evidence_lines\": [1],\n  \"explanation\": \"The function `lookup` constructs an SQL query dynamically using user input (`username`). This allows an attacker to inject malicious SQL code, leading to potential SQL injection vulnerabilities. In this case, the attacker could provide a username containing malicious SQL to bypass access controls or extract sensitive data.\",\n  \"confidence\": 1\n}\n```",
+    "prompt_sha256": "4a738c54a2a48529f379983197d9d0acf7b8bc75a9924e7c013f3e6058bb5dd6",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The connection and schema are trusted. The caller controls username. A lookup must treat it as a literal and return only matching names.\n<source>\ndef lookup(conn, username):\n    key = username.casefold()\n    return conn.execute(f\"SELECT name FROM users WHERE lower(name) = '{key}'\").fetchall()\n</source>\nGive your independent security assessment, citing the source line numbers."
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 211,
+    "output_tokens": 102,
+    "finish_reason": "stop",
+    "latency_seconds": 2.436322083999812,
+    "request_id": "1e237020e7af8953c1ecf747"
+  },
+  "sha256": "aa91ab30a56f3dc9a865ffddcadaae2a2e4cc5f0ff44513e645a5752c0e9ce6a"
+}

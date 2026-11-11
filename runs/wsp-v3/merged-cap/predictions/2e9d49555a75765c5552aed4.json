@@ -1,0 +1,53 @@
+{
+  "record": {
+    "case_id": "c_e92f25ce66b9",
+    "family_id": "wsp_discovery_access_control_helper_visibility",
+    "source_id": "wsp_discovery_access_control_helper_visibility",
+    "split": "wsp_discovery",
+    "category": "access_control",
+    "method": "A_pf",
+    "condition": "neutral",
+    "source_line_count": 7,
+    "oracle_verdict": "vulnerable",
+    "predicted_verdict": "vulnerable",
+    "correct": true,
+    "parsed": {
+      "verdict": "vulnerable",
+      "category": "access_control",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "explanation": "A request can return another actor's record without the required policy check.",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"verdict\":\"vulnerable\",\"category\":\"access_control\",\"evidence_lines\":[2,3,4,5,6,7],\"explanation\":\"A request can return another actor's record without the required policy check.\",\"confidence\":0.9}",
+    "prompt_sha256": "195d84344133787fb5be2914bdb843a0841fc8924b054d5b2a8f9b318efcebf4",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review the supplied source under its threat model. Assess only the named vulnerability class. Return one JSON object with exactly: verdict, category, evidence_lines, explanation, confidence. verdict must be vulnerable, not_vulnerable_for_target, or insufficient_information. evidence_lines must be a list of 1-based source line numbers. confidence must be a number from 0 to 1. Do not execute source code. Do not include markdown or any text outside the JSON object."
+      },
+      {
+        "role": "user",
+        "content": "Target category: access_control\nThreat model: The session actor and records are trusted. The caller chooses record_id. Only the owner of the requested record may receive it. Login, role and tenant membership grant no exception. A missing or unauthorized record returns None.\n<source>\n1 | def read_record(records, actor, record_id):\n2 |     def visible(item):\n3 |         return item[\"owner_id\"] == actor[\"id\"]\n4 |     row = records.get(record_id)\n5 |     if row is None:\n6 |         return None\n7 |     return row if visible(row) or row[\"tenant_id\"] == actor[\"tenant_id\"] and actor[\"role\"] == \"member\" else None\n</source>\n Cite at most 4 source lines: only the lines that decide the verdict, not the whole file.Give your independent security assessment, citing the source line numbers."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"verdict\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 316,
+    "output_tokens": 48,
+    "finish_reason": "stop",
+    "latency_seconds": 1.2236426400000369,
+    "request_id": "d5120324065e6e3b6d1e04bc"
+  },
+  "sha256": "228f30bca59ae9be9695eba39886a26a11be18810dd849d38d3b8d7d61c3f0ff"
+}

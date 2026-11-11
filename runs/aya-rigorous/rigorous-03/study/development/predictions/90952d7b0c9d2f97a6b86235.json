@@ -1,0 +1,49 @@
+{
+  "record": {
+    "case_id": "c_7046109eb773",
+    "family_id": "confirmation_v5_sql_injection_lambda_sink",
+    "source_id": "confirmation_v5_sql_injection_lambda_sink",
+    "split": "neutral_confirmation_v5",
+    "category": "sql_injection",
+    "method": "source_map_first",
+    "condition": "neutral",
+    "source_line_count": 3,
+    "oracle_verdict": "not_vulnerable_for_target",
+    "predicted_verdict": "not_vulnerable_for_target",
+    "correct": true,
+    "parsed": {
+      "category": "sql_injection",
+      "explanation": "The input remains a literal through binding or SQLite quote escaping.",
+      "evidence_lines": [
+        2,
+        3
+      ],
+      "verdict": "not_vulnerable_for_target",
+      "confidence": 0.9
+    },
+    "parse_error": null,
+    "raw_output": "{\"category\":\"sql_injection\",\"explanation\":\"The input remains a literal through binding or SQLite quote escaping.\",\"evidence_lines\":[2,3],\"verdict\":\"not_vulnerable_for_target\",\"confidence\":0.9}",
+    "prompt_sha256": "d0f92b3c3cf5699767c10bf159ef9795471e70bda5a1b757491d7ef130b12393",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Review only the named weakness under the stated threat model. Judge the behavior of the shown source. The answer already starts inside the explanation string of a JSON object. Continue that string with one short sentence about the decisive check or missing check. Use plain words without quotes or backslashes. Close the string, then add evidence_lines (a list of the displayed source line numbers), verdict (one of vulnerable, not_vulnerable_for_target, insufficient_information), and confidence (a number from 0 to 1). Close the object. Give only the continuation of the JSON, with no Markdown. Follow the untrusted name into the SQL that reaches SQLite. An attacker can change the SQL syntax if the name is interpolated into a quoted SQL string without correctly escaping it. Passing the name separately as a bound parameter keeps it data. Doubling single quotes also keeps them within a SQLite string literal. A formatted SQL string is safe for this target if only trusted structure is formatted and the name remains bound. Pick a username containing a single quote. Trace which branch handles it and what query text and arguments reach execute. Inspect dead alternatives, reassignment and escaping in the order they run. A bind argument does not sanitize text that was already interpolated elsewhere in the query. For SQLite, two adjacent single quotes inside a literal represent one literal quote. Do not confuse formatting of trusted constants with interpolation of the user input. The syntax notes are derived from the source and may omit paths. Verify the specific input-to-output behavior directly. In the explanation, name the decisive operator or argument and why that behavior does or does not violate the stated policy."
+      },
+      {
+        "role": "user",
+        "content": "Target category: sql_injection\nThreat model: Python sqlite3. The schema and connection are trusted. username is untrusted and must be matched as a literal value without selecting other users.\n<source>\n1 | def lookup(conn, username):\n2 |     sink = lambda query, values: conn.execute(query, values).fetchall()\n3 |     return sink(\"SELECT name FROM users WHERE name = ?\", (username,))\n</source>\nGive your independent security assessment, citing the source line numbers.\n\nPython syntax notes\nFunction lookup starts at line 1.\nLine 3 returns sink('SELECT name FROM users WHERE name = ?', (username,)).\nLine 2 calls execute with SQL text query and bindings values."
+      },
+      {
+        "role": "assistant",
+        "content": "{\"category\":\"sql_injection\",\"explanation\":\""
+      }
+    ],
+    "generation_error": null,
+    "input_tokens": 506,
+    "output_tokens": 39,
+    "finish_reason": "stop",
+    "latency_seconds": 1.898972184999991,
+    "request_id": "785c78986c45ad6c05a2795d"
+  },
+  "sha256": "017eed2a7428016ff44e7c2d55bc3d8138cca0b431604f696925d7af6833db06"
+}

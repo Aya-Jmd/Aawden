@@ -57,7 +57,9 @@ def image():
     if Image is None:
         return None
     return Image(python_version="python3.11").add_python_packages(
-        ["torch==2.5.1", "transformers==4.46.3", "peft==0.13.2", "accelerate==1.1.1",
+        # peft must match the release that wrote adapter_config.json (peft_version 0.21.2), whose config
+         # carries fields the 0.13 line does not know.
+         ["torch==2.5.1", "transformers==4.46.3", "peft==0.21.2", "accelerate==1.1.1",
          "fastapi==0.115.5", "pydantic==2.10.3", "sentencepiece==0.2.0", "uvicorn==0.32.1"])
 
 
@@ -125,6 +127,49 @@ def make_app(load_fn=load):
     @app.get("/health")
     def health():
         return {"ok": True, "model": MODEL_ID, "adapter": str(ADAPTER_DIR)}
+
+    @app.get("/diagnose")
+    def diagnose(x_passcode: str | None = Header(None)):
+        """Walk load() and one verdict, returning the traceback of the first failure.
+
+        Gated by the same passcode as /review. It exists because the container is not reachable by
+        the log-streaming CLI from this machine, so a failure there has to report itself.
+        """
+        import traceback
+
+        check(x_passcode)
+        steps: list[dict] = []
+
+        def step(name, fn):
+            try:
+                value = fn()
+            except Exception as exc:  # noqa: BLE001 - surfacing any failure is the point
+                steps.append({"step": name, "ok": False, "error": f"{type(exc).__name__}: {exc}",
+                              "traceback": traceback.format_exc()[-4000:]})
+                return None
+            steps.append({"step": name, "ok": True})
+            return value
+
+        def need(path, label):
+            if not path.exists():
+                raise FileNotFoundError(f"{label} missing: {path}")
+            return True
+
+        step("adapter_present", lambda: need(ROOT / ADAPTER_DIR / "adapter_config.json", "adapter config"))
+        step("adapter_weights", lambda: need(ROOT / ADAPTER_DIR / "adapter_model.safetensors", "adapter weights"))
+        step("dataset_present", lambda: need(ROOT / "datasets/plain-pooled.json", "dataset"))
+        step("token_present", lambda: (os.environ.get("AAWDEN_AYA_HF_TOKEN") or os.environ.get("HF_TOKEN"))
+             or (_ for _ in ()).throw(RuntimeError("no Hub token in the environment")))
+        step("import_package", lambda: __import__("security_wsp.prompts", fromlist=["render"]).render)
+        loaded = step("load", load_fn)
+        if loaded:
+            model, tokenizer = loaded
+            step("chat_template", lambda: tokenizer.apply_chat_template(
+                [{"role": "user", "content": "hi"}], tokenize=False, add_generation_prompt=True))
+            case = step("load_case", lambda: _load_case("c_cab5d4f0e9d4"))
+            if case is not None:
+                step("verdict", lambda: _verdict(model, tokenizer, case, "incorrect_suggestion"))
+        return {"steps": steps}
 
     @app.post("/review")
     def review(body: ReviewIn, request: Request, x_passcode: str | None = Header(None)):

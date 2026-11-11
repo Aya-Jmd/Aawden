@@ -504,7 +504,7 @@ def publish(config: dict, out: Path, confirm_owner_approved: bool, *, root: Path
         if entry["id"] not in available:
             continue
         repo_id = f"{ns}/{entry['id']}"
-        kwargs = {"space_sdk": "gradio"} if entry["type"] == "space" else {}
+        kwargs = {"space_sdk": entry.get("sdk", "gradio")} if entry["type"] == "space" else {}
         api.create_repo(repo_id=repo_id, repo_type=entry["type"], private=False, exist_ok=True, token=token, **kwargs)
         if entry["type"] != "space":
             api.update_repo_settings(repo_id=repo_id, private=False, gated=False, repo_type=entry["type"], token=token)

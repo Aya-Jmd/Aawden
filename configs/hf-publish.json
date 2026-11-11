@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "namespace": "RishyanthReddy",
   "token_env": "HF_PUBLISH_TOKEN",
   "env_file": ".env",
@@ -32,6 +32,7 @@
       ".md",
       ".txt",
       ".py",
+      ".html",
       ".safetensors",
       ".csv",
       ".yaml",
@@ -45,136 +46,83 @@
   ],
   "collections": {
     "models": {
-      "title": "Aawden — models",
-      "description": "Aawden research artifacts: sparse weight-space patch, projection patch and the retrained Aya LoRA adapter. Each requires the base model Aya Expanse 8B (CC-BY-NC-4.0, Cohere Labs Acceptable Use Policy), which is not redistributed here.",
+      "title": "Aawden \u2014 the reviewer adapter",
+      "description": "The LoRA adapter from Aawden: a small weight change that makes Aya Expanse 8B answer from the code instead of from a reviewer's opinion. The base model is not redistributed here; load it from CohereLabs/aya-expanse-8b (CC-BY-NC-4.0, Cohere Labs Acceptable Use Policy).",
       "item_type": "model"
     },
     "datasets": {
-      "title": "Aawden — datasets",
-      "description": "Aawden benchmark fixtures, oracle results and run logs. Single-author, small-scale research fixtures. The sealed final split is excluded unless the owner releases it after final evaluation.",
+      "title": "Aawden \u2014 benchmark and results",
+      "description": "The security-review fixtures Aawden measures on, with executable oracle labels, and the final result tables generated from the runs.",
       "item_type": "dataset"
     }
   },
   "repos": [
     {
-      "id": "aawden-wsp-patch",
+      "id": "aawden-aya8b-reviewer-adapter",
       "type": "model",
       "collection": "models",
-      "available": false,
+      "available": true,
       "license": "cc-by-nc-4.0",
+      "base_model": "CohereLabs/aya-expanse-8b",
+      "library_name": "peft",
       "tags": [
-        "weight-space-programming",
-        "security-review",
-        "patch",
-        "sparse",
-        "aya-expanse",
-        "research"
-      ],
-      "card": "hf/model-wsp-patch/README.md",
-      "description": "Sparse row/column weight patch for Aya Expanse 8B, produced by the weight-space programming (WSP) method. Stores only changed slices plus a manifest. Requires the base model.",
-      "forbid_base_slices": true,
-      "patch_manifest": "runs/wsp-v3/patches/wsp-patch.json",
-      "summary_globs": [
-        "runs/wsp-v3/**/summary.json"
-      ],
-      "sources": [
-        {
-          "path": "runs/wsp-v3/patches/wsp-patch.safetensors",
-          "as": "wsp-patch.safetensors"
-        },
-        {
-          "path": "runs/wsp-v3/patches/wsp-patch.json",
-          "as": "wsp-patch.json"
-        }
-      ]
-    },
-    {
-      "id": "aawden-projection-patch",
-      "type": "model",
-      "collection": "models",
-      "available": false,
-      "license": "cc-by-nc-4.0",
-      "tags": [
-        "weight-space-programming",
-        "projection",
-        "security-review",
-        "patch",
-        "aya-expanse",
-        "research"
-      ],
-      "card": "hf/model-projection-patch/README.md",
-      "description": "Reversible output-projection patch for Aya Expanse 8B, stored as a sparse row/column patch (src/security_wsp/patches.py save_patch). Must not be the dense save_pretrained checkpoint written by interventions.export_hf_projection: that would contain base weights and is refused. Requires the base model.",
-      "forbid_base_slices": true,
-      "patch_manifest": "runs/wsp-v3/patches/projection-patch.json",
-      "summary_globs": [
-        "runs/wsp-v3/**/summary.json"
-      ],
-      "sources": [
-        {
-          "path": "runs/wsp-v3/patches/projection-patch.safetensors",
-          "as": "projection-patch.safetensors"
-        },
-        {
-          "path": "runs/wsp-v3/patches/projection-patch.json",
-          "as": "projection-patch.json"
-        }
-      ],
-      "note": "Source files must be produced by patches.save_patch. Dense checkpoints are refused by the weight rules."
-    },
-    {
-      "id": "aawden-aya-lora-v7",
-      "type": "model",
-      "collection": "models",
-      "available": false,
-      "license": "cc-by-nc-4.0",
-      "tags": [
-        "lora",
         "peft",
-        "security-review",
+        "lora",
         "aya-expanse",
+        "security-review",
+        "sycophancy",
+        "deference",
         "research"
       ],
-      "card": "hf/model-lora/README.md",
-      "description": "Retrained rank-16 LoRA adapter (v7) for Aya Expanse 8B. Requires the base model and the project's adapter loader.",
+      "card": "hf/model-aya8b-adapter/README.md",
+      "description": "Rank-16 LoRA for Aya Expanse 8B, two-stage recipe, seed 17. The unchanged model gives up all 67 files it gets right on its own when a reviewer states the opposite; this adapter gives up at most 7 of about 110 per reviewer wording, including five wordings it never saw in training.",
       "expected_sha256": {
-        "checkpoints/aya-adapter-v7.safetensors": "e86f9475e3c8871ba3c60a63b10704954f66edcb791bd9631866a07d82a9022f"
+        "adapter_model.safetensors": "6ab68d79390b9bfff7948038cca56c05ec467127737f1d2a6c53eb996088f56e"
       },
-      "summary_globs": [
-        "runs/aya-beam-20261107/adapter-v7/study/**/summary.json"
-      ],
       "sources": [
         {
-          "path": "checkpoints/aya-adapter-v7.safetensors",
-          "as": "aya-adapter-v7.safetensors"
+          "path": "demo/adapter-aya8b-curr-s17/adapter_model.safetensors",
+          "as": "adapter_model.safetensors"
         },
         {
-          "path": "configs/model-adapted.json",
-          "as": "aawden-loader-config.json",
+          "path": "demo/adapter-aya8b-curr-s17/adapter_config.json",
+          "as": "adapter_config.json"
+        },
+        {
+          "path": "runs/fix/aya8b-curr-s17/train_meta.json",
+          "as": "train_meta.json",
+          "required": false
+        },
+        {
+          "path": "runs/fix/aya8b-curr-s17/loss.json",
+          "as": "loss.json",
           "required": false
         }
       ]
     },
     {
-      "id": "aawden-authority-bench",
+      "id": "aawden-reviewer-flip-bench",
       "type": "dataset",
       "collection": "datasets",
       "available": true,
       "license": "cc-by-nc-4.0",
-      "license_note": "Fixtures are project-original (MIT). Oracle results and any Aya generations are derived from Aya Expanse 8B (CC-BY-NC-4.0 and Cohere Labs AUP), so the collection is published under the stricter license.",
+      "license_note": "Fixtures are project-original. The result tables quote verdicts produced by Aya Expanse 8B, so the Aya licence terms apply to those files and the collection is published under the stricter licence.",
       "tags": [
         "security-review",
         "benchmark",
         "code",
+        "sycophancy",
+        "deference",
+        "executable-oracle",
         "sql-injection",
-        "access-control",
-        "executable-oracle"
+        "access-control"
       ],
-      "card": "hf/dataset-bench/README.md",
-      "description": "Executable WSP authority benchmark: discovery, validation and regression sets, earlier case sets, manifests and oracle results. The sealed final split is excluded unless released.",
-      "summary_globs": [
-        "runs/wsp-v3/**/summary.json"
-      ],
+      "card": "hf/dataset-flip-bench/README.md",
+      "description": "129 plain security-review fixtures plus the 60-case puzzle set and 32 externally written pairs, each with executable oracle labels, and the generated result tables: flip rate on solved cases per model, per reviewer wording and per answer format.",
       "sources": [
+        {
+          "path": "datasets/plain-pooled.json"
+        },
         {
           "path": "datasets/wsp-discovery.json"
         },
@@ -182,84 +130,27 @@
           "path": "datasets/wsp-validation.json"
         },
         {
+          "path": "datasets/wsp-coding.json"
+        },
+        {
+          "path": "datasets/realcode-sinkchecked.json"
+        },
+        {
           "path": "datasets/wsp-final.json",
           "sealed": true,
           "required": false
         },
         {
-          "path": "datasets/wsp-coding.json"
-        },
-        {
-          "path": "datasets/wsp-format.json"
-        },
-        {
-          "path": "datasets/wsp-general.json"
-        },
-        {
-          "path": "datasets/coding-smoke.json"
-        },
-        {
-          "path": "datasets/development-review.json"
-        },
-        {
-          "path": "datasets/exploratory.json"
-        },
-        {
-          "path": "datasets/screen.json"
-        },
-        {
-          "glob": "datasets/neutral-confirmation*.json"
-        },
-        {
-          "glob": "datasets/rigorous-*.json"
-        },
-        {
           "path": "configs/wsp-data.json"
         },
         {
-          "path": "configs/wsp-regressions.json"
+          "path": "runs/fix/round2-summary.json"
         },
         {
-          "glob": "runs/wsp-v3/oracle/**/*.json",
-          "required": false
-        }
-      ]
-    },
-    {
-      "id": "aawden-run-logs",
-      "type": "dataset",
-      "collection": "datasets",
-      "available": true,
-      "license": "cc-by-nc-4.0",
-      "license_note": "Contains Aya Expanse 8B generations, so the Aya license terms apply.",
-      "tags": [
-        "security-review",
-        "logs",
-        "traces",
-        "evaluation",
-        "aya-expanse",
-        "research"
-      ],
-      "card": "hf/dataset-logs/README.md",
-      "description": "Run manifests, per-answer predictions, summaries, decisions and agent transcripts from the WSP and Aya runs.",
-      "summary_globs": [
-        "runs/wsp-v3/**/summary.json",
-        "runs/aya-beam-20261107/**/summary.json",
-        "runs/aya-rigorous/**/summary.json"
-      ],
-      "sources": [
-        {
-          "glob": "runs/wsp-v3/**/*.json"
+          "path": "runs/fix/round2-summary.md"
         },
         {
-          "glob": "runs/aya-beam-20261107/**/*.json"
-        },
-        {
-          "glob": "runs/aya-rigorous/**/*.json"
-        },
-        {
-          "glob": "runs/**/transcripts/**/*.md",
-          "required": false
+          "path": "runs/wsp-v3/deference-summary-redacted.json"
         }
       ]
     },
@@ -269,27 +160,18 @@
       "collection": null,
       "available": true,
       "license": "cc-by-nc-4.0",
-      "license_note": "App code is MIT. Saved examples contain Aya Expanse 8B outputs, so the Space carries the Aya license.",
-      "sdk": "gradio",
+      "license_note": "Page code is MIT. The page replays saved Aya Expanse 8B outputs, so it carries the Aya licence.",
+      "sdk": "static",
       "hardware": "cpu-basic",
-      "description": "Static Gradio demo of saved outputs: same code with a misleading reviewer, base Aya vs prompt-only vs patched answers, executable oracle verdicts and a which-weights-changed summary.",
+      "description": "Click through real cases: the same file, a reviewer who states the wrong verdict, and four answers \u2014 the correct one, the unchanged model, the model with the reviewer, and the model after the adapter.",
       "sources": [
         {
-          "path": "hf/space/app.py",
-          "as": "app.py"
-        },
-        {
-          "path": "hf/space/requirements.txt",
-          "as": "requirements.txt"
+          "path": "docs/demo.html",
+          "as": "index.html"
         },
         {
           "path": "hf/space/README.md",
           "as": "README.md"
-        },
-        {
-          "path": "hf/space/examples.json",
-          "as": "examples.json",
-          "required": false
         }
       ],
       "card": "hf/space/README.md"
@@ -300,5 +182,5 @@
     "runs/**/*.zip",
     "runs/**/predictions/*.tmp"
   ],
-  "exclude_patterns_note": "Recovered agent transcripts under runs/ are excluded from every upload. runs/aya-beam-20261107/recovered-get_task.json (266,045 bytes) matched the Beam-style token heuristic on 76- and 85-character mixed-class runs, so it must not be published; rotate any credential it contains. runs/aya-beam-20261107/recovered-logs.json was scanned item by item (100 items) with no match, but is excluded too because recovered transcripts can carry data beyond what the scanner knows. Zip archives and per-answer temp files are excluded as well."
+  "exclude_patterns_note": "Recovered agent transcripts under runs/ are excluded everywhere. One of them matched the Beam-token heuristic, so recovered files must never be published whatever repo they would land in. Zip archives and per-answer temp files are excluded too."
 }

@@ -321,11 +321,8 @@ def test_exclude_patterns_skip_recovered_transcripts(tmp_path):
 
 
 @pytest.mark.parametrize("card,kind", [
-    ("hf/model-wsp-patch/README.md", "model"),
-    ("hf/model-projection-patch/README.md", "model"),
-    ("hf/model-lora/README.md", "model"),
-    ("hf/dataset-bench/README.md", "dataset"),
-    ("hf/dataset-logs/README.md", "dataset"),
+    ("hf/model-aya8b-adapter/README.md", "model"),
+    ("hf/dataset-flip-bench/README.md", "dataset"),
     ("hf/space/README.md", "space"),
 ])
 def test_repo_cards_have_front_matter(card, kind):
@@ -336,9 +333,9 @@ def test_repo_cards_have_front_matter(card, kind):
     if kind in ("model", "space"):
         assert front.get("base_model") == "CohereLabs/aya-expanse-8b"
     if kind == "space":
-        assert front["sdk"] == "gradio" and front["app_file"] == "app.py"
+        assert front["sdk"] == "static" and front["app_file"] == "index.html"
     if kind == "model":
-        assert "{{RESULTS_TABLE}}" in text
+        assert "{{FILES_TABLE}}" in text
         assert "not included" in text.lower()
 
 
@@ -349,40 +346,29 @@ def test_publish_config_matches_cards_and_namespace():
     assert config["base_model"]["weights_uploaded"] is False
     assert config["limits"]["max_weight_bytes"] == 1 << 30
     ids = [r["id"] for r in config["repos"]]
-    assert ids == ["aawden-wsp-patch", "aawden-projection-patch", "aawden-aya-lora-v7",
-                   "aawden-authority-bench", "aawden-run-logs", "aawden-demo"]
+    assert ids == ["aawden-aya8b-reviewer-adapter", "aawden-reviewer-flip-bench", "aawden-demo"]
     for entry in config["repos"]:
         assert (ROOT / entry["card"]).is_file()
         assert entry["license"] == "cc-by-nc-4.0"
         for spec in entry["sources"]:
             assert not str(spec.get("glob", "")).startswith("checkpoints")
-    assert config["collections"]["models"]["title"] == "Aawden — models"
-    assert config["collections"]["datasets"]["title"] == "Aawden — datasets"
+    assert config["collections"]["models"]["title"] == "Aawden — the reviewer adapter"
+    assert config["collections"]["datasets"]["title"] == "Aawden — benchmark and results"
 
 
-def test_space_app_helpers_without_gradio(tmp_path):
-    sys.path.insert(0, str(ROOT / "hf" / "space"))
-    import app as space_app  # noqa: E402
+def test_space_is_a_self_contained_static_page():
+    """The Space is a static page: no inference, no network, no build step.
 
-    assert "Results pending" in space_app.case_markdown(None, None)
-    assert space_app.load_examples(tmp_path / "absent.json") is None
-    payload = {"schema_version": 1, "patch_summary": None, "examples": [
-        {"case_id": "c1", "category": "sql_injection", "split": "wsp_validation", "code": "def f(): pass",
-         "threat_model": "t", "condition": "incorrect_suggestion", "method": "A_pf", "label": "original",
-         "raw_output": "vuln", "predicted_verdict": "vulnerable", "oracle_verdict": "vulnerable"},
-        {"case_id": "c1", "category": "sql_injection", "split": "wsp_validation", "code": "def f(): pass",
-         "threat_model": "t", "condition": "incorrect_suggestion", "method": "B_trace_pf", "label": "original",
-         "raw_output": "vuln", "predicted_verdict": "vulnerable", "oracle_verdict": "vulnerable"},
-        {"case_id": "c1", "category": "sql_injection", "split": "wsp_validation", "code": "def f(): pass",
-         "threat_model": "t", "condition": "incorrect_suggestion", "method": "C_patched",
-         "label": "patched", "raw_output": "vuln", "predicted_verdict": "vulnerable",
-         "oracle_verdict": "vulnerable"},
-    ]}
-    roles = space_app.pick_roles(payload, "c1")
-    assert roles["base"]["method"] == "A_pf"
-    assert roles["prompt_only"]["method"] == "B_trace_pf"
-    assert roles["patched"]["label"] == "patched"
-    text = space_app.case_markdown(payload, "c1")
-    assert "Base Aya" in text and "Prompt only" in text and "Patched weights" in text
-    assert "Executable oracle verdict" in text
-    assert "patch manifest was included" in space_app.patch_markdown(payload)
+    It replays saved verdicts, so the only things worth asserting are that it exists, that it carries
+    no external dependencies, and that every verdict it shows came from a saved table.
+    """
+    page = ROOT / "docs" / "demo.html"
+    assert page.is_file()
+    text = page.read_text(encoding="utf-8")
+    assert "<script src=" not in text and "<link rel=\"stylesheet\"" not in text
+    assert "http://" not in text and "https://" not in text
+    # Saved verdicts are embedded as JSON; a live model would need a fetch or an API token.
+    assert "fetch(" not in text
+    assert '"models"' in text
+    card = (ROOT / "hf" / "space" / "README.md").read_text(encoding="utf-8")
+    assert "sdk: static" in card and "app_file: index.html" in card

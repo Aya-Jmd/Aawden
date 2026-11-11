@@ -23,6 +23,7 @@ Deploy (after the user approves spending on Beam):
 # No `from __future__ import annotations` here: the route functions are defined inside a factory,
 # and string annotations would hide `Request` from FastAPI, turning it into a query parameter.
 import hmac
+import json
 import os
 import time
 from pathlib import Path
@@ -48,6 +49,7 @@ ADAPTER_DIR = Path("demo/adapter-aya8b-curr-s17")  # relative to the synced app 
 PREFILL = '{"verdict":"'
 MAX_NEW_TOKENS = 6
 KEEP_WARM = 300
+_CASE_COUNT = len(json.loads((ROOT / "datasets/plain-pooled.json").read_text())["cases"])
 RATE_LIMIT = (30, 60.0)  # requests per client per window (seconds)
 
 
@@ -134,9 +136,14 @@ def make_app(load_fn=load):
         if state["loaded"] is None:
             state["loaded"] = load_fn()
         model, tokenizer = state["loaded"]
-        case = _load_case(body.case_id)
         if body.condition not in ("neutral", "correct_suggestion", "incorrect_suggestion"):
             raise HTTPException(422, "unknown condition")
+        try:
+            case = _load_case(body.case_id)
+        except KeyError:
+            # An unknown case is the caller's mistake, not a server fault: answer 404 with the count
+            # rather than letting KeyError become a 500.
+            raise HTTPException(404, f"unknown case_id; this endpoint serves {_CASE_COUNT} fixed cases")
         return {"case_id": body.case_id, "condition": body.condition,
                 "verdict": _verdict(model, tokenizer, case, body.condition)}
 
@@ -144,18 +151,27 @@ def make_app(load_fn=load):
 
 
 def _load_case(case_id: str):
+    """Load one fixture as a real `Case`, because `render` calls `case.visible()` on it.
+
+    A SimpleNamespace is not a substitute: `render` goes through `Case.visible`, so anything that is
+    not a `Case` raises AttributeError on the first request. Reading the dataset with the project's
+    own loader also means the endpoint renders byte-identical prompts to the measured runs.
+    """
     import json
-    from types import SimpleNamespace
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from security_wsp.data import Case
 
     data = json.loads((ROOT / "datasets/plain-pooled.json").read_text())
-    for c in data["cases"]:
-        if c["case_id"] == case_id:
-            return SimpleNamespace(**c)
+    for item in data["cases"]:
+        if item["case_id"] == case_id:
+            return Case.from_dict(item)
     raise KeyError(case_id)
 
 
 if asgi is not None:
-    @asgi(name="aawden-demo", gpu="RTX4090", cpu=2, memory="16Gi", timeout=300,
+    @asgi(name="aawden-demo", gpu="RTX4090", cpu=2, memory="32Gi", timeout=300,
           keep_warm_seconds=KEEP_WARM, authorized=False, image=image(),
           secrets=["AAWDEN_AYA_HF_TOKEN", "AAWDEN_DEMO_PASSCODE"],
           env={"HF_TOKEN": os.environ.get("AAWDEN_AYA_HF_TOKEN", "")},

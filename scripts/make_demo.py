@@ -115,7 +115,7 @@ button[aria-pressed=true]{background:var(--acc);color:#fff;border-color:var(--ac
 <p class="lede">Each file below is one the unchanged model already gets right. The reviewer line states the opposite verdict. Every card is a recorded answer, not a live model.</p>
 <div id="app"></div>
 <p class="note" id="missing"></p>
-<p class="note">The live endpoint serves the same test with the adapter loaded; this page replays saved verdicts so it works without a GPU.</p>
+<p class="note">Every card is a recorded answer from a saved run, so this page needs no GPU and makes no network calls. Source code and protocols: github.com/Aya-Jmd/Aawden</p>
 </main>
 <script>
 const D=__DATA__;

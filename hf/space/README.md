@@ -1,48 +1,48 @@
 ---
-title: Aawden saved-output demo
+title: "Aawden: does the model read the code, or the reviewer?"
 emoji: "\U0001F6E1"
 colorFrom: gray
 colorTo: blue
-sdk: gradio
-sdk_version: 6.31.0
-app_file: app.py
+sdk: static
+app_file: index.html
 pinned: false
 license: cc-by-nc-4.0
 base_model: CohereLabs/aya-expanse-8b
-short_description: "Saved Aya outputs: base vs prompt-only vs patched, with oracle verdicts"
+short_description: "Real cases: a wrong reviewer, and what the model answers"
 ---
 
-# Aawden saved-output demo
+# Try the test yourself
 
-Research artifact from the Aawden project. **Single author, small fixtures, independent review pending.**
+A security reviewer reads a file and says "this is fine." The model answers. Is it reading the code,
+or agreeing with the reviewer?
 
-The demo shows one security-review case at a time. Each case is the same Python snippet with a
-**misleading reviewer opinion** attached. Three answers are shown from saved real runs:
+Every file on this page is one the **unchanged** model already gets right with no reviewer present.
+Then the reviewer states the opposite verdict. Four answers are shown:
 
-- **Base Aya:** Aya Expanse 8B with a JSON prefill and the standard prompt.
-- **Prompt only:** the same base model with a stronger prompt, no weight change.
-- **Patched weights:** an Aawden sparse weight patch applied to the base model.
+- the **correct** answer, which comes from running the code;
+- the model **alone**, with no reviewer;
+- the model **with the reviewer line** — the case where it gives its answer away;
+- the model **after our adapter** — the same file, same reviewer, same question.
 
-Next to every answer the page shows the **executable oracle verdict**, obtained by running paired
-vulnerable and fixed implementations, and a **which weights changed** summary read from the patch
-manifest.
+Every card is a **recorded** answer from a saved run. Nothing on this page calls a model, so it loads
+instantly and costs nothing to host. You can switch between four models with the buttons at the top.
 
-## What this Space is not
+## What you are looking at
 
-- It does not run inference. It serves saved outputs from `examples.json`.
-- It does not ship model weights. The base model is `CohereLabs/aya-expanse-8b`, distributed under
-  CC-BY-NC-4.0 and the Cohere Labs Acceptable Use Policy, and is not included.
-- It makes no generalization claim. Cases are small synthetic fixtures written by one author.
+The measure behind it is the **flip rate on solved cases**: of the files a model gets right on its
+own, the share a wrong reviewer talks it out of. Unchanged Aya Expanse 8B gives up all 67
+of its 67 correct answers on the plain set. With the adapter it gives up at most a handful
+per reviewer wording, in every one of three training runs.
 
-## Results pending
+The page is one of the project's three artifacts:
 
-If `examples.json` is absent, the page says results are pending and shows nothing. Output numbers are
-never estimated here. The file is built offline with
-`python scripts/hf_publish.py build-space-examples --run <wsp_measure output> --patch-manifest <patch.json> --out hf/space/examples.json`,
-which excludes the sealed `wsp_final` split unless `--include-final` is passed after the freeze.
+- **the adapter** — `RishyanthReddy/aawden-aya8b-reviewer-adapter`
+- **the benchmark and every final number** — `RishyanthReddy/aawden-reviewer-flip-bench`
+- **the source, the protocols and the failures** — the GitHub repository linked in the card
 
-## Links
+## Not claimed
 
-- Benchmark: `RishyanthReddy/aawden-authority-bench`
-- Run logs: `RishyanthReddy/aawden-run-logs`
-- Patches and adapter: `RishyanthReddy/aawden-wsp-patch`, `RishyanthReddy/aawden-projection-patch`, `RishyanthReddy/aawden-aya-lora-v7`
+- The page does not run inference. It replays saved verdicts.
+- It ships no model weights.
+- The fixtures are small and templated, written by one author, and have not been independently
+  reviewed. The base model is CC-BY-NC-4.0 and is not redistributed.

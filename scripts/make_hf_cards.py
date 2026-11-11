@@ -147,7 +147,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 tokenizer = AutoTokenizer.from_pretrained("{base}", revision="{revision}")
 model = AutoModelForCausalLM.from_pretrained("{base}", revision="{revision}", torch_dtype="bfloat16")
-model = PeftModel.from_pretrained(model, "{{REPO_ID}}")
+model = PeftModel.from_pretrained(model, "{{{{REPO_ID}}}}")
 ```
 
 **Recipe.** Two stages. Stage one trains the review task with no reviewer in the prompt at all

@@ -52,7 +52,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 tokenizer = AutoTokenizer.from_pretrained("CohereLabs/aya-expanse-8b", revision="5062468bf9bc0c6035fd64e06274333ec127d980")
 model = AutoModelForCausalLM.from_pretrained("CohereLabs/aya-expanse-8b", revision="5062468bf9bc0c6035fd64e06274333ec127d980", torch_dtype="bfloat16")
-model = PeftModel.from_pretrained(model, "{REPO_ID}")
+model = PeftModel.from_pretrained(model, "{{REPO_ID}}")
 ```
 
 **Recipe.** Two stages. Stage one trains the review task with no reviewer in the prompt at all

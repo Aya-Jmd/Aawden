@@ -138,3 +138,142 @@ def test_saved_case_endpoint_still_works(client):
 def test_unknown_case_is_a_404_not_a_500(client):
     response = client.post("/review", json={"case_id": "c_does_not_exist"}, headers=AUTH)
     assert response.status_code == 404
+
+
+# --------------------------------------------------------------------------- caller identity & spend
+# Beam's proxy terminates the connection, so `request.client.host` is the proxy for every visitor.
+# These tests pin the two things that would otherwise be wrong silently: that one visitor cannot be
+# charged another's requests, and that a caller rotating its own forwarded header still cannot get
+# past the ceiling or mint unlimited buckets.
+
+
+class FakeRequest:
+    def __init__(self, peer="10.0.0.1:1234", headers=None):
+        self.headers = headers or {}
+        self.client = type("Peer", (), {"host": peer.split(":")[0]})()
+
+
+@pytest.fixture()
+def monkeypatch_limits(monkeypatch):
+    """`_rate_limit(window_seconds, per_window)` -- RATE_LIMIT is (window, limit), not (limit, window)."""
+    def apply(window, per_window):
+        monkeypatch.setattr(beam_demo, "RATE_LIMIT", (window, per_window))
+        monkeypatch.setattr(beam_demo, "GLOBAL_RATE_LIMIT", (window, 10_000))
+    return apply
+
+
+@pytest.fixture()
+def stub_verdict(monkeypatch):
+    """Every app built below stubs the model and the passcode: these tests are about the gate."""
+    monkeypatch.setenv("AAWDEN_DEMO_PASSCODE", PASSCODE)
+    monkeypatch.setattr(beam_demo, "_verdict",
+                        lambda model, tokenizer, case, condition, wording="reviewer":
+                        "vulnerable" if condition == "neutral" else "not vulnerable")
+
+
+def test_caller_is_read_from_forwarded_headers_not_the_proxy():
+    proxy = "10.0.0.1"
+    assert beam_demo._client_ip(FakeRequest(proxy, {"x-forwarded-for": "203.0.113.9"})) == "203.0.113.9"
+    # A chain: the leftmost entry is the original caller; the rest are proxies.
+    chained = {"x-forwarded-for": "203.0.113.9, 10.0.0.7, 10.0.0.1"}
+    assert beam_demo._client_ip(FakeRequest(proxy, chained)) == "203.0.113.9"
+    assert beam_demo._client_ip(FakeRequest(proxy, {"x-real-ip": "203.0.113.10"})) == "203.0.113.10"
+    # Nothing forwarded: fall back to the peer rather than an empty key.
+    assert beam_demo._client_ip(FakeRequest(proxy)) == proxy
+    assert beam_demo._client_ip(FakeRequest(proxy, {"x-forwarded-for": " , "})) == proxy
+
+
+def test_visitors_behind_one_proxy_do_not_share_a_bucket(stub_verdict, monkeypatch_limits):
+    """The bug this closes: two visitors on the same proxy must not exhaust each other's allowance."""
+    app = beam_demo.make_app(load_fn=lambda: (FakeModel(), FakeTokenizer()))
+    calls: list[int] = []
+
+    def burn(headers):
+        with TestClient(app) as c:
+            return c.post("/review-code", json={"code": CODE},
+                          headers={**headers, "X-Passcode": PASSCODE}).status_code
+
+    # RATE_LIMIT is (window_seconds, requests_per_window).
+    monkeypatch_limits(beam_demo.RATE_LIMIT[0], 2)
+    one = {"x-forwarded-for": "203.0.113.1"}
+    two = {"x-forwarded-for": "203.0.113.2"}
+    for _ in range(2):
+        calls.append(burn(one))
+    assert set(calls) == {200}
+    # The first visitor is now over its own window; the second has spent nothing.
+    assert burn(one) == 429
+    assert burn(two) == 200
+
+
+def test_a_rotating_forwarded_header_still_hits_the_container_limit(monkeypatch, stub_verdict):
+    """The forwarded header is caller-controlled, so it cannot be the only bucket."""
+    monkeypatch.setattr(beam_demo, "GLOBAL_RATE_LIMIT", (60.0, 5))  # (window_seconds, limit)
+    app = beam_demo.make_app(load_fn=lambda: (FakeModel(), FakeTokenizer()))
+    codes = []
+    with TestClient(app) as c:
+        for n in range(7):
+            codes.append(c.post("/review-code", json={"code": CODE},
+                                headers={"X-Passcode": PASSCODE,
+                                         "X-Forwarded-For": f"198.51.100.{n}"}).status_code)
+    assert codes == [200] * 5 + [429, 429]
+
+
+def test_the_daily_ceiling_refuses_before_the_model_is_loaded(monkeypatch, tmp_path):
+    monkeypatch.setattr(beam_demo, "SPEND_PATH", tmp_path / "demo-spend.json")
+    monkeypatch.setattr(beam_demo, "SPEND_DAILY_USD", 0.0)
+    monkeypatch.setenv("AAWDEN_DEMO_PASSCODE", PASSCODE)
+    loaded: list[bool] = []
+
+    def count_load():
+        loaded.append(True)
+        return (FakeModel(), FakeTokenizer())
+
+    app = beam_demo.make_app(load_fn=count_load)
+    with TestClient(app) as c:
+        r = c.post("/review-code", json={"code": CODE}, headers=AUTH)
+    assert r.status_code == 503
+    assert "budget" in r.json()["detail"]
+    assert loaded == [], "a refused request must not pay for a model load"
+
+
+def test_the_counter_survives_a_cold_start(monkeypatch, tmp_path):
+    """Scale-to-zero must not hand out a fresh budget: the day's total is read back at startup."""
+    saved = tmp_path / "demo-spend.json"
+    monkeypatch.setattr(beam_demo, "SPEND_PATH", saved)
+    monkeypatch.setattr(beam_demo, "SPEND_DAILY_USD", 2.00)
+    monkeypatch.setenv("AAWDEN_DEMO_PASSCODE", PASSCODE)
+    # A day that is already fully spent, written by the previous container.
+    today = __import__("time").strftime("%Y-%m-%d", __import__("time").gmtime())
+    saved.write_text(__import__("json").dumps({"utc_day": today, "seconds": 100000.0}))
+
+    with TestClient(beam_demo.make_app(load_fn=lambda: (FakeModel(), FakeTokenizer()))) as c:
+        assert c.post("/review-code", json={"code": CODE}, headers=AUTH).status_code == 503
+        health = c.get("/health").json()
+    assert health["spend"]["persisted"] is True
+    assert health["spend"]["utc_day"] == today
+    assert health["spend"]["usd"] >= beam_demo.SPEND_DAILY_USD
+
+
+def test_yesterdays_counter_does_not_apply_to_today(monkeypatch, tmp_path, stub_verdict):
+    saved = tmp_path / "demo-spend.json"
+    monkeypatch.setattr(beam_demo, "SPEND_PATH", saved)
+    monkeypatch.setenv("AAWDEN_DEMO_PASSCODE", PASSCODE)
+    saved.write_text(__import__("json").dumps({"utc_day": "2000-01-01", "seconds": 100000.0}))
+    with TestClient(beam_demo.make_app(load_fn=lambda: (FakeModel(), FakeTokenizer()))) as c:
+        assert c.post("/review-code", json={"code": CODE}, headers=AUTH).status_code == 200
+        # The stale file is replaced with today's record, not left lying.
+        assert __import__("json").loads(saved.read_text())["utc_day"] != "2000-01-01"
+
+
+def test_an_unwritable_volume_does_not_take_the_endpoint_down(monkeypatch, stub_verdict):
+    monkeypatch.setattr(beam_demo, "SPEND_PATH", Path("/proc/definitely-not-writable/spend.json"))
+    monkeypatch.setenv("AAWDEN_DEMO_PASSCODE", PASSCODE)
+    with TestClient(beam_demo.make_app(load_fn=lambda: (FakeModel(), FakeTokenizer()))) as c:
+        assert c.post("/review-code", json={"code": CODE}, headers=AUTH).status_code == 200
+
+
+def test_health_reports_what_the_proxy_said(client):
+    body = client.get("/health", headers={"X-Forwarded-For": "203.0.113.9"}).json()
+    assert body["client_ip"] == "203.0.113.9"
+    assert body["forwarded_for"] == "203.0.113.9"
+    assert body["spend"]["daily_usd"] == beam_demo.SPEND_DAILY_USD

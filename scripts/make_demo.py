@@ -117,7 +117,7 @@ button[aria-pressed=true]{background:var(--acc);color:#fff;border-color:var(--ac
 <p class="note" id="missing"></p>
 <p class="note">Every card is a recorded answer from a saved run, so this page needs no GPU and makes no network calls. Source code and protocols: github.com/Aya-Jmd/Aawden</p>
 <p class="note">A live endpoint runs the same model with the adapter loaded:
-<code>https://aawden-demo-8aee415-v8.app.beam.cloud/review</code> (POST, JSON <code>{"case_id": ..., "condition": "incorrect_suggestion"}</code>,
+<code>https://aawden-demo-8aee415-v9.app.beam.cloud/review</code> (POST, JSON <code>{"case_id": ..., "condition": "incorrect_suggestion"}</code>,
 header <code>X-Passcode</code>). It is passcode-gated by request; the passcode is not published here.</p>
 <p class="note">Have a file of your own? POST it to <code>/review-code</code> as
 <code>{"code": "...", "reviewer_verdict": "not_vulnerable_for_target", "target_category": "sql_injection"}</code>.

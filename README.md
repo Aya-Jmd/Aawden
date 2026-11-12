@@ -206,10 +206,11 @@ python scripts/make_fix_figure.py        # -> docs/figures/fix.html
 
 ## Where the artifacts live
 
-Three things came out of this project, and each one is published:
+Everything that came out of this project is published:
 
 | artifact | link | what it is |
 |---|---|---|
+| the article | [rishyanthreddy-aawden-article.static.hf.space](https://rishyanthreddy-aawden-article.static.hf.space) | the full write-up as one page: how deference was measured, why most small models cannot be measured this way, the fix, what it costs, and what did not work |
 | the demo | [rishyanthreddy-aawden-demo.static.hf.space](https://rishyanthreddy-aawden-demo.static.hf.space) | click through real cases: one file, a reviewer who states the wrong verdict, and four answers side by side. No GPU, nothing to install. |
 | the adapter | [RishyanthReddy/aawden-aya8b-reviewer-adapter](https://huggingface.co/RishyanthReddy/aawden-aya8b-reviewer-adapter) | the rank-16 LoRA for Aya Expanse 8B, with a card that states what it does and does not claim |
 | the benchmark | [RishyanthReddy/aawden-reviewer-flip-bench](https://huggingface.co/datasets/RishyanthReddy/aawden-reviewer-flip-bench) | the fixtures with executable oracle labels, plus every final number as machine-readable JSON |
@@ -245,7 +246,7 @@ docs/img/       the figures in this README
 | the rule, fixed before the runs | [`docs/FIX_PROTOCOL.md`](docs/FIX_PROTOCOL.md) |
 | every final number, generated | [`runs/fix/round2-summary.md`](runs/fix/round2-summary.md) |
 | the full write-up | [`docs/SUBMISSION_FINAL.md`](docs/SUBMISSION_FINAL.md) |
-| the narrative version | [`docs/ARTICLE_DRAFT.md`](docs/ARTICLE_DRAFT.md) |
+| the article (source of the published page) | [`docs/HF_ARTICLE.md`](docs/HF_ARTICLE.md) |
 | model card, licence, limitations | [`docs/MODEL_CARD_V3.md`](docs/MODEL_CARD_V3.md) |
 | the story page (open in a browser) | [`docs/index.html`](docs/index.html) |
 

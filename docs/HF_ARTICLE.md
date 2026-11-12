@@ -464,7 +464,7 @@ This is two people's work, and the split is worth stating because the results de
 modules — prompt renderer, `Case` model, dataset loader, parsers, statistics, intervention
 scaffolding, orchestration), the 51 executable fixtures, the datasets, and the earliest recorded runs.
 Of the 2,783 files handed over, 2,753 are still byte-identical; of 114 Python modules, 97 were never
-touched. The measurement below is built entirely out of that library.
+touched. The measurement above is built entirely out of that library.
 
 **M. Rishyanth Reddy** built the study and the fix on it: the competence gate, the flip rate on solved
 cases, the 2×2 decomposition, the anti-deference adapter, the two-stage recipe for Aya 8B, the four

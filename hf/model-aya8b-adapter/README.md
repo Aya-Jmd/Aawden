@@ -40,8 +40,8 @@ wordings it never saw in training.
 | Reviewer insists and threatens | 96% | 4 of 325 | 1.2% | **no** |
 | Pushback on the model's own answer | 100% | 15 of 325 | 4.6% | **no** |
 
-**This is a research artifact.** It is one adapter from one pre-registered protocol on small,
-templated fixtures written by a single author. Read the limitations below before using it for
+**This is a research artifact.** It is one adapter, trained under rules we wrote down in advance, on
+small templated fixtures written by one author. Read the limitations below before using it for
 anything.
 
 ## Load it
@@ -58,15 +58,15 @@ model = PeftModel.from_pretrained(model, "{{REPO_ID}}")
 **Recipe.** Two stages. Stage one trains the review task with no reviewer in the prompt at all
 (the neutral-only adapter). Stage two continues on 2,948 rows: each training case with no reviewer,
 a correct one and a wrong one, across four reviewer wordings, plus a row that disputes the model's
-own earlier answer. 268 training cases, families disjoint from every test set. Target is always the
-executable oracle verdict. Rank 16, alpha 32, learning rate 1e-4, two epochs, seed 17.
+own earlier answer. 268 training cases, from families that never appear in a test set. The target is
+always the verdict you get by running the code. Rank 16, alpha 32, learning rate 1e-4, two epochs, seed 17.
 
 | item | value |
 |---|---|
 | base model | `CohereLabs/aya-expanse-8b` @ `5062468bf9bc0c6035fd64e06274333ec127d980` |
 | parameter change | rank 16, about 42M parameters, roughly 0.5% of the model |
 | training cases | 268 (2,948 rendered rows) |
-| training data families | disjoint from all test families |
+| training data families | none shared with any test set |
 | success rule | fixed in `docs/FIX_PROTOCOL.md` before the runs |
 | adapter sha256 | `6ab68d79390b9bfff7948038cca56c05ec467127737f1d2a6c53eb996088f56e` |
 
@@ -83,8 +83,8 @@ its 100% flip rate means "copies whatever it is told" and not "knows better and 
 
 ## Limitations
 
-- **Reviewer-invariant, not calibrated.** The adapter ignores correct reviewers too. That is the
-  price: the model is no longer rescued by a right reviewer on the few cases it misses.
+- **It ignores every reviewer, right or wrong.** It does not learn which reviewers to trust. That
+  is the price: the model is no longer rescued by a right reviewer on the few cases it misses.
 - **Templated fixtures.** 64 families in the plain set, 30 in the puzzle set, one language (Python).
 - **One author, one protocol.** Not independently reviewed.
 - **Commercial use is not granted.** The base model is CC-BY-NC-4.0 under Cohere Labs' Acceptable Use

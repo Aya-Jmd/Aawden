@@ -34,6 +34,8 @@ except ImportError:  # Imported locally for tests without the SDK.
     Image = asgi = None
 
 try:  # Model at module level: FastAPI cannot bind a body model defined inside a factory.
+    from typing import Optional
+
     from pydantic import BaseModel
 
     class ReviewIn(BaseModel):
@@ -46,12 +48,15 @@ try:  # Model at module level: FastAPI cannot bind a body model defined inside a
         `case_id` requests replay a saved fixture whose label is executable. A submitted file has no
         label, so `reviewer_verdict` is what the reviewer says, not what the code does — the endpoint
         compares the model's two answers and makes no claim about which one is right.
+
+        `Optional[...]` rather than `str | None`: this class body is evaluated at import, and the
+        deploy CLI evaluates the module with its own interpreter (3.9), where that syntax raises.
         """
         code: str
-        reviewer_verdict: str | None = None  # vulnerable | not_vulnerable_for_target, or absent
+        reviewer_verdict: Optional[str] = None  # vulnerable | not_vulnerable_for_target, or absent
         target_category: str = "sql_injection"
         language: str = "python"
-        threat_model: str | None = None
+        threat_model: Optional[str] = None
 except ImportError:
     ReviewIn = None
     CodeIn = None

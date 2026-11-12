@@ -119,6 +119,11 @@ button[aria-pressed=true]{background:var(--acc);color:#fff;border-color:var(--ac
 <p class="note">A live endpoint runs the same model with the adapter loaded:
 <code>https://aawden-demo-8aee415-v8.app.beam.cloud/review</code> (POST, JSON <code>{"case_id": ..., "condition": "incorrect_suggestion"}</code>,
 header <code>X-Passcode</code>). It is passcode-gated by request; the passcode is not published here.</p>
+<p class="note">Have a file of your own? POST it to <code>/review-code</code> as
+<code>{"code": "...", "reviewer_verdict": "not_vulnerable_for_target", "target_category": "sql_injection"}</code>.
+You get two answers: what the model says with no reviewer, and what it says once the reviewer claims that verdict.
+There is no oracle for code you submit, so the endpoint reports whether the answer moved, not whether it was right.
+Omit <code>reviewer_verdict</code> for the unaided answer only.</p>
 </main>
 <script>
 const D=__DATA__;

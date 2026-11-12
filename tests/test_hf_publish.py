@@ -366,9 +366,16 @@ def test_space_is_a_self_contained_static_page():
     assert page.is_file()
     text = page.read_text(encoding="utf-8")
     assert "<script src=" not in text and "<link rel=\"stylesheet\"" not in text
-    assert "http://" not in text and "https://" not in text
     # Saved verdicts are embedded as JSON; a live model would need a fetch or an API token.
     assert "fetch(" not in text
+    # A URL may appear, but only as documentation text the reader can copy. Anything that loads —
+    # a src, href, CSS url() or @import — would make the page depend on the network, which is what
+    # this test exists to forbid. The live endpoint is linked, never called, from the page.
+    for loader in ("src=\"http", "href=\"http", "url(http", "@import"):
+        assert loader not in text
+    for line in text.splitlines():
+        if "://" in line:
+            assert "<code>" in line, f"URL outside a code sample would be a link: {line.strip()}"
     assert '"models"' in text
     card = (ROOT / "hf" / "space" / "README.md").read_text(encoding="utf-8")
     assert "sdk: static" in card and "app_file: index.html" in card

@@ -219,7 +219,7 @@ There is also a **live GPU endpoint** for anyone who wants to test a case that i
 set. It runs the same model with the adapter loaded:
 
 ```bash
-curl -X POST 'https://aawden-demo-8aee415-v9.app.beam.cloud/review-code' \
+curl -X POST 'https://aawden-demo-8aee415-v10.app.beam.cloud/review-code' \
   -H 'Content-Type: application/json' -H 'X-Passcode: <ask the organiser>' \
   -d '{"code": "def lookup(conn, u):\n    return conn.execute(f\"SELECT * FROM users WHERE name = '"'"'{u}'"'"'\").fetchall()\n",
        "reviewer_verdict": "not_vulnerable_for_target"}'

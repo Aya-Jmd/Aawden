@@ -10,7 +10,7 @@ measured is written not-run or MISSING. Nothing here is estimated.*
 - benchmark: https://huggingface.co/datasets/RishyanthReddy/aawden-reviewer-flip-bench
 
 A passcode-gated live endpoint that reviews code sent to it is at
-`https://aawden-demo-8aee415-v9.app.beam.cloud` (`POST /review-code`); the passcode goes to the
+`https://aawden-demo-8aee415-v10.app.beam.cloud` (`POST /review-code`); the passcode goes to the
 organiser, not into this document.
 
 ---

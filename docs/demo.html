@@ -32,7 +32,7 @@ label{display:block;font-size:13px;font-weight:600;color:var(--ink2);margin:14px
 <p class="note">Every card is a recorded answer from a saved run, so the cards need no GPU and no network. Only the live check at the bottom sends anything. Source code and protocols: github.com/Aya-Jmd/Aawden</p>
 <h2>Check a file of your own</h2>
 <p class="note">This sends your code to a live GPU endpoint running the same model with the adapter loaded:
-<code>https://aawden-demo-8aee415-v9.app.beam.cloud/review-code</code>. You get two answers: what the model says
+<code>https://aawden-demo-8aee415-v10.app.beam.cloud/review-code</code>. You get two answers: what the model says
 with no reviewer, and what it says once a reviewer claims the verdict you pick. There is no oracle for code you
 submit, so it tells you whether the answer moved, not whether it was right. The container sleeps when idle, so the
 first request can take about a minute.</p>
@@ -111,7 +111,7 @@ fillFromHash();
 // re-run, only hashchange fires. Without this listener the box stays empty and the link looks broken.
 addEventListener("hashchange", fillFromHash);
 
-const ENDPOINT="https://aawden-demo-8aee415-v9.app.beam.cloud/review-code";
+const ENDPOINT="https://aawden-demo-8aee415-v10.app.beam.cloud/review-code";
 const statusEl=document.getElementById("status"),liveEl=document.getElementById("live"),goEl=document.getElementById("go");
 function esc(s){return String(s).replace(/[<&]/g,c=>c==="<"?"&lt;":"&amp;")}
 function card(title,val,cls){return `<div class="card"><b>${title}</b><span class="v ${cls}">${val}</span></div>`}

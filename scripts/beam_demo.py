@@ -9,7 +9,13 @@ Security posture:
   * Every request must carry `X-Passcode`, compared against AAWDEN_DEMO_PASSCODE, which is set as a
     Beam runtime secret at deploy time. The Beam workspace token is never placed in this file, in an
     image, or in a request; deployment reads it from the repo `.env` exactly as `beam_launch.py` does.
-  * Rate limit: a fixed window per client IP, so a shared passcode cannot burn the GPU unbounded.
+  * Rate limit: a fixed window per caller, plus one per container. Beam's proxy terminates the
+    connection, so `request.client.host` is the proxy, not the visitor: the caller is read from the
+    forwarded headers instead. Those are caller-controlled, so the rate limit is a speed bump and
+    not a boundary.
+  * Spend ceiling: every served request charges the GPU seconds it plausibly billed to a counter
+    kept per UTC day on the `aawden-v3` volume, and requests are refused once the day's budget is
+    gone. This, not the rate limit, is what bounds the bill when someone loops the endpoint.
   * The container keeps warm 5 minutes after the last request and then scales to zero.
 
 Weights come from the Hub by pinned revision (CohereLabs/aya-expanse-8b @ 5062468b) using the
@@ -25,13 +31,14 @@ Deploy (after the user approves spending on Beam):
 import hmac
 import json
 import os
+import threading
 import time
 from pathlib import Path
 
 try:
-    from beam import Image, asgi
+    from beam import Image, Volume, asgi
 except ImportError:  # Imported locally for tests without the SDK.
-    Image = asgi = None
+    Image = Volume = asgi = None
 
 try:  # Model at module level: FastAPI cannot bind a body model defined inside a factory.
     from typing import Optional
@@ -73,7 +80,19 @@ KEEP_WARM = 300
 # room to run. deploy_demo checks that this matches its --gpu so the two cannot drift.
 GPU = os.environ.get("AAWDEN_DEMO_GPU", "RTX5090")
 _CASE_COUNT = len(json.loads((ROOT / "datasets/plain-pooled.json").read_text())["cases"])
-RATE_LIMIT = (30, 60.0)  # requests per client per window (seconds)
+RATE_LIMIT = (30, 60.0)  # requests per caller per window (seconds)
+GLOBAL_RATE_LIMIT = (60, 60.0)  # requests per container per window, whatever the caller claims to be
+# The spend ceiling. A request charges the GPU seconds it plausibly billed: the wall clock since the
+# previous request, capped at the keep-warm window (the container stayed up that long because of it),
+# plus a full cold-start load when the model is not in memory yet. Requests are refused once the
+# UTC day's total is spent. Under-counted by at most one request, because the last request's own
+# handling time is only billed by the next request's gap.
+SPEND_HOURLY_USD = 1.09  # configs/beam.json hourly_usd.RTX5090
+SPEND_DAILY_USD = 2.00  # about 1.8 GPU-hours of warm container per UTC day
+COLD_START_SECONDS = 180  # observed ~150 s; round up so the ceiling errs towards refusing early
+VOLUME_NAME = "aawden-v3"
+VOLUME_MOUNT = "/volumes/aawden-v3"
+SPEND_PATH = Path(VOLUME_MOUNT) / "demo-spend.json"
 MAX_CODE_CHARS = 20_000  # about 5k tokens: one screen of code plus room for the answer
 # The two categories the measured set covers. A third category would need a threat model the model
 # was never asked about, so it is refused rather than guessed at.
@@ -168,11 +187,62 @@ def _verdict(model, tokenizer, case, condition: str, wording: str = "reviewer"):
     return "no verdict"
 
 
+def _client_ip(request) -> str:
+    """The caller's address, as far as it can honestly be told behind Beam's proxy.
+
+    `request.client.host` is the proxy's peer address, which is the same string for every visitor,
+    so keying the rate limit on it puts the whole world in one bucket. The forwarded headers are the
+    only better signal available here, and they are caller-controlled: the leftmost X-Forwarded-For
+    entry is whatever the caller typed. So this returns a usable bucket, not an identity -- the
+    passcode is the boundary, and the daily spend ceiling is what actually bounds the bill.
+    """
+    forwarded = request.headers.get("x-forwarded-for", "")
+    if forwarded:
+        first = forwarded.split(",")[0].strip()
+        if first:
+            return first
+    real = request.headers.get("x-real-ip", "").strip()
+    if real:
+        return real
+    return request.client.host if request.client else "?"
+
+
+def _spend_read() -> dict:
+    """The counter left by an earlier container. {} when the volume is absent or unwritable."""
+    try:
+        record = json.loads(SPEND_PATH.read_text())
+    except (OSError, ValueError):
+        return {}
+    return record if isinstance(record, dict) else {}
+
+
+def _spend_write(utc_day: str, seconds: float) -> None:
+    """Persist the day's total. Write-then-rename so a killed container cannot leave half a file."""
+    try:
+        SPEND_PATH.parent.mkdir(parents=True, exist_ok=True)
+        scratch = SPEND_PATH.with_name(SPEND_PATH.name + ".tmp")
+        scratch.write_text(json.dumps({"utc_day": utc_day, "seconds": round(seconds, 1)}))
+        scratch.replace(SPEND_PATH)
+    except OSError:
+        pass  # read-only volume: the in-container counter still holds for this container's lifetime
+
+
 def make_app(load_fn=load):
     from fastapi import FastAPI, Header, HTTPException, Request
 
     app = FastAPI(title="Aawden demo")
-    state: dict = {"loaded": None, "hits": {}}
+    today = time.strftime("%Y-%m-%d", time.gmtime())
+    saved = _spend_read()
+    # Seed once per container: a cold start must not hand out a fresh budget, or the ceiling is only
+    # as strong as the scale-to-zero timer.
+    state: dict = {
+        "loaded": None,
+        "hits": {},
+        "last_at": None,
+        "spend_day": today,
+        "spend_seconds": float(saved.get("seconds", 0.0)) if saved.get("utc_day") == today else 0.0,
+    }
+    spend_lock = threading.Lock()
     passcode = os.environ.get("AAWDEN_DEMO_PASSCODE", "")
 
     def check(pw: str | None):
@@ -181,12 +251,78 @@ def make_app(load_fn=load):
         if not pw or not hmac.compare_digest(pw.encode(), passcode.encode()):
             raise HTTPException(401, "bad passcode")
 
+    def charge(seconds: float) -> float:
+        today = time.strftime("%Y-%m-%d", time.gmtime())
+        with spend_lock:
+            if today != state["spend_day"]:
+                state["spend_day"], state["spend_seconds"] = today, 0.0
+            state["spend_seconds"] += max(0.0, seconds)
+            total = state["spend_seconds"]
+            _spend_write(today, total)
+        return total
+
+    def gate(request, pw: str | None) -> None:
+        """Passcode, then the rate limits, then the day's spend ceiling.
+
+        Runs before the model is touched, so a refused request costs no GPU. The charge covers the
+        time this container has already been billing since the previous request, which is why it is
+        taken here rather than after the work.
+        """
+        check(pw)
+        ip = _client_ip(request)
+        now = time.time()
+        window, limit = RATE_LIMIT
+        hits = [t for t in state["hits"].get(ip, []) if now - t < window] + [now]
+        state["hits"][ip] = hits
+        gwindow, glimit = GLOBAL_RATE_LIMIT
+        global_hits = [t for t in state["hits"].get("\0all", []) if now - t < gwindow] + [now]
+        state["hits"]["\0all"] = global_hits
+        if len(hits) > limit or len(global_hits) > glimit:
+            raise HTTPException(429, "rate limit")
+        # A caller that rewrites the forwarded header gets a fresh per-IP bucket every time, so the
+        # table would otherwise grow without bound. Drop expired keys instead of leaking them.
+        if len(state["hits"]) > 5000:
+            for key in [k for k, v in state["hits"].items() if not v or now - v[-1] >= window]:
+                del state["hits"][key]
+        previous = state["last_at"]
+        state["last_at"] = now
+        billed = min(max(0.0, now - previous), float(KEEP_WARM)) if previous else 0.0
+        if state["loaded"] is None:
+            billed += COLD_START_SECONDS
+        spent = charge(billed)
+        if spent * SPEND_HOURLY_USD / 3600.0 >= SPEND_DAILY_USD:
+            raise HTTPException(
+                503, f"this demo has used its {SPEND_DAILY_USD:.2f} USD GPU budget for the UTC day")
+
     @app.get("/health")
-    def health():
-        return {"ok": True, "model": MODEL_ID, "adapter": str(ADAPTER_DIR)}
+    def health(request: Request):
+        """Ungated on purpose: it is what tells the organiser the container is awake.
+
+        It also reports what the caller looks like from in here and what the day has cost, because
+        those two are the only way to tell from outside whether the forwarded headers carry anything
+        real and whether the ceiling is holding.
+        """
+        today = time.strftime("%Y-%m-%d", time.gmtime())
+        spent = state["spend_seconds"] if state["spend_day"] == today else 0.0
+        return {
+            "ok": True,
+            "model": MODEL_ID,
+            "adapter": str(ADAPTER_DIR),
+            "client_ip": _client_ip(request),
+            "peer": request.client.host if request.client else None,
+            "forwarded_for": request.headers.get("x-forwarded-for"),
+            "real_ip": request.headers.get("x-real-ip"),
+            "spend": {
+                "utc_day": today,
+                "gpu_seconds": round(spent, 1),
+                "usd": round(spent * SPEND_HOURLY_USD / 3600.0, 4),
+                "daily_usd": SPEND_DAILY_USD,
+                "persisted": bool(_spend_read()),
+            },
+        }
 
     @app.get("/diagnose")
-    def diagnose(x_passcode: str | None = Header(None)):
+    def diagnose(request: Request, x_passcode: str | None = Header(None)):
         """Walk load() and one verdict, returning the traceback of the first failure.
 
         Gated by the same passcode as /review. It exists because the container is not reachable by
@@ -194,7 +330,9 @@ def make_app(load_fn=load):
         """
         import traceback
 
-        check(x_passcode)
+        # Same gate as the routes: this one loads the model and runs a verdict, so it is the most
+        # expensive request on the endpoint.
+        gate(request, x_passcode)
         steps: list[dict] = []
 
         def step(name, fn):
@@ -254,14 +392,7 @@ def make_app(load_fn=load):
 
     @app.post("/review")
     def review(body: ReviewIn, request: Request, x_passcode: str | None = Header(None)):
-        check(x_passcode)
-        ip = request.client.host if request.client else "?"
-        now = time.time()
-        window, limit = RATE_LIMIT
-        hits = [t for t in state["hits"].get(ip, []) if now - t < window] + [now]
-        state["hits"][ip] = hits
-        if len(hits) > limit:
-            raise HTTPException(429, "rate limit")
+        gate(request, x_passcode)
         if state["loaded"] is None:
             state["loaded"] = load_fn()
         model, tokenizer = state["loaded"]
@@ -285,14 +416,7 @@ def make_app(load_fn=load):
         attached — the same prompt shape as the measured runs. Whether the claim is right is the
         caller's to know; what the endpoint shows is whether the model moved.
         """
-        check(x_passcode)
-        ip = request.client.host if request.client else "?"
-        now = time.time()
-        window, limit = RATE_LIMIT
-        hits = [t for t in state["hits"].get(ip, []) if now - t < window] + [now]
-        state["hits"][ip] = hits
-        if len(hits) > limit:
-            raise HTTPException(429, "rate limit")
+        gate(request, x_passcode)
         if len(body.code) > MAX_CODE_CHARS:
             raise HTTPException(413, f"code is {len(body.code)} characters; the limit is {MAX_CODE_CHARS}")
         if not body.code.strip():
@@ -400,9 +524,12 @@ def _load_case(case_id: str):
 
 
 if asgi is not None:
+    # The volume is what makes the spend ceiling survive scale-to-zero. concurrent_requests stays at
+    # its default of 1, so the counter has a single writer.
     @asgi(name="aawden-demo", gpu=GPU, cpu=2, memory="32Gi", timeout=300,
           keep_warm_seconds=KEEP_WARM, authorized=False, image=image(),
           secrets=["AAWDEN_AYA_HF_TOKEN", "AAWDEN_DEMO_PASSCODE"],
+          volumes=[Volume(name=VOLUME_NAME, mount_path=VOLUME_MOUNT)] if Volume is not None else [],
           )
     def web_server():
         return make_app()

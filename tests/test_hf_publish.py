@@ -3,6 +3,7 @@
 No network. HfApi is replaced by a recording stub, so publish is exercised without touching Hugging Face.
 """
 import json
+import re
 import struct
 import sys
 from pathlib import Path
@@ -357,17 +358,27 @@ def test_publish_config_matches_cards_and_namespace():
 
 
 def test_space_is_a_self_contained_static_page():
-    """The Space is a static page: no inference, no network, no build step.
+    """The Space is a static page that needs no GPU to show its saved results.
 
-    It replays saved verdicts, so the only things worth asserting are that it exists, that it carries
-    no external dependencies, and that every verdict it shows came from a saved table.
+    It replays saved verdicts, so what matters is that it exists, that it has no external
+    dependencies, and that every verdict it displays came from a saved table. The one exception is
+    the live check at the bottom: the reader types a passcode and presses a button, and only then
+    does the page send anything. That request is asserted here so the page cannot quietly start
+    calling a model on load, and cannot grow a second outbound call.
     """
     page = ROOT / "docs" / "demo.html"
     assert page.is_file()
     text = page.read_text(encoding="utf-8")
     assert "<script src=" not in text and "<link rel=\"stylesheet\"" not in text
-    # Saved verdicts are embedded as JSON; a live model would need a fetch or an API token.
-    assert "fetch(" not in text
+    # Exactly one outbound call, inside the click handler, to the documented endpoint.
+    assert text.count("fetch(") == 1
+    assert "await fetch(ENDPOINT" in text
+    assert re.search(r'const ENDPOINT="https://[^"]+/review-code"', text)
+    handler = text.index('goEl.addEventListener("click"')
+    assert handler < text.index("fetch("), "the only fetch must be inside the click handler"
+    # Nothing loads before that handler runs: no fetch and no image at module scope.
+    before_handler = text[:handler]
+    assert "fetch(" not in before_handler, "the page must not call out on load"
     # A URL may appear, but only as documentation text the reader can copy. Anything that loads —
     # a src, href, CSS url() or @import — would make the page depend on the network, which is what
     # this test exists to forbid. The live endpoint is linked, never called, from the page.
@@ -375,7 +386,10 @@ def test_space_is_a_self_contained_static_page():
         assert loader not in text
     for line in text.splitlines():
         if "://" in line:
-            assert "<code>" in line, f"URL outside a code sample would be a link: {line.strip()}"
+            # Documentation text, or the endpoint the click handler posts to. A JS string is data,
+            # not a link: nothing loads it until the reader presses the button.
+            assert "<code>" in line or 'const ENDPOINT="' in line, (
+                f"URL outside a code sample would be a link: {line.strip()}")
     assert '"models"' in text
     card = (ROOT / "hf" / "space" / "README.md").read_text(encoding="utf-8")
     assert "sdk: static" in card and "app_file: index.html" in card

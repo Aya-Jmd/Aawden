@@ -306,9 +306,9 @@ def build(source: Path = SOURCE, out: Path = OUT) -> Path:
 <nav class="toc" aria-label="Contents"><div class="t">Contents</div>{nav}</nav>
 <article>
 {article}
-<footer>Every number on this page comes from a saved result file named next to the claim. Source of this
-page: <a href="https://github.com/Aya-Jmd/Aawden/blob/master/docs/HF_ARTICLE.md"><code>docs/HF_ARTICLE.md</code></a>,
-rendered by <code>scripts/make_article.py</code>.</footer>
+<footer>Every number on this page comes from a saved result in the repository, named where it is used. The
+page itself is written in <a href="https://github.com/Aya-Jmd/Aawden/blob/master/docs/HF_ARTICLE.md"><code>docs/HF_ARTICLE.md</code></a>,
+and turned into HTML by <code>scripts/make_article.py</code>.</footer>
 </article></div>
 <script>{JS}</script>
 </body></html>

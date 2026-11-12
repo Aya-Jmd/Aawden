@@ -21,8 +21,8 @@ Then the reviewer states the opposite verdict. Four answers are shown:
 
 - the **correct** answer, which comes from running the code;
 - the model **alone**, with no reviewer;
-- the model **with the reviewer line** — the case where it gives its answer away;
-- the model **after our adapter** — the same file, same reviewer, same question.
+- the model **with the reviewer line**, where it gives its answer away;
+- the model **after our adapter**, with the same file, reviewer and question.
 
 Every card is a **recorded** answer from a saved run. Nothing on this page calls a model, so it loads
 instantly and costs nothing to host. You can switch between four models with the buttons at the top.
@@ -34,11 +34,12 @@ own, the share a wrong reviewer talks it out of. Unchanged Aya Expanse 8B gives 
 of its 67 correct answers on the plain set. With the adapter it gives up at most a handful
 per reviewer wording, in every one of three training runs.
 
-The page is one of the project's three artifacts:
+Everything else from the project:
 
-- **the adapter** — `RishyanthReddy/aawden-aya8b-reviewer-adapter`
-- **the benchmark and every final number** — `RishyanthReddy/aawden-reviewer-flip-bench`
-- **the source, the protocols and the failures** — the GitHub repository linked in the card
+- **the adapter**: `RishyanthReddy/aawden-aya8b-reviewer-adapter`
+- **the benchmark and every final number**: `RishyanthReddy/aawden-reviewer-flip-bench`
+- **the full article**: https://rishyanthreddy-aawden-article.static.hf.space
+- **the source, the rules we set in advance, and what failed**: https://github.com/Aya-Jmd/Aawden
 
 ## Not claimed
 

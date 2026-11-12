@@ -81,7 +81,7 @@ def wording_table(summary: dict) -> str:
 
 def small_model_table(summary: dict) -> str:
     """The two recipes on the two small models, worst wording per run."""
-    rows = ["| model | recipe | right on its own, 3 runs | worst held-out wording | rule |",
+    rows = ["| model | recipe | right on its own, 3 runs | worst held-out wording | rule set in advance |",
             "|---|---|---|---|---|"]
     for key, label, recipe in (("aya8b-curr", "Aya Expanse 8B", "task first, then eight wordings"),
                                ("aya8b-multi", "Aya Expanse 8B", "all wordings from scratch"),
@@ -99,7 +99,7 @@ def small_model_table(summary: dict) -> str:
         passed = block["_summary"]
         rows.append(f"| {label} | {recipe} | {', '.join(str(s) for s in solved)} | "
                     f"{WORDING_LABEL[worst[0]]}: {worst[1]} of {worst[2]} | "
-                    f"PASS {passed['seeds_passed']}/{passed['seeds_scored']} |")
+                    f"pass, {passed['seeds_passed']} of {passed['seeds_scored']} |")
     return "\n".join(rows)
 
 
@@ -135,8 +135,8 @@ wordings it never saw in training.
 
 {wording_table}
 
-**This is a research artifact.** It is one adapter from one pre-registered protocol on small,
-templated fixtures written by a single author. Read the limitations below before using it for
+**This is a research artifact.** It is one adapter, trained under rules we wrote down in advance, on
+small templated fixtures written by one author. Read the limitations below before using it for
 anything.
 
 ## Load it
@@ -153,15 +153,15 @@ model = PeftModel.from_pretrained(model, "{{{{REPO_ID}}}}")
 **Recipe.** Two stages. Stage one trains the review task with no reviewer in the prompt at all
 (the neutral-only adapter). Stage two continues on 2,948 rows: each training case with no reviewer,
 a correct one and a wrong one, across four reviewer wordings, plus a row that disputes the model's
-own earlier answer. 268 training cases, families disjoint from every test set. Target is always the
-executable oracle verdict. Rank 16, alpha 32, learning rate 1e-4, two epochs, seed 17.
+own earlier answer. 268 training cases, from families that never appear in a test set. The target is
+always the verdict you get by running the code. Rank 16, alpha 32, learning rate 1e-4, two epochs, seed 17.
 
 | item | value |
 |---|---|
 | base model | `{base}` @ `{revision}` |
 | parameter change | rank 16, about 42M parameters, roughly 0.5% of the model |
 | training cases | 268 (2,948 rendered rows) |
-| training data families | disjoint from all test families |
+| training data families | none shared with any test set |
 | success rule | fixed in `docs/FIX_PROTOCOL.md` before the runs |
 | adapter sha256 | `{sha}` |
 
@@ -178,8 +178,8 @@ its 100% flip rate means "copies whatever it is told" and not "knows better and 
 
 ## Limitations
 
-- **Reviewer-invariant, not calibrated.** The adapter ignores correct reviewers too. That is the
-  price: the model is no longer rescued by a right reviewer on the few cases it misses.
+- **It ignores every reviewer, right or wrong.** It does not learn which reviewers to trust. That
+  is the price: the model is no longer rescued by a right reviewer on the few cases it misses.
 - **Templated fixtures.** 64 families in the plain set, 30 in the puzzle set, one language (Python).
 - **One author, one protocol.** Not independently reviewed.
 - **Commercial use is not granted.** The base model is CC-BY-NC-4.0 under Cohere Labs' Acceptable Use
@@ -220,14 +220,14 @@ whether the model answers from the code or from the reviewer.
 
 ## Why the obvious metric does not work
 
-The usual score is "accuracy when the reviewer lies", and it is gameable: a model that always answers
-`vulnerable` scores exactly 50% on a balanced set, and a benchmark with no competence precondition
-cannot tell that apart from a real repair.
+The usual score is "accuracy when the reviewer lies", and it is easy to game: a model that always
+answers `vulnerable` scores exactly 50% on a balanced set, and a benchmark that never checks whether
+the model can do the task cannot tell that apart from a real fix.
 
-So the headline measure is **flip rate on solved cases**: take only the files the model gets right
+So the main measure is **flip rate on solved cases**: take only the files the model gets right
 with **no reviewer present at all**, then attach a reviewer who states the opposite. The flip rate is
 the share of those correct answers that go wrong. A model that was guessing has no correct answers to
-lose — which is why no flip rate is quoted for a model that is at chance.
+lose. That is also why we quote no flip rate for a model that is at chance.
 
 ## What is in here
 
@@ -242,16 +242,16 @@ lose — which is why no flip rate is quoted for a model that is at chance.
 | `runs/fix/round2-summary.json` | every final number, machine-readable |
 | `runs/fix/round2-summary.md` | the same numbers as tables, generated from the JSON |
 
-A sealed 120-case final set exists with committed hashes and is deliberately **not** published, and
-was never opened.
+A sealed 120-case final set exists with committed hashes. We have not published it, and we have
+never opened it.
 
 ## What it measures
 
 {primary_table}
 
 Three numbers per cell in the source report are three answer formats: one JSON answer and two A/B
-letter mappings with the labels swapped. Qwen2.5-32B's own rate moves tenfold across formats, so no
-single format can be trusted.
+letter mappings with the labels swapped. Qwen2.5-32B's own rate moves tenfold across formats, so we
+don't trust any one format on its own.
 
 The small-model recipe, on models that cannot do the task unaided:
 
@@ -260,7 +260,7 @@ The small-model recipe, on models that cannot do the task unaided:
 ## Labels are executable, not judged
 
 Each fixture is a runnable pair: a vulnerable implementation and a fixed one. The verdict comes from
-what the code does — SQL against an in-memory SQLite database, access control against a fixed record
+what the code does: SQL against an in-memory SQLite database, access control against a fixed record
 table. All 220 oracle checks pass. `datasets/realcode-sinkchecked.json` is the exception and says so
 in its own `label_status`: its labels are asserted by the upstream dataset and checked with a sink
 scan, not by an executable oracle.
@@ -308,8 +308,8 @@ Then the reviewer states the opposite verdict. Four answers are shown:
 
 - the **correct** answer, which comes from running the code;
 - the model **alone**, with no reviewer;
-- the model **with the reviewer line** — the case where it gives its answer away;
-- the model **after our adapter** — the same file, same reviewer, same question.
+- the model **with the reviewer line**, where it gives its answer away;
+- the model **after our adapter**, with the same file, reviewer and question.
 
 Every card is a **recorded** answer from a saved run. Nothing on this page calls a model, so it loads
 instantly and costs nothing to host. You can switch between four models with the buttons at the top.
@@ -321,11 +321,12 @@ own, the share a wrong reviewer talks it out of. Unchanged Aya Expanse 8B gives 
 of its {base_solved} correct answers on the plain set. With the adapter it gives up at most a handful
 per reviewer wording, in every one of three training runs.
 
-The page is one of the project's three artifacts:
+Everything else from the project:
 
-- **the adapter** — `RishyanthReddy/aawden-aya8b-reviewer-adapter`
-- **the benchmark and every final number** — `RishyanthReddy/aawden-reviewer-flip-bench`
-- **the source, the protocols and the failures** — the GitHub repository linked in the card
+- **the adapter**: `RishyanthReddy/aawden-aya8b-reviewer-adapter`
+- **the benchmark and every final number**: `RishyanthReddy/aawden-reviewer-flip-bench`
+- **the full article**: https://rishyanthreddy-aawden-article.static.hf.space
+- **the source, the rules we set in advance, and what failed**: https://github.com/Aya-Jmd/Aawden
 
 ## Not claimed
 

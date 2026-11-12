@@ -249,6 +249,19 @@ docs/img/       the figures in this README
 | model card, licence, limitations | [`docs/MODEL_CARD_V3.md`](docs/MODEL_CARD_V3.md) |
 | the story page (open in a browser) | [`docs/index.html`](docs/index.html) |
 
+## Credits
+
+Aawden is two people's work. **[Aya-Jmd](https://github.com/Aya-Jmd)** built the platform this study
+runs on — the `security_wsp` library (42 modules: prompt renderer, `Case` model, parsers, statistics,
+interventions, CLI), the 51 executable fixtures, the datasets, and the first recorded runs. Of the
+2,783 files handed over, 2,753 are still byte-identical; of 114 Python files, 97 are untouched.
+
+**M. Rishyanth Reddy** built the measurement and the fix on top of it — the competence gate, the flip
+rate on solved cases, the 2×2 decomposition, the anti-deference adapter and the two-stage recipe for
+Aya 8B, the four reported nulls, and the published endpoint, adapter, benchmark and demo.
+
+Full breakdown, including how to verify the split: [`CREDITS.md`](CREDITS.md).
+
 ## Licence
 
 Project code and fixtures are MIT — see [`LICENSE`](LICENSE). The base model is

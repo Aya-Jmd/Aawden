@@ -92,6 +92,25 @@ function pickModel(i){mi=i;ci=0;render()}
 function next(d){const m=D.models[mi];ci=Math.max(0,Math.min(m.cases.length-1,ci+d));render()}
 render();
 
+// A link ending in #p=<passcode> fills the box, so the organiser's link carries the page and the
+// code at once. The fragment never reaches a server: it is not in the request, not in HF's access
+// log, and not in the Referer of any link out of this page. Anyone opening the plain URL sees the
+// same page with an empty box.
+function fillFromHash(){
+  const m=location.hash.match(/[#&]p=([^&]*)/);
+  if(!m||!m[1])return;
+  let code=m[1];
+  try{code=decodeURIComponent(code)}catch(e){}
+  if(!code)return;
+  document.getElementById("pc").value=code;
+  document.getElementById("pchint").textContent=
+    "Loaded from the link you were given. It stays in this tab, in memory, and is not stored or saved anywhere. Anyone opening the plain link without the passcode sees the same page with an empty box.";
+}
+fillFromHash();
+// Pasting #p=... onto the URL bar of an open page is a same-document navigation: the script is not
+// re-run, only hashchange fires. Without this listener the box stays empty and the link looks broken.
+addEventListener("hashchange", fillFromHash);
+
 const ENDPOINT="https://aawden-demo-8aee415-v9.app.beam.cloud/review-code";
 const statusEl=document.getElementById("status"),liveEl=document.getElementById("live"),goEl=document.getElementById("go");
 function esc(s){return String(s).replace(/[<&]/g,c=>c==="<"?"&lt;":"&amp;")}

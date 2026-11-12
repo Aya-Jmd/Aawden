@@ -3,6 +3,16 @@
 *Every number below was read from a file in this repository, named at each claim. Anything not
 measured is written not-run or MISSING. Nothing here is estimated.*
 
+**The three published artifacts** (details in `README.md`, "Where the artifacts live"):
+
+- demo: https://rishyanthreddy-aawden-demo.static.hf.space
+- adapter: https://huggingface.co/RishyanthReddy/aawden-aya8b-reviewer-adapter
+- benchmark: https://huggingface.co/datasets/RishyanthReddy/aawden-reviewer-flip-bench
+
+A passcode-gated live endpoint that reviews code sent to it is at
+`https://aawden-demo-8aee415-v9.app.beam.cloud` (`POST /review-code`); the passcode goes to the
+organiser, not into this document.
+
 ---
 
 ## Abstract

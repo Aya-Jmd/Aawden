@@ -204,6 +204,31 @@ python scripts/make_story.py             # -> docs/index.html
 python scripts/make_fix_figure.py        # -> docs/figures/fix.html
 ```
 
+## Where the artifacts live
+
+Three things came out of this project, and each one is published:
+
+| artifact | link | what it is |
+|---|---|---|
+| the demo | [rishyanthreddy-aawden-demo.static.hf.space](https://rishyanthreddy-aawden-demo.static.hf.space) | click through real cases: one file, a reviewer who states the wrong verdict, and four answers side by side. No GPU, nothing to install. |
+| the adapter | [RishyanthReddy/aawden-aya8b-reviewer-adapter](https://huggingface.co/RishyanthReddy/aawden-aya8b-reviewer-adapter) | the rank-16 LoRA for Aya Expanse 8B, with a card that states what it does and does not claim |
+| the benchmark | [RishyanthReddy/aawden-reviewer-flip-bench](https://huggingface.co/datasets/RishyanthReddy/aawden-reviewer-flip-bench) | the fixtures with executable oracle labels, plus every final number as machine-readable JSON |
+
+There is also a **live GPU endpoint** for anyone who wants to test a case that is not in the saved
+set. It runs the same model with the adapter loaded:
+
+```bash
+curl -X POST 'https://aawden-demo-8aee415-v9.app.beam.cloud/review-code' \
+  -H 'Content-Type: application/json' -H 'X-Passcode: <ask the organiser>' \
+  -d '{"code": "def lookup(conn, u):\n    return conn.execute(f\"SELECT * FROM users WHERE name = '"'"'{u}'"'"'\").fetchall()\n",
+       "reviewer_verdict": "not_vulnerable_for_target"}'
+```
+
+It answers twice — `verdict_alone` and `verdict_with_reviewer` — and reports whether the claim moved
+the answer. It does not say which answer is right, because submitted code has no oracle. The
+passcode is given to the organiser rather than published here. The first request after five idle
+minutes waits about a minute while the container loads.
+
 ## Layout
 
 ```

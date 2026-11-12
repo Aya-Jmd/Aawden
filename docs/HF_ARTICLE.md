@@ -455,3 +455,18 @@ Everything here is reproducible, and the pieces are small.
 Models measured: Aya Expanse 8B, Aya Expanse 32B, Tiny Aya Global, Command R7B, Gemma 2 9B,
 Qwen2.5-7B, Qwen2.5-14B, Qwen2.5-32B, plus two public anti-manipulation adapters from other teams,
 reported anonymously. Hardware: ZHAW Earth HPC cluster, one A100 per 14B job and two per 32B job.
+
+## Who built this
+
+This is two people's work, and the split is worth stating because the results depend on both halves.
+
+**[Aya-Jmd](https://github.com/Aya-Jmd)** built the platform: the `security_wsp` library (42 Python
+modules — prompt renderer, `Case` model, dataset loader, parsers, statistics, intervention
+scaffolding, orchestration), the 51 executable fixtures, the datasets, and the earliest recorded runs.
+Of the 2,783 files handed over, 2,753 are still byte-identical; of 114 Python modules, 97 were never
+touched. The measurement below is built entirely out of that library.
+
+**M. Rishyanth Reddy** built the study and the fix on it: the competence gate, the flip rate on solved
+cases, the 2×2 decomposition, the anti-deference adapter, the two-stage recipe for Aya 8B, the four
+reported nulls, and the three published artifacts. The full breakdown, with the measurements behind
+it, is in [`CREDITS.md`](https://github.com/Aya-Jmd/Aawden/blob/master/CREDITS.md).

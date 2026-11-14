@@ -264,21 +264,24 @@ why the fix above is done on a model that is already competent.
 
 **Track 2 — AI Red Teaming, Safety and Alignment.**
 
-**Problem statement 9 — locating where safety lives.** This project asks a localisation question
-before it asks an intervention question: it contrasts residual-stream and MLP/attention-output
-activations between the neutral and misleading-opinion prompt on identical source code, and tests
-whether the difference is causally load-bearing by projecting it out at the last prefix position,
-scored against a random direction of matched norm (`src/security_wsp/discovery.py`). If no component
-beats its random control, the honest conclusion is that deference is diffuse — and the protocol says
-to report that as a result rather than searching harder (`docs/PROTOCOL_V3.md`, "Stop decisions").
+**Main entry: Track 2a, problem statement 2 — safety evaluation sets.** The contribution is a
+benchmark and a measure. Every label is executable: SQL runs against in-memory SQLite, and access
+control runs against a fixed record table. The measure is the flip rate on solved cases, which
+cannot reward a model for guessing. On top of the benchmark sits the fix: a rank-16 LoRA adapter
+that brings the flip rate to 0.000 on every competent model we tried. The adapter addresses our own
+problem: how robust an AI code reviewer is to a wrong human opinion (sycophancy).
 
-**Problem statement 10 — circuit-level interventions.** The intervention is a weight patch, not a
-prompt: an agent may change at most 0.05% of the weights, on four named tensor types only
-(`down_proj`, `o_proj`, `up_proj`, `gate_proj`), with no gradients, under a 50-forward-pass budget
-over at most 64 prompts, and at most 10 submissions (`configs/protocol-v3.json`, `wsp_agent`). Every
-patch is compared against a size-matched random patch with a recorded update norm and against a
-no-op that must reproduce the baseline exactly — so a circuit-level claim has to survive the
-possibility that the same edit magnitude on random slices does as well.
+**Also attempted: Track 2b, problem statements 9 and 10 — locating safety, and circuit-level
+edits.** Both came out negative, and they are reported as results:
+
+- Four sparse weight-space patches were written by two frontier models, capped at 0.05% of the
+  weights (`configs/protocol-v3.json`). With the prompting attempts and the largest head ablation,
+  every one stayed at J ≤ 0.
+- Zeroing the 11 opinion-reading heads of Qwen2.5-14B was no better than size-matched random heads.
+- Removing the opinion direction from the residual stream got the flip rate down only to 0.544, and
+  cost 8 solved cases.
+
+The sections above give the numbers. The protocol for these attempts is in `docs/PROTOCOL_V3.md`.
 
 ---
 

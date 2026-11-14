@@ -44,6 +44,27 @@ question:
 The rest of this post covers how we measured it, why the obvious ways of measuring it go wrong, and
 what the fix costs.
 
+## For judges: one minute
+
+- **Claim.** One sentence from a wrong reviewer makes open models abandon most of the security
+  verdicts they get right alone. A small LoRA adapter, trained so the verdict never depends on the
+  reviewer, brings that to near zero without hurting coding.
+- **Tracks.** Track 2a, problem statement 2 (safety evaluation sets): a benchmark with
+  executable labels and a measure that cannot reward a model for guessing. Track 2b, problem
+  statements 9 and 10 (locating safety; circuit-level edits): attempted, and both came out
+  negative, reported below. The adapter itself is our own problem: robustness of an AI code
+  reviewer to a wrong human opinion (sycophancy).
+- **Headline.** Qwen2.5-14B-Instruct abandons 84 of 111 correct verdicts before and 1 of 111
+  after. Aya Expanse 32B goes from 85 of 90 to 3 of 90.
+- **Base model and method.** Qwen2.5-14B-Instruct (also Aya Expanse 32B and 8B), with a rank-16
+  LoRA trained on 268 held-out-family files, each shown with no reviewer, a right one and a wrong one,
+  all with the same target.
+- **Check it.** [Demo](https://rishyanthreddy-aawden-demo.static.hf.space) ·
+  [benchmark](https://huggingface.co/datasets/RishyanthReddy/aawden-reviewer-flip-bench) ·
+  [all adapters](https://huggingface.co/collections/RishyanthReddy/aawden-the-reviewer-adapter-6af4ab65e046bad1521098f7) ·
+  [code](https://github.com/Aya-Jmd/Aawden). The full checklist (kits, licences, splits,
+  hyperparameters, compute) is in [Submission details](#submission-details) near the end.
+
 ---
 
 ## The problem
@@ -190,9 +211,10 @@ file, and no file from the same family as a test file, is used in training. Each
 reviewer, a reviewer who is right, and a reviewer who is wrong. The target output is the same in all
 three. That is the whole idea: the correct answer does not depend on what the reviewer says.
 
-The settings: rank 16, alpha 32, about 42M parameters, roughly 0.5% of the model. Learning rate 1e-4,
-two epochs, seed 17. The 268 training cases become 2,948 rows. The Qwen2.5-14B adapter trains in 11
-minutes on one A100; the Aya 8B two-stage adapter takes 7 minutes for the first stage plus 33 for the
+The settings: rank 16, alpha 32, on all seven attention and MLP projections (42M parameters on
+Aya 8B, about 0.5% of the model). Learning rate 1e-4, two epochs, seed 17. For Qwen2.5-14B and
+Aya 32B the 268 training cases become 804 rows (three conditions each) and 201 steps; the Aya 8B
+recipe further down uses 2,948 rows. The Qwen2.5-14B adapter trains in 11 minutes on one A100; the Aya 8B two-stage adapter takes 7 minutes for the first stage plus 33 for the
 second (times from `train_meta.json` in the adapter repository).
 
 | model | version | right unaided | flip rate | rule set in advance |
@@ -438,16 +460,117 @@ important thing this project has not done.
 
 ---
 
+## Submission details
+
+This section covers each required field of the hackathon write-up in one place. Each fact is taken from a file in the
+repository or a saved run.
+
+**Tracks and problem statements.** Track 2a, problem statement 2 (adversarial and safety evaluation
+sets) is the main fit: an executable-label benchmark plus a measure that a guessing model cannot pass.
+Track 2b, problem statements 9 (where safety lives) and 10 (circuit-level interventions) were
+attempted with head ablation and a residual-direction edit, and both were negative (see "What did not
+work"). The adapter is a fix for a problem of our own: an AI code reviewer that defers to a wrong human
+opinion.
+
+**Hackathon kits used, and how they connect.**
+
+- **CircuitKIT** (pinned `e71d5e17`) was used for instrumented inference on Aya 8B: a parity check against native Hugging
+  Face logits, plus residual-stream contrasts. That localisation work is exploratory. Its EAP-IG entry point
+  is not exposed, so we record `unsupported_api` and claim no CircuitKIT localisation.
+- **AuditKIT** (pinned `71316da3`, v1.1.3) is an independent scorer that re-scores recorded
+  generations with our strict parser. It ran on two 20-sample evaluations.
+- **CuratorKIT** (v0.1.21, `d6f2e44`) ran an exact and MinHash (0.85) dedup check over the regression
+  sets. Counts: coding 40→40; general 60→60 and 60→56 (four reading items share a passage); format 20→20. No
+  dataset was changed.
+- **SafeTune** was not used.
+
+Pipeline: the fixtures come first; CuratorKIT checks them for duplicates; the models are measured and
+the adapter is trained with our own scripts; AuditKIT re-scores a sample of the outputs; CircuitKIT
+served the localisation attempt that failed.
+
+**Models and licences.**
+
+| model | revision | licence |
+|---|---|---|
+| `Qwen/Qwen2.5-14B-Instruct` | `cf98f3b3` | Apache-2.0 |
+| `Qwen/Qwen2.5-32B-Instruct` | `5ede1c97` | Apache-2.0 |
+| `CohereLabs/aya-expanse-32b` | `b306ea27` | CC-BY-NC-4.0 |
+| `CohereLabs/aya-expanse-8b` | `5062468b` | CC-BY-NC-4.0 |
+| `CohereLabs/tiny-aya-global` | `af89d219` | CC-BY-NC-4.0 |
+
+Each adapter inherits its base model's licence.
+
+**Datasets, sources, licences, languages.** The prompts are English and the code is Python.
+
+- The plain set has 129 cases in 64 families. Training uses 268 cases in 134 families. Both are fixtures
+  written by this team, with executable oracles. They are published in the benchmark under CC-BY-NC-4.0.
+- The real-code set has 64 cases in 32 families from `CyberNative/Code_Vulnerability_Security_DPO`
+  @ `403bbc40` (Apache-2.0), filtered to pairs whose sink can be checked. Its labels are asserted by the
+  dataset, not by our oracle.
+- The coding regression is HumanEval (`openai/openai_humaneval`, MIT).
+
+**Splits and leak check.** The split is by family, not by file. The training families and the
+evaluation families share none of the plain set's 64 families. A repository test (`tests/test_fix_arms.py`) checks this against the plain set and the selection
+set, and we re-counted it for this post. Two sets (`wsp-final.json`, `wsp-validation.json`) are sealed and were never read
+(`docs/FIX_PROTOCOL.md`). CuratorKIT found no duplicates inside any regression set beyond the four
+items noted above.
+
+**Metrics.** Each metric's better direction is given in brackets.
+
+- **Flip rate on solved cases** (lower is better) is the main metric, with a 95% Wilson interval.
+- **Right unaided** (higher is better) is the competence check. A flip rate is only quoted when this
+  clears chance.
+- **Rescue by a correct reviewer** (higher is better) is reported as the cost of the fix.
+- **HumanEval pass@1** (higher is better) is the coding regression.
+
+The flip rate and the right-unaided count are reported under all three answer formats.
+
+**Hyperparameters.**
+
+- LoRA rank 16, alpha 32, dropout 0.05, on the q, k, v, o, gate, up and down projections.
+- Learning rate 1e-4, batch 1 with gradient accumulation 8, maximum length 2,048, 2 epochs.
+- The task-only control runs 6 epochs, to match 201 steps.
+- Seeds 17, 29 and 43. The rules for success were written in `docs/FIX_PROTOCOL.md` before the runs.
+
+**Compute.** Training covered 27 adapters and took 517 minutes of wall-clock in total, summed from their `train_meta.json`
+files. Peak memory was 10 to 38 GB. The hardware was the ZHAW Earth HPC cluster: one A100 per 14B job and two per 32B job. GPU time
+for evaluation was not tallied, so the total is unknown. Early hosted runs cost about $1.46 (`docs/VALIDATION.md`).
+
+**With more credits.** The before and after values here are plans, not results.
+
+1. **Real code at scale.** Build an oracle-labelled set of hundreds of CVE fix commits that have tests.
+   We expect the adapter's flip rate to stay well below the unchanged model's, as it did on 32 pairs.
+2. **Calibrated rather than invariant.** The adapter also ignores correct reviewers. Train with
+   reviewers who are sometimes right where the model is wrong, and measure whether the rescue rate
+   comes back while the flip rate stays low.
+3. **A held-out vulnerability class.** Train on SQL injection and access control only, then test on
+   command injection.
+4. **Independent label review.** Have the blinded label packet signed off by a second person.
+
+**Declaration.** The work was done during the hackathon, in November 2026. The repository's first
+commits, by Aya-Jmd, are dated 8 November. The models, the kits and the real-code dataset are outside
+work, all listed above with their licences.
+
+**Use of AI tools.** AI coding assistants were used to write code, run experiments and draft text.
+Every number in this post was copied from a saved run file and checked against it.
+
+---
+
 ## Check it yourself
 
 You can reproduce all of this, and none of it is big.
 
 - **The demo.** [rishyanthreddy-aawden-demo.static.hf.space](https://rishyanthreddy-aawden-demo.static.hf.space)
   replays real cases: the same file, a reviewer who states the wrong verdict, and four answers (the
-  correct one, the model alone, the model with the reviewer, and the model after our adapter). It
-  needs no GPU and runs no inference; every card is a saved answer.
+  correct one, the model alone, the model with the reviewer, and the model after our adapter). The
+  cards are saved answers and need no GPU. At the bottom, a live check sends a file of your own to
+  Aya 8B with the adapter on a GPU; it is passcode-protected to cap cost, and the organisers have
+  the passcode.
 - **The adapter.** [RishyanthReddy/aawden-aya8b-reviewer-adapter](https://huggingface.co/RishyanthReddy/aawden-aya8b-reviewer-adapter)
   is a 42M-parameter LoRA for `CohereLabs/aya-expanse-8b` at a pinned revision.
+- **Every other adapter.** All 30 adapters trained for this post, including the controls and the
+  failures, are in five repositories (one per base model) in the
+  [adapters collection](https://huggingface.co/collections/RishyanthReddy/aawden-the-reviewer-adapter-6af4ab65e046bad1521098f7).
 - **The benchmark and every final number.**
   [RishyanthReddy/aawden-reviewer-flip-bench](https://huggingface.co/datasets/RishyanthReddy/aawden-reviewer-flip-bench)
   carries the fixtures, the oracle config, and the generated result tables.

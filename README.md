@@ -213,6 +213,7 @@ Everything that came out of this project is published:
 | the article | [rishyanthreddy-aawden-article.static.hf.space](https://rishyanthreddy-aawden-article.static.hf.space) | the full write-up as one page: how deference was measured, why most small models cannot be measured this way, the fix, what it costs, and what did not work |
 | the demo | [rishyanthreddy-aawden-demo.static.hf.space](https://rishyanthreddy-aawden-demo.static.hf.space) | click through real cases: one file, a reviewer who states the wrong verdict, and four answers side by side. No GPU, nothing to install. |
 | the adapter | [RishyanthReddy/aawden-aya8b-reviewer-adapter](https://huggingface.co/RishyanthReddy/aawden-aya8b-reviewer-adapter) | the rank-16 LoRA for Aya Expanse 8B, with a card that states what it does and does not claim |
+| every adapter | [adapters collection](https://huggingface.co/collections/RishyanthReddy/aawden-the-reviewer-adapter-6af4ab65e046bad1521098f7) | all 30 LoRA adapters from the fix runs, including the task-only controls and the failures, in five repositories, one per base model (Qwen2.5-14B, Qwen2.5-32B, Aya Expanse 32B, Aya Expanse 8B, Tiny Aya) |
 | the benchmark | [RishyanthReddy/aawden-reviewer-flip-bench](https://huggingface.co/datasets/RishyanthReddy/aawden-reviewer-flip-bench) | the fixtures with executable oracle labels, plus every final number as machine-readable JSON |
 
 There is also a **live GPU endpoint** for anyone who wants to test a case that is not in the saved

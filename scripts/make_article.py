@@ -29,6 +29,8 @@ FIGURES = {  # image URL basename in the markdown -> docs/img stem
     "fig-measure.png": "fig-measure",
     "fig-flip.png": "fig-flip",
     "fig-recipe.png": "fig-recipe",
+    "fig-map.png": "fig-map",
+    "fig-hero.png": "fig-hero",
 }
 
 LINKS = [
@@ -261,7 +263,7 @@ th:last-child,td:last-child{padding-right:0}
 td:first-child{min-width:9.5em}
 .r{text-align:right;white-space:nowrap}.c{text-align:center}
 td code{font-size:.9em}
-figure{margin:28px 0 30px}
+figure{margin:28px 0 30px}@media (min-width:1180px){figure{margin-right:calc(-1 * min(160px, (100vw - 1004px) / 2 - 56px))}}
 figure svg{display:block;width:100%;height:auto;border-radius:10px}
 .fig-dark{display:none}
 @media (prefers-color-scheme:dark){.fig-light{display:none}.fig-dark{display:block}}

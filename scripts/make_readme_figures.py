@@ -8,6 +8,8 @@ colour rather than inheriting the page background.
   docs/img/fig-measure.svg  what "flip rate on solved cases" counts, as one bar of 129 files
   docs/img/fig-flip.svg     the headline: unedited against adapter, three competent models
   docs/img/fig-recipe.svg   Aya 8B: unchanged against the two-stage recipe, per reviewer wording
+  docs/img/fig-map.svg      every model: competence against flip rate, before and after the adapter
+  docs/img/fig-hero.svg     one recorded case, animated: alone, wrong reviewer, with the adapter
 
 Run: python scripts/make_readme_figures.py
 """
@@ -308,6 +310,218 @@ def figure_recipe(summary: dict, c: dict) -> str:
     return "\n".join(out)
 
 
+# ---------------------------------------------------------------- figure 0: the whole study
+
+MAP_BEFORE = [  # (label, run directory under runs/wsp-v3/plain, summary key or None)
+    ("Qwen2.5-14B", "plain-qwen25-14b", "qwen14b"), ("Aya Expanse 32B", "plain-aya32b", "aya32b"),
+    ("Qwen2.5-32B", "plain-qwen25-32b", "qwen32b"), ("Aya Expanse 8B", "plain-aya8b", "aya8b"),
+    ("Tiny Aya", "plain-tinyaya", "tinyaya"), ("Qwen2.5-7B", "plain-qwen25-7b", None),
+    ("Command R7B", "plain-command-r7b", None), ("Gemma 2 9B", "plain-gemma2-9b", None),
+]
+
+
+def map_points(summary: dict) -> list[dict]:
+    """Before: the unedited flip analysis. After: seed 17 of the adapter (two-stage recipe for the
+    two small models, whose one-sentence adapters fail the competence rule)."""
+    flips = json.loads((ROOT / "runs/wsp-v3/plain/flip-plain-json_prefill.json").read_text())
+    pts = []
+    for label, run, key in MAP_BEFORE:
+        a = flips[run]["all"]
+        pt = {"label": label, "x": a["solved_unaided"], "y": a["flip_rate"],
+              "k": a["flipped_by_wrong_reviewer"], "after": None}
+        if key in ("qwen14b", "aya32b", "qwen32b"):
+            j = summary["primary"][key]["antidef-s17"]["json_prefill"]
+            pt["after"] = {"x": j["solved_unaided"], "y": j["flip_rate"], "k": j["flipped"]}
+        elif key in ("aya8b", "tinyaya"):
+            w = summary["multi"][f"{key}-curr"]["17"]["wordings"]["reviewer"]
+            pt["after"] = {"x": w["solved"], "y": w["flip_rate"], "k": w["flipped"]}
+        pts.append(pt)
+    return pts
+
+
+def figure_map(summary: dict, c: dict) -> str:
+    aid = "arr-dark" if c is DARK else "arr"
+    title = "The whole study in one picture"
+    sub = ("Each dot is one model on the same 129 files. Across: how many it gets right with no "
+           "reviewer. Up: the share of those it gives away when a reviewer states the wrong verdict. "
+           "Inside the grey band a model is guessing, so its height means nothing. Each arrow is the "
+           "same model after our adapter; the two arrows leaving the band are Aya Expanse 8B and Tiny Aya, "
+           "which only became measurable once the adapter taught them the task.")
+    head, top, _ = frame(title, sub, c)
+    legend_y = top + 4
+    px0, px1 = 64, W - 24            # plot x range in px
+    py0 = legend_y + 34              # top of plot (flip rate 100%)
+    py1 = py0 + 330                  # bottom of plot (flip rate 0%)
+    xmin, xmax = 50, 131
+    foot_y = py1 + 50
+    height = int(foot_y + 34)
+
+    def X(v): return px0 + (v - xmin) / (xmax - xmin) * (px1 - px0)
+    def Y(v): return py1 - v * (py1 - py0)
+
+    out = svg_open(title, sub, height)
+    out.append(f'<rect width="{W}" height="{height}" fill="{c["surface"]}"/>')
+    out.append(f'<defs><marker id="{aid}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" '
+               f'markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" '
+               f'fill="{c["c3"]}"/></marker></defs>')
+    out += head
+    done, _ = legend([("dot", "Unedited model", c["c2"]), ("dot", "Same model with the adapter", c["c3"]),
+                      ("band", "Guessing zone (95% of coin-flip scores)", c["grid"])], 0, legend_y, c)
+    out += done
+
+    # chance band: binomial 95% interval around 64.5 of 129
+    lo, hi = 64.5 - 1.96 * (129 * 0.25) ** 0.5, 64.5 + 1.96 * (129 * 0.25) ** 0.5
+    out.append(f'<rect x="{X(lo):.1f}" y="{py0}" width="{X(hi) - X(lo):.1f}" height="{py1 - py0}" '
+               f'fill="{c["grid"]}" opacity="0.85"/>')
+    bx = (X(lo) + X(hi)) / 2
+    for i, (t, wgt, col) in enumerate((("GUESSING", "600", c["muted"]), ("5 models up to 9B:", "400", c["ink"]),
+                                       ("their height is noise", "400", c["ink"]))):
+        out.append(f'<text x="{bx:.1f}" y="{Y(0.62) + 16 * i:.1f}" text-anchor="middle" fill="{col}" '
+                   f'font-family="{FONT}" font-size="12" font-weight="{wgt}">{t}</text>')
+
+    # grid and axes
+    for v in (0, 0.25, 0.5, 0.75, 1.0):
+        out.append(f'<line x1="{px0}" y1="{Y(v):.1f}" x2="{px1}" y2="{Y(v):.1f}" stroke="{c["grid"]}" '
+                   f'stroke-width="1"/>')
+        out.append(f'<text x="{px0 - 8}" y="{Y(v) + 4:.1f}" text-anchor="end" fill="{c["muted"]}" '
+                   f'font-family="{FONT}" font-size="11.5">{v:.0%}</text>')
+    for v in (64.5, 90, 110, 129):  # noqa: the after-label sits above the axis, clear of these
+        lab = "chance 64.5" if v == 64.5 else ("all 129" if v == 129 else str(v))
+        out.append(f'<text x="{X(v):.1f}" y="{py1 + 18}" text-anchor="middle" fill="{c["muted"]}" '
+                   f'font-family="{FONT}" font-size="11.5">{lab}</text>')
+    out.append(f'<line x1="{px0}" y1="{py1}" x2="{px1}" y2="{py1}" stroke="{c["axis"]}" stroke-width="1"/>')
+    out.append(f'<text x="{(px0 + px1) / 2:.1f}" y="{py1 + 36}" text-anchor="middle" fill="{c["ink"]}" '
+               f'font-family="{FONT}" font-size="12">files right with no reviewer (of 129) →</text>')
+    out.append(f'<text transform="translate(14 {(py0 + py1) / 2:.1f}) rotate(-90)" text-anchor="middle" '
+               f'fill="{c["ink"]}" font-family="{FONT}" font-size="12">flip rate on solved files →</text>')
+
+    pts = map_points(summary)
+    # arrows first, so dots sit on top
+    for p in pts:
+        a = p["after"]
+        if not a:
+            continue
+        x0, y0, x1, y1 = X(p["x"]), Y(p["y"]), X(a["x"]), Y(a["y"])
+        dx, dy = x1 - x0, y1 - y0
+        L = (dx * dx + dy * dy) ** 0.5
+        sx, sy = x0 + dx / L * 9, y0 + dy / L * 9          # start just outside the dot
+        ex, ey = x1 - dx / L * 10, y1 - dy / L * 10        # stop just before the dot
+        out.append(f'<path d="M{sx:.1f} {sy:.1f} L{ex:.1f} {ey:.1f}" fill="none" '
+                   f'stroke="{c["c3"]}" stroke-width="1.6" stroke-dasharray="4 3" opacity="0.8" '
+                   f'marker-end="url(#{aid})"/>')
+    for p in pts:
+        tip = f'{p["label"]}, unedited: {p["x"]} of 129 right alone, {p["k"]} of them flipped ({p["y"]:.0%})'
+        out.append(f'<circle cx="{X(p["x"]):.1f}" cy="{Y(p["y"]):.1f}" r="6" fill="{c["c2"]}" '
+                   f'stroke="{c["surface"]}" stroke-width="2"><title>{esc(tip)}</title></circle>')
+        a = p["after"]
+        if a:
+            tip = f'{p["label"]} with the adapter: {a["x"]} of 129 right alone, {a["k"]} of them flipped ({a["y"]:.1%})'
+            out.append(f'<circle cx="{X(a["x"]):.1f}" cy="{Y(a["y"]):.1f}" r="6" fill="{c["c3"]}" '
+                       f'stroke="{c["surface"]}" stroke-width="2"><title>{esc(tip)}</title></circle>')
+
+    # labels for the unedited competent models (right of the dot); the five small ones as one group
+    for p in pts:
+        if p["x"] > hi:
+            out.append(f'<text x="{X(p["x"]) + 10:.1f}" y="{Y(p["y"]) + 4:.1f}" fill="{c["ink"]}" '
+                       f'font-family="{FONT}" font-size="12">{esc(p["label"])}</text>')
+    afters = [p["after"] for p in pts if p["after"]]
+    out.append(f'<text x="{X(min(a["x"] for a in afters)) - 12:.1f}" y="{py1 - 8}" text-anchor="end" '
+               f'fill="{c["c3"]}" font-family="{FONT}" font-size="12.5" font-weight="700">'
+               f'with the adapter: {len(afters)} models, 0 to 1% flip →</text>')
+
+    out.append(footnote(foot_y, "JSON answer format, 129 plain-set files, seed 17. Aya Expanse 8B and Tiny Aya "
+                                "use the two-stage recipe; the others the one-sentence adapter. Sources: "
+                                "runs/wsp-v3/plain/flip-plain-json_prefill.json, runs/fix/round2-summary.json", c))
+    out.append("</svg>")
+    return "\n".join(out)
+
+
+# ---------------------------------------------------------------- figure: one real file, animated
+
+HERO_CASE = "c_cab5d4f0e9d4"
+HERO_RUNS = ("runs/wsp-v3/plain/plain-qwen25-14b/table.json", "runs/fix/plain-qwen14b-antidef-s17/table.json")
+
+
+def hero_answers() -> dict:
+    """The recorded verdicts for one case, read the same way the demo reads them."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("_flip", ROOT / "scripts/wsp_flip_analysis.py")
+    flip = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(flip)
+    base = json.loads((ROOT / HERO_RUNS[0]).read_text())
+    ad = json.loads((ROOT / HERO_RUNS[1]).read_text())
+    n = flip.argmax_verdicts(base, "neutral", "json_prefill")[HERO_CASE]
+    w = flip.argmax_verdicts(base, "incorrect_suggestion", "json_prefill")[HERO_CASE]
+    a = flip.argmax_verdicts(ad, "incorrect_suggestion", "json_prefill")[HERO_CASE]
+    code = {c["case_id"]: c["code"] for c in
+            json.loads((ROOT / "datasets/plain-pooled.json").read_text())["cases"]}[HERO_CASE]
+    return {"truth": n[1], "alone": n[0], "wrong": w[0], "adapter": a[0], "code": code}
+
+
+def figure_hero(summary: dict, c: dict) -> str:
+    h = hero_answers()
+    title = "One recorded answer, three ways"
+    sub = ("Qwen2.5-14B-Instruct on this file. Alone, it gets it right. "
+           "With one wrong reviewer line, it changes its answer. With our adapter, it holds.")
+    head, top, _ = frame(title, sub, c)
+    mono = "ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+    code_y = top + 6
+    lines = h["code"].rstrip("\n").split("\n")
+    code_h = 26 + 22 * len(lines)
+    rev_y = code_y + code_h + 10
+    cards_y = rev_y + 58
+    card_h = 86
+    foot_y = cards_y + card_h + 30
+    height = int(foot_y + 34)
+    codebg = "#f3f2ee" if c is LIGHT else "#242422"
+
+    out = svg_open(title, sub, height)
+    out.append("<style>"
+               ".awh{animation:awh0 6s ease-out 1 both}"
+               ".awh1{animation-name:awh1}.awh2{animation-name:awh2}.awh3{animation-name:awh3}.awh4{animation-name:awh4}"
+               "@keyframes awh1{0%,6%{opacity:0}16%,100%{opacity:1}}"
+               "@keyframes awh2{0%,26%{opacity:0;transform:translateX(-14px)}38%,100%{opacity:1;transform:none}}"
+               "@keyframes awh3{0%,50%{opacity:0}60%,100%{opacity:1}}"
+               "@keyframes awh4{0%,76%{opacity:0}86%,100%{opacity:1}}"
+               "@media (prefers-reduced-motion:reduce){.awh{animation:none}}"
+               "</style>")
+    out.append(f'<rect width="{W}" height="{height}" fill="{c["surface"]}"/>')
+    out += head
+    out.append(f'<rect x="0" y="{code_y}" width="{W}" height="{code_h}" rx="8" fill="{codebg}"/>')
+    for i, line in enumerate(lines):
+        out.append(f'<text x="16" y="{code_y + 30 + 22 * i}" fill="{c["ink"]}" font-family="{mono}" '
+                   f'font-size="14.5" xml:space="preserve">{esc(line)}</text>')
+    opposite = "not_vulnerable_for_target" if h["truth"] == "vulnerable" else "vulnerable"
+    out.append(f'<g class="awh awh2"><rect x="0" y="{rev_y}" width="{W}" height="40" rx="6" fill="{codebg}"/>'
+               f'<rect x="0" y="{rev_y}" width="4" height="40" rx="2" fill="{c["c2"]}"/>'
+               f'<text x="16" y="{rev_y + 26}" fill="{c["ink"]}" font-family="{mono}" font-size="14" '
+               f'font-weight="600">Reviewer assessment (opinion only): I believe the verdict is '
+               f'{esc(opposite)}.</text></g>')
+
+    def word(v): return "vulnerable" if v == "vulnerable" else "not vulnerable"
+    cards = [("awh1", "No reviewer", h["alone"]), ("awh3", "Wrong reviewer added", h["wrong"]),
+             ("awh4", "Wrong reviewer + adapter", h["adapter"])]
+    cw, gap = (W - 2 * 16) / 3, 16
+    for i, (cls, label, verdict) in enumerate(cards):
+        x = i * (cw + gap)
+        ok = verdict == h["truth"]
+        col = c["c3"] if ok else c["c2"]
+        mark = "✓ correct" if ok else "✗ wrong"
+        out.append(f'<g class="awh {cls}"><rect x="{x:.1f}" y="{cards_y}" width="{cw:.1f}" height="{card_h}" '
+                   f'rx="10" fill="{c["surface"]}" stroke="{col}" stroke-width="2"/>'
+                   f'<text x="{x + 16:.1f}" y="{cards_y + 28}" fill="{c["muted"]}" font-family="{FONT}" '
+                   f'font-size="14">{esc(label)}</text>'
+                   f'<text x="{x + 16:.1f}" y="{cards_y + 62}" fill="{c["ink"]}" font-family="{FONT}" '
+                   f'font-size="24" font-weight="700">{esc(word(verdict))}</text>'
+                   f'<text x="{x + cw - 16:.1f}" y="{cards_y + 62}" text-anchor="end" fill="{col}" '
+                   f'font-family="{FONT}" font-size="15" font-weight="700">{mark}</text></g>')
+    out.append(footnote(foot_y, f"Recorded verdicts, not a mock-up: case {HERO_CASE}, JSON answer format. "
+                                f"Sources: {HERO_RUNS[0]}, {HERO_RUNS[1]}. The correct answer is checked by "
+                                "running the code against SQLite.", c))
+    out.append("</svg>")
+    return "\n".join(out)
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--summary", type=Path, default=ROOT / "runs/fix/round2-summary.json")
@@ -316,7 +530,7 @@ def main(argv=None) -> int:
     summary = json.loads(args.summary.read_text(encoding="utf-8"))
     args.out.mkdir(parents=True, exist_ok=True)
     for name, build in (("fig-measure", figure_measure), ("fig-flip", figure_flip),
-                        ("fig-recipe", figure_recipe)):
+                        ("fig-recipe", figure_recipe), ("fig-map", figure_map), ("fig-hero", figure_hero)):
         for suffix, palette in (("", LIGHT), ("-dark", DARK)):
             (args.out / f"{name}{suffix}.svg").write_text(build(summary, palette), encoding="utf-8")
         print(f"[figures] {name}.svg and {name}-dark.svg")

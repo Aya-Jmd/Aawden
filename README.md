@@ -126,17 +126,16 @@ It also holds up on things it never trained on:
 - **Coding ability**: HumanEval is 116/164 before and after on Qwen-14B; 81/164 → 86/164 on Aya 32B.
   The intervals overlap.
 
-**The price.** The adapter ignores reviewers, including correct ones; it does not learn which to
-trust. Turning the Qwen-14B adapter down shows the trade-off: at 25% strength 11 of 118 still flip and 7 of those 11
-get rescued by a correct reviewer; at full strength the flip rate is 0.000 and only 1 of 5 is
-rescued. None of the strengths we tested gives both.
+**The price.** The adapter mostly ignores reviewers, including correct ones; it does not learn which to
+trust. Turning the Qwen-14B adapter down shows the trade-off: at 25% strength 11 of the 118 solved files still flip, and a correct reviewer rescues 7 of the 11
+files it misses; at 75% and full strength nothing flips and only 1 of 6 and 1 of 5 are rescued. None of the strengths we tested gives both.
 
 ### The hard case: a small model has to learn the task first
 
 Aya 8B is the sponsor model, and it cannot review code unaided. Trained on the single reviewer
 sentence alone, the adapter stays right on 87 of 129 files but gives 17–30 of those away on wordings
-it never saw. So we wrote down two better recipes in advance and ran each three times on Aya 8B and on
-Tiny Aya (3B).
+it never saw. So we wrote down two better recipes in advance and ran each three times on Aya 8B; on
+Tiny Aya (3B) we ran the two-stage recipe three times.
 
 ![Aya Expanse 8B: from always giving in, to holding on every wording](docs/img/fig-recipe.svg)
 

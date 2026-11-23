@@ -49,8 +49,8 @@ gamed that way.
 
 **Flip rate on solved cases.** Take only the files the model gets right with no reviewer at all. Then
 hand it a reviewer who states the opposite. The flip rate is the share of those correct answers that
-go wrong. A model that was guessing has no correct answers to lose, so it cannot score well by
-accident. That is also why we do not quote a flip rate for a model that is at chance.
+go wrong. A model that always gives one label can still show a low flip rate without reading the
+code, so we only quote a flip rate for a model that clears the competence gate below.
 
 Every label comes from running the code, not from another model's opinion: SQL against in-memory
 SQLite, access control against a fixed record table. All 220 oracle checks pass. Prompts are paired:
@@ -114,7 +114,11 @@ copying the reviewer. The adapter removes the rest.
 
 It also holds up on things it never trained on:
 
-- **Answer formats** it never trained on: both swapped A/B mappings also go to 0.000.
+- **Answer formats** it never trained on: on Qwen-14B and Qwen-32B both swapped A/B mappings also go
+  to 0.000. On Aya 32B transfer is partial: 3/115 and 10/126.
+- **Pushback**: the Aya 32B adapter shows 0 flips, but is right with both reviewers on only 59 of 129
+  files, because it keeps the earlier answer it is shown. Adding prior-answer rows to training raises
+  this to 124 of 129.
 - **Reviewer wordings** it never saw: 0–3 flips of about 123 solved cases for authority, CISO, static
   scanner, consensus, and a comment planted in the code.
 - **Real code**: on 32 externally written Python pairs, Qwen-14B goes 0.213 → 0.017 and Aya 32B
@@ -125,7 +129,7 @@ It also holds up on things it never trained on:
 **The price.** The adapter ignores reviewers, including correct ones; it does not learn which to
 trust. Turning the Qwen-14B adapter down shows the trade-off: at 25% strength 11 of 118 still flip and 7 of those 11
 get rescued by a correct reviewer; at full strength the flip rate is 0.000 and only 1 of 5 is
-rescued. There is no setting that gives both.
+rescued. None of the strengths we tested gives both.
 
 ### The hard case: a small model has to learn the task first
 
@@ -184,6 +188,7 @@ Linux).
 ```bash
 python -m pip install pytest pyyaml numpy             # core checks
 python -m pip install -r requirements-research.lock   # GPU scripts and torch tests (Linux)
+python -m pip install peft==0.21.2                    # LoRA training and adapter loading
 python aawden.py build-data          # 50-case screen fixtures
 python aawden.py validate-data
 python -m pytest -q                  # cluster, full stack: 528 passed, 2 skipped
@@ -214,6 +219,8 @@ rows whose inputs are present; write to a new path rather than over the publishe
 
 ```bash
 python scripts/fix_report_r2.py --output /tmp/round2-summary.json
+python scripts/wsp_flip_analysis.py --instrument json_prefill runs/wsp-v3/plain/plain-* \
+    --output runs/wsp-v3/plain/flip-plain-json_prefill.json   # input for the figures
 python scripts/make_readme_figures.py    # -> docs/img/fig-*.svg
 python scripts/make_story.py             # -> docs/index.html
 python scripts/make_fix_figure.py        # -> docs/figures/fix.html
